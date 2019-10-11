@@ -3,27 +3,25 @@ import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-export class ListaMiembros extends Component {
+export class ListaDocumentos extends Component {
 	constructor(props) {
 		super(props);
 		this.storeContext = null;
 		this.actionsContext = null;
 	}
 	componentDidMount() {
-		console.log("load group", this.storeContext);
-		this.actionsContext.GetUser({}, this.props.history);
-		console.log(this.props);
+		this.actionsContext.getDocumento({}, this.props.history);
 	}
 	render() {
 		return (
 			<table className="table table-striped table-sm">
 				<thead>
 					<tr>
-						<th>ID </th>
-						<th>User</th>
-						<th>Mail</th>
-						<th>fecha</th>
-						<th>telefono</th>
+						<th>Fecha </th>
+						<th>documento</th>
+						<th>Detalle</th>
+						<th>pago</th>
+						<th>total</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -31,15 +29,15 @@ export class ListaMiembros extends Component {
 						{({ store, actions }) => {
 							this.storeContext = store;
 							this.actionsContext = actions;
-							console.log("render", store.miembros);
-							const peo2 = store.miembros.map((item, i) => {
+							console.log("render", store.documentos);
+							const peo2 = store.documentos.map((item, i) => {
 								return (
 									<tr key={i}>
-										<td>{item.id}</td>
-										<td>{item.userAccount}</td>
-										<td>{item.mail}</td>
-										<td>{item.fecha_nacimiento}</td>
-										<td>{item.phone}</td>
+										<td>{item.date_doc}</td>
+										<td>{item.numdoc}</td>
+										<td>{item.detalle_tratamiento}</td>
+										<td>{item.pago}</td>
+										<td>{item.montodoc}</td>
 									</tr>
 								);
 							});
@@ -51,6 +49,6 @@ export class ListaMiembros extends Component {
 		);
 	}
 }
-ListaMiembros.propTypes = {
+ListaDocumentos.propTypes = {
 	history: PropTypes.array
 };

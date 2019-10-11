@@ -6,7 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				refresh: "",
 				access: ""
 			},
-			avisos: [],
+			documentos: [],
 			grupos: [],
 			evento: [],
 			miembros: [],
@@ -101,7 +101,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			getDocumento: () => {
 				const store = getStore();
-				fetch(store.apiUrl + "/api/anuncios/", {
+				fetch(store.apiUrl + "/api/documento/", {
 					method: "GET",
 					headers: {
 						"Content-Type": "application/json",
@@ -109,7 +109,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				})
 					.then(resp => resp.json())
-					.then(data => setStore({ document: data }))
+					.then(data => setStore({ documentos: data }))
 					.catch(error => setStore({ error }));
 			},
 			getEvento: () => {
@@ -210,7 +210,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 				console.log(data);
 
-				fetch(store.apiUrl + "/api/anuncios/", {
+				fetch(store.apiUrl + "/api/domentos/", {
 					method: "Post",
 					body: JSON.stringify(data),
 					headers: {
@@ -225,47 +225,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				//setStore({ demo: demo });
-			},
-			SaveEvento: history => {
-				const store = getStore();
-				const data = store.grupos;
-
-				fetch(store.apiUrl + "/api/profile/", {
-					method: "PUT",
-					body: JSON.stringify(data),
-					headers: {
-						"Content-Type": "application/json",
-						Authorization: "Bearer " + store.token.access
-					}
-				})
-					.then(resp => resp.json())
-					.then(data => {
-						setStore({ grupos: data });
-						alert("se a creado tu nuevo grupo");
-						history.push("/eventos");
-					});
-
-				//reset the global store
-				//setStore({ demo: demo });
-			},
-			postevento: history => {
-				const store = getStore();
-				const data = store.grupos;
-
-				fetch(store.apiUrl + "/api/profile/", {
-					method: "PUT",
-					body: JSON.stringify(data),
-					headers: {
-						"Content-Type": "application/json",
-						Authorization: "Bearer " + store.token.access
-					}
-				})
-					.then(resp => resp.json())
-					.then(data => {
-						setStore({ grupos: data });
-						alert("se a creado tu nuevo evento");
-						history.push("/eventos");
-					});
 			}
 		}
 	};

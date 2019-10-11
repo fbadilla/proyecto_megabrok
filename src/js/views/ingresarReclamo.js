@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import ModalReclamo from "../component/modalReclamo";
+import { ListaDocumentos } from "../component/listaDocumentos";
 import PropTypes from "prop-types";
 
 export class ingresarReclamo extends React.Component {
@@ -141,19 +142,24 @@ export class ingresarReclamo extends React.Component {
 															</button>
 														</div>
 													</div>
-
-													<div className="form-group">
-														<div className="col-md-3">
-															<Link to="/" className="btn btn-primary">
-																Guardar formulario
-															</Link>
+													<div className="row">
+														<div className="col-md-8">
+															<ListaDocumentos />
 														</div>
 													</div>
-													<div className="form-group">
-														<div className="col-md-3">
-															<Link to="/" className="btn btn-primary">
-																Guardar y enviar
-															</Link>
+													<div className="row">
+														<div className="form-group">
+															<div className="col-md-3">
+																<Link to="/" className="btn btn-primary">
+																	Guardar formulario
+																</Link>
+															</div>
+
+															<div className="col-md-3">
+																<Link to="/" className="btn btn-primary">
+																	Guardar y enviar
+																</Link>
+															</div>
 														</div>
 													</div>
 												</form>
