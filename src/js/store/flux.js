@@ -1,20 +1,24 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			apiUrl: "https://8000-be081a0a-e93c-4781-986f-793517b79813.ws-us1.gitpod.io",
+			apiUrl: "https://damp-caverns-92972.herokuapp.com",
+			apiUrl2: "https://cors-anywhere.herokuapp.com/https://mobile.bestdoctorsinsurance.com/spiritapi/api",
 			token: {
 				refresh: "",
 				access: ""
 			},
 			documentos: [],
-			grupos: [],
+			Rol: [],
 			evento: [],
-			miembros: [],
-			miembro: {},
+			accounts: [],
+			account: {},
 			username: "",
 			password: "",
 			password2: "",
 			email: "",
+			asegurados: [],
+			aseguradoselectecd: {},
+			numpoliza: "",
 			error: {}
 		},
 		actions: {
@@ -25,19 +29,32 @@ const getState = ({ getStore, getActions, setStore }) => {
 				});
 			},
 
-			handleMiembro: e => {
+			handleaccount: e => {
 				const { name, value } = e.target;
 				const store = getStore();
-				let miembro = store.miembro;
-				miembro[name] = value;
+				let account = store.account;
+				account[name] = value;
 				setStore({
-					miembro
+					account
 				});
 			},
+			handledocument: e => {
+				const { name, value } = e.target;
+				const store = getStore();
+				let documentos = store.documentos;
+				documentos[name] = value;
 
-			handleGrupo: (e, history) => {
+				setStore({
+					documentos
+				});
+			},
+			handleenviodoc: (e, history) => {
 				e.preventDefault();
-				getActions().postgrupo(history);
+			},
+
+			handleRol: (e, history) => {
+				e.preventDefault();
+				getActions().postRol(history);
 			},
 			handleevento: (e, history) => {
 				e.preventDefault();
@@ -56,7 +73,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			handleUser: (e, history) => {
 				e.preventDefault();
-				getActions().putMiembro(history);
+				getActions().putAccount(history);
+			},
+			handleSearch: (e, history) => {
+				e.preventDefault();
+				const store = getStore();
+				getActions().getPoliza(history);
+			},
+			handleAseguradoSelected: e => {
+				const store = getStore().then(data => {
+					setStore({ aseguradoselectecd: data, ClaimantId: "", ClaimantFirstName: "" });
+				});
 			},
 			login: (username, password, history) => {
 				const store = getStore();
@@ -76,7 +103,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({ token: data, username: "", password: "" });
 						localStorage.setItem("token", data.access);
 
-						history.push("/usuarios");
+						history.push("/ingresareclamo");
 					});
 			},
 			register: (username, email, password) => {
@@ -101,7 +128,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			getDocumento: () => {
 				const store = getStore();
-				fetch(store.apiUrl + "/api/documento/", {
+				fetch(store.apiUrl + "/api/documentos/", {
 					method: "GET",
 					headers: {
 						"Content-Type": "application/json",
@@ -114,7 +141,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			getEvento: () => {
 				const store = getStore();
-				fetch(store.apiUrl + "/api/eventos/", {
+				fetch(store.apiUrl + "/api/reclamos/", {
 					method: "GET",
 					headers: {
 						"Content-Type": "application/json",
@@ -125,9 +152,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => setStore({ evento: data }))
 					.catch(error => setStore({ error }));
 			},
-			getMiembros: () => {
+			getaccounts: () => {
 				const store = getStore();
-				fetch(store.apiUrl + "/api/miembros", {
+				fetch(store.apiUrl + "/api/account", {
 					method: "GET",
 					headers: {
 						"Content-Type": "application/json",
@@ -135,9 +162,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				})
 					.then(resp => resp.json())
-					.then(data => setStore({ miembros: data }));
+					.then(data => setStore({ accounts: data }));
 			},
-			getMiembro: () => {
+			getaccount: () => {
 				const store = getStore();
 				fetch(store.apiUrl + "/api/profile/", {
 					method: "GET",
@@ -148,13 +175,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(resp => resp.json())
 					.then(data => {
-						setStore({ miembro: data });
+						setStore({ account: data });
 						console.log(data);
 					});
 			},
-			putMiembro: history => {
+			putAccount: history => {
 				const store = getStore();
-				const data = store.miembro;
+				const data = store.account;
 
 				fetch(store.apiUrl + "/api/profile/", {
 					method: "PUT",
@@ -166,14 +193,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(resp => resp.json())
 					.then(data => {
-						setStore({ miembro: data });
+						setStore({ account: data });
 						alert("Tus datos se actualizaron");
 						history.push("/usuarios");
 					});
 			},
-			postgrupo: history => {
+			postRol: history => {
 				const store = getStore();
-				const data = store.grupos;
+				const data = store.Rol;
 
 				fetch(store.apiUrl + "/api/profile/", {
 					method: "PUT",
@@ -185,14 +212,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(resp => resp.json())
 					.then(data => {
-						setStore({ grupos: data });
-						alert("se a creado tu nuevo grupo");
-						history.push("/usuarios");
+						setStore({ rol: data });
+						alert("se agregado un nuevo rol");
+						history.push("/profile");
 					});
 			},
-			getGrupos: () => {
+			getRol: () => {
 				const store = getStore();
-				fetch(store.apiUrl + "/api/grupos/", {
+				fetch(store.apiUrl + "/api/roles/", {
 					method: "GET",
 					headers: {
 						"Content-Type": "application/json",
@@ -200,17 +227,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				})
 					.then(resp => resp.json())
-					.then(data => setStore({ grupos: data }));
+					.then(data => setStore({ Rol: data }));
 			},
 			SaveDocumento: data => {
 				const store = getStore();
-				if (data != "") {
-				} else {
-					alert("INGRESA DATOS");
-				}
-				console.log(data);
 
-				fetch(store.apiUrl + "/api/domentos/", {
+				fetch(store.apiUrl + "/api/documentos/", {
 					method: "Post",
 					body: JSON.stringify(data),
 					headers: {
@@ -219,12 +241,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				})
 					.then(resp => resp.json())
-					.then(resp => {
-						getActions().getDocumento();
+					.then(data => {
+						setStore({ documentos: data });
 					});
 
 				//reset the global store
 				//setStore({ demo: demo });
+			},
+			getPoliza: () => {
+				const store = getStore();
+				fetch(store.apiUrl2 + "/claim/policymembers/" + store.numpoliza, {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Basic QkQxNzYwMy0wMTpOODVGWlJGU1pDMTFSVFNKT0pRRTQwUVFOM0lHRFQxSg=="
+					}
+				})
+					.then(resp => resp.json())
+					.then(data => setStore({ asegurados: data }))
+					.catch(error => setStore({ error }));
 			}
 		}
 	};

@@ -846,6 +846,29 @@ form label {
   color: #1a1a1a;
   margin-bottom: 10px;
 }
+.feature-left .icon3 {
+  float: right;
+  text-align: center;
+  width: 15%;
+}
+.feature-left .icon3 i {
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 40px;
+  color: #f54c53;
+  padding-left: 5px;
+}
+.card {
+  border: 1px solid #ccc;
+  border-radius: 4px 4px 12px 12px;
+  border-bottom: 4px solid #337ab7;
+  padding: 5px;
+}
+.card-footer {
+  background-color: #cccccc47;
+    border-radius: 4px;
+    text-align: center;
+}
 
 .gtco-heading {
   margin-bottom: 5em;

@@ -10,8 +10,8 @@ export class Usuarios extends React.Component {
 		this.actionsContext = null;
 	}
 	componentDidMount() {
-		this.actionsContext.getMiembro();
-		this.actionsContext.getGrupos();
+		this.actionsContext.getaccount();
+		this.actionsContext.getRol();
 	}
 	render() {
 		return (
@@ -38,7 +38,7 @@ export class Usuarios extends React.Component {
 												<div className="row row-mt-15em">
 													<div className="col-md-7 mt-text">
 														<span className="intro-text-small">Bienvenido</span>
-														<h1>{store.miembro.userAccount}</h1>
+														<h1>{store.account.userAccount}</h1>
 													</div>
 												</div>
 											</div>
@@ -83,7 +83,7 @@ export class Usuarios extends React.Component {
 													</span>
 													<div className="feature-copy">
 														<h3>Nombre</h3>
-														<p>{store.miembro.userAccount} </p>
+														<p>{store.account.userAccount} </p>
 													</div>
 												</div>
 												<div className="feature-left">
@@ -92,7 +92,7 @@ export class Usuarios extends React.Component {
 													</span>
 													<div className="feature-copy">
 														<h3>Correo</h3>
-														<p>{store.miembro.mail}</p>
+														<p>{store.account.mail}</p>
 													</div>
 												</div>
 
@@ -102,7 +102,7 @@ export class Usuarios extends React.Component {
 													</span>
 													<div className="feature-copy">
 														<h3>Fecha de nacimiento</h3>
-														<p>{store.miembro.fecha_nacimiento}</p>
+														<p>{store.account.fecha_nacimiento}</p>
 													</div>
 												</div>
 
@@ -113,7 +113,7 @@ export class Usuarios extends React.Component {
 													<div className="feature-copy">
 														<h3>Telefono</h3>
 														+569
-														<p>{store.miembro.phone}</p>
+														<p>{store.account.phone}</p>
 													</div>
 												</div>
 
@@ -123,7 +123,7 @@ export class Usuarios extends React.Component {
 													</span>
 													<div className="feature-copy">
 														<h3>ID Grupo</h3>
-														<p>{store.miembro.gruponame}</p>
+														<p>{store.account.gruponame}</p>
 													</div>
 												</div>
 											</div>

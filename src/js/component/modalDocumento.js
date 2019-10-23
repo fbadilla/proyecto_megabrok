@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
 
-export default class ModalReclamo extends React.Component {
+export default class ModalDocumento extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -15,17 +15,20 @@ export default class ModalReclamo extends React.Component {
 			detalle_tratamiento: "",
 			pago: ""
 		};
+		this.storeContext = null;
+		this.actionsContext = null;
 		this.props.history;
 	}
-	handleInputChange(event) {}
 
 	render() {
 		return (
 			<Context.Consumer>
 				{({ store, actions }) => {
+					this.storeContext = store;
+					this.actionsContext = actions;
 					return (
 						<div
-							className="modal fade"
+							className="modal"
 							id="modaldocumento"
 							tabIndex="-1"
 							role="dialog"
@@ -39,7 +42,7 @@ export default class ModalReclamo extends React.Component {
 										</h5>
 									</div>
 									<div className="modal-body">
-										<form action="#" onSubmit={e => actions.handleGrupo(e, this.props.history)}>
+										<form action="#" onSubmit={e => actions.handleenviodoc(e, this.props.history)}>
 											<div className="form-row">
 												<div className="col-md-6">
 													<div className="feature-left">
@@ -49,10 +52,11 @@ export default class ModalReclamo extends React.Component {
 														<div className="feature-copy">
 															<label>Fecha </label>
 															<input
-																name="date_doc"
-																id="date_doc"
+																name="datedoc"
+																id="datedoc"
 																type="date"
 																className="form-control"
+																onChange={e => actions.handleChange(e)}
 															/>
 														</div>
 													</div>
@@ -70,6 +74,7 @@ export default class ModalReclamo extends React.Component {
 																placeholder="Clinica de prueba"
 																type="text"
 																className="form-control"
+																onChange={e => actions.handleChange(e)}
 															/>
 														</div>
 													</div>
@@ -83,7 +88,10 @@ export default class ModalReclamo extends React.Component {
 														</span>
 														<div className="feature-copy">
 															<label>Tipo </label>
-															<select className="form-control" id="tipodoc">
+															<select
+																className="form-control"
+																id="tipodoc"
+																onChange={e => actions.handleChange(e)}>
 																<option>Boleta</option>
 																<option>Factura</option>
 																<option>Otro</option>
@@ -105,6 +113,7 @@ export default class ModalReclamo extends React.Component {
 																//onChange={e => actions.handleMiembro(e)}
 																type="number"
 																className="form-control"
+																onChange={e => actions.handleChange(e)}
 															/>
 														</div>
 													</div>
@@ -123,6 +132,7 @@ export default class ModalReclamo extends React.Component {
 																//onChange={e => actions.handleMiembro(e)}
 																type="number"
 																className="form-control"
+																onChange={e => actions.handleChange(e)}
 															/>
 														</div>
 													</div>
@@ -140,6 +150,7 @@ export default class ModalReclamo extends React.Component {
 																rows="5"
 																id="detalle_tratamiento"
 																placeholder="Ingrese detalles del Tratamiento"
+																onChange={e => actions.handleChange(e)}
 															/>
 
 															<span>
@@ -154,7 +165,11 @@ export default class ModalReclamo extends React.Component {
 													<div className="feature-left">
 														<div className="feature-copy">
 															<label>Pago </label>
-															<select className="form-control" id="pago">
+															<select
+																className="form-control"
+																name="pago"
+																id="pago"
+																onChange={e => actions.handleChange(e)}>
 																<option>COB</option>
 																<option>REM</option>
 															</select>
@@ -176,14 +191,14 @@ export default class ModalReclamo extends React.Component {
 												actions.SaveDocumento({
 													date_doc: this.state.date_doc,
 													nombre_proveedor: this.state.nombre_proveedor,
-													tipodoc: this.state.media,
-													numdoc: this.state.date_anuncio,
-													montodoc: this.state.anuncio_nameID,
-													detalle_tratamiento: this.state.ubication
+													tipodoc: this.state.tipodoc,
+													numdoc: this.state.numdoc,
+													montodoc: this.state.montodoc,
+													detalle_tratamiento: this.state.detalle_tratamiento,
+													tipodoc: this.state.tipodoc
 												});
 											}}
 											data-dismiss="modal">
-											{""}
 											Ingresar Documento
 										</button>
 									</div>
@@ -196,6 +211,6 @@ export default class ModalReclamo extends React.Component {
 		);
 	}
 }
-ModalReclamo.propTypes = {
-	history: PropTypes.object
+ModalDocumento.propTypes = {
+	history: PropTypes.array
 };

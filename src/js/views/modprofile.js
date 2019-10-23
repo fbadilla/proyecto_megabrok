@@ -10,8 +10,8 @@ export class modificarUsuario extends React.Component {
 		this.props.history;
 	}
 	componentDidMount() {
-		this.actionsContext.getMiembro();
-		this.actionsContext.getGrupos();
+		this.actionsContext.getaccount();
+		this.actionsContext.getRol();
 	}
 
 	render() {
@@ -33,10 +33,9 @@ export class modificarUsuario extends React.Component {
 										<div className="col-md-12 col-md-offset-0 text-left">
 											<div className="row row-mt-15em">
 												<div className="col-md-7 mt-text">
-													<h1>{store.miembro.userAccount}</h1>
+													<h1>{store.account.userAccount}</h1>
 													<span className="intro-text-small">
-														manten actualizado tus datos, recuerda que la comunicacion debe
-														ser fluida
+														manten actualizado tus datos
 													</span>
 												</div>
 											</div>
@@ -64,10 +63,10 @@ export class modificarUsuario extends React.Component {
 																		nombre
 																	</label>
 																	<input
-																		name="userAccount"
-																		id="userAccount"
-																		placeholder={store.miembro.userAccount}
-																		onChange={e => actions.handleMiembro(e)}
+																		name="name_Account"
+																		id="name_Account"
+																		placeholder={store.account.name_Account}
+																		onChange={e => actions.handleaccount(e)}
 																		type="text"
 																		className="form-control"
 																	/>
@@ -89,8 +88,8 @@ export class modificarUsuario extends React.Component {
 																	<input
 																		name="mail"
 																		id="mail"
-																		placeholder={store.miembro.mail}
-																		onChange={e => actions.handleMiembro(e)}
+																		placeholder={store.account.mail}
+																		onChange={e => actions.handleaccount(e)}
 																		type="email"
 																		className="form-control"
 																	/>
@@ -112,8 +111,8 @@ export class modificarUsuario extends React.Component {
 																	<input
 																		name="fecha_nacimiento"
 																		id="fecha_nacimiento"
-																		placeholder={store.miembro.fecha_nacimiento}
-																		onChange={e => actions.handleMiembro(e)}
+																		placeholder={store.account.fecha_nacimiento}
+																		onChange={e => actions.handleaccount(e)}
 																		type="date"
 																		className="form-control"
 																	/>
@@ -134,10 +133,10 @@ export class modificarUsuario extends React.Component {
 																	<input
 																		name="phone"
 																		id="phone"
-																		onChange={e => actions.handleMiembro(e)}
+																		onChange={e => actions.handleaccount(e)}
 																		type="text"
 																		className="form-control"
-																		placeholder={store.miembro.phone}
+																		placeholder={store.account.phone}
 																	/>
 																</div>
 															</div>
@@ -154,16 +153,16 @@ export class modificarUsuario extends React.Component {
 																		grupo
 																	</label>
 																	<select
-																		name="gruponame"
-																		id="gruponame"
-																		onChange={e => actions.handleMiembro(e)}
+																		name="rolName"
+																		id="rolName"
+																		onChange={e => actions.handleaccount(e)}
 																		type="text"
 																		className="form-control">
 																		<option value="1">Seleccione</option>
-																		{store.grupos.length > 0 &&
-																			store.grupos.map((item, i) => {
+																		{store.Rol.length > 0 &&
+																			store.Rol.map((item, i) => {
 																				const selected =
-																					store.miembro.gruponame == item.id
+																					store.account.rolName == item.id
 																						? "selected"
 																						: "";
 																				return (
@@ -171,7 +170,7 @@ export class modificarUsuario extends React.Component {
 																						value={item.id}
 																						key={i}
 																						selected={selected}>
-																						{item.grupoName}
+																						{item.rolName}
 																					</option>
 																				);
 																			})}

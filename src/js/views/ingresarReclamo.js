@@ -1,8 +1,12 @@
 import React, { Fragment } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
-import ModalReclamo from "../component/modalReclamo";
+import ModalDocumento from "../component/modalDocumento";
+import ModalEvento from "../component/modalEvento";
+import ModalAviso from "../component/modalAviso";
 import { ListaDocumentos } from "../component/listaDocumentos";
+import { ListaAsegurados } from "../component/listaAsegurados";
+import { SearchComponent } from "../component/search";
 import PropTypes from "prop-types";
 
 export class ingresarReclamo extends React.Component {
@@ -50,6 +54,12 @@ export class ingresarReclamo extends React.Component {
 									<div className="row">
 										<div className="col-md-12">
 											<div className="col-md-10 ">
+												<h2>Bucar datos del cliente por poliza</h2>
+												<SearchComponent />
+												<h3>Resultados </h3>
+												<ListaAsegurados />
+											</div>
+											<div className="col-md-10 ">
 												<h2>Ingresar Formulario</h2>
 												<form
 													action="#"
@@ -63,10 +73,9 @@ export class ingresarReclamo extends React.Component {
 																</span>
 																<div className="feature-copy">
 																	<input
-																		name="userAccount"
-																		id="userAccount"
+																		name="nameReclamo"
+																		id="nameReclamo"
 																		placeholder="Nombre completo del paciente"
-																		//onChange={e => actions.handleMiembro(e)}
 																		type="text"
 																		className="form-control"
 																	/>
@@ -112,7 +121,7 @@ export class ingresarReclamo extends React.Component {
 																</span>
 																<div className="feature-copy">
 																	<input
-																		name="mail"
+																		name="detalle_diagnostico"
 																		id="mail"
 																		placeholder="Diagnóstico o Tipo de Accidente"
 																		//onChange={e => actions.handleMiembro(e)}
@@ -155,10 +164,12 @@ export class ingresarReclamo extends React.Component {
 																</Link>
 															</div>
 
-															<div className="col-md-3">
-																<Link to="/" className="btn btn-primary">
-																	Guardar y enviar
-																</Link>
+															<div className="form-group">
+																<input
+																	type="submit"
+																	value="modificar"
+																	className="btn btn-primary"
+																/>
 															</div>
 														</div>
 													</div>
@@ -168,7 +179,9 @@ export class ingresarReclamo extends React.Component {
 									</div>
 								</div>
 							</div>
-							<ModalReclamo />
+							<ModalDocumento />
+							<ModalEvento />
+							<ModalAviso />
 						</Fragment>
 					);
 				}}

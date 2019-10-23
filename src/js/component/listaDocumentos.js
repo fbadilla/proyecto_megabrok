@@ -8,9 +8,7 @@ export class ListaDocumentos extends Component {
 		super(props);
 		this.storeContext = null;
 		this.actionsContext = null;
-	}
-	componentDidMount() {
-		this.actionsContext.getDocumento({}, this.props.history);
+		this.props.history;
 	}
 	render() {
 		return (
@@ -27,21 +25,21 @@ export class ListaDocumentos extends Component {
 				<tbody>
 					<Context.Consumer>
 						{({ store, actions }) => {
-							this.storeContext = store;
-							this.actionsContext = actions;
-							console.log("render", store.documentos);
-							const peo2 = store.documentos.map((item, i) => {
-								return (
-									<tr key={i}>
-										<td>{item.date_doc}</td>
-										<td>{item.numdoc}</td>
-										<td>{item.detalle_tratamiento}</td>
-										<td>{item.pago}</td>
-										<td>{item.montodoc}</td>
-									</tr>
-								);
-							});
-							return <>{peo2}</>;
+							if (store.documentos.length > 0) {
+								return store.documentos.map((item, i) => {
+									return (
+										<tr key={i}>
+											<td>{item.date_doc}</td>
+											<td>{item.numdoc}</td>
+											<td>{item.detalle_tratamiento}</td>
+											<td>{item.pago}</td>
+											<td>{item.montodoc}</td>
+										</tr>
+									);
+								});
+							} else {
+								return "";
+							}
 						}}
 					</Context.Consumer>
 				</tbody>
