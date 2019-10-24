@@ -17,7 +17,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			password2: "",
 			email: "",
 			asegurados: [],
-			aseguradoselectecd: {},
+			aseguradoselected: {},
 			numpoliza: "",
 			error: {}
 		},
@@ -80,9 +80,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				getActions().getPoliza(history);
 			},
-			handleAseguradoSelected: e => {
-				const store = getStore().then(data => {
-					setStore({ aseguradoselectecd: data, ClaimantId: "", ClaimantFirstName: "" });
+			handleAseguradoSelected: (item, history) => {
+				setStore({
+					aseguradoselected: item
 				});
 			},
 			login: (username, password, history) => {
