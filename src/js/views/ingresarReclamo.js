@@ -7,6 +7,7 @@ import ModalAviso from "../component/modalAviso";
 import { ListaDocumentos } from "../component/listaDocumentos";
 import { ListaAsegurados } from "../component/listaAsegurados";
 import { SearchComponent } from "../component/search";
+import { FormReclamo } from "../component/formReclamo";
 import PropTypes from "prop-types";
 
 export class ingresarReclamo extends React.Component {
@@ -58,6 +59,8 @@ export class ingresarReclamo extends React.Component {
 												<SearchComponent />
 												<h3>Resultados </h3>
 												<ListaAsegurados />
+												<h3>Generar Reclamo</h3>
+												<FormReclamo />
 											</div>
 											<div className="col-md-10 ">
 												<h2>Ingresar Formulario</h2>

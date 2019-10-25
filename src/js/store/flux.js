@@ -19,7 +19,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 			asegurados: [],
 			aseguradoselected: {},
 			numpoliza: "",
-			error: {}
+			error: {},
+			idReclamo: "",
+			reclamo: {
+				PolicyNumber: "",
+				ClaimId: "",
+				ClaimForm: "",
+				Extension: "png",
+				IsBankingInfo: "",
+				Comments: ""
+			}
 		},
 		actions: {
 			handleChange: e => {
@@ -81,9 +90,32 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getActions().getPoliza(history);
 			},
 			handleAseguradoSelected: (item, history) => {
+				const store = getStore();
 				setStore({
 					aseguradoselected: item
 				});
+			},
+			handleReclamo: e => {
+				const { name, value } = e.target;
+				const store = getStore();
+				let reclamo = store.reclamo;
+				reclamo[name] = value;
+				setStore({
+					reclamo,
+					reclamo: {
+						ClaimId: store.aseguradoselected.ClaimantId,
+						PolicyNumber: store.numpoliza
+					}
+				});
+			},
+			handledatosfaltantes: e => {
+				setStore({
+					reclamo
+				});
+			},
+			handleGenerate: (e, history) => {
+				e.preventDefault();
+				getActions().PostReclamo(history);
 			},
 			login: (username, password, history) => {
 				const store = getStore();
@@ -260,6 +292,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(resp => resp.json())
 					.then(data => setStore({ asegurados: data }))
 					.catch(error => setStore({ error }));
+			},
+			PostReclamo: history => {
+				const store = getStore();
+				const data = store.reclamo;
+				fetch(store.apiUrl2 + "/claim/fileclaim/", {
+					method: "POST",
+					body: JSON.stringify(data),
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Basic QkQxNzYwMy0wMTpOODVGWlJGU1pDMTFSVFNKT0pRRTQwUVFOM0lHRFQxSg=="
+					}
+				})
+					.then(resp => resp.json())
+					.then(data => {
+						setStore({ idReclamo: data });
+						alert("reclamo generado con exito" + store.idReclamo.ClaimId);
+					});
 			}
 		}
 	};
