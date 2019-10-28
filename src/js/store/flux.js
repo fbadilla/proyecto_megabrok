@@ -101,11 +101,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let reclamo = store.reclamo;
 				reclamo[name] = value;
 				setStore({
-					reclamo,
-					reclamo: {
-						ClaimId: store.aseguradoselected.ClaimantId,
-						PolicyNumber: store.numpoliza
-					}
+					reclamo
 				});
 			},
 			handledatosfaltantes: e => {

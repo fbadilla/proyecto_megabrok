@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import "react-dropzone-uploader/dist/styles.css";
+import Dropzone from "react-dropzone-uploader";
 
 export class FormReclamo extends Component {
 	constructor(props) {
@@ -119,6 +121,7 @@ export class FormReclamo extends Component {
 													className="form-control"
 												/>
 											</div>
+											<Dropzone accept="image/*,audio/*,video/*" />
 										</div>
 									</div>
 									<div className="col-md-4">
