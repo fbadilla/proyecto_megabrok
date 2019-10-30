@@ -13,6 +13,7 @@ import { ingresarReclamo } from "./views/ingresarReclamo";
 import { Evento } from "./views/evento";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
+import { FormularioChile } from "./views/formularioChile";
 
 import { ModalEvento } from "./component/modalEvento";
 
@@ -43,6 +44,7 @@ export class Layout extends React.Component {
 										<Route path="/grupo" component={Grupo} />
 										<Route path="/creargrupo" component={crearGrupo} />
 										<Route path="/ingresareclamo" component={ingresarReclamo} />
+										<Route path="/formulariochile" component={FormularioChile} />
 										<Route path="/eventos" component={Evento} />
 										<Route render={() => <h1>Not found!</h1>} />
 									</Switch>

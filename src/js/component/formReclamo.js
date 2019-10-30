@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import "react-dropzone-uploader/dist/styles.css";
+import { FileInput } from "../component/fileInput";
 import Dropzone from "react-dropzone-uploader";
 
 export class FormReclamo extends Component {
@@ -111,17 +111,8 @@ export class FormReclamo extends Component {
 									<div className="col-md-4">
 										<div className="feature-left">
 											<div className="feature-copy">
-												<label className="custom-file-label">Cargar Formulario</label>
-												<input
-													name="ClaimForm"
-													id="ClaimForm"
-													placeholder=""
-													onChange={e => actions.handleReclamo(e)}
-													type="file"
-													className="form-control"
-												/>
+												<FileInput name="ClaimantId" />
 											</div>
-											<Dropzone accept="image/*,audio/*,video/*" />
 										</div>
 									</div>
 									<div className="col-md-4">
@@ -130,7 +121,7 @@ export class FormReclamo extends Component {
 												<input
 													className="form-check-input"
 													type="checkbox"
-													value=""
+													value="True"
 													id="IsBankingInfo"
 													name="IsBankingInfo"
 													onChange={e => actions.handleReclamo(e)}

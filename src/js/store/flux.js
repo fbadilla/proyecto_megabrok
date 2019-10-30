@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			apiUrl: "https://damp-caverns-92972.herokuapp.com",
+			apiUrl: "https://shielded-hollows-23132.herokuapp.com",
 			apiUrl2: "https://cors-anywhere.herokuapp.com/https://mobile.bestdoctorsinsurance.com/spiritapi/api",
 			token: {
 				refresh: "",
@@ -21,6 +21,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			numpoliza: "",
 			error: {},
 			idReclamo: "",
+			formulario: {},
 			reclamo: {
 				PolicyNumber: "",
 				ClaimId: "",
@@ -35,6 +36,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const { name, value } = e.target;
 				setStore({
 					[name]: value
+				});
+			},
+			handleForm: e => {
+				const { name, value } = e.target;
+				const store = getStore();
+				let formulario = store.formulario;
+				formulario[name] = value;
+
+				setStore({
+					formulario
 				});
 			},
 
@@ -65,9 +76,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				e.preventDefault();
 				getActions().postRol(history);
 			},
-			handleevento: (e, history) => {
+			handleFormulario: (e, history) => {
 				e.preventDefault();
-				getActions().postevento(history);
+				getActions().SaveFormulario(history);
+			},
+
+			handleEnvioDocumento: (e, history) => {
+				e.preventDefault();
+				getActions().SaveDocumento(history);
 			},
 
 			handleLogin: (e, history) => {
@@ -131,7 +147,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({ token: data, username: "", password: "" });
 						localStorage.setItem("token", data.access);
 
-						history.push("/ingresareclamo");
+						history.push("/formulariochile");
 					});
 			},
 			register: (username, email, password) => {
@@ -259,7 +275,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			SaveDocumento: data => {
 				const store = getStore();
-
 				fetch(store.apiUrl + "/api/documentos/", {
 					method: "Post",
 					body: JSON.stringify(data),
@@ -272,9 +287,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => {
 						setStore({ documentos: data });
 					});
-
-				//reset the global store
-				//setStore({ demo: demo });
 			},
 			getPoliza: () => {
 				const store = getStore();
@@ -300,10 +312,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 						Authorization: "Basic QkQxNzYwMy0wMTpOODVGWlJGU1pDMTFSVFNKT0pRRTQwUVFOM0lHRFQxSg=="
 					}
 				})
-					.then(resp => resp.json())
+					.then(resp => resp)
 					.then(data => {
 						setStore({ idReclamo: data });
 						alert("reclamo generado con exito" + store.idReclamo.ClaimId);
+					});
+			},
+			SaveFormulario: history => {
+				const store = getStore();
+				const data = store.formulario;
+				fetch(store.apiUrl + "/api/reclamos/", {
+					method: "Post",
+					body: JSON.stringify(data),
+					headers: {
+						Authorization: "Bearer " + getStore().token.access,
+						"Content-Type": "application/json"
+					}
+				})
+					.then(resp => resp.json())
+					.then(data => {
+						setStore({ documentos: data });
 					});
 			}
 		}

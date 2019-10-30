@@ -53,13 +53,13 @@ body {
 }
 
 a {
-  color: #f54c53;
+  color: #33b5e5;
   -webkit-transition: 0.5s;
   -o-transition: 0.5s;
   transition: 0.5s;
 }
 a:hover, a:active, a:focus {
-  color: #f54c53;
+  color: #33b5e5;
   outline: none;
   text-decoration: none;
 }
@@ -77,17 +77,17 @@ h1, h2, h3, h4, h5, h6, figure {
 
 ::-webkit-selection {
   color: #fff;
-  background: #f54c53;
+  background: #33b5e5;
 }
 
 ::-moz-selection {
   color: #fff;
-  background: #f54c53;
+  background: #33b5e5;
 }
 
 ::selection {
   color: #fff;
-  background: #f54c53;
+  background: #33b5e5;
 }
 
 .gtco-container {
@@ -121,7 +121,7 @@ h1, h2, h3, h4, h5, h6, figure {
   font-weight: bold;
 }
 .gtco-nav #gtco-logo em {
-  color: #f54c53;
+  color: #33b5e5;
 }
 .gtco-nav a {
   padding: 5px 10px;
@@ -207,7 +207,7 @@ h1, h2, h3, h4, h5, h6, figure {
   font-size: 15px;
 }
 .gtco-nav ul li.has-dropdown .dropdown li a:hover {
-  color: #f54c53;
+  color: #33b5e5;
 }
 .gtco-nav ul li.has-dropdown .dropdown li.active > a {
   color: #000 !important;
@@ -216,7 +216,7 @@ h1, h2, h3, h4, h5, h6, figure {
   color: #fff;
 }
 .gtco-nav ul li.btn-cta a {
-  color: #f54c53;
+  color: #33b5e5;
 }
 .gtco-nav ul li.btn-cta a span {
   border: 2px solid rgba(255, 255, 255, 0.5);
@@ -236,14 +236,14 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 .gtco-nav ul li.btn-cta a:hover span {
   background: #fff;
-  color: #f54c53;
+  color: #33b5e5;
 }
 .gtco-nav ul li.active > a {
   color: #fff !important;
 }
 
 #gtco-header {
-  background: #fdd035;
+  background: #35cdfd;
 }
 @media screen and (max-width: 768px) {
   #gtco-header.gtco-cover {
@@ -342,7 +342,7 @@ h1, h2, h3, h4, h5, h6, figure {
   display: block;
   padding: 10px 20px 20px 20px;
   background: #fff;
-  color: #f54c53;
+  color: #33b5e5;
 }
 #gtco-header .form-wrap .tab-menu li.gtco-first a {
   border-top-left-radius: 7px;
@@ -453,7 +453,7 @@ h1, h2, h3, h4, h5, h6, figure {
   width: 100%;
 }
 .gtco-cover a {
-  color: #f54c53;
+  color: #33b5e5;
 }
 .gtco-cover a:hover {
   color: white;
@@ -582,7 +582,7 @@ h1, h2, h3, h4, h5, h6, figure {
   display: inline-block;
   zoom: 1;
   *display: inline;
-  color: #f54c53;
+  color: #33b5e5;
   padding-left: 10px;
   padding-right: 10px;
 }
@@ -700,7 +700,7 @@ form label {
 #gtco-counter .counter {
   font-size: 50px;
   margin-bottom: 10px;
-  color: #f54c53;
+  color: #33b5e5;
   font-weight: 100;
   display: block;
 }
@@ -810,7 +810,7 @@ form label {
 .feature-center h3 {
   font-size: 20px;
   margin-bottom: 20px;
-  color: #f54c53;
+  color: #33b5e5;
   position: relative;
 }
 
@@ -829,13 +829,13 @@ form label {
   display: table-cell;
   vertical-align: middle;
   font-size: 40px;
-  color: #f54c53;
+  color: #33b5e5;
 }
 .feature-left .icon2 i {
   display: table-cell;
   vertical-align: middle;
   font-size: 20px;
-  color: #f54c53;
+  color: #33b5e5;
 }
 .feature-left .feature-copy {
   float: right;
@@ -855,7 +855,7 @@ form label {
   display: table-cell;
   vertical-align: middle;
   font-size: 40px;
-  color: #f54c53;
+  color: #33b5e5;
   padding-left: 5px;
 }
 .card {
@@ -945,7 +945,7 @@ form label {
 #gtco-subscribe .btn {
   height: 46px;
   border: none !important;
-  background: #f54c53;
+  background: #33b5e5;
   color: #fff;
   font-size: 16px;
   text-transform: uppercase;
@@ -1019,7 +1019,7 @@ form label {
   *display: inline;
 }
 #gtco-footer .footer-logo span {
-  color: #f54c53;
+  color: #33b5e5;
 }
 #gtco-footer .copyright {
   color: #b3b3b3;
@@ -1294,21 +1294,21 @@ form label {
 }
 
 .btn-primary {
-  background: #f54c53;
+  background: #33b5e5;
   color: #fff;
-  border: 2px solid #f54c53 !important;
+  border: 2px solid #33b5e5 !important;
 }
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
-  background: #f6646a !important;
-  border-color: #f6646a !important;
+  background: #0099CC !important;
+  border-color: #0099CC !important;
 }
 .btn-primary.btn-outline {
   background: transparent;
-  color: #f54c53;
-  border: 2px solid #f54c53;
+  color: #33b5e5;
+  border: 2px solid #33b5e5;
 }
 .btn-primary.btn-outline:hover, .btn-primary.btn-outline:focus, .btn-primary.btn-outline:active {
-  background: #f54c53;
+  background: #33b5e5;
   color: #fff;
 }
 
@@ -1460,7 +1460,7 @@ form label {
 .form-control:active, .form-control:focus {
   outline: none;
   box-shadow: none;
-  border-color: #f54c53;
+  border-color: #33b5e5;
 }
 
 .row-mt-15em {
@@ -1522,7 +1522,7 @@ form label {
   margin-left: 0px;
 }
 .gtco-nav .gtco-contact ul li a i {
-  color: #f54c53;
+  color: #33b5e5;
 }
 .gtco-nav .gtco-contact ul li a:hover i {
   color: #fff;
@@ -1616,14 +1616,14 @@ form label {
 }
 .owl-theme .owl-controls .owl-nav [class*="owl-"] i {
   font-size: 24px;
-  background: #f54c53 !important;
+  background: #33b5e5 !important;
   padding: 12px;
   -webkit-transition: 0.5s;
   -o-transition: 0.5s;
   transition: 0.5s;
 }
 .owl-theme .owl-controls .owl-nav [class*="owl-"]:hover i, .owl-theme .owl-controls .owl-nav [class*="owl-"]:focus i {
-  background: #f54c53 !important;
+  background: #33b5e5 !important;
 }
 
 .owl-theme .owl-dots {
@@ -1641,7 +1641,7 @@ form label {
 .owl-theme .owl-dots .owl-dot span {
   width: 10px;
   height: 10px;
-  background: #f54c53;
+  background: #33b5e5;
   -webkit-transition: 0.2s;
   -o-transition: 0.2s;
   transition: 0.2s;
@@ -1649,12 +1649,12 @@ form label {
 }
 .owl-theme .owl-dots .owl-dot span:hover {
   background: none;
-  border: 2px solid #f54c53;
+  border: 2px solid #33b5e5;
 }
 
 .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
   background: none;
-  border: 2px solid #f54c53;
+  border: 2px solid #33b5e5;
 }
 
 .fh5co-project-item {
@@ -1726,7 +1726,7 @@ form label {
   font-size: 20px;
   font-weight: 300;
   margin: 0 0 10px 0;
-  color: #f54c53;
+  color: #33b5e5;
 }
 .fh5co-project-item .fh5co-text span {
   color: #b3b3b3;
@@ -1785,7 +1785,7 @@ form label {
   border-radius: 5px;
 }
 .price-box.popular {
-  border: 2px solid #f54c53;
+  border: 2px solid #33b5e5;
 }
 .price-box.popular .popular-text {
   top: 0;
@@ -1794,7 +1794,7 @@ form label {
   margin-top: -2em;
   position: absolute;
   padding: 4px 20px;
-  background: #f54c53;
+  background: #33b5e5;
   color: #fff;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -1808,7 +1808,7 @@ form label {
   left: 50%;
   margin-left: -10px;
   border-top: 10px solid black;
-  border-top-color: #f54c53;
+  border-top-color: #33b5e5;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
 }
