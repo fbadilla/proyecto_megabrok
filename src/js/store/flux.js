@@ -2,7 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			apiUrl: "http://127.0.0.1:8000",
-			apiUrl2: "https://cors-anywhere.herokuapp.com/https://mobile.bestdoctorsinsurance.com/spiritapi/api",
+			apiUrl2: "https://apy-cors-fcobad.herokuapp.com/https://mobile.bestdoctorsinsurance.com/spiritapi/api",
 			token: {
 				refresh: "",
 				access: ""
@@ -26,7 +26,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			formulariosId: [],
 			documento: {},
 			documentoid: [],
-			image: {},
+			docfile: {},
 			reclamo: {
 				PolicyNumber: "",
 				ClaimId: "",
@@ -88,7 +88,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			handleEnvioDocumento: (e, history) => {
 				getActions().getDocumentoId(history);
-				getActions().SaveDocumento(history);
+				getActions().SaveDocumentoSinFile(history);
 				getActions().getDocumentoId(history);
 			},
 
@@ -135,20 +135,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 				e.preventDefault();
 				getActions().PostReclamo(history);
 			},
-			onChangeHandler: e => {
-				const { name, value } = e.target.files[0];
-				const store = getStore();
-				let image = store.image;
-				image[name] = value;
+			handleFileChange: e => {
+				const docfile = e.target.files[0];
+
 				setStore({
-					image
+					docfile
 				});
-			},
-			onClickHandler: () => {
-				const store = getStore();
-				const data = new FormData();
-				data.append("image", store.selectedFile);
-				localStorage.setItem("image", data);
 			},
 			login: (username, password, history) => {
 				const store = getStore();
@@ -373,7 +365,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			SaveDocumentoSinFile: history => {
 				const store = getStore();
 				let form_data = new FormData();
-				form_data.append("image", store.image.name);
+				form_data.append("docfile", store.docfile, store.docfile.name);
 				form_data.append("datedoc", store.documento.datedoc);
 				form_data.append("nombre_proveedor", store.documento.nombre_proveedor);
 				form_data.append("tipodoc", store.documento.tipodoc);
@@ -385,9 +377,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				fetch(store.apiUrl + "/api/documentos/" + store.formulario.id, {
 					method: "Post",
 					body: form_data,
-
+					mimeType: "multipart/form-data",
 					headers: {
-						"Content-Type": "multipart/form-data;boundary=***someboundary***",
 						Authorization: "Bearer " + getStore().token.access
 					}
 				})
