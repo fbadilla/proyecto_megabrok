@@ -33,7 +33,7 @@ export class modificarUsuario extends React.Component {
 										<div className="col-md-12 col-md-offset-0 text-left">
 											<div className="row row-mt-15em">
 												<div className="col-md-7 mt-text">
-													<h1>{store.account.userAccount}</h1>
+													<h1>{store.account.name_Account}</h1>
 													<span className="intro-text-small">
 														manten actualizado tus datos
 													</span>

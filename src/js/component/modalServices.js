@@ -13,8 +13,7 @@ export default class ModalDocumento extends React.Component {
 			numdoc: "",
 			montodoc: "",
 			detalle_tratamiento: "",
-			pago: "",
-			image: null
+			pago: ""
 		};
 		this.storeContext = null;
 		this.actionsContext = null;
@@ -75,7 +74,7 @@ export default class ModalDocumento extends React.Component {
 																placeholder="Clinica de prueba"
 																type="text"
 																className="form-control"
-																onChange={e => actions.handledocumento(e)}
+																onChange={e => actions.handledocument(e)}
 															/>
 														</div>
 													</div>
@@ -115,7 +114,7 @@ export default class ModalDocumento extends React.Component {
 																//onChange={e => actions.handleMiembro(e)}
 																type="number"
 																className="form-control"
-																onChange={e => actions.handledocumento(e)}
+																onChange={e => actions.handleChange(e)}
 															/>
 														</div>
 													</div>
@@ -134,7 +133,7 @@ export default class ModalDocumento extends React.Component {
 																//onChange={e => actions.handleMiembro(e)}
 																type="number"
 																className="form-control"
-																onChange={e => actions.handledocumento(e)}
+																onChange={e => actions.handledocument(e)}
 															/>
 														</div>
 													</div>
@@ -152,7 +151,7 @@ export default class ModalDocumento extends React.Component {
 																rows="5"
 																id="detalle_tratamiento"
 																placeholder="Ingrese detalles del Tratamiento"
-																onChange={e => actions.handledocumento(e)}
+																onChange={e => actions.handledocument(e)}
 															/>
 
 															<span>
@@ -171,37 +170,10 @@ export default class ModalDocumento extends React.Component {
 																className="form-control"
 																name="pago"
 																id="pago"
-																onChange={e => actions.handledocumento(e)}>
+																onChange={e => actions.handledocument(e)}>
 																<option>COB</option>
 																<option>REM</option>
 															</select>
-														</div>
-													</div>
-												</div>
-												<div className="col-md-3">
-													<div className="feature-left">
-														<span className="icon2">
-															<i className="ti-archive" />
-														</span>
-														<div className="feature-copy">
-															<label>Sube tu archivo</label>
-															<input
-																name="image"
-																id="image"
-																placeholder="666"
-																//onChange={e => actions.handleMiembro(e)}
-																type="file"
-																className="form-control"
-																onChange={e => actions.onChangeHandler(e)}
-															/>
-															<button
-																type="button"
-																className="btn btn-primary"
-																onClick={() => {
-																	actions.onClickHandler({});
-																}}>
-																subir
-															</button>
 														</div>
 													</div>
 												</div>

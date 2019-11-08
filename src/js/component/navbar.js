@@ -20,10 +20,10 @@ export class Navbar extends React.Component {
 									<Link to="/usuarios">Mi cuenta</Link>
 								</li>
 								<li>
-									<Link to="/anuncios">Personas</Link>
+									<Link to="/formulariochile">Formulario</Link>
 								</li>
 								<li>
-									<Link to="/">Plan de Ingreso</Link>
+									<Link to="/reclamos">ver reclamos</Link>
 								</li>
 
 								<li className="has-dropdown">
@@ -47,10 +47,10 @@ export class Navbar extends React.Component {
 											<Link to="/">Listar Reclamos</Link>
 										</li>
 										<li>
-											<Link to="/creargrupo">Agregar</Link>
+											<Link to="/">Agregar</Link>
 										</li>
 										<li>
-											<Link to="/creargrupo">Modificar</Link>
+											<Link to="/">Modificar</Link>
 										</li>
 									</ul>
 								</li>

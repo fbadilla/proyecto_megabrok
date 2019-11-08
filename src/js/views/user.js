@@ -38,7 +38,7 @@ export class Usuarios extends React.Component {
 												<div className="row row-mt-15em">
 													<div className="col-md-7 mt-text">
 														<span className="intro-text-small">Bienvenido</span>
-														<h1>{store.account.userAccount}</h1>
+														<h1>{store.account.name_Account}</h1>
 													</div>
 												</div>
 											</div>
@@ -83,7 +83,7 @@ export class Usuarios extends React.Component {
 													</span>
 													<div className="feature-copy">
 														<h3>Nombre</h3>
-														<p>{store.account.userAccount} </p>
+														<p>{store.account.name_Account} </p>
 													</div>
 												</div>
 												<div className="feature-left">

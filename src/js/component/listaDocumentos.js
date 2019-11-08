@@ -25,11 +25,11 @@ export class ListaDocumentos extends Component {
 				<tbody>
 					<Context.Consumer>
 						{({ store, actions }) => {
-							if (store.documentos.length > 0) {
-								return store.documentos.map((item, i) => {
+							if (store.documentoid.length > 0) {
+								return store.documentoid.map((item, i) => {
 									return (
 										<tr key={i}>
-											<td>{item.date_doc}</td>
+											<td>{item.datedoc}</td>
 											<td>{item.numdoc}</td>
 											<td>{item.detalle_tratamiento}</td>
 											<td>{item.pago}</td>

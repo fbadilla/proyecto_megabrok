@@ -24,7 +24,7 @@ export class Home extends React.Component {
 									<div className="gtco-container">
 										<div className="row">
 											<div className="col-md-12 col-md-offset-0 text-left">
-												<div className="row row-mt-15em">
+												<div className="row row-mt-15em2">
 													<div className="col-md-7 mt-text">
 														<br />
 														<span className="intro-text-small">bienvenido</span>

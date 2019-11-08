@@ -485,11 +485,11 @@ h1, h2, h3, h4, h5, h6, figure {
 @media screen and (max-width: 768px) {
   .gtco-cover .display-t,
   .gtco-cover .display-tc {
-    height: 600px;
+    height: 400px;
   }
 }
 .gtco-cover.gtco-cover-sm {
-  height: 600px;
+  height: 300px;
 }
 @media screen and (max-width: 768px) {
   .gtco-cover.gtco-cover-sm {
@@ -498,18 +498,18 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 .gtco-cover.gtco-cover-sm .display-t,
 .gtco-cover.gtco-cover-sm .display-tc {
-  height: 600px;
+  height: 400px;
   display: table;
   width: 100%;
 }
 @media screen and (max-width: 768px) {
   .gtco-cover.gtco-cover-sm .display-t,
   .gtco-cover.gtco-cover-sm .display-tc {
-    height: 400px;
+    height: 300px;
   }
 }
 .gtco-cover.gtco-cover-xs {
-  height: 500px;
+  height: 400px;
 }
 @media screen and (max-width: 768px) {
   .gtco-cover.gtco-cover-xs {
@@ -1370,21 +1370,21 @@ form label {
 }
 
 .btn-danger {
-  background: #d9534f;
+  background: #33b5e5;
   color: #fff;
-  border: 2px solid #d9534f;
+  border: 2px solid #33b5e5;
 }
 .btn-danger:hover, .btn-danger:focus, .btn-danger:active {
-  background: #d43f3a !important;
-  border-color: #d43f3a !important;
+  background: #1d8eb7 !important;
+  border-color: #1d8eb7 !important;
 }
 .btn-danger.btn-outline {
   background: transparent;
-  color: #d9534f;
-  border: 2px solid #d9534f;
+  color: #1d8eb7;
+  border: 2px solid #1d8eb7;
 }
 .btn-danger.btn-outline:hover, .btn-danger.btn-outline:focus, .btn-danger.btn-outline:active {
-  background: #d9534f;
+  background: #1d8eb7;
   color: #fff;
 }
 
@@ -1464,6 +1464,9 @@ form label {
 }
 
 .row-mt-15em {
+  margin-top: 1rem;
+}
+.row-mt-15em2 {
   margin-top: 15em;
 }
 @media screen and (max-width: 768px) {

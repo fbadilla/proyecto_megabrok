@@ -9,6 +9,7 @@ import { ListaAsegurados } from "../component/listaAsegurados";
 import { SearchComponent } from "../component/search";
 import { FormReclamo } from "../component/formReclamo";
 import PropTypes from "prop-types";
+import { Animated } from "react-animated-css";
 
 export class FormularioChile extends React.Component {
 	constructor(props) {
@@ -19,49 +20,53 @@ export class FormularioChile extends React.Component {
 			numpoliza: "",
 			detalle_diagnostico: ""
 		};
-		this.handleChange2 = this.handleChange2.bind(this);
 		this.storeContext = null;
 		this.actionsContext = null;
 		this.props.history;
 	}
-	handleChange2(event) {
-		this.setState({ value: event.target.value });
+	componentDidMount() {
+		this.actionsContext.getaccount();
 	}
 	render() {
 		return (
 			<Context.Consumer>
 				{({ store, actions }) => {
+					this.storeContext = store;
+					this.actionsContext = actions;
 					return (
 						<Fragment>
-							<header id="gtco-header" className="gtco-cover gtco-cover-sm" role="banner">
-								<div className="overlay" />
-								<div className="gtco-container">
-									<div className="row">
-										<div className="col-md-12 col-md-offset-0 text-left">
-											<div className="row row-mt-15em">
-												<div className="col-md-7 mt-text ">
-													<h1>Formulario de Reclamacion</h1>
-													<span className="intro-text-small"> Por favor asegurese de:</span>
-													<span className="intro-text-small">
-														<li>
+							<Animated
+								animationIn="bounceInDown"
+								animationOut="fadeOut"
+								isVisible={true}
+								data-animate-effect="fadeInLeft">
+								<header
+									id="gtco-header"
+									className="gtco-cover gtco-cover-sm"
+									role="banner"
+									style={{ backgroundImage: "url(images/img_6.jpg)" }}>
+									<div className="overlay" />
+									<div className="gtco-container">
+										<div className="row">
+											<div className="col-md-12 col-md-offset-0 text-left">
+												<div className="row row-mt-15em">
+													<div className="col-md-7 mt-text ">
+														<h1>Formulario de Reclamacion</h1>
+														<span className="intro-text-small">
+															{" "}
+															Por favor asegurese de:
+														</span>
+														<small className="intro-text-small">
 															<i className="ti-check" />
-															Completar un formulario por evento
-														</li>
-														<li>
-															<i className="ti-check" />
-															Enviar y completar este formulario en su totalidad
-														</li>
-														<li>
-															<i className="ti-check" />
-															Enviar facturas originales, detallando todos los servicios
-														</li>
-													</span>
+															Completar en su totalidad y enviar un formulario por evento
+														</small>
+													</div>
 												</div>
 											</div>
 										</div>
 									</div>
-								</div>
-							</header>
+								</header>
+							</Animated>
 							<div className="gtco-section border-bottom">
 								<div className="gtco-container">
 									<div className="row">
@@ -146,40 +151,13 @@ export class FormularioChile extends React.Component {
 															</div>
 														</div>
 													</div>
-													<div className="row form-group">
-														<div className="col-md-6">
-															<h4>Datos sobre los Servicios Prestados</h4>
-														</div>
-														<div className="col-md-6">
-															<button
-																type="button"
-																className="btn btn-primary"
-																data-toggle="modal"
-																data-target="#modaldocumento">
-																Agregar Servicio
-															</button>
-														</div>
-													</div>
-													<div className="row">
-														<div className="col-md-8">
-															<ListaDocumentos />
-														</div>
-													</div>
 													<div className="row">
 														<div className="form-group">
-															<div className="col-md-3">
-																<Link to="/" className="btn btn-primary">
-																	enviar?
-																</Link>
-															</div>
-
-															<div className="form-group">
-																<input
-																	type="submit"
-																	value="Guardar"
-																	className="btn btn-primary"
-																/>
-															</div>
+															<input
+																type="submit"
+																value="aceptar"
+																className="btn btn-primary"
+															/>
 														</div>
 													</div>
 												</form>
@@ -188,9 +166,6 @@ export class FormularioChile extends React.Component {
 									</div>
 								</div>
 							</div>
-							<ModalDocumento />
-							<ModalEvento />
-							<ModalAviso />
 						</Fragment>
 					);
 				}}

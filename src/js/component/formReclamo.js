@@ -3,7 +3,6 @@ import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { FileInput } from "../component/fileInput";
-import Dropzone from "react-dropzone-uploader";
 
 export class FormReclamo extends Component {
 	constructor(props) {

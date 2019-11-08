@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			apiUrl: "https://shielded-hollows-23132.herokuapp.com",
+			apiUrl: "http://127.0.0.1:8000",
 			apiUrl2: "https://cors-anywhere.herokuapp.com/https://mobile.bestdoctorsinsurance.com/spiritapi/api",
 			token: {
 				refresh: "",
@@ -22,6 +22,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 			error: {},
 			idReclamo: "",
 			formulario: {},
+			formularios: [],
+			formulariosId: [],
+			documento: {},
+			documentoid: [],
+			image: {},
 			reclamo: {
 				PolicyNumber: "",
 				ClaimId: "",
@@ -58,14 +63,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 					account
 				});
 			},
-			handledocument: e => {
+			handledocumento: e => {
 				const { name, value } = e.target;
 				const store = getStore();
-				let documentos = store.documentos;
-				documentos[name] = value;
+				let documento = store.documento;
+				documento[name] = value;
 
 				setStore({
-					documentos
+					documento
 				});
 			},
 			handleenviodoc: (e, history) => {
@@ -82,8 +87,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			handleEnvioDocumento: (e, history) => {
-				e.preventDefault();
+				getActions().getDocumentoId(history);
 				getActions().SaveDocumento(history);
+				getActions().getDocumentoId(history);
 			},
 
 			handleLogin: (e, history) => {
@@ -129,6 +135,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 				e.preventDefault();
 				getActions().PostReclamo(history);
 			},
+			onChangeHandler: e => {
+				const { name, value } = e.target.files[0];
+				const store = getStore();
+				let image = store.image;
+				image[name] = value;
+				setStore({
+					image
+				});
+			},
+			onClickHandler: () => {
+				const store = getStore();
+				const data = new FormData();
+				data.append("image", store.selectedFile);
+				localStorage.setItem("image", data);
+			},
 			login: (username, password, history) => {
 				const store = getStore();
 				const data = {
@@ -170,7 +191,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 						alert("ya puedes iniciar sesion");
 					});
 			},
-			getDocumento: () => {
+			getDocumentoId: () => {
+				const store = getStore();
+				fetch(store.apiUrl + "/api/documentos/" + store.formulario.id, {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + store.token.access
+					}
+				})
+					.then(resp => resp.json())
+					.then(data => setStore({ documentoid: data }))
+					.catch(error => setStore({ error }));
+			},
+			getDocumentoAll: () => {
 				const store = getStore();
 				fetch(store.apiUrl + "/api/documentos/", {
 					method: "GET",
@@ -273,21 +307,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(resp => resp.json())
 					.then(data => setStore({ Rol: data }));
 			},
-			SaveDocumento: data => {
-				const store = getStore();
-				fetch(store.apiUrl + "/api/documentos/", {
-					method: "Post",
-					body: JSON.stringify(data),
-					headers: {
-						Authorization: "Bearer " + getStore().token.access,
-						"Content-Type": "application/json"
-					}
-				})
-					.then(resp => resp.json())
-					.then(data => {
-						setStore({ documentos: data });
-					});
-			},
 			getPoliza: () => {
 				const store = getStore();
 				fetch(store.apiUrl2 + "/claim/policymembers/" + store.numpoliza, {
@@ -321,7 +340,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			SaveFormulario: history => {
 				const store = getStore();
 				const data = store.formulario;
-				fetch(store.apiUrl + "/api/reclamos/", {
+				fetch(store.apiUrl + "/api/reclamos/" + store.account.id, {
 					method: "Post",
 					body: JSON.stringify(data),
 					headers: {
@@ -331,8 +350,64 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(resp => resp.json())
 					.then(data => {
-						setStore({ documentos: data });
+						setStore({ formulario: data });
+						history.push("/formdoc");
 					});
+			},
+			SaveDocumento: history => {
+				const store = getStore();
+				const data = store.documento;
+				fetch(store.apiUrl + "/api/documentos/" + store.formulario.id, {
+					method: "Post",
+					body: JSON.stringify(data),
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + getStore().token.access
+					}
+				})
+					.then(resp => resp.json())
+					.then(data => {
+						setStore({ documento: data });
+					});
+			},
+			SaveDocumentoSinFile: history => {
+				const store = getStore();
+				let form_data = new FormData();
+				form_data.append("image", store.image.name);
+				form_data.append("datedoc", store.documento.datedoc);
+				form_data.append("nombre_proveedor", store.documento.nombre_proveedor);
+				form_data.append("tipodoc", store.documento.tipodoc);
+				form_data.append("numdoc", store.documento.numdoc);
+				form_data.append("montodoc", store.documento.montodoc);
+				form_data.append("detalle_tratamiento", store.documento.detalle_tratamiento);
+				form_data.append("pago", store.documento.pago);
+				const data = store.documento;
+				fetch(store.apiUrl + "/api/documentos/" + store.formulario.id, {
+					method: "Post",
+					body: form_data,
+
+					headers: {
+						"Content-Type": "multipart/form-data;boundary=***someboundary***",
+						Authorization: "Bearer " + getStore().token.access
+					}
+				})
+					.then(resp => resp.json())
+					.then(data => {
+						setStore({ documento: data });
+					});
+			},
+			getFormulario: () => {
+				const store = getStore();
+				fetch(store.apiUrl + "/api/reclamos/" + store.account.id, {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + store.token.access
+					}
+				})
+					.then(resp => resp.json())
+					.then(data => setStore({ formulariosId: data }))
+					.catch(error => setStore({ error }));
 			}
 		}
 	};

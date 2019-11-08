@@ -10,10 +10,11 @@ import { modificarUsuario } from "./views/modprofile";
 import { Grupo } from "./views/grupo";
 import { crearGrupo } from "./views/creargrupo";
 import { ingresarReclamo } from "./views/ingresarReclamo";
-import { Evento } from "./views/evento";
+import { DashReclamo } from "./views/dashReclamo";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { FormularioChile } from "./views/formularioChile";
+import { FormDoc } from "./views/formDoc";
 
 import { ModalEvento } from "./component/modalEvento";
 
@@ -45,7 +46,8 @@ export class Layout extends React.Component {
 										<Route path="/creargrupo" component={crearGrupo} />
 										<Route path="/ingresareclamo" component={ingresarReclamo} />
 										<Route path="/formulariochile" component={FormularioChile} />
-										<Route path="/eventos" component={Evento} />
+										<Route path="/reclamos" component={DashReclamo} />
+										<Route path="/formdoc" component={FormDoc} />
 										<Route render={() => <h1>Not found!</h1>} />
 									</Switch>
 									<Footer />
