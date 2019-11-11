@@ -88,7 +88,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			handleEnvioDocumento: (e, history) => {
 				getActions().getDocumentoId(history);
-				getActions().SaveDocumento(history);
+				getActions().SaveDocumentoSinFile(history);
 				getActions().getDocumentoId(history);
 			},
 
@@ -136,10 +136,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getActions().PostReclamo(history);
 			},
 			onChangeHandler: e => {
-				const { name, value } = e.target.files[0];
-				const store = getStore();
-				let image = store.image;
-				image[name] = value;
+				const image = e.target.files[0];
+				//console.log(name, value);
+				//const store = getStore();
+				//let image = store.image;
+				//image[name] = value;
+				// console.log(image);
 				setStore({
 					image
 				});
@@ -373,7 +375,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			SaveDocumentoSinFile: history => {
 				const store = getStore();
 				let form_data = new FormData();
-				form_data.append("image", store.image.name);
+				form_data.append("image", store.image, store.image.name);
 				form_data.append("datedoc", store.documento.datedoc);
 				form_data.append("nombre_proveedor", store.documento.nombre_proveedor);
 				form_data.append("tipodoc", store.documento.tipodoc);
@@ -383,11 +385,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				form_data.append("pago", store.documento.pago);
 				const data = store.documento;
 				fetch(store.apiUrl + "/api/documentos/" + store.formulario.id, {
-					method: "Post",
+					method: "POST",
 					body: form_data,
-
+					mimeType: "multipart/form-data",
 					headers: {
-						"Content-Type": "multipart/form-data;boundary=***someboundary***",
 						Authorization: "Bearer " + getStore().token.access
 					}
 				})

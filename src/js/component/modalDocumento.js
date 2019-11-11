@@ -186,9 +186,7 @@ export default class ModalDocumento extends React.Component {
 														<div className="feature-copy">
 															<label>Sube tu archivo</label>
 															<input
-																name="image"
-																id="image"
-																placeholder="666"
+																name="file"
 																//onChange={e => actions.handleMiembro(e)}
 																type="file"
 																className="form-control"
