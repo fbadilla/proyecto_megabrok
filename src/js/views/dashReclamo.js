@@ -38,7 +38,7 @@ export class DashReclamo extends React.Component {
 												<div className="row row-mt-15em">
 													<div className="col-md-7 mt-text ">
 														<span className="intro-text-small">
-															aqui estan los reclamos ingresados
+															Aqui estan los reclamos ingresados
 														</span>
 														<h1>Reclamos </h1>
 													</div>

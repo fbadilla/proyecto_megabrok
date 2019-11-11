@@ -56,7 +56,7 @@ export class Navbar extends React.Component {
 								</li>
 								<li className="btn-cta">
 									<Link to="/">
-										<span>Get started</span>
+										<span>Login</span>
 									</Link>
 								</li>
 							</ul>
