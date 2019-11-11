@@ -14,7 +14,7 @@ export default class ModalDocumento extends React.Component {
 			montodoc: "",
 			detalle_tratamiento: "",
 			pago: "",
-			image: null
+			docfile: null
 		};
 		this.storeContext = null;
 		this.actionsContext = null;
@@ -186,20 +186,14 @@ export default class ModalDocumento extends React.Component {
 														<div className="feature-copy">
 															<label>Sube tu archivo</label>
 															<input
-																name="file"
+																name="docfile"
+																id="docfile"
+																placeholder=""
 																//onChange={e => actions.handleMiembro(e)}
 																type="file"
 																className="form-control"
-																onChange={e => actions.onChangeHandler(e)}
+																onChange={e => actions.handleFileChange(e)}
 															/>
-															<button
-																type="button"
-																className="btn btn-primary"
-																onClick={() => {
-																	actions.onClickHandler({});
-																}}>
-																subir
-															</button>
 														</div>
 													</div>
 												</div>
