@@ -12,6 +12,7 @@ class readPDF extends Component {
     this.setState({ numPages });
   }
 
+  
   render() {
     return (
       <Context.Consumer>
