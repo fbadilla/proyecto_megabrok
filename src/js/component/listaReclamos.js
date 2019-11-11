@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-
+import ModalViewDocumento from "./modalViewDocumento";
 import { Animated } from "react-animated-css";
 
 export class ListaReclamos extends Component {
@@ -16,46 +16,41 @@ export class ListaReclamos extends Component {
 
 	render() {
 		return (
-			<div className="card-deck">
-				<div className="row">
-					<Animated
-						animationIn="bounceIn"
-						animationOut="bounceOutLeft"
-						animationInDuration={1000}
-						isVisible={true}>
+			<Animated animationIn="bounceIn" animationOut="bounceOutLeft" animationInDuration={1000} isVisible={true}>
+				<table className="table">
+					<thead>
+						<tr>
+							<th scope="col">Id reclamo</th>
+							<th scope="col">Reclamante</th>
+							<th scope="col">Rut</th>
+							<th scope="col">Poliza</th>
+							<th scope="col">Ver más</th>
+						</tr>
+					</thead>
+					<tbody>
 						<Context.Consumer>
 							{({ store, actions }) => {
 								if (store.formulariosId.length > 0) {
 									return store.formulariosId.map((item, i) => {
 										return (
-											<div className="col-md-4 col-sm-6" key={i}>
-												<div className="feature-center">
-													<span className="icon">
-														<i className="ti-archive" />
-													</span>
-													<h3>Reclamo ID: {item.id}</h3>
-													<p>
-														Reclamante:
-														{item.nameReclamo} <br />
-														Rut:
-														{item.rut}{" "}
-													</p>
-													<h5>Detalle: {item.detalle_diagnostico}</h5>
-
-													<h3>
-														Poliza: <br />
-														{item.numpoliza}
-													</h3>
+											<tr key={i}>
+												<th scope="row"> {item.id}</th>
+												<td> {item.nameReclamo}</td>
+												<td>{item.rut}</td>
+												<td>{item.numpoliza}</td>
+												<td>
+													{console.log("id:" + item.id)}
 													<button
 														type="button"
-														className="btn btn-danger"
-														data-toggle="tooltip"
-														data-placement="top"
-														title="Tooltip on top">
-														Ver <i className="ti-eye" />
+														className="btn btn-primary"
+														data-toggle="modal"
+														data-target="#modalviewdocumento"
+														onClick={() => actions.getDocumentoId2(item.id)}>
+														<i className="ti-eye" />
+														Ver documentos
 													</button>
-												</div>
-											</div>
+												</td>
+											</tr>
 										);
 									});
 								} else {
@@ -63,9 +58,10 @@ export class ListaReclamos extends Component {
 								}
 							}}
 						</Context.Consumer>
-					</Animated>
-				</div>
-			</div>
+						<ModalViewDocumento />
+					</tbody>
+				</table>
+			</Animated>
 		);
 	}
 }

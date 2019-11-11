@@ -196,6 +196,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => setStore({ documentoid: data }))
 					.catch(error => setStore({ error }));
 			},
+			getDocumentoId2: id => {
+				const store = getStore();
+				fetch(store.apiUrl + "/api/documentos/" + id, {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + store.token.access
+					}
+				})
+					.then(resp => resp.json())
+					.then(data => setStore({ documentoid: data }))
+					.catch(error => setStore({ error }));
+			},
 			getDocumentoAll: () => {
 				const store = getStore();
 				fetch(store.apiUrl + "/api/documentos/", {
