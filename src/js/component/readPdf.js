@@ -1,40 +1,41 @@
-import React, { Component } from 'react';
-import { Document, Page } from 'react-pdf';
+import React, { Component } from "react";
+import { Document, Page } from "react-pdf";
 import PropTypes from "prop-types";
+import { Context } from "../store/appContext";
 
-class readPDF extends Component {
-  state = {
-    numPages: null,
-    pageNumber: 1,
-  }
+class ReadPDF extends Component {
+	state = {
+		numPages: null,
+		pageNumber: 1
+	};
 
-  onDocumentLoadSuccess = ({ numPages }) => {
-    this.setState({ numPages });
-  }
+	onDocumentLoadSuccess = ({ numPages }) => {
+		this.setState({ numPages });
+	};
 
-  
-  render() {
-    return (
-      <Context.Consumer>
-        {({ store, actions }) => {
-          this.storeContext = store;
-          this.actionsContext = actions;
-          return (
-            <div>
-              <Document
-                file={store.documentos.docfile}
-                onLoadSuccess={this.onDocumentLoadSuccess}
-              >
-                <Page pageNumber={pageNumber} />
-              </Document>
-              <p>Page {pageNumber} of {numPages}</p>
-            </div>
-          );
-        }}
-      </Context.Consumer>
-    );
-  }
+	render() {
+		return (
+			<Context.Consumer>
+				{({ store, actions }) => {
+					this.storeContext = store;
+					this.actionsContext = actions;
+					return (
+						<div>
+							<Document
+								file="http://127.0.0.1:8000/media/post_Files/archivo.pdf"
+								onLoadSuccess={this.onDocumentLoadSuccess}>
+								<Page pageNumber={pageNumber} />
+							</Document>
+							<p>
+								Page {pageNumber} of {numPages}
+							</p>
+						</div>
+					);
+				}}
+			</Context.Consumer>
+		);
+	}
 }
-readPDF.propTypes = {
+ReadPDF.propTypes = {
 	history: PropTypes.object
 };

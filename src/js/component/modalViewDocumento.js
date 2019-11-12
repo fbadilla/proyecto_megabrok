@@ -34,10 +34,11 @@ export default class ModalViewDocumento extends React.Component {
 								<thead>
 									<tr>
 										<th>Fecha </th>
-										<th>documento</th>
+										<th>N° documento</th>
 										<th>Detalle</th>
 										<th>pago</th>
 										<th>total</th>
+										<th>Ver documento</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -52,6 +53,19 @@ export default class ModalViewDocumento extends React.Component {
 															<td>{item.detalle_tratamiento}</td>
 															<td>{item.pago}</td>
 															<td>{item.montodoc}</td>
+															<td>
+																<button
+																	type="button"
+																	className="btn btn-primary"
+																	data-toggle="modal"
+																	data-target="#modalviewdocumento"
+																	onClick={() =>
+																		window.open(store.apiUrl + item.docfile)
+																	}>
+																	<i className="ti-eye" />
+																	Abrir
+																</button>
+															</td>
 														</tr>
 													);
 												});

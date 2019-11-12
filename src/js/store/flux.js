@@ -247,6 +247,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(resp => resp.json())
 					.then(data => setStore({ accounts: data }));
 			},
+			getDoc: ruta => {
+				const store = getStore();
+				fetch(store.apiUrl + ruta, {
+					method: "GET"
+				})
+					.then(response => {
+						window.open(store.apiUrl + ruta);
+					})
+					.catch(error => {
+						console.log(error);
+					});
+			},
 			getaccount: () => {
 				const store = getStore();
 				fetch(store.apiUrl + "/api/profile/", {

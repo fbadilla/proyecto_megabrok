@@ -20,6 +20,7 @@ export class ListaDocumentos extends Component {
 						<th>Detalle</th>
 						<th>pago</th>
 						<th>total</th>
+						<th>Ver archivo</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -34,6 +35,15 @@ export class ListaDocumentos extends Component {
 											<td>{item.detalle_tratamiento}</td>
 											<td>{item.pago}</td>
 											<td>{item.montodoc}</td>
+											<td>
+												<button
+													type="button"
+													className="btn btn-primary"
+													onClick={() => window.open(store.apiUrl + item.docfile)}>
+													<i className="ti-eye" />
+													Ver documentos
+												</button>
+											</td>
 										</tr>
 									);
 								});
