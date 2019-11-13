@@ -40,7 +40,6 @@ export class ListaReclamos extends Component {
 												<td>{item.rut}</td>
 												<td>{item.numpoliza}</td>
 												<td>
-													{console.log("id:" + item.id)}
 													<button
 														type="button"
 														className="btn btn-primary"
@@ -52,13 +51,14 @@ export class ListaReclamos extends Component {
 													</button>
 												</td>
 												<td>
-													<button
-														type="button"
-														className="btn btn-primary"
-														onClick={() => actions.updateForm(item)}>
-														<i className="ti-marker-alt" />
-														Editar
-													</button>
+													<Link to="/formdoc/update">
+														<input
+															onClick={() => actions.updateForm(item)}
+															type="submit"
+															value="Editar"
+															className="btn btn-primary"
+														/>
+													</Link>
 												</td>
 											</tr>
 										);

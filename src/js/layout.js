@@ -15,6 +15,7 @@ import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import { FormularioChile } from "./views/formularioChile";
 import { FormDoc } from "./views/formDoc";
+import { FormDocUpdate } from "./views/formDocUpdate";
 
 import { ModalEvento } from "./component/modalEvento";
 
@@ -48,6 +49,7 @@ export class Layout extends React.Component {
 										<Route path="/formulariochile" component={FormularioChile} />
 										<Route path="/reclamos" component={DashReclamo} />
 										<Route path="/formdoc" component={FormDoc} />
+										<Route path="/formdoc/update" component={FormDocUpdate} />
 										<Route render={() => <h1>Not found!</h1>} />
 									</Switch>
 								</Fragment>
