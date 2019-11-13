@@ -26,7 +26,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			formulariosId: [],
 			documento: {},
 			documentoid: [],
+			documentoid2: [],
 			docfile: {},
+			pdf: {},
 			reclamo: {
 				PolicyNumber: "",
 				ClaimId: "",
@@ -196,7 +198,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => setStore({ documentoid: data }))
 					.catch(error => setStore({ error }));
 			},
-			getDocumentoId2: id => {
+			getDocumentoId2: () => {
 				const store = getStore();
 				fetch(store.apiUrl + "/api/documentos/" + id, {
 					method: "GET",
@@ -206,9 +208,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				})
 					.then(resp => resp.json())
-					.then(data => setStore({ documentoid: data }))
+					.then(data => setStore({ documentoid2: data }))
 					.catch(error => setStore({ error }));
 			},
+			
 			getDocumentoAll: () => {
 				const store = getStore();
 				fetch(store.apiUrl + "/api/documentos/", {
