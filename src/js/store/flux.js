@@ -26,7 +26,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			formulariosId: [],
 			documento: {},
 			documentoid: [],
+			documentoid2: [],
 			docfile: {},
+			pdf: {},
 			reclamo: {
 				PolicyNumber: "",
 				ClaimId: "",

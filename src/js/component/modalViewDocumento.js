@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
+import ModalDocumento from "./modalServices";
 
 export default class ModalViewDocumento extends React.Component {
 	constructor(props) {
@@ -30,6 +31,13 @@ export default class ModalViewDocumento extends React.Component {
 							</h5>
 						</div>
 						<div className="modal-body">
+							<button
+								type="button"
+								className="btn btn-primary"
+								data-toggle="modal"
+								data-target="#modaldocumento">
+								Agregar Servicio
+							</button>
 							<table className="table table-striped table-sm">
 								<thead>
 									<tr>
@@ -74,6 +82,7 @@ export default class ModalViewDocumento extends React.Component {
 											}
 										}}
 									</Context.Consumer>
+									<ModalDocumento />
 								</tbody>
 							</table>
 						</div>
