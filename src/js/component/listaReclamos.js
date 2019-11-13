@@ -20,7 +20,7 @@ export class ListaReclamos extends Component {
 				<table className="table">
 					<thead>
 						<tr>
-							<th scope="col">Id reclamo</th>
+							<th scope="col">Id Reclamo</th>
 							<th scope="col">Reclamante</th>
 							<th scope="col">Rut</th>
 							<th scope="col">Poliza</th>
