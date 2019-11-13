@@ -33,6 +33,7 @@ export default class ModalDocumento extends React.Component {
 							tabIndex="-1"
 							role="dialog"
 							aria-labelledby="exampleModalLabel"
+							data-backdrop="false"
 							aria-hidden="true">
 							<div className="modal-dialog" role="document">
 								<div className="modal-content">

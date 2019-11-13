@@ -28,20 +28,6 @@ export class modificarUsuario extends React.Component {
 								role="banner"
 								style={{ backgroundImage: "url(images/img_2.jpg)" }}>
 								<div className="overlay" />
-								<div className="gtco-container">
-									<div className="row">
-										<div className="col-md-12 col-md-offset-0 text-left">
-											<div className="row row-mt-15em">
-												<div className="col-md-7 mt-text">
-													<h1>{store.account.name_Account}</h1>
-													<span className="intro-text-small">
-														manten actualizado tus datos
-													</span>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
 							</header>
 							<div className="gtco-section border-bottom">
 								<div className="gtco-container">

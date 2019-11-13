@@ -209,6 +209,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => setStore({ documentoid: data }))
 					.catch(error => setStore({ error }));
 			},
+			updateForm: item => {
+				const store = getStore();
+				let formulario = store.formulario;
+				formulario = item;
+				setStore({ formulario });
+			},
 			getDocumentoAll: () => {
 				const store = getStore();
 				fetch(store.apiUrl + "/api/documentos/", {
