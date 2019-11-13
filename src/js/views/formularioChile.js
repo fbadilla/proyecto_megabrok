@@ -51,7 +51,7 @@ export class FormularioChile extends React.Component {
 											<div className="col-md-12 col-md-offset-0 text-left">
 												<div className="row row-mt-15em">
 													<div className="col-md-7 mt-text ">
-														<h1>Formulario de Reclamacion</h1>
+														<h1>Formulario </h1>
 														<span className="intro-text-small">
 															{" "}
 															Por favor asegurese de:

@@ -198,7 +198,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => setStore({ documentoid: data }))
 					.catch(error => setStore({ error }));
 			},
-			getDocumentoId2: () => {
+			getDocumentoId2: id => {
 				const store = getStore();
 				fetch(store.apiUrl + "/api/documentos/" + id, {
 					method: "GET",
@@ -208,10 +208,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				})
 					.then(resp => resp.json())
-					.then(data => setStore({ documentoid2: data }))
+					.then(data => setStore({ documentoid: data }))
 					.catch(error => setStore({ error }));
 			},
-			
+
 			getDocumentoAll: () => {
 				const store = getStore();
 				fetch(store.apiUrl + "/api/documentos/", {
