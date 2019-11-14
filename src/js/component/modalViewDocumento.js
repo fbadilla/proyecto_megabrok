@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
+import ModalDocumento from "./modalServices";
 
 export default class ModalViewDocumento extends React.Component {
 	constructor(props) {
@@ -20,8 +21,7 @@ export default class ModalViewDocumento extends React.Component {
 				tabIndex="-1"
 				role="dialog"
 				aria-labelledby="exampleModalLabel"
-				aria-hidden="true"
-				data-backdrop="false">
+				aria-hidden="true">
 				<div className="modal-dialog" role="document">
 					<div className="modal-content">
 						<div className="modal-header">
@@ -30,14 +30,22 @@ export default class ModalViewDocumento extends React.Component {
 							</h5>
 						</div>
 						<div className="modal-body">
+							<button
+								type="button"
+								className="btn btn-primary"
+								data-toggle="modal"
+								data-target="#modaldocumento">
+								Agregar Servicio
+							</button>
 							<table className="table table-striped table-sm">
 								<thead>
 									<tr>
 										<th>Fecha </th>
-										<th>documento</th>
+										<th>N° documento</th>
 										<th>Detalle</th>
 										<th>pago</th>
 										<th>total</th>
+										<th>Ver documento</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -52,6 +60,19 @@ export default class ModalViewDocumento extends React.Component {
 															<td>{item.detalle_tratamiento}</td>
 															<td>{item.pago}</td>
 															<td>{item.montodoc}</td>
+															<td>
+																<button
+																	type="button"
+																	className="btn btn-primary"
+																	data-toggle="modal"
+																	data-target="#modalviewdocumento"
+																	onClick={() =>
+																		window.open(store.apiUrl + item.docfile)
+																	}>
+																	<i className="ti-eye" />
+																	Abrir
+																</button>
+															</td>
 														</tr>
 													);
 												});
@@ -60,6 +81,7 @@ export default class ModalViewDocumento extends React.Component {
 											}
 										}}
 									</Context.Consumer>
+									<ModalDocumento />
 								</tbody>
 							</table>
 						</div>

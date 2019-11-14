@@ -21,9 +21,9 @@ export class FormDoc extends React.Component {
 		this.props.history;
 	}
 	componentDidMount() {
-		this.actionsContext.getDocumentoId();
 		this.actionsContext.getaccount();
 	}
+
 	render() {
 		return (
 			<Context.Consumer>
