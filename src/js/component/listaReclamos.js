@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import ModalViewDocumento from "./modalViewDocumento";
+
 import { Animated } from "react-animated-css";
 
 export class ListaReclamos extends Component {
@@ -20,7 +20,7 @@ export class ListaReclamos extends Component {
 				<table className="table">
 					<thead>
 						<tr>
-							<th scope="col">Id reclamo</th>
+							<th scope="col">Id Reclamo</th>
 							<th scope="col">Reclamante</th>
 							<th scope="col">Rut</th>
 							<th scope="col">Poliza</th>
@@ -68,7 +68,6 @@ export class ListaReclamos extends Component {
 								}
 							}}
 						</Context.Consumer>
-						<ModalViewDocumento />
 					</tbody>
 				</table>
 			</Animated>

@@ -8,8 +8,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				access: ""
 			},
 			documentos: [],
-			Rol: [],
-			evento: [],
 			accounts: [],
 			account: {},
 			username: "",
@@ -28,23 +26,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 			documentoid: [],
 			documentoid2: [],
 			docfile: {},
-			pdf: {},
-			reclamo: {
-				PolicyNumber: "",
-				ClaimId: "",
-				ClaimForm: "",
-				Extension: "png",
-				IsBankingInfo: "",
-				Comments: ""
-			}
+			reclamo: {}
 		},
+
 		actions: {
+			//funcion que actualiza los valores en el store
 			handleChange: e => {
 				const { name, value } = e.target;
 				setStore({
 					[name]: value
 				});
 			},
+
+			//funcion que actualiza los valores del store.formulario
 			handleForm: e => {
 				const { name, value } = e.target;
 				const store = getStore();
@@ -56,6 +50,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				});
 			},
 
+			//funcion que actualiza los valores del store.account
 			handleaccount: e => {
 				const { name, value } = e.target;
 				const store = getStore();
@@ -65,6 +60,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					account
 				});
 			},
+
+			//funcion que actualiza los valores del store.documento
 			handledocumento: e => {
 				const { name, value } = e.target;
 				const store = getStore();
@@ -75,50 +72,54 @@ const getState = ({ getStore, getActions, setStore }) => {
 					documento
 				});
 			},
-			handleenviodoc: (e, history) => {
-				e.preventDefault();
-			},
 
-			handleRol: (e, history) => {
-				e.preventDefault();
-				getActions().postRol(history);
-			},
+			//funcion que maneja el Post de un nuevo formulario
 			handleFormulario: (e, history) => {
 				e.preventDefault();
 				getActions().SaveFormulario(history);
 			},
 
+			//funcion que maneja el Post de un nuevo formulario, ademas realiza un GET de documentos por ID, antes y despues del POST
 			handleEnvioDocumento: (e, history) => {
 				getActions().getDocumentoId(history);
 				getActions().SaveDocumentoSinFile(history);
 				getActions().getDocumentoId(history);
 			},
 
+			//funcion que maneja el Post para obtener un nuevo TOKEN
 			handleLogin: (e, history) => {
 				e.preventDefault();
 				const store = getStore();
 				getActions().login(store.username, store.password, history);
 			},
+			//funcion que maneja el Post para crear un nuevo usuario
 			handleRegister: e => {
 				e.preventDefault();
 				const store = getStore();
 				getActions().register(store.username, store.email, store.password);
 			},
+
+			//funcion que maneja el Post para crear un nuevo usuario
 			handleUser: (e, history) => {
 				e.preventDefault();
 				getActions().putAccount(history);
 			},
+			//funcion que maneja el GET que busca una poliza en la api claim
 			handleSearch: (e, history) => {
 				e.preventDefault();
 				const store = getStore();
 				getActions().getPoliza(history);
 			},
+
+			//funcion que crea un nuevo store.aseguradoselected con la la poliza seleccionada
 			handleAseguradoSelected: (item, history) => {
 				const store = getStore();
 				setStore({
 					aseguradoselected: item
 				});
 			},
+
+			//funcion que actualiza los valores del store.reclamo
 			handleReclamo: e => {
 				const { name, value } = e.target;
 				const store = getStore();
@@ -128,15 +129,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 					reclamo
 				});
 			},
-			handledatosfaltantes: e => {
-				setStore({
-					reclamo
-				});
-			},
+
+			//funcion que maneja el Post para crear un nuevo reclamo en api/claim
 			handleGenerate: (e, history) => {
 				e.preventDefault();
 				getActions().PostReclamo(history);
 			},
+
+			//funcion que maneja los file y actualiza el store
 			handleFileChange: e => {
 				const docfile = e.target.files[0];
 
@@ -144,6 +144,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					docfile
 				});
 			},
+
+			//funcion para iniciar sesion -  POST api propia
 			login: (username, password, history) => {
 				const store = getStore();
 				const data = {
@@ -165,6 +167,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						history.push("/formulariochile");
 					});
 			},
+
+			//funcion para registrarse - POST api propia
 			register: (username, email, password) => {
 				const store = getStore();
 				const data = {
@@ -185,6 +189,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						alert("ya puedes iniciar sesion");
 					});
 			},
+
+			//funcion GET para obtener los documentos por reclamo - GET api propia
 			getDocumentoId: () => {
 				const store = getStore();
 				fetch(store.apiUrl + "/api/documentos/" + store.formulario.id, {
@@ -198,6 +204,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => setStore({ documentoid: data }))
 					.catch(error => setStore({ error }));
 			},
+
+			//funcion GET para obtener los documentos por reclamo  - GET api propia
 			getDocumentoId2: id => {
 				const store = getStore();
 				fetch(store.apiUrl + "/api/documentos/" + id, {
@@ -211,12 +219,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => setStore({ documentoid: data }))
 					.catch(error => setStore({ error }));
 			},
-			updateForm: item => {
-				const store = getStore();
-				let formulario = store.formulario;
-				formulario = item;
-				setStore({ formulario });
-			},
+
+			//funcion GET para obtener todos los documentos - GET api propia
 			getDocumentoAll: () => {
 				const store = getStore();
 				fetch(store.apiUrl + "/api/documentos/", {
@@ -230,19 +234,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => setStore({ documentos: data }))
 					.catch(error => setStore({ error }));
 			},
-			getEvento: () => {
-				const store = getStore();
-				fetch(store.apiUrl + "/api/reclamos/", {
-					method: "GET",
-					headers: {
-						"Content-Type": "application/json",
-						Authorization: "Bearer " + store.token.access
-					}
-				})
-					.then(resp => resp.json())
-					.then(data => setStore({ evento: data }))
-					.catch(error => setStore({ error }));
-			},
+			//funcion GET para obtener todos los documentos - GET api propia
 			getaccounts: () => {
 				const store = getStore();
 				fetch(store.apiUrl + "/api/account", {
@@ -255,18 +247,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(resp => resp.json())
 					.then(data => setStore({ accounts: data }));
 			},
-			getDoc: ruta => {
-				const store = getStore();
-				fetch(store.apiUrl + ruta, {
-					method: "GET"
-				})
-					.then(response => {
-						window.open(store.apiUrl + ruta);
-					})
-					.catch(error => {
-						console.log(error);
-					});
-			},
+
+			//funcion GET para obtener todos los documentos - GET api propia
 			getaccount: () => {
 				const store = getStore();
 				fetch(store.apiUrl + "/api/profile/", {
@@ -282,6 +264,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						console.log(data);
 					});
 			},
+
+			//funcion PUT para modificar los datos del usuario - PUT api propia
 			putAccount: history => {
 				const store = getStore();
 				const data = store.account;
@@ -301,37 +285,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						history.push("/usuarios");
 					});
 			},
-			postRol: history => {
-				const store = getStore();
-				const data = store.Rol;
 
-				fetch(store.apiUrl + "/api/profile/", {
-					method: "PUT",
-					body: JSON.stringify(data),
-					headers: {
-						"Content-Type": "application/json",
-						Authorization: "Bearer " + store.token.access
-					}
-				})
-					.then(resp => resp.json())
-					.then(data => {
-						setStore({ rol: data });
-						alert("se agregado un nuevo rol");
-						history.push("/profile");
-					});
-			},
-			getRol: () => {
-				const store = getStore();
-				fetch(store.apiUrl + "/api/roles/", {
-					method: "GET",
-					headers: {
-						"Content-Type": "application/json",
-						Authorization: "Bearer " + store.token.access
-					}
-				})
-					.then(resp => resp.json())
-					.then(data => setStore({ Rol: data }));
-			},
+			//funcion GET para obtener todos los documentos - GET api propia
 			getPoliza: () => {
 				const store = getStore();
 				fetch(store.apiUrl2 + "/claim/policymembers/" + store.numpoliza, {
@@ -345,6 +300,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => setStore({ asegurados: data }))
 					.catch(error => setStore({ error }));
 			},
+
+			//funcion POST para crear un nuevo reclamo - POST api claim //falta mejorar convertir al formData
 			PostReclamo: history => {
 				const store = getStore();
 				const data = store.reclamo;
@@ -362,6 +319,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						alert("reclamo generado con exito" + store.idReclamo.ClaimId);
 					});
 			},
+
+			//funcion POST para crear un nuevo reclamo - POST api propia
 			SaveFormulario: history => {
 				const store = getStore();
 				const data = store.formulario;
@@ -379,6 +338,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						history.push("/formdoc");
 					});
 			},
+
+			//funcion POST para agregar documentos a un reclamo  - POST api propia
 			SaveDocumento: history => {
 				const store = getStore();
 				const data = store.documento;
@@ -395,6 +356,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({ documento: data });
 					});
 			},
+			//funcion POST para agregar documentos a un reclamo se envia con Formdata, ya que se adjunta File del documento - POST api propia
 			SaveDocumentoSinFile: history => {
 				const store = getStore();
 				let form_data = new FormData();
@@ -420,6 +382,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({ documento: data });
 					});
 			},
+			//funcion GET para obtener los reclamos por usuario - GET api propia
 			getFormulario: () => {
 				const store = getStore();
 				fetch(store.apiUrl + "/api/reclamos/" + store.account.id, {
