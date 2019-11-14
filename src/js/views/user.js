@@ -51,7 +51,6 @@ export class Usuarios extends React.Component {
 									<div className="row">
 										<div className="col-md-8 text-left gtco-heading">
 											<h2>Mis Datos</h2>
-											<p>Estos son tus datos registrados</p>
 											<div className="form-group">
 												<Link to="/modprofile">
 													<input

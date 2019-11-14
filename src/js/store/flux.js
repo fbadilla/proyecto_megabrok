@@ -24,6 +24,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			formulariosId: [],
 			documento: {},
 			documentoid: [],
+			documentoid2: [],
 			docfile: {},
 			reclamo: {}
 		},
@@ -246,6 +247,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(resp => resp.json())
 					.then(data => setStore({ accounts: data }));
 			},
+
 			//funcion GET para obtener todos los documentos - GET api propia
 			getaccount: () => {
 				const store = getStore();

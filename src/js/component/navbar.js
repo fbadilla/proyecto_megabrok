@@ -23,7 +23,7 @@ export class Navbar extends React.Component {
 									<Link to="/formulariochile">Formulario</Link>
 								</li>
 								<li>
-									<Link to="/reclamos">ver reclamos</Link>
+									<Link to="/reclamos">Reclamos</Link>
 								</li>
 
 								<li className="has-dropdown">

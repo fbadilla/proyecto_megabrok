@@ -28,7 +28,7 @@ export class Home extends React.Component {
 													<div className="col-md-7 mt-text">
 														<br />
 														<span className="intro-text-small">bienvenido</span>
-														<h2>gestiona tu informacion</h2>
+														<h2>Gestiona tu informacion</h2>
 													</div>
 
 													<div className="col-md-4 col-md-push-1 ">

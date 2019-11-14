@@ -25,6 +25,7 @@ export class ListaReclamos extends Component {
 							<th scope="col">Rut</th>
 							<th scope="col">Poliza</th>
 							<th scope="col">Ver más</th>
+							<th scope="col">Editar</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -48,6 +49,15 @@ export class ListaReclamos extends Component {
 														onClick={() => actions.getDocumentoId2(item.id)}>
 														<i className="ti-eye" />
 														Ver documentos
+													</button>
+												</td>
+												<td>
+													<button
+														type="button"
+														className="btn btn-primary"
+														onClick={() => actions.updateForm(item)}>
+														<i className="ti-marker-alt" />
+														Editar
 													</button>
 												</td>
 											</tr>
