@@ -70,6 +70,7 @@ export default class ModalDocumento extends React.Component {
 														<div className="feature-copy">
 															<label>Proveedor</label>
 															<input
+																required
 																name="nombre_proveedor"
 																id="nombre_proveedor"
 																placeholder="Clinica de prueba"
@@ -90,6 +91,7 @@ export default class ModalDocumento extends React.Component {
 														<div className="feature-copy">
 															<label>Tipo </label>
 															<select
+																required
 																className="form-control"
 																id="tipodoc"
 																name="tipodoc"
@@ -109,6 +111,7 @@ export default class ModalDocumento extends React.Component {
 														<div className="feature-copy">
 															<label>Nº Doc</label>
 															<input
+																required
 																name="numdoc"
 																id="numdoc"
 																placeholder="666"
@@ -128,6 +131,7 @@ export default class ModalDocumento extends React.Component {
 														<div className="feature-copy">
 															<label>Monto</label>
 															<input
+																required
 																name="montodoc"
 																id="montodoc"
 																placeholder="$100.000.-"
@@ -147,6 +151,7 @@ export default class ModalDocumento extends React.Component {
 														<div className="feature-copy">
 															<label>Descripción</label>
 															<textarea
+																required
 																name="detalle_tratamiento"
 																className="form-control"
 																rows="5"
@@ -168,6 +173,7 @@ export default class ModalDocumento extends React.Component {
 														<div className="feature-copy">
 															<label>Pago </label>
 															<select
+																required
 																className="form-control"
 																name="pago"
 																id="pago"
@@ -186,6 +192,7 @@ export default class ModalDocumento extends React.Component {
 														<div className="feature-copy">
 															<label>Sube tu archivo</label>
 															<input
+																required
 																name="docfile"
 																id="docfile"
 																placeholder=""

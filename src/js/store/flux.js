@@ -26,7 +26,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			documentoid: [],
 			documentoid2: [],
 			docfile: {},
-			reclamo: {}
+			reclamo: {},
+			mensaje: {}
 		},
 
 		actions: {
@@ -143,6 +144,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({
 					docfile
 				});
+			},
+			handleModReclamo: item => {
+				const store = getStore();
+				let formulario = store.formulario;
+				formulario = item;
+				setStore({ formulario });
 			},
 
 			//funcion para iniciar sesion -  POST api propia
@@ -261,7 +268,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(resp => resp.json())
 					.then(data => {
 						setStore({ account: data });
-						console.log(data);
 					});
 			},
 
@@ -394,6 +400,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(resp => resp.json())
 					.then(data => setStore({ formulariosId: data }))
+					.catch(error => setStore({ error }));
+			},
+			//funcion GET para obtener los reclamos por usuario - GET api propia
+			deleteDocumento: id => {
+				const store = getStore();
+				fetch(store.apiUrl + "/api/documentos/" + id, {
+					method: "DELETE",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + store.token.access
+					}
+				})
+					.then(resp => resp.json())
+					.then(data => setStore({ mensaje: data }))
 					.catch(error => setStore({ error }));
 			}
 		}

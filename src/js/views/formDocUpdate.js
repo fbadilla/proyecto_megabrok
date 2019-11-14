@@ -3,11 +3,10 @@ import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import ModalDocumento from "../component/modalDocumento";
 import { ListaDocumentos } from "../component/listaDocumentos";
-import { FormReclamo } from "../component/formReclamo";
 import PropTypes from "prop-types";
 import { Animated } from "react-animated-css";
 
-export class FormDoc extends React.Component {
+export class FormDocUpdate extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -81,9 +80,9 @@ export class FormDoc extends React.Component {
 																<div className="feature-copy">
 																	<input
 																		name="nameReclamo"
-																		readOnly
 																		className="form-control"
-																		id="static"
+																		id="nameReclamo"
+																		onChange={e => actions.handleForm(e)}
 																		placeholder={store.formulario.nameReclamo}
 																		type="text"
 																	/>
@@ -96,10 +95,10 @@ export class FormDoc extends React.Component {
 																	<input
 																		name="rut"
 																		id="disabledTextInput"
+																		onChange={e => actions.handleForm(e)}
 																		placeholder={store.formulario.rut}
 																		type="text"
 																		className="form-control"
-																		readOnly
 																	/>
 																</div>
 															</div>
@@ -110,10 +109,10 @@ export class FormDoc extends React.Component {
 																	<input
 																		name="numpoliza"
 																		id="disabledTextInput"
+																		onChange={e => actions.handleForm(e)}
 																		placeholder={store.formulario.numpoliza}
 																		type="text"
 																		className="form-control"
-																		readOnly
 																	/>
 																</div>
 															</div>
@@ -122,7 +121,7 @@ export class FormDoc extends React.Component {
 
 													<div className="row form-group">
 														<h4>Detalles del Diagnostico / Accidente</h4>
-														<div className="col-md-8">
+														<div className="col-md-6">
 															<div className="feature-left">
 																<span className="icon">
 																	<i className="ti-clipboard" />
@@ -132,15 +131,22 @@ export class FormDoc extends React.Component {
 																		name="detalle_diagnostico"
 																		id="mail"
 																		rows="5"
+																		onChange={e => actions.handleForm(e)}
 																		placeholder={
 																			store.formulario.detalle_diagnostico
 																		}
 																		type="text"
-																		readOnly
 																		className="form-control"
 																	/>
 																</div>
 															</div>
+														</div>
+														<div className="col-md-4 offset-md-4">
+															<input
+																type="submit"
+																value="Modificar"
+																className="btn btn-primary"
+															/>
 														</div>
 													</div>
 													<div className="row form-group">
@@ -163,11 +169,9 @@ export class FormDoc extends React.Component {
 														</div>
 													</div>
 													<div className="row">
-														<div className="form-group">
-															<Link to="/reclamos" className="btn btn-primary">
-																Ver Reclamos
-															</Link>
-														</div>
+														<Link to="/reclamos" className="btn btn-primary">
+															Ver Reclamos
+														</Link>
 													</div>
 												</form>
 											</div>
@@ -183,6 +187,6 @@ export class FormDoc extends React.Component {
 		);
 	}
 }
-FormDoc.propTypes = {
+FormDocUpdate.propTypes = {
 	history: PropTypes.object
 };

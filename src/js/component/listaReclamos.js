@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-
 import { Animated } from "react-animated-css";
+import { Link } from "react-router-dom";
 
 export class ListaReclamos extends Component {
 	constructor(props) {
@@ -16,7 +15,7 @@ export class ListaReclamos extends Component {
 
 	render() {
 		return (
-			<Animated animationIn="bounceIn" animationOut="bounceOutLeft" animationInDuration={1000} isVisible={true}>
+			<Animated animationIn="fadeInLeft" animationOut="bounceOutLeft" animationInDuration={1000} isVisible={true}>
 				<table className="table">
 					<thead>
 						<tr>
@@ -32,37 +31,38 @@ export class ListaReclamos extends Component {
 						<Context.Consumer>
 							{({ store, actions }) => {
 								if (store.formulariosId.length > 0) {
-									return store.formulariosId.map((item, i) => {
-										return (
-											<tr key={i}>
-												<th scope="row"> {item.id}</th>
-												<td> {item.nameReclamo}</td>
-												<td>{item.rut}</td>
-												<td>{item.numpoliza}</td>
-												<td>
-													{console.log("id:" + item.id)}
-													<button
-														type="button"
-														className="btn btn-primary"
-														data-toggle="modal"
-														data-target="#modalviewdocumento"
-														onClick={() => actions.getDocumentoId2(item.id)}>
-														<i className="ti-eye" />
-														Ver documentos
-													</button>
-												</td>
-												<td>
-													<button
-														type="button"
-														className="btn btn-primary"
-														onClick={() => actions.updateForm(item)}>
-														<i className="ti-marker-alt" />
-														Editar
-													</button>
-												</td>
-											</tr>
-										);
-									});
+									return store.formulariosId
+										.slice(0)
+										.reverse()
+										.map((item, i) => {
+											return (
+												<tr key={i}>
+													<th scope="row"> {item.id}</th>
+													<td> {item.nameReclamo}</td>
+													<td>{item.rut}</td>
+													<td>{item.numpoliza}</td>
+
+													<td>
+														<button
+															type="button"
+															className="btn btn-primary2"
+															data-toggle="modal"
+															data-target="#modalviewdocumento"
+															onClick={() => actions.getDocumentoId2(item.id)}>
+															<i className="ti-eye" />
+														</button>
+													</td>
+													<td>
+														<Link
+															to="/update"
+															className="btn btn-primary2"
+															onClick={() => actions.handleModReclamo(item)}>
+															<i className="ti-marker-alt" />
+														</Link>
+													</td>
+												</tr>
+											);
+										});
 								} else {
 									return "";
 								}

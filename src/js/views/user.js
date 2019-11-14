@@ -11,7 +11,6 @@ export class Usuarios extends React.Component {
 	}
 	componentDidMount() {
 		this.actionsContext.getaccount();
-		this.actionsContext.getRol();
 	}
 	render() {
 		return (

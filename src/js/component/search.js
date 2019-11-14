@@ -19,7 +19,6 @@ export class SearchComponent extends Component {
 				{({ store, actions }) => {
 					this.storeContext = store;
 					this.actionsContext = actions;
-					console.log("aqui estoy ahora", store.numpoliza);
 					return (
 						<div className="gtco-container">
 							<div className="row">
