@@ -34,7 +34,8 @@ export default class ModalViewDocumento extends React.Component {
 								type="button"
 								className="btn btn-primary"
 								data-toggle="modal"
-								data-target="#modaldocumento">
+								data-target="#modaldocumento"
+								data-dismiss="modal">
 								Agregar Servicio
 							</button>
 							<table className="table table-striped table-sm">
@@ -63,14 +64,13 @@ export default class ModalViewDocumento extends React.Component {
 															<td>
 																<button
 																	type="button"
-																	className="btn btn-primary"
+																	className="btn btn-primary2"
 																	data-toggle="modal"
 																	data-target="#modalviewdocumento"
 																	onClick={() =>
 																		window.open(store.apiUrl + item.docfile)
 																	}>
-																	<i className="ti-eye" />
-																	Abrir
+																	<i className="ti-image" />
 																</button>
 															</td>
 														</tr>
@@ -81,7 +81,6 @@ export default class ModalViewDocumento extends React.Component {
 											}
 										}}
 									</Context.Consumer>
-									<ModalDocumento />
 								</tbody>
 							</table>
 						</div>

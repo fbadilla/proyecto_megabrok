@@ -9,9 +9,9 @@ export class Navbar extends React.Component {
 					<div className="row">
 						<div className="col-sm-4 col-xs-12">
 							<div id="gtco-logo">
-								<a href="index.html">
-									Megabrok <em>.</em>
-								</a>
+								<Link to="/">
+									<span>MegaBrok</span>
+								</Link>
 							</div>
 						</div>
 						<div className="col-xs-8 text-right menu-1">

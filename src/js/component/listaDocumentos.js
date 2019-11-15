@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 
 export class ListaDocumentos extends Component {
 	constructor(props) {
@@ -20,7 +19,8 @@ export class ListaDocumentos extends Component {
 						<th>Detalle</th>
 						<th>pago</th>
 						<th>total</th>
-						<th>adjunto</th>
+						<th>Ver Documento</th>
+						<th>Eliminar</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -38,9 +38,17 @@ export class ListaDocumentos extends Component {
 											<td>
 												<button
 													type="button"
-													className="btn btn-primary"
+													className="btn btn-primary2"
 													onClick={() => window.open(store.apiUrl + item.docfile)}>
 													<i className="ti-image" />
+												</button>
+											</td>
+											<td>
+												<button
+													type="button"
+													className="btn btn-primary2"
+													onClick={() => actions.deleteDocumento(item.id)}>
+													<i className="ti-trash" />
 												</button>
 											</td>
 										</tr>

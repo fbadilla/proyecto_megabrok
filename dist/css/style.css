@@ -1298,6 +1298,13 @@ form label {
   color: #fff;
   border: 2px solid #33b5e5 !important;
 }
+.btn-primary2 {
+  background: #33b5e5;
+  color: #fff;
+  border: 2px solid #33b5e5 !important;
+  padding: 3px 15px;
+}
+
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
   background: #0099CC !important;
   border-color: #0099CC !important;

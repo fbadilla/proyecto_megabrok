@@ -1,13 +1,5 @@
 import React, { Fragment } from "react";
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
-import ModalDocumento from "../component/modalDocumento";
-import ModalEvento from "../component/modalEvento";
-import ModalAviso from "../component/modalAviso";
-import { ListaDocumentos } from "../component/listaDocumentos";
-import { ListaAsegurados } from "../component/listaAsegurados";
-import { SearchComponent } from "../component/search";
-import { FormReclamo } from "../component/formReclamo";
 import PropTypes from "prop-types";
 import { Animated } from "react-animated-css";
 

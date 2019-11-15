@@ -3,7 +3,6 @@ import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import ModalDocumento from "../component/modalDocumento";
 import { ListaDocumentos } from "../component/listaDocumentos";
-import { FormReclamo } from "../component/formReclamo";
 import PropTypes from "prop-types";
 import { Animated } from "react-animated-css";
 
@@ -21,9 +20,10 @@ export class FormDoc extends React.Component {
 		this.props.history;
 	}
 	componentDidMount() {
-		this.actionsContext.getDocumentoId();
 		this.actionsContext.getaccount();
+		this.actionsContext.getDocumentoId();
 	}
+
 	render() {
 		return (
 			<Context.Consumer>

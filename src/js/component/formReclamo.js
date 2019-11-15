@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-import { FileInput } from "../component/fileInput";
 
 export class FormReclamo extends Component {
 	constructor(props) {
@@ -109,9 +107,7 @@ export class FormReclamo extends Component {
 									</div>
 									<div className="col-md-4">
 										<div className="feature-left">
-											<div className="feature-copy">
-												<FileInput name="ClaimantId" />
-											</div>
+											<div className="feature-copy" />
 										</div>
 									</div>
 									<div className="col-md-4">

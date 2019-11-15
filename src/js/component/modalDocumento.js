@@ -6,16 +6,8 @@ import PropTypes from "prop-types";
 export default class ModalDocumento extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			datedoc: "",
-			nombre_proveedor: "",
-			tipodoc: "",
-			numdoc: "",
-			montodoc: "",
-			detalle_tratamiento: "",
-			pago: "",
-			docfile: null
-		};
+		this.state = {};
+
 		this.storeContext = null;
 		this.actionsContext = null;
 		this.props.history;
