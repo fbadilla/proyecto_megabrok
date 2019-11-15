@@ -47,7 +47,7 @@ export class ListaDocumentos extends Component {
 												<button
 													type="button"
 													className="btn btn-primary2"
-													onClick={() => actions.deleteDocumento(item.id)}>
+													onClick={() => actions.handleDeleteDoc(item.id)}>
 													<i className="ti-trash" />
 												</button>
 											</td>

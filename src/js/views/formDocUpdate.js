@@ -69,7 +69,7 @@ export class FormDocUpdate extends React.Component {
 												</h2>
 												<form
 													action="#"
-													onSubmit={e => actions.handleFormulario(e, this.props.history)}>
+													onSubmit={e => actions.handleEnvioMod(e, this.props.history)}>
 													<div className="row form-group">
 														<h4>Datos Personales del Paciente</h4>
 														<div className="col-md-5">
