@@ -20,6 +20,7 @@ export class ListaReclamos extends Component {
 					<thead>
 						<tr>
 							<th scope="col">Id Reclamo</th>
+							<th scope="col">Estado</th>
 							<th scope="col">Reclamante</th>
 							<th scope="col">Rut</th>
 							<th scope="col">Poliza</th>
@@ -38,6 +39,7 @@ export class ListaReclamos extends Component {
 											return (
 												<tr key={i}>
 													<th scope="row"> {item.id}</th>
+													<th>{item.name_estado}</th>
 													<td> {item.nameReclamo}</td>
 													<td>{item.rut}</td>
 													<td>{item.numpoliza}</td>

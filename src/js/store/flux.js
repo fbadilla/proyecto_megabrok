@@ -22,7 +22,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 			formulario: {},
 			formularios: [],
 			formulariosId: [],
-			documento: {},
+			documento: {
+				pago: "COB",
+				tipodoc: "BOLETA",
+				nombre_proveedor: "",
+				tipodoc: "",
+				numdoc: "",
+				montodoc: "",
+				detalle_tratamiento: "",
+				datedoc: new Date().toISOString().slice(0, 10)
+			},
 			documentoid: [],
 			documentoid2: [],
 			docfile: null,
@@ -333,6 +342,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 						alert("reclamo generado con exito" + store.idReclamo.ClaimId);
 					});
 			},
+			deleteReclamo: id => {
+				const store = getStore();
+				fetch(store.apiUrl + "/api/reclamos/" + id, {
+					method: "DELETE",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + store.token.access
+					}
+				})
+					.then(resp => resp.json())
+					.then(data => {
+						alert("se ha eliminado un reclamo");
+						history.push("/reclamos");
+					});
+			},
 
 			//funcion POST para crear un nuevo reclamo - POST api propia
 			SaveFormulario: history => {
@@ -374,7 +398,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 			SaveDocumentoSinFile: history => {
 				const store = getStore();
 				let form_data = new FormData();
-				form_data.append("docfile", store.docfile, store.docfile.name);
+				if (store.docfile == null) {
+					form_data.append("docfile", null);
+				} else {
+					form_data.append("docfile", store.docfile, store.docfile.name);
+				}
+
 				form_data.append("datedoc", store.documento.datedoc);
 				form_data.append("nombre_proveedor", store.documento.nombre_proveedor);
 				form_data.append("tipodoc", store.documento.tipodoc);
@@ -393,7 +422,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(resp => resp.json())
 					.then(data => {
-						setStore({ documento: {} });
+						setStore({ documento: data });
+					})
+					.catch(error => {
+						setStore({ error });
+						alert("No se pudo ingresar el documento, revise los campos");
 					});
 			},
 			//funcion GET para obtener los reclamos por usuario - GET api propia
