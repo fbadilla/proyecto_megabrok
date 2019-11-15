@@ -141,6 +141,27 @@ export class FormDocUpdate extends React.Component {
 																</div>
 															</div>
 														</div>
+														<div className="col-md-3">
+															<div className="feature-left">
+																<div className="feature-copy">
+																	<label>Estado Reclamo </label>
+																	<select
+																		className="form-control"
+																		id="name_estado"
+																		name="name_estado"
+																		value={store.formulario.name_estado}
+																		onChange={e => actions.handleForm(e)}>
+																		<option selected>
+																			{store.formulario.name_estado}
+																		</option>
+																		<option>Pendiente</option>
+																		<option>Aprobada</option>
+																		<option>Rechazada</option>
+																		<option>Anulada</option>
+																	</select>
+																</div>
+															</div>
+														</div>
 														<div className="col-md-4 offset-md-4">
 															<input
 																type="submit"
@@ -150,7 +171,7 @@ export class FormDocUpdate extends React.Component {
 														</div>
 													</div>
 													<div className="row form-group">
-														<div className="col-md-6">
+														<div className="col-md-8">
 															<h4>Datos sobre los Servicios Prestados</h4>
 														</div>
 														<div className="col-md-6">
@@ -166,6 +187,14 @@ export class FormDocUpdate extends React.Component {
 													<div className="row">
 														<div className="col-md-8">
 															<ListaDocumentos />
+														</div>
+														<div className="col-md-4">
+															<button
+																type="button"
+																className="btn btn-primary2"
+																onClick={() => actions.getDocumentoId()}>
+																<i className="ti-reload" />
+															</button>
 														</div>
 													</div>
 													<div className="row">
