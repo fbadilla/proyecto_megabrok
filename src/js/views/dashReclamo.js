@@ -34,27 +34,13 @@ export class DashReclamo extends React.Component {
 									role="banner"
 									style={{ backgroundImage: "url(images/img_2.jpg)" }}>
 									<div className="overlay" />
-									<div className="gtco-container">
-										<div className="row">
-											<div className="col-md-12 col-md-offset-0 text-left">
-												<div className="row row-mt-15em">
-													<div className="col-md-7 mt-text ">
-														<span className="intro-text-small">
-															Aqui estan los reclamos ingresados
-														</span>
-														<h1>Reclamos </h1>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
+									<div className="gtco-container" />
 								</header>
 							</Animated>
-							<div id="gtco-features" className="border-bottom">
-								<div className="gtco-container">
-									<ListaReclamos />
-								</div>
+							<div className="gtco-container">
+								<ListaReclamos />
 							</div>
+
 							<ModalViewDocumento />
 							<ModalDocumento />
 						</Fragment>
