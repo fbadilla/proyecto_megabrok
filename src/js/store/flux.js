@@ -25,7 +25,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			documento: {},
 			documentoid: [],
 			documentoid2: [],
-			docfile: {},
+			docfile: null,
 			reclamo: {},
 			mensaje: {}
 		},
@@ -81,10 +81,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			//funcion que maneja el Post de un nuevo formulario, ademas realiza un GET de documentos por ID, antes y despues del POST
-			handleEnvioDocumento: (e, history) => {
+			handleEnvioDocumento: history => {
 				getActions().getDocumentoId(history);
 				getActions().SaveDocumentoSinFile(history);
-				getActions().getDocumentoId(history);
+				getActions().getDocumentoId();
 			},
 
 			//funcion que maneja el Post para obtener un nuevo TOKEN
@@ -150,6 +150,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let formulario = store.formulario;
 				formulario = item;
 				setStore({ formulario });
+			},
+			handleEnvioMod: (e, history) => {
+				e.preventDefault();
+				getActions().putFormulario(history);
+			},
+			handleDeleteDoc: (id, history) => {
+				getActions().deleteDocumento(id);
+				getActions().getDocumentoId(history);
 			},
 
 			//funcion para iniciar sesion -  POST api propia
@@ -385,7 +393,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(resp => resp.json())
 					.then(data => {
-						setStore({ documento: data });
+						setStore({ documento: {} });
 					});
 			},
 			//funcion GET para obtener los reclamos por usuario - GET api propia
@@ -415,6 +423,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(resp => resp.json())
 					.then(data => setStore({ mensaje: data }))
 					.catch(error => setStore({ error }));
+			},
+			//funcion PUT para modificar los datos del usuario - PUT api propia
+			putFormulario: () => {
+				const store = getStore();
+				const data = store.formulario;
+
+				fetch(store.apiUrl + "/api/reclamos/" + store.formulario.id, {
+					method: "PUT",
+					body: JSON.stringify(data),
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + store.token.access
+					}
+				})
+					.then(resp => resp.json())
+					.then(data => {
+						setStore({ formulario: data });
+						alert("se modificaron los datos del paciente");
+					});
 			}
 		}
 	};
