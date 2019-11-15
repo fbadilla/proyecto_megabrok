@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import ModalViewDocumento from "./modalViewDocumento";
+
 import { Animated } from "react-animated-css";
 
 export class ListaReclamos extends Component {
@@ -60,6 +60,15 @@ export class ListaReclamos extends Component {
 														/>
 													</Link>
 												</td>
+												<td>
+													<button
+														type="button"
+														className="btn btn-primary"
+														onClick={() => actions.deleteReclamo(item.id)}>
+														<i className="ti-eye" />
+														Eliminar
+													</button>
+												</td>
 											</tr>
 										);
 									});
@@ -68,7 +77,6 @@ export class ListaReclamos extends Component {
 								}
 							}}
 						</Context.Consumer>
-						<ModalViewDocumento />
 					</tbody>
 				</table>
 			</Animated>

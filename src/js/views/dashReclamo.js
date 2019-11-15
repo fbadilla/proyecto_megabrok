@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import { Context } from "../store/appContext";
 import { Animated } from "react-animated-css";
 import { ListaReclamos } from "../component/listaReclamos";
+import ModalViewDocumento from "../component/modalViewDocumento";
 
 export class DashReclamo extends React.Component {
 	constructor(props) {
@@ -53,6 +54,7 @@ export class DashReclamo extends React.Component {
 									<ListaReclamos />
 								</div>
 							</div>
+							<ModalViewDocumento />
 						</Fragment>
 					);
 				}}

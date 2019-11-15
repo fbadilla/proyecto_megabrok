@@ -214,7 +214,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let formulario = store.formulario;
 				formulario = item;
 				setStore({ formulario });
-				
 			},
 			getDocumentoAll: () => {
 				const store = getStore();
@@ -359,6 +358,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => {
 						setStore({ idReclamo: data });
 						alert("reclamo generado con exito" + store.idReclamo.ClaimId);
+					});
+			},
+			deleteReclamo: id => {
+				const store = getStore();
+				fetch(store.apiUrl + "/api/reclamos/" + id, {
+					method: "DELETE",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + store.token.access
+					}
+				})
+					.then(resp => resp.json())
+					.then(data => {
+						alert("se ha eliminado un reclamo");
+						history.push("/reclamos");
 					});
 			},
 			SaveFormulario: history => {
