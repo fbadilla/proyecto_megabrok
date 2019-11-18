@@ -38,10 +38,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 			documentoid2: [],
 			docfile: null,
 			reclamo: {},
-			mensaje: {}
+			mensaje: {},
+			filtro: false
 		},
 
 		actions: {
+			// -----------------------------------------HANDLES-------------------------------
 			//funcion que actualiza los valores en el store
 			handleChange: e => {
 				const { name, value } = e.target;
@@ -162,6 +164,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 				formulario = item;
 				setStore({ formulario });
 			},
+			handleFiltroReclamo: e => {
+				const { name, value } = e.target;
+				const store = getStore();
+				let filtroReclamo = value;
+				if (filtroReclamo == "") {
+					let filtro = false;
+					setStore({ filtro });
+				} else {
+					let coleccion = store.formulariosId.filter(
+						item =>
+							item.nameReclamo.toLowerCase().includes(filtroReclamo.toLowerCase()) ||
+							item.rut.toLowerCase().includes(filtroReclamo.toLowerCase()) ||
+							item.numpoliza.toLowerCase().includes(filtroReclamo.toLowerCase())
+					);
+					let filtro = true;
+					setStore({ filtroReclamo, coleccion, filtro });
+				}
+			},
+			// -----------------------------------------HANDLES-------------------------------
 			handleEnvioMod: (e, history) => {
 				e.preventDefault();
 				getActions().putFormulario(history);
