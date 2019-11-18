@@ -105,6 +105,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				e.preventDefault();
 				const store = getStore();
 				getActions().login(store.username, store.password, history);
+				getActions().handleLocalStorage();
 			},
 			//funcion que maneja el Post para crear un nuevo usuario
 			handleRegister: e => {
@@ -113,6 +114,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getActions().register(store.username, store.email, store.password);
 			},
 
+			handleLocalStorage: e => {
+				const store = getStore();
+				let access = store.access;
+				access = localStorage.getItem("token");
+
+				setStore({
+					access
+				});
+			},
 			//funcion que maneja el Post para crear un nuevo usuario
 			handleUser: (e, history) => {
 				e.preventDefault();
@@ -182,6 +192,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({ filtroReclamo, coleccion, filtro });
 				}
 			},
+			clean: history => {
+				const store = getStore();
+				setStore({
+					username: "",
+					password: "",
+					access: ""
+				});
+				localStorage.clear();
+				window.location = "/";
+			},
 			// -----------------------------------------HANDLES-------------------------------
 			handleEnvioMod: (e, history) => {
 				e.preventDefault();
@@ -208,7 +228,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(resp => resp.json())
 					.then(data => {
-						setStore({ token: data, username: "", password: "" });
+						setStore({ token: data, username: "", password: "", access: data.access });
 						localStorage.setItem("token", data.access);
 
 						history.push("/formulariochile");
@@ -244,7 +264,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					method: "GET",
 					headers: {
 						"Content-Type": "application/json",
-						Authorization: "Bearer " + store.token.access
+						Authorization: "Bearer " + store.access
 					}
 				})
 					.then(resp => resp.json())
@@ -259,7 +279,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					method: "GET",
 					headers: {
 						"Content-Type": "application/json",
-						Authorization: "Bearer " + store.token.access
+						Authorization: "Bearer " + store.access
 					}
 				})
 					.then(resp => resp.json())
@@ -274,7 +294,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					method: "GET",
 					headers: {
 						"Content-Type": "application/json",
-						Authorization: "Bearer " + store.token.access
+						Authorization: "Bearer " + store.access
 					}
 				})
 					.then(resp => resp.json())
@@ -288,7 +308,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					method: "GET",
 					headers: {
 						"Content-Type": "application/json",
-						Authorization: "Bearer " + store.token.access
+						Authorization: "Bearer " + store.access
 					}
 				})
 					.then(resp => resp.json())
@@ -302,7 +322,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					method: "GET",
 					headers: {
 						"Content-Type": "application/json",
-						Authorization: "Bearer " + store.token.access
+						Authorization: "Bearer " + store.access
 					}
 				})
 					.then(resp => resp.json())
@@ -321,7 +341,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					body: JSON.stringify(data),
 					headers: {
 						"Content-Type": "application/json",
-						Authorization: "Bearer " + store.token.access
+						Authorization: "Bearer " + store.access
 					}
 				})
 					.then(resp => resp.json())
@@ -371,7 +391,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					method: "DELETE",
 					headers: {
 						"Content-Type": "application/json",
-						Authorization: "Bearer " + store.token.access
+						Authorization: "Bearer " + store.access
 					}
 				})
 					.then(resp => resp.json())
@@ -459,7 +479,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					method: "GET",
 					headers: {
 						"Content-Type": "application/json",
-						Authorization: "Bearer " + store.token.access
+						Authorization: "Bearer " + store.access
 					}
 				})
 					.then(resp => resp.json())
@@ -473,7 +493,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					method: "DELETE",
 					headers: {
 						"Content-Type": "application/json",
-						Authorization: "Bearer " + store.token.access
+						Authorization: "Bearer " + store.access
 					}
 				})
 					.then(resp => resp.json())
@@ -490,7 +510,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					body: JSON.stringify(data),
 					headers: {
 						"Content-Type": "application/json",
-						Authorization: "Bearer " + store.token.access
+						Authorization: "Bearer " + store.access
 					}
 				})
 					.then(resp => resp.json())
