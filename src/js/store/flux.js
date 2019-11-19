@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			apiUrl: "http://127.0.0.1:8000",
+			apiUrl: "http://192.168.0.104:8000",
 			apiUrl2: "https://apy-cors-fcobad.herokuapp.com/https://mobile.bestdoctorsinsurance.com/spiritapi/api",
 			token: {
 				refresh: "",
@@ -183,7 +183,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({ filtroReclamo, coleccion, filtro });
 				}
 			},
-			// -----------------------------------------HANDLES-------------------------------
 			handleEnvioMod: (e, history) => {
 				e.preventDefault();
 				getActions().putFormulario(history);
@@ -192,6 +191,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getActions().deleteDocumento(id);
 				getActions().getDocumentoId(history);
 			},
+			handleFormulario: (e, id) => {
+				const store = getStore();
+				fetch(store.apiUrl + "/api/formulario/" + id, {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + store.token.access
+					}
+				})
+					.then(resp => resp.json())
+					.then(data => {
+						window.open(store.apiUrl + data.pdf);
+					});
+			},
+			// -----------------------------------------HANDLES-------------------------------
 
 			//funcion para iniciar sesion -  POST api propia
 			login: (username, password, history) => {
