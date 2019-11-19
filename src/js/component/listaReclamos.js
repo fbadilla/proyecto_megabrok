@@ -50,6 +50,15 @@ export class ListaReclamos extends Component {
 														<i className="ti-marker-alt" />
 													</Link>
 												</td>
+												<td>
+													<button
+														type="button"
+														className="btn btn-primary"
+														onClick={() => actions.deleteReclamo(item.id)}>
+														<i className="ti-eye" />
+														Eliminar
+													</button>
+												</td>
 											</tr>
 										);
 									});
@@ -84,6 +93,15 @@ export class ListaReclamos extends Component {
 														<i className="ti-marker-alt" />
 													</Link>
 												</td>
+												<td>
+													<button
+														type="button"
+														className="btn btn-primary"
+														onClick={() => actions.deleteReclamo(item.id)}>
+														<i className="ti-eye" />
+														Eliminar
+													</button>
+												</td>
 											</tr>
 										);
 									});
@@ -113,6 +131,7 @@ export class ListaReclamos extends Component {
 													<th scope="col">Poliza</th>
 													<th scope="col">Ver más</th>
 													<th scope="col">Editar</th>
+													<th scope="col">Eliminar</th>
 												</tr>
 											</thead>
 											<tbody>{foo()}</tbody>

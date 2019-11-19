@@ -30,7 +30,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				numdoc: "",
 				montodoc: "",
 				detalle_tratamiento: "",
-				datedoc: new Date().toISOString().slice(0, 10)
+				datedoc: new Date().toISOString().slice(0, 10),
+				proveedorValue: ""
 			},
 			documentoid: [],
 			documentoid2: [],
@@ -308,7 +309,42 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({ account: data });
 					});
 			},
+			getProveedoresAll: () => {
+				const store = getStore();
+				fetch(store.apiUrl + "/api/proveedores/", {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + store.token.access
+					}
+				})
+					.then(resp => resp.json())
+					.then(data => setStore({ proveedores: data }))
+					.catch(error => setStore({ error }));
+			},
+			handleChangeProveedor: e => {
+				const { name, value } = e.target;
+				const store = getStore();
+				let proveedorValue = store.documento.proveedorValue;
+				proveedorValue = value;
 
+				setStore({
+					proveedorValue
+				});
+			},
+			handleSelectProveedor: e => {
+				const { value } = e.target;
+				const store = getStore();
+				let proveedorValue = store.documento.proveedorValue;
+				proveedorValue = value;
+
+				setStore({
+					proveedorValue
+				});
+			},
+			// matchProveedores: (proveedorValue, value) => {
+			// 	return proveedorValue.nombre_proveedor.toLowerCase().indexOf(value.toLowerCase()) !== -1;
+			// },
 			//funcion PUT para modificar los datos del usuario - PUT api propia
 			putAccount: history => {
 				const store = getStore();
@@ -376,6 +412,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => {
 						alert("se ha eliminado un reclamo");
 						history.push("/reclamos");
+					});
+			},
+			deleteReclamo: id => {
+				const store = getStore();
+				fetch(store.apiUrl + "/api/reclamos/" + id, {
+					method: "DELETE",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + store.token.access
+					}
+				})
+					.then(resp => resp.json())
+					.then(data => {
+						alert("se ha eliminado un reclamo");
 					});
 			},
 
