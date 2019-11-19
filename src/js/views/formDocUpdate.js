@@ -42,21 +42,7 @@ export class FormDocUpdate extends React.Component {
 									role="banner"
 									style={{ backgroundImage: "url(images/img_6.jpg)" }}>
 									<div className="overlay" />
-									<div className="gtco-container">
-										<div className="row">
-											<div className="col-md-12 col-md-offset-0 text-left">
-												<div className="row row-mt-15em">
-													<div className="col-md-7 mt-text ">
-														<h2>Servicios Prestados</h2>
-														<span className="intro-text-small">
-															{" "}
-															Por favor ingrese los servicios prestados:
-														</span>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
+									<div className="gtco-container" />
 								</header>
 							</Animated>
 							<div className="gtco-section border-bottom">
@@ -72,7 +58,7 @@ export class FormDocUpdate extends React.Component {
 													onSubmit={e => actions.handleEnvioMod(e, this.props.history)}>
 													<div className="row form-group">
 														<h4>Datos Personales del Paciente</h4>
-														<div className="col-md-5">
+														<div className="col-md-6">
 															<div className="feature-left">
 																<span className="icon">
 																	<i className="ti-user" />
@@ -89,7 +75,7 @@ export class FormDocUpdate extends React.Component {
 																</div>
 															</div>
 														</div>
-														<div className="col-md-4">
+														<div className="col-md-3">
 															<div className="feature-left">
 																<div className="feature-copy">
 																	<input
@@ -159,6 +145,24 @@ export class FormDocUpdate extends React.Component {
 																		<option>Rechazada</option>
 																		<option>Anulada</option>
 																	</select>
+																</div>
+															</div>
+														</div>
+														<div className="col-md-3">
+															<div className="feature-left">
+																<div className="feature-copy">
+																	<label>Crear formulario </label>
+																	<button
+																		type="button"
+																		className="btn btn-primary"
+																		onClick={e =>
+																			actions.handleFormulario(
+																				e,
+																				store.formulario.id
+																			)
+																		}>
+																		Crear
+																	</button>
 																</div>
 															</div>
 														</div>

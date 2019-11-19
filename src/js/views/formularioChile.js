@@ -18,6 +18,7 @@ export class FormularioChile extends React.Component {
 	}
 	componentDidMount() {
 		this.actionsContext.getaccount();
+		this.actionsContext.getProveedoresAll();
 	}
 	render() {
 		return (
@@ -36,11 +37,16 @@ export class FormularioChile extends React.Component {
 									id="gtco-header"
 									className="gtco-cover gtco-cover-sm"
 									role="banner"
+<<<<<<< HEAD
 									style={{ backgroundImage: "url(images/img_2.jpg)" }}>
+=======
+									style={{ backgroundImage: "url(images/img_6.jpg)" }}>
+>>>>>>> 7d17083bd060ca6e52b01f97be1dd6bbbebabd69
 									<div className="overlay" />
 									<div className="gtco-container" />
 								</header>
 							</Animated>
+<<<<<<< HEAD
 							<Animated
 								animationIn="bounceInLeft"
 								animationOut="fadeOut"
@@ -86,6 +92,47 @@ export class FormularioChile extends React.Component {
 																			className="form-control"
 																		/>
 																	</div>
+=======
+							<div className="gtco-section border-bottom">
+								<div className="gtco-container">
+									<div className="row">
+										<div className="col-md-12">
+											<div className="col-md-10 ">
+												<h2>Ingresar Formulario</h2>
+												<form
+													action="#"
+													onSubmit={e => actions.handleFormulario(e, this.props.history)}>
+													<div className="row form-group">
+														<h4>Datos Personales del Paciente</h4>
+														<div className="col-md-6">
+															<div className="feature-left">
+																<span className="icon">
+																	<i className="ti-user" />
+																</span>
+																<div className="feature-copy">
+																	<input
+																		name="nameReclamo"
+																		id="nameReclamo"
+																		placeholder="Nombre completo del paciente"
+																		onChange={e => actions.handleForm(e)}
+																		type="text"
+																		className="form-control"
+																	/>
+																</div>
+															</div>
+														</div>
+														<div className="col-md-3">
+															<div className="feature-left">
+																<div className="feature-copy">
+																	<input
+																		name="rut"
+																		id="rut"
+																		placeholder="12345678-5"
+																		onChange={e => actions.handleForm(e)}
+																		type="text"
+																		className="form-control"
+																	/>
+>>>>>>> 7d17083bd060ca6e52b01f97be1dd6bbbebabd69
 																</div>
 															</div>
 															<div className="col-md-3">
@@ -104,6 +151,7 @@ export class FormularioChile extends React.Component {
 															</div>
 														</div>
 
+<<<<<<< HEAD
 														<div className="row form-group">
 															<h4>Detalles del Diagnostico / Accidente</h4>
 															<div className="col-md-8">
@@ -127,6 +175,30 @@ export class FormularioChile extends React.Component {
 																			Policial
 																		</label>
 																	</div>
+=======
+													<div className="row form-group">
+														<h4>Detalles del Diagnostico / Accidente</h4>
+														<div className="col-md-6">
+															<div className="feature-left">
+																<span className="icon">
+																	<i className="ti-clipboard" />
+																</span>
+																<div className="feature-copy">
+																	<textarea
+																		name="detalle_diagnostico"
+																		id="mail"
+																		rows="5"
+																		placeholder="Diagnóstico o Tipo de Accidente"
+																		onChange={e => actions.handleForm(e)}
+																		type="text"
+																		className="form-control"
+																	/>
+																	<label>
+																		<i className="ti-link" />
+																		En caso de accidente, incluir el Reporte
+																		Policial
+																	</label>
+>>>>>>> 7d17083bd060ca6e52b01f97be1dd6bbbebabd69
 																</div>
 															</div>
 														</div>

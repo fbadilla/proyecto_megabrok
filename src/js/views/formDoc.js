@@ -43,21 +43,7 @@ export class FormDoc extends React.Component {
 									role="banner"
 									style={{ backgroundImage: "url(images/img_6.jpg)" }}>
 									<div className="overlay" />
-									<div className="gtco-container">
-										<div className="row">
-											<div className="col-md-12 col-md-offset-0 text-left">
-												<div className="row row-mt-15em">
-													<div className="col-md-7 mt-text ">
-														<h2>Servicios Prestados</h2>
-														<span className="intro-text-small">
-															{" "}
-															Por favor ingrese los servicios prestados:
-														</span>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
+									<div className="gtco-container" />
 								</header>
 							</Animated>
 							<div className="gtco-section border-bottom">
@@ -73,7 +59,7 @@ export class FormDoc extends React.Component {
 													onSubmit={e => actions.handleFormulario(e, this.props.history)}>
 													<div className="row form-group">
 														<h4>Datos Personales del Paciente</h4>
-														<div className="col-md-5">
+														<div className="col-md-6">
 															<div className="feature-left">
 																<span className="icon">
 																	<i className="ti-user" />
@@ -90,7 +76,7 @@ export class FormDoc extends React.Component {
 																</div>
 															</div>
 														</div>
-														<div className="col-md-4">
+														<div className="col-md-3">
 															<div className="feature-left">
 																<div className="feature-copy">
 																	<input
@@ -122,7 +108,7 @@ export class FormDoc extends React.Component {
 
 													<div className="row form-group">
 														<h4>Detalles del Diagnostico / Accidente</h4>
-														<div className="col-md-8">
+														<div className="col-md-6">
 															<div className="feature-left">
 																<span className="icon">
 																	<i className="ti-clipboard" />
