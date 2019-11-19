@@ -28,7 +28,7 @@ export class FormularioChile extends React.Component {
 					return (
 						<Fragment>
 							<Animated
-								animationIn="bounceInDown"
+								animationIn="bounceInLeft"
 								animationOut="fadeOut"
 								isVisible={true}
 								data-animate-effect="fadeInLeft">
@@ -36,28 +36,8 @@ export class FormularioChile extends React.Component {
 									id="gtco-header"
 									className="gtco-cover gtco-cover-sm"
 									role="banner"
-									style={{ backgroundImage: "url(images/img_6.jpg)" }}>
-									<div className="overlay" />
-									<div className="gtco-container">
-										<div className="row">
-											<div className="col-md-12 col-md-offset-0 text-left">
-												<div className="row row-mt-15em">
-													<div className="col-md-7 mt-text ">
-														<h1>Formulario </h1>
-														<span className="intro-text-small">
-															{" "}
-															Por favor asegurese de:
-														</span>
-														<small className="intro-text-small">
-															<i className="ti-check" />
-															Completar en su totalidad y enviar un formulario por evento
-														</small>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</header>
+									style={{ backgroundImage: "url(images/img_2.jpg)" }}
+								/>
 							</Animated>
 							<div className="gtco-section border-bottom">
 								<div className="gtco-container">

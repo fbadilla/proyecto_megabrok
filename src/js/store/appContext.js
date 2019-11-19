@@ -29,6 +29,7 @@ const injectContext = PassedComponent => {
 			 * you should do your ajax requests or fetch api requests here
 			 **/
 			this.state.actions.handleLocalStorage();
+			this.state.actions.getaccount();
 		}
 
 		render() {
