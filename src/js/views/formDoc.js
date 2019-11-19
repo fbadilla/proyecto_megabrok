@@ -130,7 +130,7 @@ export class FormDoc extends React.Component {
 														</div>
 													</div>
 													<div className="row form-group">
-														<div className="col-md-6">
+														<div className="col-md-8">
 															<h4>Datos sobre los Servicios Prestados</h4>
 														</div>
 														<div className="col-md-6">
@@ -146,6 +146,14 @@ export class FormDoc extends React.Component {
 													<div className="row">
 														<div className="col-md-8">
 															<ListaDocumentos />
+														</div>
+														<div className="col-md-4">
+															<button
+																type="button"
+																className="btn btn-primary2"
+																onClick={() => actions.getDocumentoId()}>
+																<i className="ti-reload" />
+															</button>
 														</div>
 													</div>
 													<div className="row">

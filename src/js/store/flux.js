@@ -19,7 +19,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			numpoliza: "",
 			error: {},
 			idReclamo: "",
-			formulario: {},
+			formulario: {
+				name_estado: "Pendiente	"
+			},
 			formularios: [],
 			formulariosId: [],
 			documento: {
