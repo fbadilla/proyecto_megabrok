@@ -1,4 +1,5 @@
-import React from "react";
+import React, { Component } from "react";
+import Autocomplete from "react-autocomplete";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
@@ -6,7 +7,7 @@ import PropTypes from "prop-types";
 export default class ModalDocumento extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {};
+		this.state = { value: "" };
 
 		this.storeContext = null;
 		this.actionsContext = null;
@@ -71,6 +72,32 @@ export default class ModalDocumento extends React.Component {
 															/>
 														</div>
 													</div>
+													{/* 
+													<Autocomplete
+														value={store.nombre_proveedor}
+														inputProps={{ id: "states-autocomplete" }}
+														items={store.proveedores}
+														getItemValue={item => item.nombre_proveedor}
+														// shouldItemRender={actions.matchProveedores()}
+														shouldItemRender={(item, value) =>
+															item.nombre_proveedor
+																.toLowerCase()
+																.indexOf(value.toLowerCase()) > -1
+														}
+														// onChange={e => actions.handleChangeProveedor(e)}
+														// onSelect={e => actions.handleSelectProveedor(e)}
+														onChange={e => (value = e.target.value)}
+														renderMenu={children => <div className="menu">{children}</div>}
+														renderItem={(item, isHighlighted) => (
+															<div
+																className={`item ${
+																	isHighlighted ? "item-highlighted" : ""
+																}`}
+																key={item.abbr}>
+																{item.nombre_proveedor}
+															</div>
+														)}
+													/> */}
 												</div>
 											</div>
 											<div className="row form-group">

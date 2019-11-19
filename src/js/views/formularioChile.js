@@ -18,6 +18,7 @@ export class FormularioChile extends React.Component {
 	}
 	componentDidMount() {
 		this.actionsContext.getaccount();
+		this.actionsContext.getProveedoresAll();
 	}
 	render() {
 		return (
@@ -36,8 +37,10 @@ export class FormularioChile extends React.Component {
 									id="gtco-header"
 									className="gtco-cover gtco-cover-sm"
 									role="banner"
-									style={{ backgroundImage: "url(images/img_2.jpg)" }}
-								/>
+									style={{ backgroundImage: "url(images/img_6.jpg)" }}>
+									<div className="overlay" />
+									<div className="gtco-container" />
+								</header>
 							</Animated>
 							<div className="gtco-section border-bottom">
 								<div className="gtco-container">
@@ -50,7 +53,7 @@ export class FormularioChile extends React.Component {
 													onSubmit={e => actions.handleFormulario(e, this.props.history)}>
 													<div className="row form-group">
 														<h4>Datos Personales del Paciente</h4>
-														<div className="col-md-5">
+														<div className="col-md-6">
 															<div className="feature-left">
 																<span className="icon">
 																	<i className="ti-user" />
@@ -67,13 +70,13 @@ export class FormularioChile extends React.Component {
 																</div>
 															</div>
 														</div>
-														<div className="col-md-4">
+														<div className="col-md-3">
 															<div className="feature-left">
 																<div className="feature-copy">
 																	<input
 																		name="rut"
 																		id="rut"
-																		placeholder="Ejem: 9999999-9"
+																		placeholder="12345678-5"
 																		onChange={e => actions.handleForm(e)}
 																		type="text"
 																		className="form-control"
@@ -99,7 +102,7 @@ export class FormularioChile extends React.Component {
 
 													<div className="row form-group">
 														<h4>Detalles del Diagnostico / Accidente</h4>
-														<div className="col-md-8">
+														<div className="col-md-6">
 															<div className="feature-left">
 																<span className="icon">
 																	<i className="ti-clipboard" />
