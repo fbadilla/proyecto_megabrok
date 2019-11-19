@@ -11,7 +11,6 @@ export class modificarUsuario extends React.Component {
 	}
 	componentDidMount() {
 		this.actionsContext.getaccount();
-		this.actionsContext.getRol();
 	}
 
 	render() {
@@ -138,29 +137,6 @@ export class modificarUsuario extends React.Component {
 																	<label className="sr-only" htmlFor="subject">
 																		grupo
 																	</label>
-																	<select
-																		name="rolName"
-																		id="rolName"
-																		onChange={e => actions.handleaccount(e)}
-																		type="text"
-																		className="form-control">
-																		<option value="1">Seleccione</option>
-																		{store.Rol.length > 0 &&
-																			store.Rol.map((item, i) => {
-																				const selected =
-																					store.account.rolName == item.id
-																						? "selected"
-																						: "";
-																				return (
-																					<option
-																						value={item.id}
-																						key={i}
-																						selected={selected}>
-																						{item.rolName}
-																					</option>
-																				);
-																			})}
-																	</select>
 																</div>
 															</div>
 														</div>
