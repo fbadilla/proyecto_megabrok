@@ -1,5 +1,5 @@
-import React, { Fragment } from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import React, { Fragment, useState } from "react";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
 import { Home } from "./views/home";
 import injectContext from "./store/appContext";
@@ -11,6 +11,7 @@ import { Navbar } from "./component/navbar";
 import { FormularioChile } from "./views/formularioChile";
 import { FormDoc } from "./views/formDoc";
 import { FormDocUpdate } from "./views/formDocUpdate";
+import PrivateRoute from "./PrivateRoute";
 
 import { Context } from "./store/appContext";
 
@@ -20,7 +21,6 @@ export class Layout extends React.Component {
 		//the basename is used when your project is published in a subdirectory and not in the root of the domain
 		// you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
 		const basename = process.env.BASENAME || "";
-
 		return (
 			<Context.Consumer>
 				{({ store, actions }) => {
@@ -33,13 +33,25 @@ export class Layout extends React.Component {
 									<Navbar />
 									<Switch>
 										<Route exact path="/" component={Home} />
-										<Route path="/usuarios" component={Usuarios} />
-										<Route path="/modprofile" component={modificarUsuario} />
-										<Route path="/ingresareclamo" component={ingresarReclamo} />
-										<Route path="/formulariochile" component={FormularioChile} />
-										<Route path="/reclamos" component={DashReclamo} />
-										<Route path="/formdoc" component={FormDoc} />
-										<Route path="/update" component={FormDocUpdate} />
+										<PrivateRoute path="/usuarios" component={Usuarios} access={store.access} />
+										<PrivateRoute
+											path="/modprofile"
+											component={modificarUsuario}
+											access={store.access}
+										/>
+										<PrivateRoute
+											path="/ingresareclamo"
+											component={ingresarReclamo}
+											access={store.access}
+										/>
+										<PrivateRoute
+											path="/formulariochile"
+											component={FormularioChile}
+											access={store.access}
+										/>
+										<PrivateRoute path="/reclamos" component={DashReclamo} access={store.access} />
+										<PrivateRoute path="/formdoc" component={FormDoc} access={store.access} />
+										<PrivateRoute path="/update" component={FormDocUpdate} access={store.access} />
 										<Route render={() => <h1>Not found!</h1>} />
 									</Switch>
 								</Fragment>

@@ -29,7 +29,7 @@ export class FormularioChile extends React.Component {
 					return (
 						<Fragment>
 							<Animated
-								animationIn="bounceInDown"
+								animationIn="bounceInLeft"
 								animationOut="fadeOut"
 								isVisible={true}
 								data-animate-effect="fadeInLeft">

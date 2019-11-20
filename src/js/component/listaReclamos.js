@@ -100,10 +100,9 @@ export class ListaReclamos extends Component {
 												<td>
 													<button
 														type="button"
-														className="btn btn-primary"
+														className="btn btn-danger2"
 														onClick={() => actions.deleteReclamo(item.id)}>
-														<i className="ti-eye" />
-														Eliminar
+														<i className="ti-trash" />
 													</button>
 												</td>
 											</tr>

@@ -156,7 +156,7 @@ export class FormDocUpdate extends React.Component {
 																		type="button"
 																		className="btn btn-primary"
 																		onClick={e =>
-																			actions.handleFormulario(
+																			actions.handlePDFFormulario(
 																				e,
 																				store.formulario.id
 																			)
