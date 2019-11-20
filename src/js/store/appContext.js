@@ -4,6 +4,10 @@ import getState from "./flux.js";
 // Don't change, here is where we initialize our context, by default its just going to be Null.
 export const Context = React.createContext(null);
 
+export function useAuth() {
+	return React.useContext(Context);
+}
+
 // This function injects the global store to any view/component where you want to use it, we will inject the context to Layout.jsx, you can see it here:
 // https://github.com/4GeeksAcademy/react-hello-webapp/blob/master/src/js/layout.jsx#L35
 const injectContext = PassedComponent => {

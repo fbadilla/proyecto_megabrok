@@ -9,6 +9,25 @@ export class Navbar extends React.Component {
 				{({ store, actions }) => {
 					this.actioncontext = actions;
 					this.storecontext = store;
+
+					if (!store.access) {
+						return (
+							<nav className="gtco-nav" role="navigation">
+								<div className="gtco-container">
+									<div className="row">
+										<div className="col-sm-4 col-xs-12">
+											<div id="gtco-logo">
+												<Link to="/">
+													<span>MegaBrok</span>
+												</Link>
+											</div>
+										</div>
+									</div>
+								</div>
+							</nav>
+						);
+					}
+
 					return (
 						<nav className="gtco-nav" role="navigation">
 							<div className="gtco-container">
@@ -67,7 +86,7 @@ export class Navbar extends React.Component {
 														onClick={() => {
 															actions.clean({});
 														}}>
-														Login
+														Cerrar Sesion
 													</span>
 												</Link>
 											</li>
