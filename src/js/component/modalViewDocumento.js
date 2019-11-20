@@ -30,14 +30,6 @@ export default class ModalViewDocumento extends React.Component {
 							</h5>
 						</div>
 						<div className="modal-body">
-							<button
-								type="button"
-								className="btn btn-primary"
-								data-toggle="modal"
-								data-target="#modaldocumento"
-								data-dismiss="modal">
-								Agregar Servicio
-							</button>
 							<table className="table table-striped table-sm">
 								<thead>
 									<tr>

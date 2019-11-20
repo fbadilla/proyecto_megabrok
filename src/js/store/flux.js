@@ -20,15 +20,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 			error: {},
 			idReclamo: "",
 			formulario: {
-				name_estado: "Pendiente	"
+				name_estado: "Pendiente"
 			},
 			formularios: [],
 			formulariosId: [],
 			documento: {
 				pago: "COB",
-				tipodoc: "BOLETA",
+				tipodoc: "Boleta",
 				nombre_proveedor: "",
-				tipodoc: "",
 				numdoc: "",
 				montodoc: "",
 				detalle_tratamiento: "",
@@ -448,24 +447,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(resp => resp.json())
 					.then(data => {
-						alert("se ha eliminado un reclamo");
-					});
-			},
-			deleteReclamo: id => {
-				const store = getStore();
-				fetch(store.apiUrl + "/api/reclamos/" + id, {
-					method: "DELETE",
-					headers: {
-						"Content-Type": "application/json",
-						Authorization: "Bearer " + store.access
-					}
-				})
-					.then(resp => resp.json())
-					.then(data => {
-						alert("se ha eliminado un reclamo");
-					});
-			},
+						alert("se ha eliminado el reclamo");
 
+					});
+			},
 			//funcion POST para crear un nuevo reclamo - POST api propia
 			SaveFormulario: history => {
 				const store = getStore();
@@ -499,7 +484,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(resp => resp.json())
 					.then(data => {
-						setStore({ documento: data });
+						setStore({
+							documento: {
+								pago: "COB",
+								tipodoc: "BOLETA",
+								nombre_proveedor: "",
+								tipodoc: "",
+								numdoc: "",
+								montodoc: "",
+								detalle_tratamiento: "",
+								datedoc: new Date().toISOString().slice(0, 10),
+								proveedorValue: ""
+							}
+						});
 					});
 			},
 			//funcion POST para agregar documentos a un reclamo se envia con Formdata, ya que se adjunta File del documento - POST api propia
@@ -530,7 +527,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(resp => resp.json())
 					.then(data => {
-						setStore({ documento: data });
+						setStore({
+							documento: {
+								pago: "COB",
+								tipodoc: "Boleta",
+								nombre_proveedor: "",
+								tipodoc: "",
+								numdoc: "",
+								montodoc: "",
+								detalle_tratamiento: "",
+								datedoc: new Date().toISOString().slice(0, 10),
+								proveedorValue: ""
+							}
+						});
 					})
 					.catch(error => {
 						setStore({ error });

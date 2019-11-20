@@ -55,10 +55,9 @@ export class ListaReclamos extends Component {
 												<td>
 													<button
 														type="button"
-														className="btn btn-primary"
+														className="btn btn-primary3"
 														onClick={() => actions.deleteReclamo(item.id)}>
-														<i className="ti-eye" />
-														Eliminar
+														<i className="ti-trash" />
 													</button>
 												</td>
 											</tr>
@@ -100,7 +99,7 @@ export class ListaReclamos extends Component {
 												<td>
 													<button
 														type="button"
-														className="btn btn-danger2"
+														className="btn btn-primary3"
 														onClick={() => actions.deleteReclamo(item.id)}>
 														<i className="ti-trash" />
 													</button>
@@ -114,31 +113,43 @@ export class ListaReclamos extends Component {
 						if (store.formulariosId.length > 0) {
 							return (
 								<Fragment>
-									<div className="col-md-11">
-										<input
-											name="filtro_reclamo"
-											type="text"
-											className="form-control"
-											placeholder="Filtro"
-											onChange={e => actions.handleFiltroReclamo(e)}
-										/>
+									<div className="gtco-section ">
+										<div className="col-md-10">
+											<input
+												name="filtro_reclamo"
+												type="text"
+												className="form-control"
+												placeholder="Filtro"
+												onChange={e => actions.handleFiltroReclamo(e)}
+											/>
+										</div>
+										<div className="col-md-2">
+											<button
+												type="button"
+												className="btn btn-primary4"
+												onClick={() => actions.getFormulario()}>
+												<i className="ti-reload" />
+											</button>
+										</div>
 									</div>
-									<div className="col-md-11">
-										<table className="table">
-											<thead>
-												<tr>
-													<th scope="col">Id Reclamo</th>
-													<th scope="col">Estado</th>
-													<th scope="col">Reclamante</th>
-													<th scope="col">Rut</th>
-													<th scope="col">Poliza</th>
-													<th scope="col">Ver más</th>
-													<th scope="col">Editar</th>
-													<th scope="col">Eliminar</th>
-												</tr>
-											</thead>
-											<tbody>{foo()}</tbody>
-										</table>
+									<div className="gtco-section ">
+										<div className="col-md-11">
+											<table className="table">
+												<thead>
+													<tr>
+														<th scope="col">Id Reclamo</th>
+														<th scope="col">Estado</th>
+														<th scope="col">Reclamante</th>
+														<th scope="col">Rut</th>
+														<th scope="col">Poliza</th>
+														<th scope="col">Ver más</th>
+														<th scope="col">Editar</th>
+														<th scope="col">Eliminar</th>
+													</tr>
+												</thead>
+												<tbody>{foo()}</tbody>
+											</table>
+										</div>
 									</div>
 								</Fragment>
 							);
