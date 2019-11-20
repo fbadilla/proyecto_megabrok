@@ -25,7 +25,9 @@ export class ListaReclamos extends Component {
 									.reverse()
 									.map((item, i) => {
 										return (
-											<tr key={i}>
+											<tr
+												key={i}
+												className={item.name_estado == "Pendiente" ? "danger" : "primary"}>
 												<th scope="row"> {item.id}</th>
 												<th>{item.name_estado}</th>
 												<td> {item.nameReclamo}</td>
@@ -68,7 +70,9 @@ export class ListaReclamos extends Component {
 									.reverse()
 									.map((item, i) => {
 										return (
-											<tr key={i}>
+											<tr
+												key={i}
+												className={item.name_estado == "Pendiente" ? "danger" : "primary"}>
 												<th scope="row"> {item.id}</th>
 												<th>{item.name_estado}</th>
 												<td> {item.nameReclamo}</td>
