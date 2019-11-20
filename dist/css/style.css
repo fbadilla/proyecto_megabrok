@@ -53,13 +53,13 @@ body {
 }
 
 a {
-  color: #33b5e5;
+  color: #457B9D;
   -webkit-transition: 0.5s;
   -o-transition: 0.5s;
   transition: 0.5s;
 }
 a:hover, a:active, a:focus {
-  color: #33b5e5;
+  color: #457B9D;
   outline: none;
   text-decoration: none;
 }
@@ -77,17 +77,17 @@ h1, h2, h3, h4, h5, h6, figure {
 
 ::-webkit-selection {
   color: #fff;
-  background: #33b5e5;
+  background: #457B9D;
 }
 
 ::-moz-selection {
   color: #fff;
-  background: #33b5e5;
+  background: #457B9D;
 }
 
 ::selection {
   color: #fff;
-  background: #33b5e5;
+  background: #457B9D;
 }
 
 .gtco-container {
@@ -121,7 +121,7 @@ h1, h2, h3, h4, h5, h6, figure {
   font-weight: bold;
 }
 .gtco-nav #gtco-logo em {
-  color: #33b5e5;
+  color: #457B9D;
 }
 .gtco-nav a {
   padding: 5px 10px;
@@ -207,7 +207,7 @@ h1, h2, h3, h4, h5, h6, figure {
   font-size: 15px;
 }
 .gtco-nav ul li.has-dropdown .dropdown li a:hover {
-  color: #33b5e5;
+  color: #457B9D;
 }
 .gtco-nav ul li.has-dropdown .dropdown li.active > a {
   color: #000 !important;
@@ -216,7 +216,7 @@ h1, h2, h3, h4, h5, h6, figure {
   color: #fff;
 }
 .gtco-nav ul li.btn-cta a {
-  color: #33b5e5;
+  color: #457B9D;
 }
 .gtco-nav ul li.btn-cta a span {
   border: 2px solid rgba(255, 255, 255, 0.5);
@@ -236,7 +236,7 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 .gtco-nav ul li.btn-cta a:hover span {
   background: #fff;
-  color: #33b5e5;
+  color: #457B9D;
 }
 .gtco-nav ul li.active > a {
   color: #fff !important;
@@ -342,7 +342,7 @@ h1, h2, h3, h4, h5, h6, figure {
   display: block;
   padding: 10px 20px 20px 20px;
   background: #fff;
-  color: #33b5e5;
+  color: #457B9D;
 }
 #gtco-header .form-wrap .tab-menu li.gtco-first a {
   border-top-left-radius: 7px;
@@ -453,7 +453,7 @@ h1, h2, h3, h4, h5, h6, figure {
   width: 100%;
 }
 .gtco-cover a {
-  color: #33b5e5;
+  color: #457B9D;
 }
 .gtco-cover a:hover {
   color: white;
@@ -582,7 +582,7 @@ h1, h2, h3, h4, h5, h6, figure {
   display: inline-block;
   zoom: 1;
   *display: inline;
-  color: #33b5e5;
+  color: #457B9D;
   padding-left: 10px;
   padding-right: 10px;
 }
@@ -700,7 +700,7 @@ form label {
 #gtco-counter .counter {
   font-size: 50px;
   margin-bottom: 10px;
-  color: #33b5e5;
+  color: #457B9D;
   font-weight: 100;
   display: block;
 }
@@ -810,7 +810,7 @@ form label {
 .feature-center h3 {
   font-size: 20px;
   margin-bottom: 20px;
-  color: #33b5e5;
+  color: #457B9D;
   position: relative;
 }
 
@@ -829,13 +829,13 @@ form label {
   display: table-cell;
   vertical-align: middle;
   font-size: 40px;
-  color: #33b5e5;
+  color: #457B9D;
 }
 .feature-left .icon2 i {
   display: table-cell;
   vertical-align: middle;
   font-size: 20px;
-  color: #33b5e5;
+  color: #457B9D;
 }
 .feature-left .feature-copy {
   float: right;
@@ -855,7 +855,7 @@ form label {
   display: table-cell;
   vertical-align: middle;
   font-size: 40px;
-  color: #33b5e5;
+  color: #457B9D;
   padding-left: 5px;
 }
 .card {
@@ -945,7 +945,7 @@ form label {
 #gtco-subscribe .btn {
   height: 46px;
   border: none !important;
-  background: #33b5e5;
+  background: #457B9D;
   color: #fff;
   font-size: 16px;
   text-transform: uppercase;
@@ -1019,7 +1019,7 @@ form label {
   *display: inline;
 }
 #gtco-footer .footer-logo span {
-  color: #33b5e5;
+  color: #457B9D;
 }
 #gtco-footer .copyright {
   color: #b3b3b3;
@@ -1294,28 +1294,28 @@ form label {
 }
 
 .btn-primary {
-  background: #33b5e5;
+  background: #457B9D;
   color: #fff;
-  border: 2px solid #33b5e5 !important;
+  border: 2px solid #457B9D !important;
 }
 .btn-primary2 {
-  background: #33b5e5;
+  background: #457B9D;
   color: #fff;
-  border: 2px solid #33b5e5 !important;
+  border: 2px solid #457B9D !important;
   padding: 3px 15px;
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
-  background: #0099CC !important;
-  border-color: #0099CC !important;
+  background: #1D3557 !important;
+  border-color: #1D3557 !important;
 }
 .btn-primary.btn-outline {
   background: transparent;
-  color: #33b5e5;
-  border: 2px solid #33b5e5;
+  color: #457B9D;
+  border: 2px solid #457B9D;
 }
 .btn-primary.btn-outline:hover, .btn-primary.btn-outline:focus, .btn-primary.btn-outline:active {
-  background: #33b5e5;
+  background: #457B9D;
   color: #fff;
 }
 
@@ -1377,9 +1377,14 @@ form label {
 }
 
 .btn-danger {
-  background: #33b5e5;
+  background: #457B9D;
   color: #fff;
-  border: 2px solid #33b5e5;
+  border: 2px solid #457B9D;
+}
+.btn-danger2 {
+  background: #E63946;
+  color: #fff;
+  border: 2px solid #E63946;
 }
 .btn-danger:hover, .btn-danger:focus, .btn-danger:active {
   background: #1d8eb7 !important;
@@ -1467,7 +1472,7 @@ form label {
 .form-control:active, .form-control:focus {
   outline: none;
   box-shadow: none;
-  border-color: #33b5e5;
+  border-color: #457B9D;
 }
 
 .row-mt-15em {
@@ -1531,7 +1536,7 @@ form label {
   margin-left: 0px;
 }
 .gtco-nav .gtco-contact ul li a i {
-  color: #33b5e5;
+  color: #457B9D;
 }
 .gtco-nav .gtco-contact ul li a:hover i {
   color: #fff;
@@ -1625,14 +1630,14 @@ form label {
 }
 .owl-theme .owl-controls .owl-nav [class*="owl-"] i {
   font-size: 24px;
-  background: #33b5e5 !important;
+  background: #457B9D !important;
   padding: 12px;
   -webkit-transition: 0.5s;
   -o-transition: 0.5s;
   transition: 0.5s;
 }
 .owl-theme .owl-controls .owl-nav [class*="owl-"]:hover i, .owl-theme .owl-controls .owl-nav [class*="owl-"]:focus i {
-  background: #33b5e5 !important;
+  background: #457B9D !important;
 }
 
 .owl-theme .owl-dots {
@@ -1650,7 +1655,7 @@ form label {
 .owl-theme .owl-dots .owl-dot span {
   width: 10px;
   height: 10px;
-  background: #33b5e5;
+  background: #457B9D;
   -webkit-transition: 0.2s;
   -o-transition: 0.2s;
   transition: 0.2s;
@@ -1658,12 +1663,12 @@ form label {
 }
 .owl-theme .owl-dots .owl-dot span:hover {
   background: none;
-  border: 2px solid #33b5e5;
+  border: 2px solid #457B9D;
 }
 
 .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
   background: none;
-  border: 2px solid #33b5e5;
+  border: 2px solid #457B9D;
 }
 
 .fh5co-project-item {
@@ -1735,7 +1740,7 @@ form label {
   font-size: 20px;
   font-weight: 300;
   margin: 0 0 10px 0;
-  color: #33b5e5;
+  color: #457B9D;
 }
 .fh5co-project-item .fh5co-text span {
   color: #b3b3b3;
@@ -1794,7 +1799,7 @@ form label {
   border-radius: 5px;
 }
 .price-box.popular {
-  border: 2px solid #33b5e5;
+  border: 2px solid #457B9D;
 }
 .price-box.popular .popular-text {
   top: 0;
@@ -1803,7 +1808,7 @@ form label {
   margin-top: -2em;
   position: absolute;
   padding: 4px 20px;
-  background: #33b5e5;
+  background: #457B9D;
   color: #fff;
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
@@ -1817,7 +1822,7 @@ form label {
   left: 50%;
   margin-left: -10px;
   border-top: 10px solid black;
-  border-top-color: #33b5e5;
+  border-top-color: #457B9D;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
 }
