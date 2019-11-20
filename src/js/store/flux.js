@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			apiUrl: "http://best-health.git.net:8001",
+			apiUrl: "http://best-health.ddns.net:8001",
 			apiUrl2: "https://apy-cors-fcobad.herokuapp.com/https://mobile.bestdoctorsinsurance.com/spiritapi/api",
 			token: {
 				refresh: "",
@@ -20,15 +20,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 			error: {},
 			idReclamo: "",
 			formulario: {
-				name_estado: "Pendiente	"
+				name_estado: "Pendiente"
 			},
 			formularios: [],
 			formulariosId: [],
 			documento: {
 				pago: "COB",
-				tipodoc: "BOLETA",
+				tipodoc: "Boleta",
 				nombre_proveedor: "",
-				tipodoc: "",
 				numdoc: "",
 				montodoc: "",
 				detalle_tratamiento: "",
@@ -201,7 +200,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					access: ""
 				});
 				localStorage.clear();
-				window.location = "/";
 			},
 			// -----------------------------------------HANDLES-------------------------------
 
@@ -213,13 +211,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getActions().deleteDocumento(id);
 				getActions().getDocumentoId(history);
 			},
-			handleFormulario: (e, id) => {
+			handlePDFFormulario: (e, id) => {
 				const store = getStore();
 				fetch(store.apiUrl + "/api/formulario/" + id, {
 					method: "GET",
 					headers: {
 						"Content-Type": "application/json",
-						Authorization: "Bearer " + store.token.access
+						Authorization: "Bearer " + store.access
 					}
 				})
 					.then(resp => resp.json())
@@ -353,7 +351,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					method: "GET",
 					headers: {
 						"Content-Type": "application/json",
-						Authorization: "Bearer " + store.token.access
+						Authorization: "Bearer " + store.access
 					}
 				})
 					.then(resp => resp.json())
@@ -448,25 +446,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(resp => resp.json())
 					.then(data => {
-						alert("se ha eliminado un reclamo");
-						history.push("/reclamos");
+						alert("se ha eliminado el reclamo");
 					});
 			},
-			deleteReclamo: id => {
-				const store = getStore();
-				fetch(store.apiUrl + "/api/reclamos/" + id, {
-					method: "DELETE",
-					headers: {
-						"Content-Type": "application/json",
-						Authorization: "Bearer " + store.token.access
-					}
-				})
-					.then(resp => resp.json())
-					.then(data => {
-						alert("se ha eliminado un reclamo");
-					});
-			},
-
 			//funcion POST para crear un nuevo reclamo - POST api propia
 			SaveFormulario: history => {
 				const store = getStore();
@@ -475,7 +457,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					method: "Post",
 					body: JSON.stringify(data),
 					headers: {
-						Authorization: "Bearer " + getStore().token.access,
+						Authorization: "Bearer " + store.access,
 						"Content-Type": "application/json"
 					}
 				})
@@ -495,12 +477,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 					body: JSON.stringify(data),
 					headers: {
 						"Content-Type": "application/json",
-						Authorization: "Bearer " + getStore().token.access
+						Authorization: "Bearer " + store.access
 					}
 				})
 					.then(resp => resp.json())
 					.then(data => {
-						setStore({ documento: data });
+						setStore({
+							documento: {
+								pago: "COB",
+								tipodoc: "BOLETA",
+								nombre_proveedor: "",
+								tipodoc: "",
+								numdoc: "",
+								montodoc: "",
+								detalle_tratamiento: "",
+								datedoc: new Date().toISOString().slice(0, 10),
+								proveedorValue: ""
+							}
+						});
 					});
 			},
 			//funcion POST para agregar documentos a un reclamo se envia con Formdata, ya que se adjunta File del documento - POST api propia
@@ -526,12 +520,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 					body: form_data,
 					mimeType: "multipart/form-data",
 					headers: {
-						Authorization: "Bearer " + getStore().token.access
+						Authorization: "Bearer " + store.access
 					}
 				})
 					.then(resp => resp.json())
 					.then(data => {
-						setStore({ documento: data });
+						setStore({
+							documento: {
+								pago: "COB",
+								tipodoc: "Boleta",
+								nombre_proveedor: "",
+								tipodoc: "",
+								numdoc: "",
+								montodoc: "",
+								detalle_tratamiento: "",
+								datedoc: new Date().toISOString().slice(0, 10),
+								proveedorValue: ""
+							}
+						});
 					})
 					.catch(error => {
 						setStore({ error });

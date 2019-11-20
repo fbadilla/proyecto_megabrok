@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Autocomplete from "react-autocomplete";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
