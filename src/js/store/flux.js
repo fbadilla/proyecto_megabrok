@@ -32,7 +32,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				montodoc: "",
 				detalle_tratamiento: "",
 				datedoc: new Date().toISOString().slice(0, 10),
-				proveedorValue: ""
+				proveedorValue: "",
+				docfile: null
 			},
 			documentoid: [],
 			documentoid2: [],
@@ -96,7 +97,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			//funcion que maneja el Post de un nuevo formulario, ademas realiza un GET de documentos por ID, antes y despues del POST
 			handleEnvioDocumento: history => {
-				getActions().getDocumentoId(history);
 				getActions().SaveDocumentoSinFile(history);
 				getActions().getDocumentoId();
 			},
@@ -448,7 +448,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(resp => resp.json())
 					.then(data => {
 						alert("se ha eliminado el reclamo");
-
 					});
 			},
 			//funcion POST para crear un nuevo reclamo - POST api propia
@@ -487,14 +486,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({
 							documento: {
 								pago: "COB",
-								tipodoc: "BOLETA",
+								tipodoc: "Boleta",
 								nombre_proveedor: "",
-								tipodoc: "",
 								numdoc: "",
 								montodoc: "",
 								detalle_tratamiento: "",
 								datedoc: new Date().toISOString().slice(0, 10),
-								proveedorValue: ""
+								proveedorValue: "",
+								docfile: null
 							}
 						});
 					});
@@ -504,7 +503,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				let form_data = new FormData();
 				if (store.docfile == null) {
-					form_data.append("docfile", null);
+					// form_data.append("docfile", "");
 				} else {
 					form_data.append("docfile", store.docfile, store.docfile.name);
 				}
@@ -516,7 +515,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				form_data.append("montodoc", store.documento.montodoc);
 				form_data.append("detalle_tratamiento", store.documento.detalle_tratamiento);
 				form_data.append("pago", store.documento.pago);
-				const data = store.documento;
+				// console.log(form_data);
+				// debugger;
 				fetch(store.apiUrl + "/api/documentos/" + store.formulario.id, {
 					method: "Post",
 					body: form_data,
@@ -538,7 +538,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 								detalle_tratamiento: "",
 								datedoc: new Date().toISOString().slice(0, 10),
 								proveedorValue: ""
-							}
+							},
+							docfile: null
 						});
 					})
 					.catch(error => {

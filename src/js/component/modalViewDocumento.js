@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
 import ModalDocumento from "./modalServices";
-
+import { ListaDocumentos } from "./listaDocumentos";
 export default class ModalViewDocumento extends React.Component {
 	constructor(props) {
 		super(props);
@@ -16,13 +16,13 @@ export default class ModalViewDocumento extends React.Component {
 	render() {
 		return (
 			<div
-				className="modal"
+				className="modal fade"
 				id="modalviewdocumento"
 				tabIndex="-1"
 				role="dialog"
-				aria-labelledby="exampleModalLabel"
+				aria-labelledby="myLargeModalLabel"
 				aria-hidden="true">
-				<div className="modal-dialog" role="document">
+				<div className="modal-dialog modal-lg" role="document">
 					<div className="modal-content">
 						<div className="modal-header">
 							<h5 className="modal-title" id="exampleModalLabel">
@@ -30,51 +30,7 @@ export default class ModalViewDocumento extends React.Component {
 							</h5>
 						</div>
 						<div className="modal-body">
-							<table className="table table-striped table-sm">
-								<thead>
-									<tr>
-										<th>Fecha </th>
-										<th>N° documento</th>
-										<th>Detalle</th>
-										<th>pago</th>
-										<th>total</th>
-										<th>Ver documento</th>
-									</tr>
-								</thead>
-								<tbody>
-									<Context.Consumer>
-										{({ store, actions }) => {
-											if (store.documentoid.length > 0) {
-												return store.documentoid.map((item, i) => {
-													return (
-														<tr key={i}>
-															<td>{item.datedoc}</td>
-															<td>{item.numdoc}</td>
-															<td>{item.detalle_tratamiento}</td>
-															<td>{item.pago}</td>
-															<td>{item.montodoc}</td>
-															<td>
-																<button
-																	type="button"
-																	className="btn btn-primary2"
-																	data-toggle="modal"
-																	data-target="#modalviewdocumento"
-																	onClick={() =>
-																		window.open(store.apiUrl + item.docfile)
-																	}>
-																	<i className="ti-image" />
-																</button>
-															</td>
-														</tr>
-													);
-												});
-											} else {
-												return "";
-											}
-										}}
-									</Context.Consumer>
-								</tbody>
-							</table>
+							<ListaDocumentos />
 						</div>
 
 						<div className="modal-footer">

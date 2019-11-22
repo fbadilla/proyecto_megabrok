@@ -21,13 +21,13 @@ export default class ModalDocumento extends React.Component {
 					this.actionsContext = actions;
 					return (
 						<div
-							className="modal"
+							className="modal fade"
 							id="modaldocumento"
 							tabIndex="-1"
 							role="dialog"
 							aria-labelledby="exampleModalLabel"
 							aria-hidden="true">
-							<div className="modal-dialog" role="document">
+							<div className="modal-dialog modal-lg" role="document">
 								<div className="modal-content">
 									<div className="modal-header">
 										<h5 className="modal-title" id="exampleModalLabel">
@@ -36,8 +36,27 @@ export default class ModalDocumento extends React.Component {
 									</div>
 									<div className="modal-body">
 										<form action="#">
-											<div className="form-row">
-												<div className="col-md-6">
+											<div className="row form-group">
+												<div className="col-md-3">
+													<div className="feature-left">
+														<span className="icon2">
+															<i className="ti-receipt" />
+														</span>
+														<div className="feature-copy">
+															<label>Tipo </label>
+															<select
+																className="form-control"
+																id="tipodoc"
+																name="tipodoc"
+																onChange={e => actions.handledocumento(e)}>
+																<option>Boleta</option>
+																<option>Factura</option>
+																<option>Otro</option>
+															</select>
+														</div>
+													</div>
+												</div>
+												<div className="col-md-4">
 													<div className="feature-left">
 														<span className="icon2">
 															<i className="ti-calendar" />
@@ -54,7 +73,7 @@ export default class ModalDocumento extends React.Component {
 														</div>
 													</div>
 												</div>
-												<div className="col-md-5">
+												<div className="col-md-4">
 													<div className="feature-left">
 														<span className="icon2">
 															<i className="ti-package" />
@@ -99,26 +118,8 @@ export default class ModalDocumento extends React.Component {
 													/> */}
 												</div>
 											</div>
+
 											<div className="row form-group">
-												<div className="col-md-3">
-													<div className="feature-left">
-														<span className="icon2">
-															<i className="ti-receipt" />
-														</span>
-														<div className="feature-copy">
-															<label>Tipo </label>
-															<select
-																className="form-control"
-																id="tipodoc"
-																name="tipodoc"
-																onChange={e => actions.handledocumento(e)}>
-																<option>Boleta</option>
-																<option>Factura</option>
-																<option>Otro</option>
-															</select>
-														</div>
-													</div>
-												</div>
 												<div className="col-md-3">
 													<div className="feature-left">
 														<span className="icon2">
@@ -157,7 +158,24 @@ export default class ModalDocumento extends React.Component {
 														</div>
 													</div>
 												</div>
-												<div className="col-md-8">
+												<div className="col-md-4">
+													<div className="feature-left">
+														<div className="feature-copy">
+															<label>Pago </label>
+															<select
+																className="form-control"
+																name="pago"
+																id="pago"
+																onChange={e => actions.handledocumento(e)}>
+																<option>COB</option>
+																<option>REM</option>
+															</select>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div className="row form-group">
+												<div className="col-md-6">
 													<div className="feature-left">
 														<span className="icon2">
 															<i className="ti-write" />
@@ -181,22 +199,8 @@ export default class ModalDocumento extends React.Component {
 														</div>
 													</div>
 												</div>
-												<div className="col-md-4">
-													<div className="feature-left">
-														<div className="feature-copy">
-															<label>Pago </label>
-															<select
-																className="form-control"
-																name="pago"
-																id="pago"
-																onChange={e => actions.handledocumento(e)}>
-																<option>COB</option>
-																<option>REM</option>
-															</select>
-														</div>
-													</div>
-												</div>
-												<div className="col-md-3">
+
+												<div className="col-md-6">
 													<div className="feature-left">
 														<span className="icon2">
 															<i className="ti-archive" />
@@ -206,8 +210,6 @@ export default class ModalDocumento extends React.Component {
 															<input
 																name="docfile"
 																id="docfile"
-																placeholder=""
-																//onChange={e => actions.handleMiembro(e)}
 																type="file"
 																className="form-control"
 																onChange={e => actions.handleFileChange(e)}
@@ -227,7 +229,7 @@ export default class ModalDocumento extends React.Component {
 											type="button"
 											className="btn btn-primary"
 											onClick={() => {
-												actions.handleEnvioDocumento({});
+												actions.handleEnvioDocumento();
 											}}
 											data-dismiss="modal">
 											Ingresar Documento
