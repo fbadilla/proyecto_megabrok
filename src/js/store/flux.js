@@ -486,9 +486,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({
 							documento: {
 								pago: "COB",
-								tipodoc: "BOLETA",
+								tipodoc: "Boleta",
 								nombre_proveedor: "",
-								tipodoc: "",
 								numdoc: "",
 								montodoc: "",
 								detalle_tratamiento: "",

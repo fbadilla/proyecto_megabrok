@@ -35,6 +35,7 @@ export default class ModalViewDocumento extends React.Component {
 									<tr>
 										<th>Fecha </th>
 										<th>N° documento</th>
+										<th>Tipo</th>
 										<th>Detalle</th>
 										<th>pago</th>
 										<th>total</th>
@@ -50,6 +51,7 @@ export default class ModalViewDocumento extends React.Component {
 														<tr key={i}>
 															<td>{item.datedoc}</td>
 															<td>{item.numdoc}</td>
+															<td>{item.tipodoc}</td>
 															<td>{item.detalle_tratamiento}</td>
 															<td>{item.pago}</td>
 															<td>{item.montodoc}</td>
