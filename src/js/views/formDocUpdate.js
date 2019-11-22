@@ -64,12 +64,13 @@ export class FormDocUpdate extends React.Component {
 																	<i className="ti-user" />
 																</span>
 																<div className="feature-copy">
+																	<label>Nombre Completo Paciente</label>
 																	<input
 																		name="nameReclamo"
 																		className="form-control"
 																		id="nameReclamo"
 																		onChange={e => actions.handleForm(e)}
-																		placeholder={store.formulario.nameReclamo}
+																		value={store.formulario.nameReclamo}
 																		type="text"
 																	/>
 																</div>
@@ -78,11 +79,12 @@ export class FormDocUpdate extends React.Component {
 														<div className="col-md-3">
 															<div className="feature-left">
 																<div className="feature-copy">
+																	<label> Rut</label>
 																	<input
 																		name="rut"
 																		id="disabledTextInput"
 																		onChange={e => actions.handleForm(e)}
-																		placeholder={store.formulario.rut}
+																		value={store.formulario.rut}
 																		type="text"
 																		className="form-control"
 																	/>
@@ -92,11 +94,12 @@ export class FormDocUpdate extends React.Component {
 														<div className="col-md-3">
 															<div className="feature-left">
 																<div className="feature-copy">
+																	<label>Numero Poliza</label>
 																	<input
 																		name="numpoliza"
 																		id="disabledTextInput"
 																		onChange={e => actions.handleForm(e)}
-																		placeholder={store.formulario.numpoliza}
+																		value={store.formulario.numpoliza}
 																		type="text"
 																		className="form-control"
 																	/>
@@ -118,9 +121,7 @@ export class FormDocUpdate extends React.Component {
 																		id="mail"
 																		rows="5"
 																		onChange={e => actions.handleForm(e)}
-																		placeholder={
-																			store.formulario.detalle_diagnostico
-																		}
+																		value={store.formulario.detalle_diagnostico}
 																		type="text"
 																		className="form-control"
 																	/>
@@ -137,9 +138,6 @@ export class FormDocUpdate extends React.Component {
 																		name="name_estado"
 																		value={store.formulario.name_estado}
 																		onChange={e => actions.handleForm(e)}>
-																		<option selected>
-																			{store.formulario.name_estado}
-																		</option>
 																		<option>Pendiente</option>
 																		<option>Aprobada</option>
 																		<option>Rechazada</option>
@@ -186,19 +184,18 @@ export class FormDocUpdate extends React.Component {
 																data-target="#modaldocumento">
 																Agregar Servicio
 															</button>
+															<button
+																type="button"
+																className="btn btn-primary"
+																onClick={() => actions.getDocumentoId()}>
+																<i className="ti-reload" />
+																Actualizar Servicios
+															</button>
 														</div>
 													</div>
 													<div className="row">
-														<div className="col-md-8">
+														<div className="col-md-12">
 															<ListaDocumentos />
-														</div>
-														<div className="col-md-4">
-															<button
-																type="button"
-																className="btn btn-primary2"
-																onClick={() => actions.getDocumentoId()}>
-																<i className="ti-reload" />
-															</button>
 														</div>
 													</div>
 													<div className="row">

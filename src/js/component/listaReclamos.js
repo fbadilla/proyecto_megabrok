@@ -28,7 +28,7 @@ export class ListaReclamos extends Component {
 											<tr
 												key={i}
 												className={item.name_estado == "Pendiente" ? "danger" : "primary"}>
-												<th scope="row"> {item.id}</th>
+												<td scope="row">{item.numpoliza}</td>
 												<th>{item.name_estado}</th>
 												<td> {item.nameReclamo}</td>
 												<td>{item.rut}</td>
@@ -73,13 +73,12 @@ export class ListaReclamos extends Component {
 											<tr
 												key={i}
 												className={item.name_estado == "Pendiente" ? "danger" : "primary"}>
-												<th scope="row"> {item.id}</th>
+												<td scope="row">{item.numpoliza}</td>
 												<th>{item.name_estado}</th>
 												<td> {item.nameReclamo}</td>
 												<td>{item.rut}</td>
 												<td>{item.numpoliza}</td>
 												<td>{item.detalle_diagnostico}</td>
-
 												<td>
 													<button
 														type="button"
@@ -139,7 +138,7 @@ export class ListaReclamos extends Component {
 											<table className="table">
 												<thead>
 													<tr>
-														<th scope="col">Id Reclamo</th>
+														<th scope="col">Poliza</th>
 														<th scope="col">Estado</th>
 														<th scope="col">Reclamante</th>
 														<th scope="col">Rut</th>
