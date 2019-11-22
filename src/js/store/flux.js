@@ -515,9 +515,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				form_data.append("montodoc", store.documento.montodoc);
 				form_data.append("detalle_tratamiento", store.documento.detalle_tratamiento);
 				form_data.append("pago", store.documento.pago);
+				form_data.append("reclamo_id", store.formulario.id);
 				// console.log(form_data);
 				// debugger;
-				fetch(store.apiUrl + "/api/documentos/" + store.formulario.id, {
+				fetch(store.apiUrl + "/api/documentos/", {
 					method: "Post",
 					body: form_data,
 					mimeType: "multipart/form-data",
@@ -572,7 +573,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				})
 					.then(resp => resp.json())
-					.then(data => setStore({ mensaje: data }))
+					.then(() => getActions().getDocumentoId(history))
 					.catch(error => setStore({ error }));
 			},
 			//funcion PUT para modificar los datos del usuario - PUT api propia
