@@ -23,11 +23,16 @@ export class ListaDocumentos extends Component {
 									<td>{documento.pago}</td>
 									<td>{documento.montodoc}</td>
 									<td>{documento.nombre_proveedor}</td>
+
 									<td>
 										<button
 											type="button"
 											className="btn btn-primary2"
-											onClick={() => window.open(store.apiUrl + documento.docfile)}>
+											onClick={() =>
+												documento.docfile == null
+													? alert("no existe el documento")
+													: window.open(store.apiUrl + documento.docfile)
+											}>
 											<i className="ti-image" />
 										</button>
 									</td>
@@ -35,7 +40,7 @@ export class ListaDocumentos extends Component {
 										<button
 											type="button"
 											className="btn btn-primary2"
-											onClick={() => actions.handleModReclamo(documento)}>
+											onClick={() => alert("Estamos trabajando en esta funcionalidad")}>
 											<i className="ti-pencil" />
 										</button>
 									</td>

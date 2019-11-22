@@ -98,7 +98,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			//funcion que maneja el Post de un nuevo formulario, ademas realiza un GET de documentos por ID, antes y despues del POST
 			handleEnvioDocumento: history => {
 				getActions().SaveDocumentoSinFile(history);
-				getActions().getDocumentoId();
 			},
 
 			//funcion que maneja el Post para obtener un nuevo TOKEN
@@ -446,7 +445,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				})
 					.then(resp => resp.json())
-					.then(data => {
+					.then(() => {
+						getActions().getFormulario();
 						alert("se ha eliminado el reclamo");
 					});
 			},
@@ -528,6 +528,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(resp => resp.json())
 					.then(data => {
+						getActions().getDocumentoId();
 						setStore({
 							documento: {
 								pago: "COB",
