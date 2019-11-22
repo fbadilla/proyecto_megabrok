@@ -55,6 +55,9 @@ export class Navbar extends React.Component {
 												<a href="#">Ingresar</a>
 												<ul className="dropdown">
 													<li>
+														<Link to="/">Cliente</Link>
+													</li>
+													<li>
 														<Link to="/">Agente</Link>
 													</li>
 													<li>

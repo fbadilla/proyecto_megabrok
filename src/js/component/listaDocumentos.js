@@ -11,56 +11,77 @@ export class ListaDocumentos extends Component {
 	}
 	render() {
 		return (
-			<table className="table table-striped table-sm">
-				<thead>
-					<tr>
-						<th>Fecha </th>
-						<th>documento</th>
-						<th>Detalle</th>
-						<th>pago</th>
-						<th>total</th>
-						<th>Ver Documento</th>
-						<th>Eliminar</th>
-					</tr>
-				</thead>
-				<tbody>
-					<Context.Consumer>
-						{({ store, actions }) => {
-							if (store.documentoid.length > 0) {
-								return store.documentoid.map((item, i) => {
-									return (
-										<tr key={i}>
-											<td>{item.datedoc}</td>
-											<td>{item.numdoc}</td>
-											<td>{item.detalle_tratamiento}</td>
-											<td>{item.pago}</td>
-											<td>{item.montodoc}</td>
-											<td>
-												<button
-													type="button"
-													className="btn btn-primary2"
-													onClick={() => window.open(store.apiUrl + item.docfile)}>
-													<i className="ti-image" />
-												</button>
-											</td>
-											<td>
-												<button
-													type="button"
-													className="btn btn-primary2"
-													onClick={() => actions.handleDeleteDoc(item.id)}>
-													<i className="ti-trash" />
-												</button>
-											</td>
-										</tr>
-									);
-								});
-							} else {
-								return "";
-							}
-						}}
-					</Context.Consumer>
-				</tbody>
-			</table>
+			<Context.Consumer>
+				{({ store, actions }) => {
+					if (store.documentoid.length > 0) {
+						const columnas = store.documentoid.map((documento, i) => {
+							return (
+								<tr key={i}>
+									<td>{documento.datedoc}</td>
+									<td>{documento.numdoc}</td>
+									<td>{documento.detalle_tratamiento}</td>
+									<td>{documento.pago}</td>
+									<td>{documento.montodoc}</td>
+									<td>{documento.nombre_proveedor}</td>
+									<td>
+										<button
+											type="button"
+											className="btn btn-primary2"
+											onClick={() => window.open(store.apiUrl + documento.docfile)}>
+											<i className="ti-image" />
+										</button>
+									</td>
+									<td>
+										<button
+											type="button"
+											className="btn btn-primary2"
+											onClick={() => actions.handleModReclamo(documento)}>
+											<i className="ti-pencil" />
+										</button>
+									</td>
+									<td>
+										<button
+											type="button"
+											className="btn btn-primary2"
+											onClick={() => actions.handleDeleteDoc(documento.id)}>
+											<i className="ti-trash" />
+										</button>
+									</td>
+								</tr>
+							);
+						});
+
+						return (
+							<table className="table table-striped table-sm">
+								<thead>
+									<tr>
+										<th>Fecha </th>
+										<th>documento</th>
+										<th>Detalle</th>
+										<th>pago</th>
+										<th>total</th>
+										<th>Proveedor</th>
+										<th>Documento</th>
+										<th>Modificar</th>
+										<th>Eliminar</th>
+										<th>
+											<button
+												type="button"
+												className="btn btn-primary2"
+												onClick={() => actions.getDocumentoId()}>
+												<i className="ti-reload" />
+											</button>
+										</th>
+									</tr>
+								</thead>
+								<tbody>{columnas}</tbody>
+							</table>
+						);
+					} else {
+						return "";
+					}
+				}}
+			</Context.Consumer>
 		);
 	}
 }

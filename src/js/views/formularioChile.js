@@ -59,10 +59,11 @@ export class FormularioChile extends React.Component {
 																	<i className="ti-user" />
 																</span>
 																<div className="feature-copy">
+																	<label>Nombre Completo Paciente</label>
 																	<input
 																		name="nameReclamo"
 																		id="nameReclamo"
-																		placeholder="Nombre completo del paciente"
+																		placeholder="Juan Peréz"
 																		onChange={e => actions.handleForm(e)}
 																		type="text"
 																		className="form-control"
@@ -73,6 +74,7 @@ export class FormularioChile extends React.Component {
 														<div className="col-md-3">
 															<div className="feature-left">
 																<div className="feature-copy">
+																	<label> Rut</label>
 																	<input
 																		name="rut"
 																		id="rut"
@@ -87,10 +89,11 @@ export class FormularioChile extends React.Component {
 														<div className="col-md-3">
 															<div className="feature-left">
 																<div className="feature-copy">
+																	<label>Numero Poliza</label>
 																	<input
 																		name="numpoliza"
 																		id="numpoliza"
-																		placeholder="Nº poliza"
+																		placeholder="0000"
 																		onChange={e => actions.handleForm(e)}
 																		type="text"
 																		className="form-control"

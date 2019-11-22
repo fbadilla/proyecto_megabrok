@@ -13,7 +13,8 @@ export default class ModalDocumento extends React.Component {
 			numdoc: "",
 			montodoc: "",
 			detalle_tratamiento: "",
-			pago: ""
+			pago: "",
+			docfile: null
 		};
 		this.storeContext = null;
 		this.actionsContext = null;
