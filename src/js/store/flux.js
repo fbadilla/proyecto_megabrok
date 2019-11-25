@@ -225,6 +225,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 						window.open(store.apiUrl + data.pdf);
 					});
 			},
+			handleDocumentoData: documento => {
+				const store = getStore();
+				setStore({ documento });
+			},
 			// -----------------------------------------HANDLES-------------------------------
 
 			//funcion para iniciar sesion -  POST api propia
@@ -543,6 +547,58 @@ const getState = ({ getStore, getActions, setStore }) => {
 							},
 							docfile: null
 						});
+					})
+					.catch(error => {
+						setStore({ error });
+						alert("No se pudo ingresar el documento, revise los campos");
+					});
+			},
+			PutDocumento: () => {
+				const store = getStore();
+				let form_data = new FormData();
+				if (store.docfile == null) {
+					// form_data.append("docfile", "");
+				} else {
+					form_data.append("docfile", store.docfile, store.docfile.name);
+				}
+
+				form_data.append("datedoc", store.documento.datedoc);
+				form_data.append("nombre_proveedor", store.documento.nombre_proveedor);
+				form_data.append("tipodoc", store.documento.tipodoc);
+				form_data.append("numdoc", store.documento.numdoc);
+				form_data.append("montodoc", store.documento.montodoc);
+				form_data.append("detalle_tratamiento", store.documento.detalle_tratamiento);
+				form_data.append("pago", store.documento.pago);
+				form_data.append("id", store.documento.id);
+				// console.log(form_data);
+				// debugger;
+				fetch(store.apiUrl + "/api/documentos/" + store.documento.reclamo_id, {
+					method: "PUT",
+					body: form_data,
+					mimeType: "multipart/form-data",
+					headers: {
+						Authorization: "Bearer " + store.access
+					}
+				})
+					.then(resp => resp.json())
+					.then(data => {
+						getActions().getDocumentoId2(store.documento.reclamo_id);
+						setStore({
+							documento: {
+								pago: "COB",
+								tipodoc: "Boleta",
+								nombre_proveedor: "",
+								tipodoc: "",
+								numdoc: "",
+								montodoc: "",
+								detalle_tratamiento: "",
+								datedoc: new Date().toISOString().slice(0, 10),
+								proveedorValue: "",
+								docfile: null
+							},
+							docfile: null
+						});
+						alert("Las modificaciones se realizon exitosamente!");
 					})
 					.catch(error => {
 						setStore({ error });

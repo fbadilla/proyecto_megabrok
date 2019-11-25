@@ -5,6 +5,7 @@ import ModalDocumento from "../component/modalDocumento";
 import { ListaDocumentos } from "../component/listaDocumentos";
 import PropTypes from "prop-types";
 import { Animated } from "react-animated-css";
+import ModalDocumentoUpdate from "../component/modalDocumentoUpdate";
 
 export class FormDocUpdate extends React.Component {
 	constructor(props) {
@@ -20,8 +21,8 @@ export class FormDocUpdate extends React.Component {
 		this.props.history;
 	}
 	componentDidMount() {
-		this.actionsContext.getDocumentoId();
 		this.actionsContext.getaccount();
+		this.actionsContext.getDocumentoId();
 	}
 	render() {
 		return (
@@ -209,6 +210,7 @@ export class FormDocUpdate extends React.Component {
 									</div>
 								</div>
 							</div>
+							<ModalDocumentoUpdate />
 							<ModalDocumento />
 						</Fragment>
 					);

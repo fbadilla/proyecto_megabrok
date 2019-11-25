@@ -23,7 +23,6 @@ export class FormDoc extends React.Component {
 		this.actionsContext.getaccount();
 		this.actionsContext.getDocumentoId();
 	}
-
 	render() {
 		return (
 			<Context.Consumer>
@@ -65,6 +64,7 @@ export class FormDoc extends React.Component {
 																	<i className="ti-user" />
 																</span>
 																<div className="feature-copy">
+																	<label>Nombre Completo Paciente</label>
 																	<input
 																		name="nameReclamo"
 																		readOnly
@@ -79,6 +79,7 @@ export class FormDoc extends React.Component {
 														<div className="col-md-3">
 															<div className="feature-left">
 																<div className="feature-copy">
+																	<label> Rut</label>
 																	<input
 																		name="rut"
 																		id="disabledTextInput"
@@ -93,6 +94,7 @@ export class FormDoc extends React.Component {
 														<div className="col-md-3">
 															<div className="feature-left">
 																<div className="feature-copy">
+																	<label>Numero Poliza</label>
 																	<input
 																		name="numpoliza"
 																		id="disabledTextInput"

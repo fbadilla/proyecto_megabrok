@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
 
-export default class ModalDocumento extends React.Component {
+export default class ModalDocumentoUpdate extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = { value: "" };
@@ -22,7 +22,7 @@ export default class ModalDocumento extends React.Component {
 					return (
 						<div
 							className="modal fade"
-							id="modaldocumento"
+							id="modaldocumentoUpdate"
 							tabIndex="-1"
 							role="dialog"
 							aria-labelledby="exampleModalLabel"
@@ -48,6 +48,7 @@ export default class ModalDocumento extends React.Component {
 																className="form-control"
 																id="tipodoc"
 																name="tipodoc"
+																value={store.documento.tipodoc}
 																onChange={e => actions.handledocumento(e)}>
 																<option>Boleta</option>
 																<option>Factura</option>
@@ -68,6 +69,7 @@ export default class ModalDocumento extends React.Component {
 																id="datedoc"
 																type="date"
 																className="form-control"
+																value={store.documento.datedoc}
 																onChange={e => actions.handledocumento(e)}
 															/>
 														</div>
@@ -86,6 +88,7 @@ export default class ModalDocumento extends React.Component {
 																placeholder="Clinica de prueba"
 																type="text"
 																className="form-control"
+																value={store.documento.nombre_proveedor}
 																onChange={e => actions.handledocumento(e)}
 															/>
 														</div>
@@ -107,6 +110,7 @@ export default class ModalDocumento extends React.Component {
 																placeholder="12345"
 																type="number"
 																className="form-control"
+																value={store.documento.numdoc}
 																onChange={e => actions.handledocumento(e)}
 															/>
 														</div>
@@ -125,6 +129,7 @@ export default class ModalDocumento extends React.Component {
 																placeholder="$100.000.-"
 																type="number"
 																className="form-control"
+																value={store.documento.montodoc}
 																onChange={e => actions.handledocumento(e)}
 															/>
 														</div>
@@ -138,6 +143,7 @@ export default class ModalDocumento extends React.Component {
 																className="form-control"
 																name="pago"
 																id="pago"
+																value={store.documento.pago}
 																onChange={e => actions.handledocumento(e)}>
 																<option>COB</option>
 																<option>REM</option>
@@ -159,6 +165,7 @@ export default class ModalDocumento extends React.Component {
 																className="form-control"
 																rows="5"
 																id="detalle_tratamiento"
+																value={store.documento.detalle_tratamiento}
 																placeholder="Ingrese detalles del Tratamiento"
 																onChange={e => actions.handledocumento(e)}
 															/>
@@ -201,7 +208,7 @@ export default class ModalDocumento extends React.Component {
 											type="button"
 											className="btn btn-primary"
 											onClick={() => {
-												actions.handleEnvioDocumento();
+												actions.PutDocumento();
 											}}
 											data-dismiss="modal">
 											Ingresar Documento
@@ -216,6 +223,6 @@ export default class ModalDocumento extends React.Component {
 		);
 	}
 }
-ModalDocumento.propTypes = {
+ModalDocumentoUpdate.propTypes = {
 	history: PropTypes.array
 };
