@@ -506,12 +506,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			SaveDocumentoSinFile: history => {
 				const store = getStore();
 				let form_data = new FormData();
-				if (store.docfile == null) {
-					// form_data.append("docfile", "");
-				} else {
-					form_data.append("docfile", store.docfile, store.docfile.name);
-				}
-
+				if (store.docfile != null) form_data.append("docfile", store.docfile, store.docfile.name);
 				form_data.append("datedoc", store.documento.datedoc);
 				form_data.append("nombre_proveedor", store.documento.nombre_proveedor);
 				form_data.append("tipodoc", store.documento.tipodoc);
@@ -520,8 +515,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				form_data.append("detalle_tratamiento", store.documento.detalle_tratamiento);
 				form_data.append("pago", store.documento.pago);
 				form_data.append("reclamo_id", store.formulario.id);
-				// console.log(form_data);
-				// debugger;
 				fetch(store.apiUrl + "/api/documentos/" + store.formulario.id, {
 					method: "Post",
 					body: form_data,
@@ -531,7 +524,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				})
 					.then(resp => resp.json())
-					.then(data => {
+					.then(() => {
 						getActions().getDocumentoId();
 						setStore({
 							documento: {

@@ -5,6 +5,7 @@ import ModalDocumento from "../component/modalDocumento";
 import { ListaDocumentos } from "../component/listaDocumentos";
 import PropTypes from "prop-types";
 import { Animated } from "react-animated-css";
+import ModalDocumentoUpdate from "../component/modalDocumentoUpdate";
 
 export class FormDoc extends React.Component {
 	constructor(props) {
@@ -188,6 +189,7 @@ export class FormDoc extends React.Component {
 									</div>
 								</div>
 							</div>
+							<ModalDocumentoUpdate />
 							<ModalDocumento />
 						</Fragment>
 					);
