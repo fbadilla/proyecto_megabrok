@@ -40,7 +40,9 @@ export class ListaDocumentos extends Component {
 										<button
 											type="button"
 											className="btn btn-primary2"
-											onClick={() => alert("Estamos trabajando en esta funcionalidad")}>
+											data-toggle="modal"
+											data-target="#modaldocumentoUpdate"
+											onClick={() => actions.handleDocumentoData(documento)}>
 											<i className="ti-pencil" />
 										</button>
 									</td>
