@@ -42,7 +42,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			mensaje: {},
 			filtro: false,
 			estaLoggeado: false,
-			personas: {}
+			aseguradosFiltro: {}
+
 		},
 
 		actions: {
@@ -134,6 +135,38 @@ const getState = ({ getStore, getActions, setStore }) => {
 				e.preventDefault();
 				const store = getStore();
 				getActions().getPoliza(history);
+			},
+
+			//funcion que maneja el GET que busca una poliza en la api claim
+			cargarAsegurados: () => {
+				// e.preventDefault();
+				const store = getStore();
+
+				fetch(store.apiUrl + "/api/asociacion", {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + store.access
+					}
+				})
+					.then(resp => resp.json())
+					.then(data => setStore({ asegurados: data, aseguradosFiltro: {} }))
+					.catch(error => setStore({ error }));
+			},
+
+			handleSearchPersona: (e, history) => {
+				e.preventDefault();
+
+				const store = getStore();
+				const filtro = store.busqueda;
+				let aseguradosFiltro = store.asegurados.filter(
+					item =>
+						item.id_persona__nombreCliente.toLowerCase().includes(filtro.toLowerCase()) ||
+						item.id_persona__apellidoCliente.toLowerCase().includes(filtro.toLowerCase()) ||
+						item.id_persona__rutCliente.toLowerCase().includes(filtro.toLowerCase()) ||
+						item.id_poliza__nun_poliza.toLowerCase().includes(filtro.toLowerCase())
+				);
+				setStore({ aseguradosFiltro });
 			},
 
 			//funcion que crea un nuevo store.aseguradoselected con la la poliza seleccionada

@@ -29,7 +29,7 @@ export class ListaReclamos extends Component {
 												key={i}
 												className={item.name_estado == "Pendiente" ? "danger" : "primary"}>
 												<td scope="row">{item.numpoliza}</td>
-												<td>{item.account_id.name_Account}</td>
+												<td>{item.account_id__name_Account}</td>
 												<th>{item.name_estado}</th>
 												<td> {item.nameReclamo}</td>
 												<td>{item.rut}</td>
@@ -75,7 +75,7 @@ export class ListaReclamos extends Component {
 												key={i}
 												className={item.name_estado == "Pendiente" ? "danger" : "primary"}>
 												<td scope="row">{item.numpoliza}</td>
-												<td>{item.account_id.name_Account}</td>
+												<td>{item.account_id__name_Account}</td>
 												<th>{item.name_estado}</th>
 												<td> {item.nameReclamo}</td>
 												<td>{item.rut}</td>
