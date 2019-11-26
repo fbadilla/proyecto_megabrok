@@ -192,6 +192,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({ filtroReclamo, coleccion, filtro });
 				}
 			},
+			vaciarFiltro: () => {
+				const store = getStore();
+				setStore({ filtro: false, filtroReclamo: "" });
+			},
 			clean: history => {
 				const store = getStore();
 				setStore({

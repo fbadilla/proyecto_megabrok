@@ -16,6 +16,7 @@ export class DashReclamo extends React.Component {
 		this.actionsContext.getaccount();
 		this.actionsContext.getFormulario();
 		this.actionsContext.getDocumentoAll();
+		this.actionsContext.vaciarFiltro();
 	}
 	render() {
 		return (
