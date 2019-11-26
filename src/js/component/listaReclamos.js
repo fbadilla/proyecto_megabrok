@@ -33,6 +33,8 @@ export class ListaReclamos extends Component {
 												<th>{item.name_estado}</th>
 												<td> {item.nameReclamo}</td>
 												<td>{item.rut}</td>
+												<td>{item.numpoliza}</td>
+												<td>{item.detalle_diagnostico}</td>
 
 												<td>
 													<button
@@ -77,7 +79,8 @@ export class ListaReclamos extends Component {
 												<th>{item.name_estado}</th>
 												<td> {item.nameReclamo}</td>
 												<td>{item.rut}</td>
-
+												<td>{item.numpoliza}</td>
+												<td>{item.detalle_diagnostico}</td>
 												<td>
 													<button
 														type="button"
@@ -142,6 +145,8 @@ export class ListaReclamos extends Component {
 														<th scope="col">Estado</th>
 														<th scope="col">Reclamante</th>
 														<th scope="col">Rut</th>
+														<th scope="col">Poliza</th>
+														<th scope="col">Detalle</th>
 														<th scope="col">Ver más</th>
 														<th scope="col">Editar</th>
 														<th scope="col">Eliminar</th>
