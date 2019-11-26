@@ -41,7 +41,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			reclamo: {},
 			mensaje: {},
 			filtro: false,
-			estaLoggeado: false
+			estaLoggeado: false,
+			personas: {}
 		},
 
 		actions: {
@@ -646,6 +647,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({ formulario: data });
 						alert("se modificaron los datos del paciente");
 					});
+			},
+			getPersonas: () => {
+				const store = getStore();
+				fetch(store.apiUrl + "/api/personas/", {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + store.access
+					}
+				})
+					.then(resp => resp.json())
+					.then(data => setStore({ personas: data }))
+					.catch(error => setStore({ error }));
 			}
 		}
 	};
