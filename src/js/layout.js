@@ -6,6 +6,7 @@ import injectContext from "./store/appContext";
 import { Usuarios } from "./views/user";
 import { modificarUsuario } from "./views/modprofile";
 import { ingresarReclamo } from "./views/ingresarReclamo";
+import { ingresarReclamov2 } from "./views/ingresarReclamov2";
 import { DashReclamo } from "./views/dashReclamo";
 import { Navbar } from "./component/navbar";
 import { FormularioChile } from "./views/formularioChile";
@@ -42,6 +43,11 @@ export class Layout extends React.Component {
 										<PrivateRoute
 											path="/ingresareclamo"
 											component={ingresarReclamo}
+											access={store.access}
+										/>
+										<PrivateRoute
+											path="/ingresareclamov2"
+											component={ingresarReclamov2}
 											access={store.access}
 										/>
 										<PrivateRoute

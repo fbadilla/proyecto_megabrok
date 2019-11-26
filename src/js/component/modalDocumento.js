@@ -48,6 +48,7 @@ export default class ModalDocumento extends React.Component {
 																className="form-control"
 																id="tipodoc"
 																name="tipodoc"
+																value={store.documento.tipodoc}
 																onChange={e => actions.handledocumento(e)}>
 																<option>Boleta</option>
 																<option>Factura</option>
@@ -68,6 +69,7 @@ export default class ModalDocumento extends React.Component {
 																id="datedoc"
 																type="date"
 																className="form-control"
+																value={store.documento.datedoc}
 																onChange={e => actions.handledocumento(e)}
 															/>
 														</div>
@@ -86,6 +88,7 @@ export default class ModalDocumento extends React.Component {
 																placeholder="Clinica de prueba"
 																type="text"
 																className="form-control"
+																value={store.documento.nombre_proveedor}
 																onChange={e => actions.handledocumento(e)}
 															/>
 														</div>
@@ -107,6 +110,7 @@ export default class ModalDocumento extends React.Component {
 																placeholder="12345"
 																type="number"
 																className="form-control"
+																value={store.documento.numdoc}
 																onChange={e => actions.handledocumento(e)}
 															/>
 														</div>
@@ -125,6 +129,7 @@ export default class ModalDocumento extends React.Component {
 																placeholder="$100.000.-"
 																type="number"
 																className="form-control"
+																value={store.documento.montodoc}
 																onChange={e => actions.handledocumento(e)}
 															/>
 														</div>
@@ -138,6 +143,7 @@ export default class ModalDocumento extends React.Component {
 																className="form-control"
 																name="pago"
 																id="pago"
+																value={store.documento.pago}
 																onChange={e => actions.handledocumento(e)}>
 																<option>COB</option>
 																<option>REM</option>
@@ -160,6 +166,7 @@ export default class ModalDocumento extends React.Component {
 																rows="5"
 																id="detalle_tratamiento"
 																placeholder="Ingrese detalles del Tratamiento"
+																value={store.documento.detalle_tratamiento}
 																onChange={e => actions.handledocumento(e)}
 															/>
 

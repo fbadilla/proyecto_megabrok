@@ -18,6 +18,7 @@ export class ListaDocumentos extends Component {
 							return (
 								<tr key={i}>
 									<td>{documento.datedoc}</td>
+									<td>{documento.tipodoc}</td>
 									<td>{documento.numdoc}</td>
 									<td>{documento.detalle_tratamiento}</td>
 									<td>{documento.pago}</td>
@@ -63,12 +64,13 @@ export class ListaDocumentos extends Component {
 								<thead>
 									<tr>
 										<th>Fecha </th>
-										<th>documento</th>
+										<th>Tipo</th>
+										<th>N° doc</th>
 										<th>Detalle</th>
-										<th>pago</th>
-										<th>total</th>
+										<th>Pago</th>
+										<th>Total</th>
 										<th>Proveedor</th>
-										<th>Documento</th>
+										<th>Archivo</th>
 										<th>Modificar</th>
 										<th>Eliminar</th>
 										<th>

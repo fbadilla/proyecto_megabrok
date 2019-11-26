@@ -66,6 +66,9 @@ export class Navbar extends React.Component {
 													<li>
 														<Link to="/ingresareclamo">Reclamo</Link>
 													</li>
+													<li>
+														<Link to="/ingresareclamov2">Reclamov2</Link>
+													</li>
 												</ul>
 											</li>
 											<li className="has-dropdown">
