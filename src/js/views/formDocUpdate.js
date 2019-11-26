@@ -73,6 +73,7 @@ export class FormDocUpdate extends React.Component {
 																		onChange={e => actions.handleForm(e)}
 																		value={store.formulario.nameReclamo}
 																		type="text"
+																		readOnly
 																	/>
 																</div>
 															</div>
@@ -88,6 +89,7 @@ export class FormDocUpdate extends React.Component {
 																		value={store.formulario.rut}
 																		type="text"
 																		className="form-control"
+																		readOnly
 																	/>
 																</div>
 															</div>
@@ -103,6 +105,7 @@ export class FormDocUpdate extends React.Component {
 																		value={store.formulario.numpoliza}
 																		type="text"
 																		className="form-control"
+																		readOnly
 																	/>
 																</div>
 															</div>

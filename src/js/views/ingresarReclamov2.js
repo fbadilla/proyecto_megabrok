@@ -1,11 +1,6 @@
 import React, { Fragment } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
-import ModalDocumento from "../component/modalDocumento";
-import { ListaDocumentos } from "../component/listaDocumentos";
-import { ListaAsegurados } from "../component/listaAsegurados";
-import { SearchComponent } from "../component/search";
-import { FormReclamo } from "../component/formReclamo";
 import PropTypes from "prop-types";
 import { Animated } from "react-animated-css";
 
@@ -34,14 +29,12 @@ export class ingresarReclamov2 extends React.Component {
 										</td>
 										<td> {item.tipo_asegurado}</td>
 										<td>
-											<button
-												type="button"
-												className="btn btn-primary"
-												onClick={() => {
-													actions.handleAseguradoSelected(item);
-												}}>
-												Generar reclamo
-											</button>
+											<Link
+												to="/formulariochile"
+												className="btn btn-primary2"
+												onClick={() => actions.handleAseguradoSelected(item)}>
+												<i className="ti-marker-alt" />
+											</Link>
 										</td>
 									</tr>
 								);

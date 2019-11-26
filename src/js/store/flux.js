@@ -43,7 +43,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			filtro: false,
 			estaLoggeado: false,
 			aseguradosFiltro: {}
-
 		},
 
 		actions: {
@@ -171,10 +170,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			//funcion que crea un nuevo store.aseguradoselected con la la poliza seleccionada
-			handleAseguradoSelected: (item, history) => {
+			handleAseguradoSelected: item => {
 				const store = getStore();
 				setStore({
-					aseguradoselected: item
+					formulario: {
+						nameReclamo:
+							item.id_persona__nombreCliente.trim() + " " + item.id_persona__apellidoCliente.trim(),
+						numpoliza: item.id_poliza__nun_poliza,
+						rut: item.id_persona__rutCliente,
+						name_estado: "Pendiente"
+					}
 				});
 			},
 
