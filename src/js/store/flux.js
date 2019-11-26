@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			apiUrl: "http://127.0.0.1:8000",
+			apiUrl: "http://best-health.ddns.net:8001",
 			apiUrl2: "https://apy-cors-fcobad.herokuapp.com/https://mobile.bestdoctorsinsurance.com/spiritapi/api",
 			token: {
 				refresh: "",
@@ -43,6 +43,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			filtro: false,
 			estaLoggeado: false,
 			aseguradosFiltro: {}
+
 		},
 
 		actions: {
@@ -679,6 +680,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({ formulario: data });
 						alert("se modificaron los datos del paciente");
 					});
+			},
+			getPersonas: () => {
+				const store = getStore();
+				fetch(store.apiUrl + "/api/personas/", {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + store.access
+					}
+				})
+					.then(resp => resp.json())
+					.then(data => setStore({ personas: data }))
+					.catch(error => setStore({ error }));
 			}
 		}
 	};
