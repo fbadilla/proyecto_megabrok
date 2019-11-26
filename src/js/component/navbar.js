@@ -45,45 +45,10 @@ export class Navbar extends React.Component {
 												<Link to="/usuarios">Mi cuenta</Link>
 											</li>
 											<li>
-												<Link to="/formulariochile">Formulario</Link>
+												<Link to="/ingresareclamov2">Crear Reclamo</Link>
 											</li>
 											<li>
 												<Link to="/reclamos">Reclamos</Link>
-											</li>
-
-											<li className="has-dropdown">
-												<a href="#">Ingresar</a>
-												<ul className="dropdown">
-													<li>
-														<Link to="/">Cliente</Link>
-													</li>
-													<li>
-														<Link to="/">Agente</Link>
-													</li>
-													<li>
-														<Link to="/">Poliza</Link>
-													</li>
-													<li>
-														<Link to="/ingresareclamo">Reclamo</Link>
-													</li>
-													<li>
-														<Link to="/ingresareclamov2">Reclamov2</Link>
-													</li>
-												</ul>
-											</li>
-											<li className="has-dropdown">
-												<a href="#">Reclamaciones</a>
-												<ul className="dropdown">
-													<li>
-														<Link to="/">Listar Reclamos</Link>
-													</li>
-													<li>
-														<Link to="/">Agregar</Link>
-													</li>
-													<li>
-														<Link to="/">Modificar</Link>
-													</li>
-												</ul>
 											</li>
 											<li className="btn-cta">
 												<Link to="/">

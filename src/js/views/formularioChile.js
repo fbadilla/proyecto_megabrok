@@ -63,10 +63,11 @@ export class FormularioChile extends React.Component {
 																	<input
 																		name="nameReclamo"
 																		id="nameReclamo"
-																		placeholder="Juan Peréz"
+																		value={store.formulario.nameReclamo}
 																		onChange={e => actions.handleForm(e)}
 																		type="text"
 																		className="form-control"
+																		readOnly
 																	/>
 																</div>
 															</div>
@@ -78,10 +79,11 @@ export class FormularioChile extends React.Component {
 																	<input
 																		name="rut"
 																		id="rut"
-																		placeholder="12345678-5"
+																		value={store.formulario.rut}
 																		onChange={e => actions.handleForm(e)}
 																		type="text"
 																		className="form-control"
+																		readOnly
 																	/>
 																</div>
 															</div>
@@ -93,7 +95,8 @@ export class FormularioChile extends React.Component {
 																	<input
 																		name="numpoliza"
 																		id="numpoliza"
-																		placeholder="0000"
+																		readOnly
+																		value={store.formulario.numpoliza}
 																		onChange={e => actions.handleForm(e)}
 																		type="text"
 																		className="form-control"

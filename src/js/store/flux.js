@@ -43,7 +43,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			filtro: false,
 			estaLoggeado: false,
 			aseguradosFiltro: {}
-
 		},
 
 		actions: {
@@ -158,11 +157,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 				e.preventDefault();
 
 				const store = getStore();
-				const filtro = store.busqueda;
+				const filtro = store.busqueda.trim();
 				let aseguradosFiltro = store.asegurados.filter(
 					item =>
-						item.id_persona__nombreCliente.toLowerCase().includes(filtro.toLowerCase()) ||
-						item.id_persona__apellidoCliente.toLowerCase().includes(filtro.toLowerCase()) ||
+						(item.id_persona__nombreCliente.trim() + " " + item.id_persona__apellidoCliente.trim())
+							.toLowerCase()
+							.includes(filtro.toLowerCase()) ||
 						item.id_persona__rutCliente.toLowerCase().includes(filtro.toLowerCase()) ||
 						item.id_poliza__nun_poliza.toLowerCase().includes(filtro.toLowerCase())
 				);
@@ -170,10 +170,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			//funcion que crea un nuevo store.aseguradoselected con la la poliza seleccionada
-			handleAseguradoSelected: (item, history) => {
+			handleAseguradoSelected: item => {
 				const store = getStore();
 				setStore({
-					aseguradoselected: item
+					formulario: {
+						nameReclamo:
+							item.id_persona__nombreCliente.trim() + " " + item.id_persona__apellidoCliente.trim(),
+						numpoliza: item.id_poliza__nun_poliza,
+						rut: item.id_persona__rutCliente,
+						name_estado: "Pendiente"
+					}
 				});
 			},
 
