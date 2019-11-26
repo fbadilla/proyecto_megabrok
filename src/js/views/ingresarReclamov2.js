@@ -122,14 +122,11 @@ export class ingresarReclamov2 extends React.Component {
 													</thead>
 													<tbody>{foo()}</tbody>
 												</table>
-												<h3>Generar Reclamo</h3>
-												<FormReclamo />
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-							<ModalDocumento />
 						</Fragment>
 					);
 				}}

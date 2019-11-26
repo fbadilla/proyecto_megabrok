@@ -157,11 +157,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 				e.preventDefault();
 
 				const store = getStore();
-				const filtro = store.busqueda;
+				const filtro = store.busqueda.trim();
 				let aseguradosFiltro = store.asegurados.filter(
 					item =>
-						item.id_persona__nombreCliente.toLowerCase().includes(filtro.toLowerCase()) ||
-						item.id_persona__apellidoCliente.toLowerCase().includes(filtro.toLowerCase()) ||
+						(item.id_persona__nombreCliente.trim() + " " + item.id_persona__apellidoCliente.trim())
+							.toLowerCase()
+							.includes(filtro.toLowerCase()) ||
 						item.id_persona__rutCliente.toLowerCase().includes(filtro.toLowerCase()) ||
 						item.id_poliza__nun_poliza.toLowerCase().includes(filtro.toLowerCase())
 				);
