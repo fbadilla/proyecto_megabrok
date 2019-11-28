@@ -18,7 +18,6 @@ export class FormularioChile extends React.Component {
 	}
 	componentDidMount() {
 		this.actionsContext.getaccount();
-		this.actionsContext.getProveedoresAll();
 	}
 	render() {
 		return (

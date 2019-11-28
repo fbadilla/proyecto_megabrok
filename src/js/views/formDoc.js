@@ -131,24 +131,6 @@ export class FormDoc extends React.Component {
 																</div>
 															</div>
 														</div>
-														<div className="col-md-3">
-															<div className="feature-left">
-																<div className="feature-copy">
-																	<label>Crear formulario </label>
-																	<button
-																		type="button"
-																		className="btn btn-primary"
-																		onClick={e =>
-																			actions.handlePDFFormulario(
-																				e,
-																				store.formulario.id
-																			)
-																		}>
-																		Crear
-																	</button>
-																</div>
-															</div>
-														</div>
 													</div>
 													<div className="row form-group">
 														<div className="col-md-8">
@@ -162,25 +144,18 @@ export class FormDoc extends React.Component {
 																data-target="#modaldocumento">
 																Agregar Servicio
 															</button>
-															<button
+															{/* <button
 																type="button"
 																className="btn btn-primary"
 																onClick={() => actions.getDocumentoId()}>
 																<i className="ti-reload" />
 																Actualizar Servicios
-															</button>
+															</button> */}
 														</div>
 													</div>
 													<div className="row">
 														<div className="col-md-12">
 															<ListaDocumentos />
-														</div>
-													</div>
-													<div className="row">
-														<div className="form-group">
-															<Link to="/reclamos" className="btn btn-primary">
-																Ver Reclamos
-															</Link>
 														</div>
 													</div>
 												</form>

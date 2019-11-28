@@ -60,31 +60,47 @@ export class ListaDocumentos extends Component {
 						});
 
 						return (
-							<table className="table table-striped table-sm">
-								<thead>
-									<tr>
-										<th>Fecha </th>
-										<th>Tipo</th>
-										<th>N° doc</th>
-										<th>Detalle</th>
-										<th>Pago</th>
-										<th>Total</th>
-										<th>Proveedor</th>
-										<th>Archivo</th>
-										<th>Modificar</th>
-										<th>Eliminar</th>
-										<th>
+							<div className="gtco-container">
+								<div className="row">
+									<table className="table table-striped table-sm">
+										<thead>
+											<tr>
+												<th>Fecha </th>
+												<th>Tipo</th>
+												<th>N° doc</th>
+												<th>Detalle</th>
+												<th>Pago</th>
+												<th>Total</th>
+												<th>Proveedor</th>
+												<th>Archivo</th>
+												<th>Modificar</th>
+												<th>Eliminar</th>
+												<th>
+													<button
+														type="button"
+														className="btn btn-primary2"
+														onClick={() => actions.getDocumentoId()}>
+														<i className="ti-reload" />
+													</button>
+												</th>
+											</tr>
+										</thead>
+										<tbody>{columnas}</tbody>
+									</table>
+								</div>
+								<div className="row">
+									<div className="col-md-3">
+										<div className="feature-left">
 											<button
 												type="button"
-												className="btn btn-primary2"
-												onClick={() => actions.getDocumentoId()}>
-												<i className="ti-reload" />
+												className="btn btn-primary"
+												onClick={e => actions.handlePDFFormulario(e, store.formulario.id)}>
+												CREAR FORMULARIO
 											</button>
-										</th>
-									</tr>
-								</thead>
-								<tbody>{columnas}</tbody>
-							</table>
+										</div>
+									</div>
+								</div>
+							</div>
 						);
 					} else {
 						return "";

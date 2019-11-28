@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			apiUrl: "http://best-health.ddns.net:8001",
+			apiUrl: "http://127.0.0.1:8000",
 			apiUrl2: "https://apy-cors-fcobad.herokuapp.com/https://mobile.bestdoctorsinsurance.com/spiritapi/api",
 			token: {
 				refresh: "",
@@ -27,13 +27,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 			documento: {
 				pago: "COB",
 				tipodoc: "Boleta",
-				nombre_proveedor: "",
 				numdoc: "",
 				montodoc: "",
 				detalle_tratamiento: "",
 				datedoc: new Date().toISOString().slice(0, 10),
-				proveedorValue: "",
-				docfile: null
+				docfile: null,
+				proveedor_id: null
 			},
 			documentoid: [],
 			documentoid2: [],
@@ -42,7 +41,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			mensaje: {},
 			filtro: false,
 			estaLoggeado: false,
-			aseguradosFiltro: {}
+			aseguradosFiltro: {},
+			proveedores: {}
 		},
 
 		actions: {
@@ -85,6 +85,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let documento = store.documento;
 				documento[name] = value;
 
+				setStore({
+					documento
+				});
+			},
+			handleSelect: value => {
+				const store = getStore();
+				let documento = store.documento;
+				documento["proveedor_id"] = value.value;
 				setStore({
 					documento
 				});
@@ -393,9 +401,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({ account: data });
 					});
 			},
-			getProveedoresAll: () => {
+			getProveedoresAutocompletar: () => {
 				const store = getStore();
-				fetch(store.apiUrl + "/api/proveedores/", {
+				fetch(store.apiUrl + "/api/proveedoresAutocompletar/", {
 					method: "GET",
 					headers: {
 						"Content-Type": "application/json",
@@ -552,7 +560,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let form_data = new FormData();
 				if (store.docfile != null) form_data.append("docfile", store.docfile, store.docfile.name);
 				form_data.append("datedoc", store.documento.datedoc);
-				form_data.append("nombre_proveedor", store.documento.nombre_proveedor);
+				form_data.append("proveedor_id", store.documento.proveedor_id);
 				form_data.append("tipodoc", store.documento.tipodoc);
 				form_data.append("numdoc", store.documento.numdoc);
 				form_data.append("montodoc", store.documento.montodoc);
@@ -574,7 +582,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							documento: {
 								pago: "COB",
 								tipodoc: "Boleta",
-								nombre_proveedor: "",
+								proveedor_id: null,
 								tipodoc: "",
 								numdoc: "",
 								montodoc: "",

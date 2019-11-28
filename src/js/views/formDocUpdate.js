@@ -150,24 +150,7 @@ export class FormDocUpdate extends React.Component {
 																</div>
 															</div>
 														</div>
-														<div className="col-md-3">
-															<div className="feature-left">
-																<div className="feature-copy">
-																	<label>Crear formulario </label>
-																	<button
-																		type="button"
-																		className="btn btn-primary"
-																		onClick={e =>
-																			actions.handlePDFFormulario(
-																				e,
-																				store.formulario.id
-																			)
-																		}>
-																		Crear
-																	</button>
-																</div>
-															</div>
-														</div>
+
 														<div className="col-md-4 offset-md-4">
 															<input
 																type="submit"
@@ -201,11 +184,6 @@ export class FormDocUpdate extends React.Component {
 														<div className="col-md-12">
 															<ListaDocumentos />
 														</div>
-													</div>
-													<div className="row">
-														<Link to="/reclamos" className="btn btn-primary">
-															Ver Reclamos
-														</Link>
 													</div>
 												</form>
 											</div>
