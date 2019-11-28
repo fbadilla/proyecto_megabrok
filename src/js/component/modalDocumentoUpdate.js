@@ -51,6 +51,8 @@ export default class ModalDocumentoUpdate extends React.Component {
 																onChange={e => actions.handledocumento(e)}>
 																<option>Boleta</option>
 																<option>Factura</option>
+																<option>Bono</option>
+																<option>Reembolso</option>
 																<option>Otro</option>
 															</select>
 														</div>

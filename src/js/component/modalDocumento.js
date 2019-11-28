@@ -22,6 +22,7 @@ export default class ModalDocumento extends React.Component {
 				{({ store, actions }) => {
 					this.storeContext = store;
 					this.actionsContext = actions;
+
 					return (
 						<div
 							className="modal fade"
@@ -55,6 +56,8 @@ export default class ModalDocumento extends React.Component {
 																onChange={e => actions.handledocumento(e)}>
 																<option>Boleta</option>
 																<option>Factura</option>
+																<option>Bono</option>
+																<option>Reembolso</option>
 																<option>Otro</option>
 															</select>
 														</div>
@@ -191,6 +194,7 @@ export default class ModalDocumento extends React.Component {
 																id="docfile"
 																type="file"
 																className="form-control"
+																value=""
 																onChange={e => actions.handleFileChange(e)}
 															/>
 														</div>

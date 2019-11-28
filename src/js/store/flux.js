@@ -24,6 +24,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			formularios: [],
 			formulariosId: [],
+			deleteselect: {},
 			documento: {
 				pago: "COB",
 				tipodoc: "Boleta",
@@ -222,6 +223,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 				formulario = item;
 				setStore({ formulario });
 			},
+			handleDeleteReclamo: item => {
+				const store = getStore();
+				let deleteselect = store.deleteselect;
+				deleteselect = item;
+				setStore({ deleteselect });
+			},
 			handleFiltroReclamo: e => {
 				const { name, value } = e.target;
 				const store = getStore();
@@ -230,10 +237,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 					let filtro = false;
 					setStore({ filtro });
 				} else {
-					let coleccion = store.formulariosId.filter(
+					let coleccion = store.formularios.filter(
 						item =>
 							item.nameReclamo.toLowerCase().includes(filtroReclamo.toLowerCase()) ||
 							item.rut.toLowerCase().includes(filtroReclamo.toLowerCase()) ||
+							item.detalle_diagnostico.toLowerCase().includes(filtroReclamo.toLowerCase()) ||
+							item.account_id__name_Account.toLowerCase().includes(filtroReclamo.toLowerCase()) ||
+							item.name_estado.toLowerCase().includes(filtroReclamo.toLowerCase()) ||
 							item.numpoliza.toLowerCase().includes(filtroReclamo.toLowerCase())
 					);
 					let filtro = true;
@@ -280,6 +290,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 			handleDocumentoData: documento => {
 				const store = getStore();
 				setStore({ documento });
+			},
+			handleCleanData: () => {
+				const store = getStore();
+				setStore({
+					documento: {
+						pago: "COB",
+						tipodoc: "Boleta",
+						nombre_proveedor: "",
+						numdoc: "",
+						montodoc: 0,
+						detalle_tratamiento: "",
+						datedoc: new Date().toISOString().slice(0, 10),
+						proveedorValue: ""
+					},
+					docfile: null
+				});
 			},
 			// -----------------------------------------HANDLES-------------------------------
 
@@ -491,9 +517,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 						alert("reclamo generado con exito" + store.idReclamo.ClaimId);
 					});
 			},
-			deleteReclamo: id => {
+			deleteReclamo: () => {
 				const store = getStore();
-				fetch(store.apiUrl + "/api/reclamos/" + id, {
+				fetch(store.apiUrl + "/api/reclamos/" + store.deleteselect, {
 					method: "DELETE",
 					headers: {
 						"Content-Type": "application/json",
@@ -503,7 +529,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(resp => resp.json())
 					.then(() => {
 						getActions().getFormulario();
-						alert("se ha eliminado el reclamo");
 					});
 			},
 			//funcion POST para crear un nuevo reclamo - POST api propia
@@ -545,7 +570,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 								tipodoc: "Boleta",
 								nombre_proveedor: "",
 								numdoc: "",
-								montodoc: "",
+								montodoc: 0,
 								detalle_tratamiento: "",
 								datedoc: new Date().toISOString().slice(0, 10),
 								proveedorValue: "",
@@ -583,9 +608,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 								pago: "COB",
 								tipodoc: "Boleta",
 								proveedor_id: null,
-								tipodoc: "",
 								numdoc: "",
-								montodoc: "",
+								montodoc: 0,
 								detalle_tratamiento: "",
 								datedoc: new Date().toISOString().slice(0, 10),
 								proveedorValue: ""
@@ -633,7 +657,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 								nombre_proveedor: "",
 								tipodoc: "",
 								numdoc: "",
-								montodoc: "",
+								montodoc: 0,
 								detalle_tratamiento: "",
 								datedoc: new Date().toISOString().slice(0, 10),
 								proveedorValue: "",
@@ -651,7 +675,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			//funcion GET para obtener los reclamos por usuario - GET api propia
 			getFormulario: () => {
 				const store = getStore();
-				fetch(store.apiUrl + "/api/reclamos/" + store.account.id, {
+				fetch(store.apiUrl + "/api/reclamos/", {
 					method: "GET",
 					headers: {
 						"Content-Type": "application/json",
@@ -659,7 +683,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				})
 					.then(resp => resp.json())
-					.then(data => setStore({ formulariosId: data }))
+					.then(data => setStore({ formularios: data }))
 					.catch(error => setStore({ error }));
 			},
 			//funcion GET para obtener los reclamos por usuario - GET api propia
@@ -707,6 +731,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(resp => resp.json())
 					.then(data => setStore({ personas: data }))
 					.catch(error => setStore({ error }));
+			},
+			restafecha: item => {
+				let fecha1 = new Date(item);
+				let fecha2 = new Date();
+				var dif = fecha2.getTime() - fecha1.getTime();
+				var dias = Math.floor(dif / (1000 * 60 * 60 * 24));
+				return dias;
 			}
 		}
 	};

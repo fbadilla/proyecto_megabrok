@@ -66,13 +66,11 @@ export class ingresarReclamov2 extends React.Component {
 									<div className="row">
 										<div className="col-md-12">
 											<div className="col-md-10 ">
-												<h2>Bucar datos del cliente por poliza</h2>
-
+												<h2>Buscar cliente</h2>
 												<form
 													action="#"
 													onSubmit={e => actions.handleSearchPersona(e, this.props.history)}>
 													<div className="row form-group">
-														<h4>Busqueda</h4>
 														<div className="col-md-5">
 															<div className="feature-left">
 																<span className="icon">

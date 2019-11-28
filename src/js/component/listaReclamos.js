@@ -33,8 +33,9 @@ export class ListaReclamos extends Component {
 												<th>{item.name_estado}</th>
 												<td> {item.nameReclamo}</td>
 												<td>{item.rut}</td>
-												<td>{item.numpoliza}</td>
 												<td>{item.detalle_diagnostico}</td>
+												<td>{item.date}</td>
+												<td>{actions.restafecha(item.date)}</td>
 
 												<td>
 													<button
@@ -58,7 +59,9 @@ export class ListaReclamos extends Component {
 													<button
 														type="button"
 														className="btn btn-primary3"
-														onClick={() => actions.deleteReclamo(item.id)}>
+														data-toggle="modal"
+														data-target="#modaldelete"
+														onClick={() => actions.handleDeleteReclamo(item.id)}>
 														<i className="ti-trash" />
 													</button>
 												</td>
@@ -66,7 +69,7 @@ export class ListaReclamos extends Component {
 										);
 									});
 							} else {
-								return store.formulariosId
+								return store.formularios
 									.slice(0)
 									.reverse()
 									.map((item, i) => {
@@ -79,8 +82,10 @@ export class ListaReclamos extends Component {
 												<th>{item.name_estado}</th>
 												<td> {item.nameReclamo}</td>
 												<td>{item.rut}</td>
-												<td>{item.numpoliza}</td>
 												<td>{item.detalle_diagnostico}</td>
+												<td>{item.date}</td>
+												<td>{actions.restafecha(item.date)}</td>
+
 												<td>
 													<button
 														type="button"
@@ -103,7 +108,9 @@ export class ListaReclamos extends Component {
 													<button
 														type="button"
 														className="btn btn-primary3"
-														onClick={() => actions.deleteReclamo(item.id)}>
+														data-toggle="modal"
+														data-target="#modaldelete"
+														onClick={() => actions.handleDeleteReclamo(item.id)}>
 														<i className="ti-trash" />
 													</button>
 												</td>
@@ -113,7 +120,7 @@ export class ListaReclamos extends Component {
 							}
 						};
 						// -------------------------------------------------------------
-						if (store.formulariosId.length > 0) {
+						if (store.formularios.length > 0) {
 							return (
 								<Fragment>
 									<div className="gtco-section ">
@@ -145,8 +152,9 @@ export class ListaReclamos extends Component {
 														<th scope="col">Estado</th>
 														<th scope="col">Reclamante</th>
 														<th scope="col">Rut</th>
-														<th scope="col">Poliza</th>
 														<th scope="col">Detalle</th>
+														<th scope="col">Fecha</th>
+														<th scope="col">Dias</th>
 														<th scope="col">Ver más</th>
 														<th scope="col">Editar</th>
 														<th scope="col">Eliminar</th>
