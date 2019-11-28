@@ -23,9 +23,9 @@ export class ingresarReclamov2 extends React.Component {
 								return (
 									<tr key={i}>
 										<td>{item.id_poliza__nun_poliza}</td>
-										<td>{item.id_persona__rutCliente}</td>
+										<td>{item.id_persona__rut}</td>
 										<td>
-											{item.id_persona__nombreCliente} {item.id_persona__apellidoCliente}
+											{item.id_persona__nombre} {item.id_persona__apellido}
 										</td>
 										<td> {item.tipo_asegurado}</td>
 										<td>
