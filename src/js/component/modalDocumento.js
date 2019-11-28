@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
+import Select from "react-select";
 
 export default class ModalDocumento extends React.Component {
 	constructor(props) {
@@ -12,7 +13,9 @@ export default class ModalDocumento extends React.Component {
 		this.actionsContext = null;
 		this.props.history;
 	}
-
+	componentDidMount() {
+		this.actionsContext.getProveedoresAutocompletar();
+	}
 	render() {
 		return (
 			<Context.Consumer>
@@ -85,14 +88,11 @@ export default class ModalDocumento extends React.Component {
 														</span>
 														<div className="feature-copy">
 															<label>Proveedor</label>
-															<input
-																name="nombre_proveedor"
-																id="nombre_proveedor"
-																placeholder="Ingrese proveedor"
-																type="text"
-																className="form-control"
-																value={store.documento.nombre_proveedor}
-																onChange={e => actions.handledocumento(e)}
+															<Select
+																className="basic-single"
+																classNamePrefix="select"
+																onChange={value => actions.handleSelect(value)}
+																options={store.proveedores}
 															/>
 														</div>
 													</div>
