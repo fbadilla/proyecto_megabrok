@@ -5,6 +5,7 @@ import { ListaReclamos } from "../component/listaReclamos";
 import ModalViewDocumento from "../component/modalViewDocumento";
 import ModalDocumento from "../component/modalDocumento";
 import ModalDocumentoUpdate from "../component/modalDocumentoUpdate";
+import ModalDelete from "../component/modalDelete";
 
 export class DashReclamo extends React.Component {
 	constructor(props) {
@@ -48,6 +49,7 @@ export class DashReclamo extends React.Component {
 							<ModalViewDocumento />
 							<ModalDocumentoUpdate />
 							<ModalDocumento />
+							<ModalDelete />
 						</Fragment>
 					);
 				}}
