@@ -26,13 +26,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 			formulariosId: [],
 			deleteselect: {},
 			documento: {
-				pago: "COB",
 				tipodoc: "Boleta",
 				numdoc: "",
 				montodoc: "",
-				detalle_tratamiento: "",
-				datedoc: new Date().toISOString().slice(0, 10),
-				docfile: null,
+				datedoc: new Date().toISOString().slice(0, 10)
+			},
+			servicio: {
+				pago: "COB",
+				detalle: "",
+				archivoServicio: null,
 				proveedor_id: null
 			},
 			documentoid: [],
@@ -90,12 +92,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 					documento
 				});
 			},
-			handleSelect: value => {
+			handleServicio: e => {
+				const { name, value } = e.target;
 				const store = getStore();
-				let documento = store.documento;
-				documento["proveedor_id"] = value.value;
+				let servicio = store.servicio;
+				servicio[name] = value;
+
 				setStore({
-					documento
+					servicio
+				});
+			},
+			handleServicioSelect: value => {
+				const store = getStore();
+				let servicio = store.servicio;
+				servicio["proveedor_id"] = value.value;
+				setStore({
+					servicio
 				});
 			},
 
@@ -106,6 +118,62 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			//funcion que maneja el Post de un nuevo formulario, ademas realiza un GET de documentos por ID, antes y despues del POST
+			handleAceptarDocumento: history => {
+				const store = getStore();
+				let documentos = store.documentos;
+				let doc = store.documento;
+				documentos.push(store.documento);
+				setStore({ documentos, documento: {} });
+			},
+
+			handleEnvioServicio: history => {
+				const store = getStore();
+				let formServicio = new FormData();
+				formServicio.append("proveedor_id", store.servicio.proveedor_id);
+				formServicio.append("detalle", store.servicio.detalle);
+				formServicio.append("pago", store.servicio.pago);
+				formServicio.append("reclamo_id", store.formulario.reclamo_id);
+				if (store.servicio.archivoServicio != null)
+					formServicio.append(
+						"archivoServicio",
+						store.servicio.archivoServicio,
+						store.servicio.archivoServicio.name
+					);
+				fetch(store.apiUrl + "/api/servicios/", {
+					method: "Post",
+					body: formServicio,
+					mimeType: "multipart/form-data",
+					headers: {
+						Authorization: "Bearer " + store.access
+					}
+				})
+					.then(resp => resp.json())
+					.then(data => {
+						store.documentos
+							.slice(0)
+							.reverse()
+							.map((documento, i) => {
+								let formDocumento = new FormData();
+								formDocumento.append("servicio_id", data.id);
+								formDocumento.append("tipodoc", documento.tipodoc);
+								formDocumento.append("numdoc", documento.numdoc);
+								formDocumento.append("datedoc", documento.datedoc);
+								formDocumento.append("montodoc", documento.montodoc);
+								fetch(store.apiUrl + "/api/documentos/", {
+									method: "Post",
+									body: formDocumento,
+									headers: {
+										Authorization: "Bearer " + store.access
+									}
+								});
+							});
+					})
+					.catch(error => {
+						setStore({ error });
+						alert("No se pudo ingresar el documento, revise los campos");
+					});
+			},
+
 			handleEnvioDocumento: history => {
 				getActions().SaveDocumentoSinFile(history);
 			},
@@ -210,10 +278,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			//funcion que maneja los file y actualiza el store
 			handleFileChange: e => {
-				const docfile = e.target.files[0];
-
+				const store = getStore();
+				const archivoServicio = e.target.files[0];
+				let servicio = store.servicio;
+				servicio["archivoServicio"] = archivoServicio;
 				setStore({
-					docfile
+					servicio
 				});
 			},
 			handleModReclamo: item => {
@@ -546,7 +616,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(resp => resp.json())
 					.then(data => {
-						setStore({ formulario: data });
+						console.log(data);
+						setStore({
+							formulario: {
+								nameReclamo: store.formulario.nameReclamo,
+								rut: store.formulario.rut,
+								name_estado: store.formulario.name_estado,
+								numpoliza: store.formulario.numpoliza,
+								reclamo_id: data.id,
+								detalle_diagnostico: data.detalle_diagnostico
+							}
+						});
 						history.push("/formdoc");
 					});
 			},

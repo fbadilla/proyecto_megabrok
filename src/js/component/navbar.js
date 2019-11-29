@@ -15,7 +15,7 @@ export class Navbar extends React.Component {
 							<nav className="gtco-nav" role="navigation">
 								<div className="gtco-container">
 									<div className="row">
-										<div className="col-sm-5 col-xs-12">
+										<div className="col-5 col-xs-12">
 											<div id="gtco-logo">
 												<Link to="/">
 													<span>Best Health International</span>
@@ -32,17 +32,20 @@ export class Navbar extends React.Component {
 						<nav className="gtco-nav" role="navigation">
 							<div className="gtco-container">
 								<div className="row">
-									<div className="col-sm-5 col-xs-12">
+									<div className="col-5 col-xs-12">
 										<div id="gtco-logo">
 											<Link to="/">
 												<span>Best Health International</span>
 											</Link>
 										</div>
 									</div>
-									<div className="col-xs-7 text-right menu-1">
+									<div className="col-7 text-right menu-1">
 										<ul>
 											<li>
 												<Link to="/usuarios">Mi cuenta</Link>
+											</li>
+											<li>
+												<Link to="/ingresareclamo">PRUEBAS</Link>
 											</li>
 											<li>
 												<Link to="/ingresareclamov2">Crear Reclamo</Link>
