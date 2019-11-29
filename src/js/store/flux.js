@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			apiUrl: "http://best-health.ddns.net:8001",
+			apiUrl: "http://0.0.0.0:8000",
 			apiUrl2: "https://apy-cors-fcobad.herokuapp.com/https://mobile.bestdoctorsinsurance.com/spiritapi/api",
 			token: {
 				refresh: "",
@@ -147,7 +147,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			//funcion que maneja el GET que busca una poliza en la api claim
 			cargarAsegurados: () => {
-				// e.preventDefault();
 				const store = getStore();
 
 				fetch(store.apiUrl + "/api/asociacion", {
@@ -166,14 +165,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				e.preventDefault();
 
 				const store = getStore();
-				const filtro = store.busqueda.trim();
+				const filtro = store.busqueda.trim().toLowerCase();
 				let aseguradosFiltro = store.asegurados.filter(
 					item =>
-						(item.id_persona__nombreCliente.trim() + " " + item.id_persona__apellidoCliente.trim())
+						(item.id_persona__nombre.trim() + " " + item.id_persona__apellido.trim())
 							.toLowerCase()
-							.includes(filtro.toLowerCase()) ||
-						item.id_persona__rutCliente.toLowerCase().includes(filtro.toLowerCase()) ||
-						item.id_poliza__nun_poliza.toLowerCase().includes(filtro.toLowerCase())
+							.includes(filtro) ||
+						item.id_persona__rut.toLowerCase().includes(filtro) ||
+						item.id_poliza__nun_poliza.toLowerCase().includes(filtro)
 				);
 				setStore({ aseguradosFiltro });
 			},
@@ -183,11 +182,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				setStore({
 					formulario: {
-						nameReclamo:
-							item.id_persona__nombreCliente.trim() + " " + item.id_persona__apellidoCliente.trim(),
+						nameReclamo: item.id_persona__nombre.trim() + " " + item.id_persona__apellido.trim(),
 						numpoliza: item.id_poliza__nun_poliza,
-						rut: item.id_persona__rutCliente,
-						name_estado: "Pendiente"
+						rut: item.id_persona__rut,
+						name_estado: "Pendiente",
+						asociacion_id: item.id
 					}
 				});
 			},
@@ -232,19 +231,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 			handleFiltroReclamo: e => {
 				const { name, value } = e.target;
 				const store = getStore();
-				let filtroReclamo = value;
+				let filtroReclamo = value.toLowerCase();
 				if (filtroReclamo == "") {
 					let filtro = false;
 					setStore({ filtro });
 				} else {
 					let coleccion = store.formularios.filter(
 						item =>
-							item.nameReclamo.toLowerCase().includes(filtroReclamo.toLowerCase()) ||
-							item.rut.toLowerCase().includes(filtroReclamo.toLowerCase()) ||
-							item.detalle_diagnostico.toLowerCase().includes(filtroReclamo.toLowerCase()) ||
-							item.account_id__name_Account.toLowerCase().includes(filtroReclamo.toLowerCase()) ||
-							item.name_estado.toLowerCase().includes(filtroReclamo.toLowerCase()) ||
-							item.numpoliza.toLowerCase().includes(filtroReclamo.toLowerCase())
+							(item.asociacion_id__id_persona__nombre + " " + item.asociacion_id__id_persona__apellido)
+								.toLowerCase()
+								.includes(filtroReclamo) ||
+							item.asociacion_id__id_persona__rut.toLowerCase().includes(filtroReclamo) ||
+							item.detalle_diagnostico.toLowerCase().includes(filtroReclamo) ||
+							item.account_id__name_Account.toLowerCase().includes(filtroReclamo) ||
+							item.name_estado.toLowerCase().includes(filtroReclamo) ||
+							item.asociacion_id__id_poliza__nun_poliza.toLowerCase().includes(filtroReclamo)
 					);
 					let filtro = true;
 					setStore({ filtroReclamo, coleccion, filtro });
