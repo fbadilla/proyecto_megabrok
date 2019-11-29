@@ -6,6 +6,7 @@ import { ListaDocumentos } from "../component/listaDocumentos";
 import PropTypes from "prop-types";
 import { Animated } from "react-animated-css";
 import ModalDocumentoUpdate from "../component/modalDocumentoUpdate";
+import ModalServicio from "../component/modalServicio";
 
 export class FormDoc extends React.Component {
 	constructor(props) {
@@ -52,7 +53,7 @@ export class FormDoc extends React.Component {
 										<div className="col-md-12">
 											<div className="col-md-10 ">
 												<h2>
-													Reclamo Nº <h1>{store.formulario.id}</h1>
+													Reclamo Nº <h1>{store.formulario.reclamo_id}</h1>
 												</h2>
 												<form
 													action="#"
@@ -141,7 +142,7 @@ export class FormDoc extends React.Component {
 																type="button"
 																className="btn btn-primary"
 																data-toggle="modal"
-																data-target="#modaldocumento"
+																data-target="#modalservicio"
 																onClick={() => actions.handleCleanData()}>
 																Agregar Servicio
 															</button>
@@ -166,7 +167,7 @@ export class FormDoc extends React.Component {
 								</div>
 							</div>
 							<ModalDocumentoUpdate />
-							<ModalDocumento />
+							<ModalServicio />
 						</Fragment>
 					);
 				}}
