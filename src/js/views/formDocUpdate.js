@@ -5,6 +5,7 @@ import ModalServicioUpdate from "../component/modalServicioUpdate";
 import { ListaDocumentos } from "../component/listaDocumentos";
 import PropTypes from "prop-types";
 import { Animated } from "react-animated-css";
+import ModalServicio from "../component/modalServicio";
 
 export class FormDocUpdate extends React.Component {
 	constructor(props) {
@@ -197,6 +198,7 @@ export class FormDocUpdate extends React.Component {
 								</div>
 							</div>
 							<ModalServicioUpdate />
+							<ModalServicio />
 						</Fragment>
 					);
 				}}
