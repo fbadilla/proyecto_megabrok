@@ -37,6 +37,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				archivoServicio: null,
 				proveedor_id: null
 			},
+			servicios: {},
 			documentoid: [],
 			documentoid2: [],
 			docfile: null,
@@ -167,6 +168,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 									}
 								});
 							});
+						getActions().getServicios();
 					})
 					.catch(error => {
 						setStore({ error });
@@ -425,6 +427,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let formulario = store.formulario;
 				formulario = item;
 				setStore({ formulario });
+				getActions().getServicios(item.id);
 			},
 			handleDeleteReclamo: item => {
 				const store = getStore();
@@ -557,6 +560,41 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({ token: data, username: "", email: "", password: "", password2: "" });
 						alert("ya puedes iniciar sesion");
 					});
+			},
+			getDocumentos: servicio_id => {
+				const store = getStore();
+				fetch(store.apiUrl + "/api/documentos/" + servicio_id, {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + store.access
+					}
+				})
+					.then(resp => resp.json())
+					.then(data => setStore({ data }))
+					.catch(error => setStore({ error }));
+			},
+
+			getServicios: id => {
+				const store = getStore();
+
+				fetch(store.apiUrl + "/api/servicios/" + id, {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + store.access
+					}
+				})
+					.then(resp => resp.json())
+					.then(data =>
+						setStore({
+							servicios: data.map(servicio => ({
+								...servicio,
+								documentos: getActions().getDocumentos(servicio.id)
+							}))
+						})
+					)
+					.catch(error => setStore({ error }));
 			},
 
 			//funcion GET para obtener los documentos por reclamo - GET api propia

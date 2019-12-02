@@ -5,6 +5,7 @@ import { ListaDocumentos } from "../component/listaDocumentos";
 import PropTypes from "prop-types";
 import { Animated } from "react-animated-css";
 import ModalServicio from "../component/modalServicio";
+import { ListaServicios } from "../component/listaServicios";
 
 export class FormDoc extends React.Component {
 	constructor(props) {
@@ -21,7 +22,7 @@ export class FormDoc extends React.Component {
 	}
 	componentDidMount() {
 		this.actionsContext.getaccount();
-		this.actionsContext.getDocumentoId();
+		this.actionsContext.getServicios();
 	}
 	render() {
 		return (
@@ -56,6 +57,7 @@ export class FormDoc extends React.Component {
 												<form
 													action="#"
 													onSubmit={e => actions.handleFormulario(e, this.props.history)}>
+													<h4>Datos Personales del Paciente</h4>
 													<div className="row form-group">
 														<div className="col-md-8">
 															<h4>Datos Personales del Paciente</h4>
@@ -110,6 +112,7 @@ export class FormDoc extends React.Component {
 														</div>
 													</div>
 
+													<h4>Detalles del Diagnostico / Accidente</h4>
 													<div className="row form-group">
 														<div className="col-md-6">
 															<h4>Detalles del Diagnostico / Accidente</h4>
@@ -157,7 +160,7 @@ export class FormDoc extends React.Component {
 													</div>
 													<div className="row">
 														<div className="col-md-12">
-															<ListaDocumentos />
+															<ListaServicios />
 														</div>
 													</div>
 												</form>
