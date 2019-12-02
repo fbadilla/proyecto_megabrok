@@ -16,11 +16,13 @@ export class ListaServicios extends Component {
 					console.log(store.servicios);
 					if (store.servicios.length > 0) {
 						const columnas = store.servicios.map((servicio, i) => {
+							// const docs = servicio.documentos.map((doc, i) => doc + "-");
 							return (
 								<tr key={i}>
 									<td>{servicio.detalle}</td>
 									<td>{servicio.monto}</td>
 									<td>{servicio.pago}</td>
+									<td>{console.log(servicio.documentos)}</td>
 									<td>
 										<button
 											type="button"
