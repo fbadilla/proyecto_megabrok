@@ -37,6 +37,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				archivoServicio: null,
 				proveedor_id: null
 			},
+			servicios: {},
 			documentoid: [],
 			documentoid2: [],
 			docfile: null,
@@ -126,6 +127,54 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ documentos, documento: {} });
 			},
 
+			handleEnvioServicio: history => {
+				const store = getStore();
+				let formServicio = new FormData();
+				formServicio.append("proveedor_id", store.servicio.proveedor_id);
+				formServicio.append("detalle", store.servicio.detalle);
+				formServicio.append("pago", store.servicio.pago);
+				formServicio.append("reclamo_id", store.formulario.reclamo_id);
+				if (store.servicio.archivoServicio != null)
+					formServicio.append(
+						"archivoServicio",
+						store.servicio.archivoServicio,
+						store.servicio.archivoServicio.name
+					);
+				fetch(store.apiUrl + "/api/servicios/", {
+					method: "Post",
+					body: formServicio,
+					mimeType: "multipart/form-data",
+					headers: {
+						Authorization: "Bearer " + store.access
+					}
+				})
+					.then(resp => resp.json())
+					.then(data => {
+						store.documentos
+							.slice(0)
+							.reverse()
+							.map((documento, i) => {
+								let formDocumento = new FormData();
+								formDocumento.append("servicio_id", data.id);
+								formDocumento.append("tipodoc", documento.tipodoc);
+								formDocumento.append("numdoc", documento.numdoc);
+								formDocumento.append("datedoc", documento.datedoc);
+								formDocumento.append("montodoc", documento.montodoc);
+								fetch(store.apiUrl + "/api/documentos/", {
+									method: "Post",
+									body: formDocumento,
+									headers: {
+										Authorization: "Bearer " + store.access
+									}
+								});
+							});
+						getActions().getServicios();
+					})
+					.catch(error => {
+						setStore({ error });
+						alert("No se pudo ingresar el documento, revise los campos");
+					});
+			},
 			handleEnvioServicio: history => {
 				const store = getStore();
 				let formServicio = new FormData();
@@ -378,6 +427,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let formulario = store.formulario;
 				formulario = item;
 				setStore({ formulario });
+				getActions().getServiciositem(item);
 			},
 			handleDeleteReclamo: item => {
 				const store = getStore();
@@ -385,6 +435,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				deleteselect = item;
 				setStore({ deleteselect });
 			},
+
 			handleFiltroReclamo: e => {
 				const { name, value } = e.target;
 				const store = getStore();
@@ -510,6 +561,75 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({ token: data, username: "", email: "", password: "", password2: "" });
 						alert("ya puedes iniciar sesion");
 					});
+			},
+			getDocumentos: item => {
+				const store = getStore();
+				fetch(store.apiUrl + "/api/documentos/" + item.id, {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + store.access
+					}
+				})
+					.then(resp => resp.json())
+					.then(data =>
+						setStore({
+							servicio: {
+								documento: {
+									datedoc: store.documento.datedoc,
+									id: store.documento.id,
+									montodoc: store.documento.montodoc,
+									numdoc: store.documento.numdoc,
+									servicio_id: store.documento.servicio_id,
+									tipodoc: store.documento.tipodoc
+								}
+							}
+						})
+					)
+					.catch(error => setStore({ error }));
+			},
+			getServiciositem: item => {
+				const store = getStore();
+
+				fetch(store.apiUrl + "/api/servicios/" + item.id, {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + store.access
+					}
+				})
+					.then(resp => resp.json())
+					.then(data =>
+						setStore({
+							servicios: data.map(servicio => ({
+								...servicio,
+								documentos: getActions().getDocumentos(item)
+							}))
+						})
+					)
+					.catch(error => setStore({ error }));
+			},
+
+			getServicios: id => {
+				const store = getStore();
+
+				fetch(store.apiUrl + "/api/servicios/" + id, {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + store.access
+					}
+				})
+					.then(resp => resp.json())
+					.then(data =>
+						setStore({
+							servicios: data.map(servicio => ({
+								...servicio,
+								documentos: getActions().getDocumentos(item)
+							}))
+						})
+					)
+					.catch(error => setStore({ error }));
 			},
 
 			//funcion GET para obtener los documentos por reclamo - GET api propia
