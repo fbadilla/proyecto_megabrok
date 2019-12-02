@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
-import ModalServicio from "../component/modalServicio";
+import ModalServicioUpdate from "../component/modalServicioUpdate";
 import { ListaDocumentos } from "../component/listaDocumentos";
 import PropTypes from "prop-types";
 import { Animated } from "react-animated-css";
@@ -196,7 +196,7 @@ export class FormDocUpdate extends React.Component {
 									</div>
 								</div>
 							</div>
-							<ModalServicio />
+							<ModalServicioUpdate />
 						</Fragment>
 					);
 				}}

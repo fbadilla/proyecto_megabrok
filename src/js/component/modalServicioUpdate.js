@@ -3,7 +3,7 @@ import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
 import Select from "react-select";
 
-export default class ModalServicio extends React.Component {
+export default class ModalServicioUpdate extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {};
@@ -43,7 +43,7 @@ export default class ModalServicio extends React.Component {
 					return (
 						<div
 							className="modal fade"
-							id="modalservicio"
+							id="modalservicioupdate"
 							tabIndex="-1"
 							role="dialog"
 							aria-labelledby="myLargeModalLabel"
@@ -92,6 +92,7 @@ export default class ModalServicio extends React.Component {
 															className="form-control"
 															rows="5"
 															id="detalle"
+															value={store.servicio.detalle}
 															placeholder="Detalles Del Tratamiento"
 															onChange={e => actions.handleServicio(e)}
 														/>
@@ -105,6 +106,7 @@ export default class ModalServicio extends React.Component {
 																className="form-control"
 																name="pago"
 																id="pago"
+																value={store.documento.pago}
 																onChange={e => actions.handleServicio(e)}>
 																<option>COB</option>
 																<option>REM</option>
@@ -125,6 +127,7 @@ export default class ModalServicio extends React.Component {
 															className="form-control"
 															id="tipodoc"
 															name="tipodoc"
+															value={store.documento.tipodoc}
 															onChange={e => actions.handledocumento(e)}>
 															<option>Boleta</option>
 															<option>Factura</option>
@@ -147,6 +150,7 @@ export default class ModalServicio extends React.Component {
 															id="datedoc"
 															type="date"
 															className="form-control"
+															value={store.documento.datedoc}
 															onChange={e => actions.handledocumento(e)}
 														/>
 													</div>
@@ -165,6 +169,7 @@ export default class ModalServicio extends React.Component {
 															placeholder="666"
 															type="number"
 															className="form-control"
+															value={store.documento.numdoc}
 															onChange={e => actions.handledocumento(e)}
 														/>
 													</div>
@@ -182,6 +187,7 @@ export default class ModalServicio extends React.Component {
 															placeholder="$100.000.-"
 															type="number"
 															className="form-control"
+															value={store.documento.montodoc}
 															onChange={e => actions.handledocumento(e)}
 														/>
 													</div>
@@ -228,7 +234,7 @@ export default class ModalServicio extends React.Component {
 											type="button"
 											className="btn btn-primary"
 											onClick={() => {
-												actions.handleEnvioServicio({});
+												actions.handlePutServicio({});
 											}}
 											data-dismiss="modal">
 											Guardar
@@ -243,6 +249,6 @@ export default class ModalServicio extends React.Component {
 		);
 	}
 }
-ModalServicio.propTypes = {
+ModalServicioUpdate.propTypes = {
 	history: PropTypes.array
 };
