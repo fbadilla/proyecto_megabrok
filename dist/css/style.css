@@ -29,7 +29,7 @@ body {
   transition: 0.5s;
 }
 #page .page-inner {
-  max-width: 100%;
+  /* max-width: 1200px; */
   background: #fff;
   margin: 0 auto;
   overflow-x: hidden;

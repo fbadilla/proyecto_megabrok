@@ -1,11 +1,10 @@
 import React, { Fragment } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
-import ModalDocumento from "../component/modalDocumento";
+import ModalServicio from "../component/modalServicio";
 import { ListaDocumentos } from "../component/listaDocumentos";
 import PropTypes from "prop-types";
 import { Animated } from "react-animated-css";
-import ModalDocumentoUpdate from "../component/modalDocumentoUpdate";
 
 export class FormDocUpdate extends React.Component {
 	constructor(props) {
@@ -58,7 +57,9 @@ export class FormDocUpdate extends React.Component {
 													action="#"
 													onSubmit={e => actions.handleEnvioMod(e, this.props.history)}>
 													<div className="row form-group">
-														<h4>Datos Personales del Paciente</h4>
+														<div className="col-md-8">
+															<h4>Datos Personales del Paciente</h4>
+														</div>
 														<div className="col-md-6">
 															<div className="feature-left">
 																<span className="icon">
@@ -113,7 +114,9 @@ export class FormDocUpdate extends React.Component {
 													</div>
 
 													<div className="row form-group">
-														<h4>Detalles del Diagnostico / Accidente</h4>
+														<div className="col-md-8">
+															<h4>Detalles del Diagnostico / Accidente</h4>
+														</div>
 														<div className="col-md-6">
 															<div className="feature-left">
 																<span className="icon">
@@ -151,7 +154,8 @@ export class FormDocUpdate extends React.Component {
 															</div>
 														</div>
 
-														<div className="col-md-4 offset-md-4">
+														<div className="col-md-3">
+															<spam> </spam>
 															<input
 																type="submit"
 																value="Modificar"
@@ -168,7 +172,7 @@ export class FormDocUpdate extends React.Component {
 																type="button"
 																className="btn btn-primary"
 																data-toggle="modal"
-																data-target="#modaldocumento"
+																data-target="#modalservicio"
 																onClick={() => actions.handleCleanData()}>
 																Agregar Servicio
 															</button>
@@ -192,8 +196,7 @@ export class FormDocUpdate extends React.Component {
 									</div>
 								</div>
 							</div>
-							<ModalDocumentoUpdate />
-							<ModalDocumento />
+							<ModalServicio />
 						</Fragment>
 					);
 				}}

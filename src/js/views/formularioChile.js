@@ -51,7 +51,9 @@ export class FormularioChile extends React.Component {
 													action="#"
 													onSubmit={e => actions.handleFormulario(e, this.props.history)}>
 													<div className="row form-group">
-														<h4>Datos Personales del Paciente</h4>
+														<div className="col-md-8">
+															<h4>Datos Personales del Paciente</h4>
+														</div>
 														<div className="col-md-6">
 															<div className="feature-left">
 																<span className="icon">
@@ -106,8 +108,8 @@ export class FormularioChile extends React.Component {
 													</div>
 
 													<div className="row form-group">
-														<h4>Detalles del Diagnostico / Accidente</h4>
 														<div className="col-md-6">
+															<h4>Detalles del Diagnostico / Accidente</h4>
 															<div className="feature-left">
 																<span className="icon">
 																	<i className="ti-clipboard" />
