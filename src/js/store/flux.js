@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			apiUrl: "http://127.0.0.1:8000",
+			apiUrl: "http://0.0.0.0:8000",
 			apiUrl2: "https://apy-cors-fcobad.herokuapp.com/https://mobile.bestdoctorsinsurance.com/spiritapi/api",
 			token: {
 				refresh: "",
@@ -175,7 +175,141 @@ const getState = ({ getStore, getActions, setStore }) => {
 						alert("No se pudo ingresar el documento, revise los campos");
 					});
 			},
-
+			handleEnvioServicio: history => {
+				const store = getStore();
+				let formServicio = new FormData();
+				formServicio.append("proveedor_id", store.servicio.proveedor_id);
+				formServicio.append("detalle", store.servicio.detalle);
+				formServicio.append("pago", store.servicio.pago);
+				formServicio.append("reclamo_id", store.formulario.reclamo_id);
+				if (store.servicio.archivoServicio != null)
+					formServicio.append(
+						"archivoServicio",
+						store.servicio.archivoServicio,
+						store.servicio.archivoServicio.name
+					);
+				fetch(store.apiUrl + "/api/servicios/", {
+					method: "Post",
+					body: formServicio,
+					mimeType: "multipart/form-data",
+					headers: {
+						Authorization: "Bearer " + store.access
+					}
+				})
+					.then(resp => resp.json())
+					.then(data => {
+						store.documentos
+							.slice(0)
+							.reverse()
+							.map((documento, i) => {
+								let formDocumento = new FormData();
+								formDocumento.append("servicio_id", data.id);
+								formDocumento.append("tipodoc", documento.tipodoc);
+								formDocumento.append("numdoc", documento.numdoc);
+								formDocumento.append("datedoc", documento.datedoc);
+								formDocumento.append("montodoc", documento.montodoc);
+								fetch(store.apiUrl + "/api/documentos/", {
+									method: "Post",
+									body: formDocumento,
+									headers: {
+										Authorization: "Bearer " + store.access
+									}
+								});
+							});
+					})
+					.catch(error => {
+						setStore({ error });
+						alert("No se pudo ingresar el documento, revise los campos");
+					});
+			},
+			handlePutServicio: history => {
+				const store = getStore();
+				let formServicio = new FormData();
+				formServicio.append("proveedor_id", store.servicio.proveedor_id);
+				formServicio.append("detalle", store.servicio.detalle);
+				formServicio.append("pago", store.servicio.pago);
+				formServicio.append("reclamo_id", store.formulario.reclamo_id);
+				if (store.servicio.archivoServicio != null)
+					formServicio.append(
+						"archivoServicio",
+						store.servicio.archivoServicio,
+						store.servicio.archivoServicio.name
+					);
+				fetch(store.apiUrl + "/api/servicios/" + store.servicio.id, {
+					method: "Put",
+					body: formServicio,
+					mimeType: "multipart/form-data",
+					headers: {
+						Authorization: "Bearer " + store.access
+					}
+				})
+					.then(resp => resp.json())
+					.then(data => {
+						store.documentos
+							.slice(0)
+							.reverse()
+							.map((documento, i) => {
+								let formDocumento = new FormData();
+								formDocumento.append("servicio_id", data.id);
+								formDocumento.append("tipodoc", documento.tipodoc);
+								formDocumento.append("numdoc", documento.numdoc);
+								formDocumento.append("datedoc", documento.datedoc);
+								formDocumento.append("montodoc", documento.montodoc);
+								fetch(store.apiUrl + "/api/documentos/" + i, {
+									method: "Put",
+									body: formDocumento,
+									headers: {
+										Authorization: "Bearer " + store.access
+									}
+								});
+							});
+					})
+					.catch(error => {
+						setStore({ error });
+						alert("No se pudo ingresar el documento, revise los campos");
+					});
+			},
+			deleteDocumento: id => {
+				const store = getStore();
+				fetch(store.apiUrl + "/api/documentos/" + id, {
+					method: "DELETE",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + store.access
+					}
+				})
+					.then(resp => resp.json())
+					.then(() => getActions().getDocumentoId(history))
+					.catch(error => setStore({ error }));
+			},
+			handleDeleteServicio: id => {
+				const store = getStore();
+				fetch(store.apiUrl + "/api/servicios/" + id, {
+					method: "DELETE",
+					mimeType: "multipart/form-data",
+					headers: {
+						Authorization: "Bearer " + store.access
+					}
+				})
+					.then(resp => resp.json())
+					.then(data => {
+						store.documentos
+							.slice(0)
+							.reverse()
+							.map((documento, i) => {
+								fetch(store.apiUrl + "/api/documentos/" + i, {
+									method: "Put",
+									headers: {
+										Authorization: "Bearer " + store.access
+									}
+								});
+							});
+					})
+					.catch(error => {
+						setStore({ error });
+						alert("No se pudo ingresar el documento, revise los campos");
+					});
+			},
 			handleEnvioDocumento: history => {
 				getActions().SaveDocumentoSinFile(history);
 			},
