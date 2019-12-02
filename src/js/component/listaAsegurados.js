@@ -19,7 +19,6 @@ export class ListaAsegurados extends Component {
 		this.actionsContext = null;
 		this.props.history;
 	}
-
 	render() {
 		return (
 			<div className="card-deck">
@@ -41,7 +40,17 @@ export class ListaAsegurados extends Component {
 														type="button"
 														className="btn btn-primary"
 														onClick={() => {
-															actions.handleAseguradoSelected(item);
+															actions.handleAseguradoSelected({
+																ClaimantId: this.state.ClaimantId,
+																ClaimantFirstName: this.state.ClaimantFirstName,
+																ClaimantMiddleName: this.state.ClaimantMiddleName,
+																ClaimantLastName: this.state.ClaimantLastName,
+																ClaimantMotherMaidenName: this.state
+																	.ClaimantMotherMaidenName,
+																ClaimantDateOfBirth: this.state.ClaimantDateOfBirth,
+																ClaimantStatusId: this.state.ClaimantStatusId,
+																ClaimantTypeId: this.state.ClaimantTypeId
+															});
 														}}>
 														Generar reclamo
 													</button>
@@ -66,5 +75,5 @@ export class ListaAsegurados extends Component {
 	}
 }
 ListaAsegurados.propTypes = {
-	history: PropTypes.object
+	history: PropTypes.array
 };

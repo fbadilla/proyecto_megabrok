@@ -1,11 +1,9 @@
 import React, { Fragment } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
-import ModalDocumento from "../component/modalDocumento";
 import { ListaDocumentos } from "../component/listaDocumentos";
 import PropTypes from "prop-types";
 import { Animated } from "react-animated-css";
-import ModalDocumentoUpdate from "../component/modalDocumentoUpdate";
 import ModalServicio from "../component/modalServicio";
 import { ListaServicios } from "../component/listaServicios";
 
@@ -61,6 +59,9 @@ export class FormDoc extends React.Component {
 													onSubmit={e => actions.handleFormulario(e, this.props.history)}>
 													<h4>Datos Personales del Paciente</h4>
 													<div className="row form-group">
+														<div className="col-md-8">
+															<h4>Datos Personales del Paciente</h4>
+														</div>
 														<div className="col-md-6">
 															<div className="feature-left">
 																<span className="icon">
@@ -114,6 +115,7 @@ export class FormDoc extends React.Component {
 													<h4>Detalles del Diagnostico / Accidente</h4>
 													<div className="row form-group">
 														<div className="col-md-6">
+															<h4>Detalles del Diagnostico / Accidente</h4>
 															<div className="feature-left">
 																<span className="icon">
 																	<i className="ti-clipboard" />
@@ -167,7 +169,6 @@ export class FormDoc extends React.Component {
 									</div>
 								</div>
 							</div>
-							<ModalDocumentoUpdate />
 							<ModalServicio />
 						</Fragment>
 					);

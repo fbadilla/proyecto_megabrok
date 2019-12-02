@@ -136,7 +136,7 @@ export class ListaReclamos extends Component {
 							return (
 								<Fragment>
 									<div className="gtco-section ">
-										<div className="col-md-10">
+										<div className="col-md-12">
 											<input
 												name="filtro_reclamo"
 												type="text"
@@ -145,17 +145,9 @@ export class ListaReclamos extends Component {
 												onChange={e => actions.handleFiltroReclamo(e)}
 											/>
 										</div>
-										<div className="col-md-2">
-											<button
-												type="button"
-												className="btn btn-primary4"
-												onClick={() => actions.getFormulario()}>
-												<i className="ti-reload" />
-											</button>
-										</div>
 									</div>
 									<div className="gtco-section ">
-										<div className="col-md-11">
+										<div className="col-md-12">
 											<table className="table">
 												<thead>
 													<tr>
