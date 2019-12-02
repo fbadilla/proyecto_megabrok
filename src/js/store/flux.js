@@ -561,19 +561,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 						alert("ya puedes iniciar sesion");
 					});
 			},
-			getDocumentos: servicio_id => {
-				const store = getStore();
-				fetch(store.apiUrl + "/api/documentos/" + servicio_id, {
-					method: "GET",
-					headers: {
-						"Content-Type": "application/json",
-						Authorization: "Bearer " + store.access
-					}
-				})
-					.then(resp => resp.json())
-					.then(data => setStore({ data }))
-					.catch(error => setStore({ error }));
-			},
+			// getDocumentos: servicio_id => {
+			// 	const store = getStore();
+			// 	fetch(store.apiUrl + "/api/documentos/" + servicio_id, {
+			// 		method: "GET",
+			// 		headers: {
+			// 			"Content-Type": "application/json",
+			// 			Authorization: "Bearer " + store.access
+			// 		}
+			// 	})
+			// 		.then(resp => resp.json())
+			// 		.then(data => setStore({ data }))
+			// 		.catch(error => setStore({ error }));
+			// },
 
 			getServicios: id => {
 				const store = getStore();
@@ -586,14 +586,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				})
 					.then(resp => resp.json())
-					.then(data =>
+					.then(servicios => {
+						servicios.map((servicio, i) =>
+							fetch(store.apiUrl + "/api/documentos/" + servicio.id, {
+								method: "GET",
+								headers: {
+									"Content-Type": "application/json",
+									Authorization: "Bearer " + store.access
+								}
+							})
+								.then(resp => resp.json())
+								.then(data => (servicio["documentos"] = data))
+								.catch(error => setStore({ error }))
+						);
+
 						setStore({
-							servicios: data.map(servicio => ({
-								...servicio,
-								documentos: getActions().getDocumentos(servicio.id)
-							}))
-						})
-					)
+							servicios
+						});
+					})
 					.catch(error => setStore({ error }));
 			},
 
