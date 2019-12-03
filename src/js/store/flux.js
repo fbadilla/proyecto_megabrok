@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			apiUrl: "http://0.0.0.0:8000",
+			apiUrl: "http://127.0.0.1:8000",
 			apiUrl2: "https://apy-cors-fcobad.herokuapp.com/https://mobile.bestdoctorsinsurance.com/spiritapi/api",
 			token: {
 				refresh: "",
@@ -37,7 +37,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				archivoServicio: null,
 				proveedor_id: null
 			},
-			servicios: {},
+			servicios: [],
 			documentoid: [],
 			documentoid2: [],
 			docfile: null,
@@ -427,6 +427,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let formulario = store.formulario;
 				formulario = item;
 				setStore({ formulario });
+
 				getActions().getServicios(item.id);
 			},
 			handleDeleteReclamo: item => {
@@ -578,7 +579,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			getServicios: id => {
 				const store = getStore();
 
-				fetch(store.apiUrl + "/api/servicios/" + id, {
+				fetch(store.apiUrl + "/api/serviciosDocumentos/" + id, {
 					method: "GET",
 					headers: {
 						"Content-Type": "application/json",
@@ -586,24 +587,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				})
 					.then(resp => resp.json())
-					.then(servicios => {
-						servicios.map((servicio, i) =>
-							fetch(store.apiUrl + "/api/documentos/" + servicio.id, {
-								method: "GET",
-								headers: {
-									"Content-Type": "application/json",
-									Authorization: "Bearer " + store.access
-								}
-							})
-								.then(resp => resp.json())
-								.then(data => (servicio["documentos"] = data))
-								.catch(error => setStore({ error }))
-						);
-
+					.then(servicios =>
 						setStore({
 							servicios
-						});
-					})
+						})
+					)
 					.catch(error => setStore({ error }));
 			},
 
@@ -798,7 +786,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(resp => resp.json())
 					.then(data => {
-						console.log(data);
+						// console.log(data);
 						setStore({
 							formulario: {
 								nameReclamo: store.formulario.nameReclamo,
