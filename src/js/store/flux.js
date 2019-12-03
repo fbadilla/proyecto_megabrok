@@ -904,7 +904,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 			//funcion PUT para modificar los datos del usuario - PUT api propia
 			putFormulario: () => {
 				const store = getStore();
-				const data = store.formulario;
+				const data = {
+					id: store.formulario.id,
+					detalle_diagnostico: store.formulario.detalle_diagnostico,
+					name_reclamo: store.formulario.name_reclamo,
+					asociacion_id: store.formulario.asociacion_id
+				};
 
 				fetch(store.apiUrl + "/api/reclamos/" + store.formulario.id, {
 					method: "PUT",
@@ -917,7 +922,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(resp => resp.json())
 					.then(data => {
 						setStore({ formulario: data });
-						alert("se modificaron los datos del paciente");
+						alert("se modificaron los datos del reclamo");
 					});
 			},
 			getPersonas: () => {
