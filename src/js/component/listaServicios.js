@@ -91,7 +91,9 @@ export class ListaServicios extends Component {
 											<button
 												type="button"
 												className="btn btn-primary"
-												onClick={e => actions.handlePDFFormulario(e, store.formulario.id)}>
+												onClick={e =>
+													actions.handlePDFFormulario(e, store.formulario.reclamo_id)
+												}>
 												CREAR FORMULARIO
 											</button>
 										</div>
