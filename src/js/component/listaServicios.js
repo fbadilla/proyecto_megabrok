@@ -13,16 +13,19 @@ export class ListaServicios extends Component {
 		return (
 			<Context.Consumer>
 				{({ store, actions }) => {
-					console.log(store.servicios);
+					// console.log(store.servicios);
 					if (store.servicios.length > 0) {
 						const columnas = store.servicios.map((servicio, i) => {
-							//const docs = servicio.documentos.map((doc, i) => doc + "-");
 							return (
 								<tr key={i}>
 									<td>{servicio.detalle}</td>
+									<td>{servicio.documentos.map((doc, i) => doc.numdoc).join(" - ")}</td>
+									<td>
+										{servicio.documentos
+											.map((doc, i) => doc.montodoc)
+											.reduce((a, b) => parseInt(a) + parseInt(b), 0)}
+									</td>
 									<td>{servicio.pago}</td>
-									<td>{servicio.monto}</td>
-
 									<td>
 										<button
 											type="button"
@@ -65,8 +68,9 @@ export class ListaServicios extends Component {
 										<thead>
 											<tr>
 												<th>Detalle </th>
-												<th>pago</th>
+												<th>Documentos</th>
 												<th>Monto</th>
+												<th>Pago</th>
 												<th>Archivo</th>
 												<th>Modificar</th>
 												<th>Eliminar</th>
