@@ -30,6 +30,7 @@ export class FormDocUpdate extends React.Component {
 				{({ store, actions }) => {
 					this.storeContext = store;
 					this.actionsContext = actions;
+
 					return (
 						<Fragment>
 							<Animated
@@ -51,9 +52,8 @@ export class FormDocUpdate extends React.Component {
 									<div className="row">
 										<div className="col-md-12">
 											<div className="col-md-10 ">
-												<h2>
-													Reclamo Nº <h1>{store.formulario.id}</h1>
-												</h2>
+												<h2>Reclamo Nº</h2>
+												<h1>{store.formulario.id}</h1>
 												<form
 													action="#"
 													onSubmit={e => actions.handleEnvioMod(e, this.props.history)}>
@@ -73,7 +73,12 @@ export class FormDocUpdate extends React.Component {
 																		className="form-control"
 																		id="nameReclamo"
 																		onChange={e => actions.handleForm(e)}
-																		value={store.formulario.nameReclamo}
+																		value={
+																			store.formulario
+																				.asociacion_id__id_persona__nombre +
+																			store.formulario
+																				.asociacion_id__id_persona__apellido
+																		}
 																		type="text"
 																		readOnly
 																	/>
@@ -88,7 +93,10 @@ export class FormDocUpdate extends React.Component {
 																		name="rut"
 																		id="disabledTextInput"
 																		onChange={e => actions.handleForm(e)}
-																		value={store.formulario.rut}
+																		value={
+																			store.formulario
+																				.asociacion_id__id_persona__rut
+																		}
 																		type="text"
 																		className="form-control"
 																		readOnly
@@ -104,7 +112,10 @@ export class FormDocUpdate extends React.Component {
 																		name="numpoliza"
 																		id="disabledTextInput"
 																		onChange={e => actions.handleForm(e)}
-																		value={store.formulario.numpoliza}
+																		value={
+																			store.formulario
+																				.asociacion_id__id_poliza__nun_poliza
+																		}
 																		type="text"
 																		className="form-control"
 																		readOnly
@@ -154,15 +165,6 @@ export class FormDocUpdate extends React.Component {
 																</div>
 															</div>
 														</div>
-
-														<div className="col-md-3">
-															<spam> </spam>
-															<input
-																type="submit"
-																value="Modificar"
-																className="btn btn-primary"
-															/>
-														</div>
 													</div>
 													<div className="row form-group">
 														<div className="col-md-8">
@@ -180,7 +182,9 @@ export class FormDocUpdate extends React.Component {
 															<button
 																type="button"
 																className="btn btn-primary"
-																onClick={() => actions.getDocumentoId()}>
+																onClick={() =>
+																	actions.getServicios(store.formulario.id)
+																}>
 																<i className="ti-reload" />
 																Actualizar Servicios
 															</button>
