@@ -16,19 +16,21 @@ export class ListaServicios extends Component {
 					console.log(store.servicios);
 					if (store.servicios.length > 0) {
 						const columnas = store.servicios.map((servicio, i) => {
+							//const docs = servicio.documentos.map((doc, i) => doc + "-");
 							return (
 								<tr key={i}>
 									<td>{servicio.detalle}</td>
-									<td>{servicio.monto}</td>
 									<td>{servicio.pago}</td>
+									<td>{servicio.monto}</td>
+
 									<td>
 										<button
 											type="button"
 											className="btn btn-primary2"
 											onClick={() =>
-												servicio.docfile == null
+												servicio.archivoServicio == null
 													? alert("no existe el documento")
-													: window.open(store.apiUrl + documento.docfile)
+													: window.open(store.apiUrl + servicio.archivoServicio)
 											}>
 											<i className="ti-image" />
 										</button>
@@ -38,8 +40,9 @@ export class ListaServicios extends Component {
 											type="button"
 											className="btn btn-primary2"
 											data-toggle="modal"
-											data-target="#modaldocumentoUpdate"
-											onClick={() => actions.handleDocumentoData(documento)}>
+											data-target="#modalservicioupdate"
+											//onClick={() => actions.handlePutServicio(servicio.id)}
+										>
 											<i className="ti-pencil" />
 										</button>
 									</td>
@@ -47,7 +50,7 @@ export class ListaServicios extends Component {
 										<button
 											type="button"
 											className="btn btn-primary2"
-											onClick={() => actions.handleDeleteDoc(documento.id)}>
+											onClick={() => actions.handleDeleteServicio(servicio.id)}>
 											<i className="ti-trash" />
 										</button>
 									</td>
