@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			apiUrl: "http://0.0.0.0:8000",
+			apiUrl: "http://127.0.0.1:8000",
 			apiUrl2: "https://apy-cors-fcobad.herokuapp.com/https://mobile.bestdoctorsinsurance.com/spiritapi/api",
 			token: {
 				refresh: "",
@@ -35,7 +35,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				pago: "COB",
 				detalle: "",
 				archivoServicio: null,
-				proveedor_id: null
+				proveedor_id: 1
 			},
 			servicios: [],
 			documentoid: [],
@@ -400,7 +400,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 							item.detalle_diagnostico.toLowerCase().includes(filtroReclamo) ||
 							item.account_id__name_Account.toLowerCase().includes(filtroReclamo) ||
 							item.name_estado.toLowerCase().includes(filtroReclamo) ||
-							item.asociacion_id__id_poliza__nun_poliza.toLowerCase().includes(filtroReclamo)
+							item.asociacion_id__id_poliza__nun_poliza.toLowerCase().includes(filtroReclamo) ||
+							item.asociacion_id__id_poliza__numPolizaLegacy.toLowerCase().includes(filtroReclamo)
 					);
 					let filtro = true;
 					setStore({ filtroReclamo, coleccion, filtro });
@@ -451,16 +452,17 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				setStore({
 					documento: {
-						pago: "COB",
 						tipodoc: "Boleta",
-						nombre_proveedor: "",
 						numdoc: "",
-						montodoc: 0,
-						detalle_tratamiento: "",
-						datedoc: new Date().toISOString().slice(0, 10),
-						proveedorValue: ""
+						montodoc: "",
+						datedoc: new Date().toISOString().slice(0, 10)
 					},
-					docfile: null
+					servicio: {
+						pago: "COB",
+						detalle: "",
+						archivoServicio: null,
+						proveedor_id: 1
+					}
 				});
 			},
 			// -----------------------------------------HANDLES-------------------------------
@@ -775,35 +777,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					});
 			},
 
-			//funcion POST para agregar documentos a un reclamo  - POST api propia
-			SaveDocumento: history => {
-				const store = getStore();
-				const data = store.documento;
-				fetch(store.apiUrl + "/api/documentos/" + store.formulario.id, {
-					method: "Post",
-					body: JSON.stringify(data),
-					headers: {
-						"Content-Type": "application/json",
-						Authorization: "Bearer " + store.access
-					}
-				})
-					.then(resp => resp.json())
-					.then(data => {
-						setStore({
-							documento: {
-								pago: "COB",
-								tipodoc: "Boleta",
-								nombre_proveedor: "",
-								numdoc: "",
-								montodoc: 0,
-								detalle_tratamiento: "",
-								datedoc: new Date().toISOString().slice(0, 10),
-								proveedorValue: "",
-								docfile: null
-							}
-						});
-					});
-			},
 			//funcion POST para agregar documentos a un reclamo se envia con Formdata, ya que se adjunta File del documento - POST api propia
 			SaveDocumentoSinFile: history => {
 				const store = getStore();
@@ -929,13 +902,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 			putFormulario: () => {
 				const store = getStore();
 				const data = {
-					id: store.formulario.id,
+					id: store.formulario.reclamo_id,
 					detalle_diagnostico: store.formulario.detalle_diagnostico,
-					name_reclamo: store.formulario.name_reclamo,
+					name_estado: store.formulario.name_estado,
+
 					asociacion_id: store.formulario.asociacion_id
 				};
 
-				fetch(store.apiUrl + "/api/reclamos/" + store.formulario.id, {
+				fetch(store.apiUrl + "/api/reclamos/" + store.formulario.reclamo_id, {
 					method: "PUT",
 					body: JSON.stringify(data),
 					headers: {

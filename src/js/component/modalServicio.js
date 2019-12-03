@@ -77,6 +77,7 @@ export default class ModalServicio extends React.Component {
 													<div className="feature-left">
 														<label>Proveedor</label>
 														<Select
+															value={store.proveedores[store.servicio.proveedor_id - 1]}
 															className="basic-single"
 															classNamePrefix="select"
 															onChange={value => actions.handleServicioSelect(value)}
@@ -92,6 +93,7 @@ export default class ModalServicio extends React.Component {
 															className="form-control"
 															rows="5"
 															id="detalle"
+															value={store.servicio.detalle}
 															placeholder="Detalles Del Tratamiento"
 															onChange={e => actions.handleServicio(e)}
 														/>
@@ -105,6 +107,7 @@ export default class ModalServicio extends React.Component {
 																className="form-control"
 																name="pago"
 																id="pago"
+																value={store.servicio.pago}
 																onChange={e => actions.handleServicio(e)}>
 																<option>COB</option>
 																<option>REM</option>
@@ -125,6 +128,7 @@ export default class ModalServicio extends React.Component {
 															className="form-control"
 															id="tipodoc"
 															name="tipodoc"
+															value={store.documento.tipodoc}
 															onChange={e => actions.handledocumento(e)}>
 															<option>Boleta</option>
 															<option>Factura</option>
@@ -146,6 +150,7 @@ export default class ModalServicio extends React.Component {
 															name="datedoc"
 															id="datedoc"
 															type="date"
+															value={store.documento.datedoc}
 															className="form-control"
 															onChange={e => actions.handledocumento(e)}
 														/>
@@ -165,6 +170,7 @@ export default class ModalServicio extends React.Component {
 															placeholder="666"
 															type="number"
 															className="form-control"
+															value={store.documento.numdoc}
 															onChange={e => actions.handledocumento(e)}
 														/>
 													</div>
@@ -179,9 +185,10 @@ export default class ModalServicio extends React.Component {
 														<input
 															name="montodoc"
 															id="montodoc"
-															placeholder="$100.000.-"
+															placeholder="100000"
 															type="number"
 															className="form-control"
+															value={store.documento.montodoc}
 															onChange={e => actions.handledocumento(e)}
 														/>
 													</div>

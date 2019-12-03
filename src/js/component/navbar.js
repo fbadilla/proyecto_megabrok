@@ -44,11 +44,11 @@ export class Navbar extends React.Component {
 											<li>
 												<Link to="/usuarios">Mi cuenta</Link>
 											</li>
-											<li>
+											{/* <li>
 												<Link to="/ingresareclamo">PRUEBAS</Link>
-											</li>
+											</li> */}
 											<li>
-												<Link to="/ingresareclamov2">Crear Reclamo</Link>
+												<Link to="/ingresareclamo">Crear Reclamo</Link>
 											</li>
 											<li>
 												<Link to="/reclamos">Reclamos</Link>
