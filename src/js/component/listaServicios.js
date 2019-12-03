@@ -13,7 +13,6 @@ export class ListaServicios extends Component {
 		return (
 			<Context.Consumer>
 				{({ store, actions }) => {
-					// console.log(store.servicios);
 					if (store.servicios.length > 0) {
 						const columnas = store.servicios.map((servicio, i) => {
 							return (

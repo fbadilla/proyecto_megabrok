@@ -165,6 +165,13 @@ export class FormDocUpdate extends React.Component {
 																</div>
 															</div>
 														</div>
+														<div className="col-md-4 offset-md-4">
+															<input
+																type="submit"
+																value="Modificar"
+																className="btn btn-primary"
+															/>
+														</div>
 													</div>
 													<div className="row form-group">
 														<div className="col-md-8">
