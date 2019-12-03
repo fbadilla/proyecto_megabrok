@@ -183,9 +183,7 @@ export class FormDocUpdate extends React.Component {
 															<button
 																type="button"
 																className="btn btn-primary"
-																onClick={() =>
-																	actions.getServicios(store.formulario.id)
-																}>
+																onClick={() => actions.getServicios()}>
 																<i className="ti-reload" />
 																Actualizar Servicios
 															</button>

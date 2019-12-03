@@ -46,7 +46,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			filtro: false,
 			estaLoggeado: false,
 			aseguradosFiltro: {},
-			proveedores: {}
+			proveedores: {},
+			serviceSelected: {},
+			numservice: ""
 		},
 
 		actions: {
@@ -175,53 +177,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						alert("No se pudo ingresar el documento, revise los campos");
 					});
 			},
-			handleEnvioServicio: history => {
-				const store = getStore();
-				let formServicio = new FormData();
-				formServicio.append("proveedor_id", store.servicio.proveedor_id);
-				formServicio.append("detalle", store.servicio.detalle);
-				formServicio.append("pago", store.servicio.pago);
-				formServicio.append("reclamo_id", store.formulario.reclamo_id);
-				if (store.servicio.archivoServicio != null)
-					formServicio.append(
-						"archivoServicio",
-						store.servicio.archivoServicio,
-						store.servicio.archivoServicio.name
-					);
-				fetch(store.apiUrl + "/api/servicios/", {
-					method: "Post",
-					body: formServicio,
-					mimeType: "multipart/form-data",
-					headers: {
-						Authorization: "Bearer " + store.access
-					}
-				})
-					.then(resp => resp.json())
-					.then(data => {
-						store.documentos
-							.slice(0)
-							.reverse()
-							.map((documento, i) => {
-								let formDocumento = new FormData();
-								formDocumento.append("servicio_id", data.id);
-								formDocumento.append("tipodoc", documento.tipodoc);
-								formDocumento.append("numdoc", documento.numdoc);
-								formDocumento.append("datedoc", documento.datedoc);
-								formDocumento.append("montodoc", documento.montodoc);
-								fetch(store.apiUrl + "/api/documentos/", {
-									method: "Post",
-									body: formDocumento,
-									headers: {
-										Authorization: "Bearer " + store.access
-									}
-								});
-							});
-					})
-					.catch(error => {
-						setStore({ error });
-						alert("No se pudo ingresar el documento, revise los campos");
-					});
-			},
 			handlePutServicio: history => {
 				const store = getStore();
 				let formServicio = new FormData();
@@ -292,19 +247,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				})
 					.then(resp => resp.json())
-					.then(data => {
-						store.documentos
-							.slice(0)
-							.reverse()
-							.map((documento, i) => {
-								fetch(store.apiUrl + "/api/documentos/" + i, {
-									method: "Put",
-									headers: {
-										Authorization: "Bearer " + store.access
-									}
-								});
-							});
-					})
+					.then(() => getActions().getServicios())
 					.catch(error => {
 						setStore({ error });
 						alert("No se pudo ingresar el documento, revise los campos");
@@ -435,6 +378,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let deleteselect = store.deleteselect;
 				deleteselect = item;
 				setStore({ deleteselect });
+			},
+			handleSelectedServicio: (servicio, i) => {
+				const store = getStore();
+				let serviceSelected = store.serviceSelected;
+				serviceSelected = servicio;
+				let numservice = i;
+				setStore({ serviceSelected, numservice });
 			},
 			handleFiltroReclamo: e => {
 				const { name, value } = e.target;
@@ -576,10 +526,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 			// 		.catch(error => setStore({ error }));
 			// },
 
-			getServicios: id => {
+			getServicios: () => {
 				const store = getStore();
 
-				fetch(store.apiUrl + "/api/serviciosDocumentos/" + id, {
+				fetch(store.apiUrl + "/api/serviciosDocumentos/" + store.formulario.reclamo_id, {
 					method: "GET",
 					headers: {
 						"Content-Type": "application/json",

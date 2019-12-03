@@ -31,9 +31,9 @@ export class ListaServicios extends Component {
 											type="button"
 											className="btn btn-primary2"
 											onClick={() =>
-												servicio.archivoServicio == null
+												servicio.archivoServicio.length < 1
 													? alert("no existe el documento")
-													: window.open(store.apiUrl + servicio.archivoServicio)
+													: window.open(store.apiUrl + "/media/" + servicio.archivoServicio)
 											}>
 											<i className="ti-image" />
 										</button>
@@ -44,8 +44,7 @@ export class ListaServicios extends Component {
 											className="btn btn-primary2"
 											data-toggle="modal"
 											data-target="#modalservicioupdate"
-											//onClick={() => actions.handlePutServicio(servicio.id)}
-										>
+											onClick={() => actions.handleSelectedServicio(servicio, i)}>
 											<i className="ti-pencil" />
 										</button>
 									</td>

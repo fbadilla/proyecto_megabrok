@@ -21,17 +21,26 @@ export default class ModalServicioUpdate extends React.Component {
 					this.storeContext = store;
 					this.actionsContext = actions;
 					const foo = () => {
-						if (store.documentos.length > 0) {
-							return store.documentos
+						console.log(store.servicios[store.numservice]);
+						if (store.numservice != "") {
+							return store.servicios[store.numservice].documentos
 								.slice(0)
 								.reverse()
-								.map((documento, i) => {
+								.map((item, i) => {
 									return (
 										<tr key={i}>
-											<td scope="row">{documento.tipodoc}</td>
-											<td>{documento.datedoc}</td>
-											<td>{documento.numdoc}</td>
-											<th>{documento.montodoc}</th>
+											<td scope="row">{item.tipodoc}</td>
+											<td>{item.datedoc}</td>
+											<td>{item.numdoc}</td>
+											<th>{item.montodoc}</th>
+											<th>
+												<button
+													type="button"
+													className="btn btn-primary2"
+													onClick={() => actions.deleteDocumento()}>
+													<i className="ti-trash" />
+												</button>
+											</th>
 										</tr>
 									);
 								});
@@ -53,7 +62,7 @@ export default class ModalServicioUpdate extends React.Component {
 									<div className="modal-header">
 										<div className="col-md-7">
 											<h5 className="modal-title" id="exampleModalLabel">
-												<label htmlFor="inputNombre">Ingreso servicio </label>
+												<label htmlFor="inputNombre">Modificar Servicio </label>
 											</h5>
 										</div>
 
@@ -64,7 +73,7 @@ export default class ModalServicioUpdate extends React.Component {
 													name="archivoServicio"
 													id="docfile"
 													className="form-control"
-													value=""
+													//value={store.serviceSelected.archivoServicio}
 													onChange={e => actions.handleFileChange(e)}
 												/>
 											</div>
@@ -81,6 +90,7 @@ export default class ModalServicioUpdate extends React.Component {
 															classNamePrefix="select"
 															onChange={value => actions.handleServicioSelect(value)}
 															options={store.proveedores}
+															value={store.proveedores[store.documento.proveedor_id - 1]}
 														/>
 													</div>
 												</div>
@@ -92,7 +102,7 @@ export default class ModalServicioUpdate extends React.Component {
 															className="form-control"
 															rows="5"
 															id="detalle"
-															value={store.servicio.detalle}
+															value={store.serviceSelected.detalle}
 															placeholder="Detalles Del Tratamiento"
 															onChange={e => actions.handleServicio(e)}
 														/>
@@ -106,7 +116,7 @@ export default class ModalServicioUpdate extends React.Component {
 																className="form-control"
 																name="pago"
 																id="pago"
-																value={store.documento.pago}
+																value={store.serviceSelected.pago}
 																onChange={e => actions.handleServicio(e)}>
 																<option>COB</option>
 																<option>REM</option>
@@ -127,7 +137,7 @@ export default class ModalServicioUpdate extends React.Component {
 															className="form-control"
 															id="tipodoc"
 															name="tipodoc"
-															value={store.documento.tipodoc}
+															value=""
 															onChange={e => actions.handledocumento(e)}>
 															<option>Boleta</option>
 															<option>Factura</option>
@@ -150,7 +160,7 @@ export default class ModalServicioUpdate extends React.Component {
 															id="datedoc"
 															type="date"
 															className="form-control"
-															value={store.documento.datedoc}
+															value=""
 															onChange={e => actions.handledocumento(e)}
 														/>
 													</div>
@@ -169,7 +179,7 @@ export default class ModalServicioUpdate extends React.Component {
 															placeholder="666"
 															type="number"
 															className="form-control"
-															value={store.documento.numdoc}
+															value=""
 															onChange={e => actions.handledocumento(e)}
 														/>
 													</div>
@@ -187,7 +197,7 @@ export default class ModalServicioUpdate extends React.Component {
 															placeholder="$100.000.-"
 															type="number"
 															className="form-control"
-															value={store.documento.montodoc}
+															value=""
 															onChange={e => actions.handledocumento(e)}
 														/>
 													</div>
@@ -217,6 +227,7 @@ export default class ModalServicioUpdate extends React.Component {
 																<th scope="col">Fecha</th>
 																<th scope="col">N°Doc</th>
 																<th scope="col">Monto</th>
+																<th scope="col">Eliminar</th>
 															</tr>
 														</thead>
 														<tbody>{foo()}</tbody>
@@ -237,7 +248,7 @@ export default class ModalServicioUpdate extends React.Component {
 												actions.handlePutServicio({});
 											}}
 											data-dismiss="modal">
-											Guardar
+											modificar
 										</button>
 									</div>
 								</div>
