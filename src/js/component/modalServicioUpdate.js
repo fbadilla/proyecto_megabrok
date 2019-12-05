@@ -21,7 +21,6 @@ export default class ModalServicioUpdate extends React.Component {
 					this.storeContext = store;
 					this.actionsContext = actions;
 					const foo = () => {
-						console.log(store.servicios[store.numservice]);
 						if (store.numservice != null) {
 							return store.servicios[store.numservice].documentos
 								.slice(0)
@@ -37,7 +36,9 @@ export default class ModalServicioUpdate extends React.Component {
 												<button
 													type="button"
 													className="btn btn-primary2"
-													onClick={() => actions.deleteDocumento(item.id)}>
+													data-toggle="modal"
+													data-target="#modaldeletedocumento"
+													onClick={() => actions.handleDelete(item.id)}>
 													<i className="ti-trash" />
 												</button>
 											</th>
@@ -178,7 +179,6 @@ export default class ModalServicioUpdate extends React.Component {
 															</span>
 														</label>
 														<input
-															value=""
 															name="numdoc"
 															id="numdoc"
 															placeholder="666"
@@ -197,7 +197,6 @@ export default class ModalServicioUpdate extends React.Component {
 															</span>
 														</label>
 														<input
-															value=""
 															name="montodoc"
 															id="montodoc"
 															placeholder="$100.000.-"
