@@ -267,9 +267,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 						alert("No se pudo modificar el servicio, revise los campos");
 					});
 			},
-			deleteDocumento: item => {
+			handleDeleteDocumento: () => {
 				const store = getStore();
-				fetch(store.apiUrl + "/api/documentos/" + item.id, {
+				fetch(store.apiUrl + "/api/documentos/" + store.deleteselect, {
 					method: "DELETE",
 					headers: {
 						"Content-Type": "application/json",
@@ -277,12 +277,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				})
 					.then(resp => resp.json())
-					.then(() => getActions().getDocumentoId(history))
+					.then(() => getActions().getServicios())
 					.catch(error => setStore({ error }));
 			},
-			handleDeleteServicio: id => {
+			handleDeleteServicio: () => {
 				const store = getStore();
-				fetch(store.apiUrl + "/api/servicios/" + id, {
+				fetch(store.apiUrl + "/api/servicios/" + store.deleteselect, {
 					method: "DELETE",
 					mimeType: "multipart/form-data",
 					headers: {
@@ -296,6 +296,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						alert("No se pudo ingresar el documento, revise los campos");
 					});
 			},
+
 			handleEnvioDocumento: history => {
 				getActions().SaveDocumentoSinFile(history);
 			},
@@ -425,7 +426,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				getActions().getServicios(item.id);
 			},
-			handleDeleteReclamo: item => {
+			handleDelete: item => {
 				const store = getStore();
 				let deleteselect = store.deleteselect;
 				deleteselect = item;
@@ -479,10 +480,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			handleEnvioMod: (e, history) => {
 				e.preventDefault();
 				getActions().putFormulario(history);
-			},
-			handleDeleteDoc: (id, history) => {
-				getActions().deleteDocumento(id);
-				getActions().getDocumentoId(history);
 			},
 			handlePDFFormulario: (e, id) => {
 				const store = getStore();
@@ -924,20 +921,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => setStore({ formularios: data }))
 					.catch(error => setStore({ error }));
 			},
-			//funcion GET para obtener los reclamos por usuario - GET api propia
-			deleteDocumento: id => {
-				const store = getStore();
-				fetch(store.apiUrl + "/api/documentos/" + id, {
-					method: "DELETE",
-					headers: {
-						"Content-Type": "application/json",
-						Authorization: "Bearer " + store.access
-					}
-				})
-					.then(resp => resp.json())
-					.then(() => getActions().getServicios())
-					.catch(error => setStore({ error }));
-			},
+
 			//funcion PUT para modificar los datos del usuario - PUT api propia
 			putFormulario: () => {
 				const store = getStore();

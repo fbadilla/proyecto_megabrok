@@ -36,7 +36,9 @@ export default class ModalServicioUpdate extends React.Component {
 												<button
 													type="button"
 													className="btn btn-primary2"
-													onClick={() => actions.deleteDocumento(item.id)}>
+													data-toggle="modal"
+													data-target="#modaldeletedocumento"
+													onClick={() => actions.handleDelete(item.id)}>
 													<i className="ti-trash" />
 												</button>
 											</th>

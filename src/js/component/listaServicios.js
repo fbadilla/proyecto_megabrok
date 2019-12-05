@@ -51,7 +51,9 @@ export class ListaServicios extends Component {
 										<button
 											type="button"
 											className="btn btn-primary2"
-											onClick={() => actions.handleDeleteServicio(servicio.id)}>
+											data-toggle="modal"
+											data-target="#modaldeleteservicio"
+											onClick={() => actions.handleDelete(servicio.id)}>
 											<i className="ti-trash" />
 										</button>
 									</td>
