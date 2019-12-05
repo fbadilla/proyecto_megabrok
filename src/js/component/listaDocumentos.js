@@ -51,7 +51,9 @@ export class ListaDocumentos extends Component {
 										<button
 											type="button"
 											className="btn btn-primary2"
-											onClick={() => actions.handleDeleteDoc(documento.id)}>
+											data-toggle="modal"
+											data-target="#modaldeletedocumento"
+											onClick={() => actions.handleDelete(documento.id)}>
 											<i className="ti-trash" />
 										</button>
 									</td>

@@ -7,6 +7,8 @@ import PropTypes from "prop-types";
 import { Animated } from "react-animated-css";
 import ModalServicio from "../component/modalServicio";
 import { ListaServicios } from "../component/listaServicios";
+import ModalDeleteServicio from "../component/modalDeleteServicio";
+import ModalDeleteDocumento from "../component/modalDeleteDocumento";
 
 export class FormDocUpdate extends React.Component {
 	constructor(props) {
@@ -201,6 +203,8 @@ export class FormDocUpdate extends React.Component {
 							</div>
 							<ModalServicioUpdate />
 							<ModalServicio />
+							<ModalDeleteServicio />
+							<ModalDeleteDocumento />
 						</Fragment>
 					);
 				}}
