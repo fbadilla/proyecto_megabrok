@@ -74,7 +74,7 @@ export default class ModalServicioUpdate extends React.Component {
 													id="docfile"
 													className="form-control"
 													//value={store.serviceSelected.archivoServicio}
-													onChange={e => actions.handleFileChange(e)}
+													onChange={e => actions.handleFileChangemod(e)}
 												/>
 											</div>
 										</div>
@@ -178,6 +178,7 @@ export default class ModalServicioUpdate extends React.Component {
 															</span>
 														</label>
 														<input
+															value=""
 															name="numdoc"
 															id="numdoc"
 															placeholder="666"
@@ -196,6 +197,7 @@ export default class ModalServicioUpdate extends React.Component {
 															</span>
 														</label>
 														<input
+															value=""
 															name="montodoc"
 															id="montodoc"
 															placeholder="$100.000.-"

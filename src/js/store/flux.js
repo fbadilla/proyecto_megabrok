@@ -227,7 +227,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				formServicio.append("detalle", store.serviceSelected.detalle);
 				formServicio.append("pago", store.serviceSelected.pago);
 				formServicio.append("reclamo_id", store.formulario.reclamo_id);
-				if (store.servicio.archivoServicio != null)
+				if (store.serviceSelected.archivoServicio != null)
 					formServicio.append(
 						"archivoServicio",
 						store.serviceSelected.archivoServicio,
@@ -259,6 +259,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 							documentos: []
 						})
 					)
+
+					.then(() => getActions().getServicios())
+
 					.catch(error => {
 						setStore({ error });
 						alert("No se pudo modificar el servicio, revise los campos");
@@ -403,6 +406,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 				servicio["archivoServicio"] = archivoServicio;
 				setStore({
 					servicio
+				});
+			},
+			handleFileChangemod: e => {
+				const store = getStore();
+				const archivoServicio = e.target.files[0];
+				let serviceSelected = store.serviceSelected;
+				serviceSelected["archivoServicio"] = archivoServicio;
+				setStore({
+					serviceSelected
 				});
 			},
 			handleModReclamo: item => {
