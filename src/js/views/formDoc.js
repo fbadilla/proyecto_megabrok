@@ -59,9 +59,6 @@ export class FormDoc extends React.Component {
 													action="#"
 													onSubmit={e => actions.handleFormulario(e, this.props.history)}>
 													<div className="row form-group">
-														<div className="col-md-8">
-															<h4>Datos Personales del Paciente</h4>
-														</div>
 														<div className="col-md-6">
 															<div className="feature-left">
 																<span className="icon">
@@ -113,7 +110,6 @@ export class FormDoc extends React.Component {
 													</div>
 													<div className="row form-group">
 														<div className="col-md-6">
-															<h4>Detalles del Diagnostico / Accidente</h4>
 															<div className="feature-left">
 																<span className="icon">
 																	<i className="ti-clipboard" />
@@ -143,17 +139,9 @@ export class FormDoc extends React.Component {
 																type="button"
 																className="btn btn-primary"
 																data-toggle="modal"
-																data-target="#modalservicio"
-																onClick={() => actions.handleCleanData()}>
+																data-target="#modalservicio">
 																Agregar Servicio
 															</button>
-															{/* <button
-																type="button"
-																className="btn btn-primary"
-																onClick={() => actions.getDocumentoId()}>
-																<i className="ti-reload" />
-																Actualizar Servicios
-															</button> */}
 														</div>
 													</div>
 													<div className="row">

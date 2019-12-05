@@ -224,22 +224,21 @@ export default class ModalServicio extends React.Component {
 													</table>
 												</div>
 											</div>
+											<div className="modal-footer">
+												<button type="button" className="btn btn-primary" data-dismiss="modal">
+													Cerrar
+												</button>
+												<button
+													type="submit"
+													className="btn btn-primary"
+													onClick={() => {
+														actions.handleEnvioServicio({});
+													}}
+													data-dismiss="modal">
+													Guardar
+												</button>
+											</div>
 										</form>
-									</div>
-
-									<div className="modal-footer">
-										<button type="button" className="btn btn-primary" data-dismiss="modal">
-											Cerrar
-										</button>
-										<button
-											type="button"
-											className="btn btn-primary"
-											onClick={() => {
-												actions.handleEnvioServicio({});
-											}}
-											data-dismiss="modal">
-											Guardar
-										</button>
 									</div>
 								</div>
 							</div>
