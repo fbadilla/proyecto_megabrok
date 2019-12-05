@@ -144,7 +144,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let documentos = store.documentos;
 				let doc = store.documento;
 				documentos.push(store.documento);
-				setStore({ documentos, documento: {} });
+				setStore({
+					documentos,
+					documento: {
+						tipodoc: "Boleta",
+						numdoc: "",
+						montodoc: "",
+						datedoc: new Date().toISOString().slice(0, 10)
+					}
+				});
 			},
 
 			handleEnvioServicio: history => {
@@ -190,6 +198,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 							});
 						getActions().getServicios();
 					})
+					.then(
+						setStore({
+							documento: {
+								tipodoc: "Boleta",
+								numdoc: "",
+								montodoc: "",
+								datedoc: new Date().toISOString().slice(0, 10)
+							},
+							servicio: {
+								pago: "COB",
+								detalle: "",
+								archivoServicio: null,
+								proveedor_id: 1
+							},
+							documentos: []
+						})
+					)
 					.catch(error => {
 						setStore({ error });
 						alert("No se pudo ingresar el documento, revise los campos");
@@ -217,6 +242,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				})
 					.then(resp => resp.json())
+					.then(
+						setStore({
+							documento: {
+								tipodoc: "Boleta",
+								numdoc: "",
+								montodoc: "",
+								datedoc: new Date().toISOString().slice(0, 10)
+							},
+							servicio: {
+								pago: "COB",
+								detalle: "",
+								archivoServicio: null,
+								proveedor_id: 1
+							},
+							documentos: []
+						})
+					)
 					.catch(error => {
 						setStore({ error });
 						alert("No se pudo modificar el servicio, revise los campos");
@@ -511,20 +553,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						alert("ya puedes iniciar sesion");
 					});
 			},
-			// getDocumentos: servicio_id => {
-			// 	const store = getStore();
-			// 	fetch(store.apiUrl + "/api/documentos/" + servicio_id, {
-			// 		method: "GET",
-			// 		headers: {
-			// 			"Content-Type": "application/json",
-			// 			Authorization: "Bearer " + store.access
-			// 		}
-			// 	})
-			// 		.then(resp => resp.json())
-			// 		.then(data => setStore({ data }))
-			// 		.catch(error => setStore({ error }));
-			// },
-
 			getServicios: () => {
 				const store = getStore();
 
@@ -740,7 +768,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 								tipodoc: "Boleta",
 								numdoc: "",
 								montodoc: "",
-								datedoc: ""
+								datedoc: new Date().toISOString().slice(0, 10)
 							}
 						});
 					})

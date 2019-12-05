@@ -141,6 +141,7 @@ export default class ModalServicioUpdate extends React.Component {
 															className="form-control"
 															id="tipodoc"
 															name="tipodoc"
+															value={store.documento.tipodoc}
 															onChange={e => actions.handledocumento(e)}>
 															<option>Boleta</option>
 															<option>Factura</option>
@@ -163,6 +164,7 @@ export default class ModalServicioUpdate extends React.Component {
 															id="datedoc"
 															type="date"
 															className="form-control"
+															value={store.documento.datedoc}
 															onChange={e => actions.handledocumento(e)}
 														/>
 													</div>
@@ -181,6 +183,7 @@ export default class ModalServicioUpdate extends React.Component {
 															placeholder="666"
 															type="number"
 															className="form-control"
+															value={store.documento.numdoc}
 															onChange={e => actions.handledocumento(e)}
 														/>
 													</div>
@@ -198,6 +201,7 @@ export default class ModalServicioUpdate extends React.Component {
 															placeholder="$100.000.-"
 															type="number"
 															className="form-control"
+															value={store.documento.montodoc}
 															onChange={e => actions.handledocumento(e)}
 														/>
 													</div>
