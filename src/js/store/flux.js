@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			apiUrl: "http://best-health.ddns.net:8006",
+			apiUrl: "http://0.0.0.0:8006",
 			apiUrl2: "https://apy-cors-fcobad.herokuapp.com/https://mobile.bestdoctorsinsurance.com/spiritapi/api",
 			token: {
 				refresh: "",
@@ -53,7 +53,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				nombre_proveedor: "",
 				grupo: "",
 				rut_proveedor: ""
-			}
+			},
+			persona: {},
+			personas: [],
+			filtroPersona: {}
 		},
 
 		actions: {
@@ -75,6 +78,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				setStore({
 					formulario
+				});
+			},
+			handleFormPersona: e => {
+				const { name, value } = e.target;
+				const store = getStore();
+				let persona = store.persona;
+				persona[name] = value;
+
+				setStore({
+					persona
 				});
 			},
 
@@ -575,6 +588,33 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({ filtroValue, coleccion, filtro });
 				}
 			},
+			handleFiltroPersona: e => {
+				e.preventDefault();
+
+				const store = getStore();
+				const filtro = store.busqueda;
+				console.log(filtro);
+				let personasFiltro = store.personas.filter(
+					item =>
+						item.nombre.toLowerCase().includes(filtro) ||
+						//item.nombrePila.toLowerCase().includes(filtro) ||
+						item.emailPrimario.toLowerCase().includes(filtro)
+					//item.emailSecundario.toLowerCase().includes(filtro) ||
+					//item.direccionParticular.toLowerCase().includes(filtro) ||
+					//item.direccionComercial.toLowerCase().includes(filtro) ||
+					//item.nombreConyuge.toLowerCase().includes(filtro) ||
+					//item.emailConyuge.toLowerCase().includes(filtro) ||
+					//item.telefonoConyuge.toLowerCase().includes(filtro) ||
+					//item.telefonoCasa.toLowerCase().includes(filtro) ||
+					//item.celular.toLowerCase().includes(filtro) ||
+					//item.nombreSecretaria.toLowerCase().includes(filtro) ||
+					//item.emailSecretaria.toLowerCase().includes(filtro) ||
+					//item.isapre.toLowerCase().includes(filtro) ||
+					//item.fecha_nacimiento_persona.toLowerCase().includes(filtro) ||
+					//item.telefonoOficina.toLowerCase().includes(filtro)
+				);
+				setStore({ personasFiltro });
+			},
 			vaciarFiltro: () => {
 				const store = getStore();
 				setStore({ filtro: false, filtroReclamo: "" });
@@ -691,6 +731,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 							servicios
 						})
 					)
+					.catch(error => setStore({ error }));
+			},
+			getPersonas: () => {
+				const store = getStore();
+				fetch(store.apiUrl + "/api/personas/", {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + store.access
+					}
+				})
+					.then(resp => resp.json())
+					.then(data => setStore({ personas: data }))
 					.catch(error => setStore({ error }));
 			},
 
@@ -982,6 +1035,27 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					.then(() => {
 						getActions().getServicios();
+					});
+			},
+			postAddPersona: () => {
+				let store = getStore();
+				let data = store.persona;
+				fetch(store.apiUrl + "/api/personas/", {
+					method: "POST",
+					body: JSON.stringify(data),
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + store.access
+					}
+				})
+					.then(resp => resp)
+					.then(data => {
+						setStore({
+							persona: {}
+						});
+					})
+					.then(() => {
+						getActions().getPersonas();
 					});
 			},
 			//funcion POST para crear un nuevo reclamo - POST api propia

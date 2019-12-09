@@ -52,8 +52,8 @@ export class Navbar extends React.Component {
 											</li>
 											<li>
 												<Link to="/personas">Personas</Link>
-												</li>
-												<li>
+											</li>
+											<li>
 												<Link to="/proveedores">Proveedores</Link>
 											</li>
 											<li>

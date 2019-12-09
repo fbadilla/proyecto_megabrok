@@ -1,11 +1,6 @@
 import React, { Fragment } from "react";
 import { Context } from "../store/appContext";
 import { Animated } from "react-animated-css";
-import { ListaReclamos } from "../component/listaReclamos";
-import ModalViewDocumento from "../component/modalViewDocumento";
-import ModalDocumento from "../component/modalDocumento";
-import ModalDocumentoUpdate from "../component/modalDocumentoUpdate";
-import ModalDelete from "../component/modalDelete";
 import { ListaProveedores } from "../component/listaProveedores";
 import ModalProveedor from "../component/modalProveedor";
 import ModalDeleteProveedor from "../component/modalDeleteProveedor";
