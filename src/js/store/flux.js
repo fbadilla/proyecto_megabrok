@@ -143,7 +143,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				let documentos = store.documentos;
 				let doc = store.documento;
-				if (doc.montodoc != "") {
+				if (doc.montodoc != "" && doc.numdoc != "") {
 					documentos.push(store.documento);
 				} else {
 					alert("ingresa todos los campos del documento");
