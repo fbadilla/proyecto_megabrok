@@ -13,6 +13,7 @@ import { FormularioChile } from "./views/formularioChile";
 import { FormDoc } from "./views/formDoc";
 import { FormDocUpdate } from "./views/formDocUpdate";
 import PrivateRoute from "./PrivateRoute";
+import { MantenedorPersonas } from "./views/mantendorPersonas";
 
 import { Context } from "./store/appContext";
 
@@ -58,6 +59,11 @@ export class Layout extends React.Component {
 										<PrivateRoute path="/reclamos" component={DashReclamo} access={store.access} />
 										<PrivateRoute path="/formdoc" component={FormDoc} access={store.access} />
 										<PrivateRoute path="/update" component={FormDocUpdate} access={store.access} />
+										<PrivateRoute
+											path="/personas"
+											component={MantenedorPersonas}
+											access={store.access}
+										/>
 										<Route render={() => <h1>Not found!</h1>} />
 									</Switch>
 								</Fragment>
