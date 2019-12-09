@@ -1,10 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
 import ModalDocumento from "./modalServicio";
-import { ListaDocumentos } from "./listaDocumentos";
-export default class ModalViewDocumento extends React.Component {
+import { ListaServiciosView } from "./listaServiciosView";
+
+export default class ModalViewServicio extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {};
@@ -17,7 +17,7 @@ export default class ModalViewDocumento extends React.Component {
 		return (
 			<div
 				className="modal fade"
-				id="modalviewdocumento"
+				id="modalviewservicio"
 				tabIndex="-1"
 				role="dialog"
 				aria-labelledby="myLargeModalLabel"
@@ -26,11 +26,11 @@ export default class ModalViewDocumento extends React.Component {
 					<div className="modal-content">
 						<div className="modal-header">
 							<h5 className="modal-title" id="exampleModalLabel">
-								<label htmlFor="inputNombre">Documentos </label>
+								<label htmlFor="inputNombre">Servicios </label>
 							</h5>
 						</div>
 						<div className="modal-body">
-							<ListaDocumentos />
+							<ListaServiciosView />
 						</div>
 
 						<div className="modal-footer">
@@ -44,6 +44,6 @@ export default class ModalViewDocumento extends React.Component {
 		);
 	}
 }
-ModalViewDocumento.propTypes = {
+ModalViewServicio.propTypes = {
 	history: PropTypes.array
 };

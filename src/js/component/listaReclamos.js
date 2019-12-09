@@ -67,7 +67,7 @@ export class ListaReclamos extends Component {
 														className="btn btn-primary3"
 														data-toggle="modal"
 														data-target="#modaldelete"
-														onClick={() => actions.handleDeleteReclamo(item.id)}>
+														onClick={() => actions.handleDelete(reclamo_id)}>
 														<i className="ti-trash" />
 													</button>
 												</td>
@@ -103,8 +103,8 @@ export class ListaReclamos extends Component {
 														type="button"
 														className="btn btn-primary2"
 														data-toggle="modal"
-														data-target="#modalviewdocumento"
-														onClick={() => actions.getDocumentoId2(item.id)}>
+														data-target="#modalviewservicio"
+														onClick={() => actions.handleModReclamo(item)}>
 														<i className="ti-eye" />
 													</button>
 												</td>
@@ -122,7 +122,7 @@ export class ListaReclamos extends Component {
 														className="btn btn-primary3"
 														data-toggle="modal"
 														data-target="#modaldelete"
-														onClick={() => actions.handleDelete(item.id)}>
+														onClick={() => actions.handleDelete(item.reclamo_id)}>
 														<i className="ti-trash" />
 													</button>
 												</td>

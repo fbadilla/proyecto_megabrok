@@ -56,7 +56,7 @@ export class FormDocUpdate extends React.Component {
 										<div className="col-md-12">
 											<div className="col-md-10 ">
 												<h2>Reclamo Nº</h2>
-												<h1>{store.formulario.id}</h1>
+												<h1>{store.formulario.reclamo_id}</h1>
 												<form
 													action="#"
 													onSubmit={e => actions.handleEnvioMod(e, this.props.history)}>
@@ -185,7 +185,8 @@ export class FormDocUpdate extends React.Component {
 																type="button"
 																className="btn btn-primary"
 																data-toggle="modal"
-																data-target="#modalservicio">
+																data-target="#modalservicio"
+																onClick={() => actions.cleanService()}>
 																Agregar Servicio
 															</button>
 														</div>

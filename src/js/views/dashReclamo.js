@@ -2,10 +2,10 @@ import React, { Fragment } from "react";
 import { Context } from "../store/appContext";
 import { Animated } from "react-animated-css";
 import { ListaReclamos } from "../component/listaReclamos";
-import ModalViewDocumento from "../component/modalViewDocumento";
-import ModalDocumento from "../component/modalDocumento";
-import ModalDocumentoUpdate from "../component/modalDocumentoUpdate";
 import ModalDelete from "../component/modalDelete";
+import ModalDeleteDocumento from "../component/modalDeleteDocumento";
+import ModalServicioUpdate from "../component/modalServicioUpdate";
+import ModalViewServicio from "../component/modalViewServicio";
 
 export class DashReclamo extends React.Component {
 	constructor(props) {
@@ -46,11 +46,10 @@ export class DashReclamo extends React.Component {
 							<div className="gtco-container">
 								<ListaReclamos />
 							</div>
-
-							<ModalViewDocumento />
-							<ModalDocumentoUpdate />
-							<ModalDocumento />
+							<ModalServicioUpdate />
 							<ModalDelete />
+							<ModalDeleteDocumento />
+							<ModalViewServicio />
 						</Fragment>
 					);
 				}}

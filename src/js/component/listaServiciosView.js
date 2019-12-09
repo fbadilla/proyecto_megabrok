@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
 
-export class ListaServicios extends Component {
+export class ListaServiciosView extends Component {
 	constructor(props) {
 		super(props);
 		this.storeContext = null;
@@ -30,22 +30,11 @@ export class ListaServicios extends Component {
 											type="button"
 											className="btn btn-primary2"
 											onClick={() =>
-												servicio.archivoServicio.length < 1 ||
-												servicio.archivoServicio.length == null
+												servicio.archivoServicio.length < 1
 													? alert("no existe el documento")
 													: window.open(store.apiUrl + "/media/" + servicio.archivoServicio)
 											}>
 											<i className="ti-image" />
-										</button>
-									</td>
-									<td>
-										<button
-											type="button"
-											className="btn btn-primary2"
-											data-toggle="modal"
-											data-target="#modalservicioupdate"
-											onClick={() => actions.handleSelectedServicio(servicio, i)}>
-											<i className="ti-pencil" />
 										</button>
 									</td>
 									<td>
@@ -73,34 +62,11 @@ export class ListaServicios extends Component {
 												<th>Monto</th>
 												<th>Pago</th>
 												<th>Archivo</th>
-												<th>Modificar</th>
 												<th>Eliminar</th>
-												<th>
-													<button
-														type="button"
-														className="btn btn-primary2"
-														onClick={() => actions.getDocumentoId()}>
-														<i className="ti-reload" />
-													</button>
-												</th>
 											</tr>
 										</thead>
 										<tbody>{columnas}</tbody>
 									</table>
-								</div>
-								<div className="row">
-									<div className="col-md-3">
-										<div className="feature-left">
-											<button
-												type="button"
-												className="btn btn-primary"
-												onClick={e =>
-													actions.handlePDFFormulario(e, store.formulario.reclamo_id)
-												}>
-												CREAR FORMULARIO
-											</button>
-										</div>
-									</div>
 								</div>
 							</div>
 						);
@@ -112,6 +78,6 @@ export class ListaServicios extends Component {
 		);
 	}
 }
-ListaServicios.propTypes = {
+ListaServiciosView.propTypes = {
 	history: PropTypes.array
 };
