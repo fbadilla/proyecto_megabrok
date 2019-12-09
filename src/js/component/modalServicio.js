@@ -64,7 +64,6 @@ export default class ModalServicio extends React.Component {
 													name="archivoServicio"
 													id="docfile"
 													className="form-control"
-													value=""
 													onChange={e => actions.handleFileChange(e)}
 												/>
 											</div>
@@ -220,7 +219,7 @@ export default class ModalServicio extends React.Component {
 																<th scope="col">Monto</th>
 															</tr>
 														</thead>
-														<tbody>{foo()}</tbody>
+														<tbody> {foo()} </tbody>
 													</table>
 												</div>
 											</div>

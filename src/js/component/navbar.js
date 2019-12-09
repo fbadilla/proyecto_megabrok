@@ -51,6 +51,9 @@ export class Navbar extends React.Component {
 												<Link to="/ingresareclamo">Crear Reclamo</Link>
 											</li>
 											<li>
+												<Link to="/proveedores">Proveedores</Link>
+											</li>
+											<li>
 												<Link to="/reclamos">Reclamos</Link>
 											</li>
 											<li className="btn-cta">

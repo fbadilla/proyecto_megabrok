@@ -15,6 +15,7 @@ import { FormDocUpdate } from "./views/formDocUpdate";
 import PrivateRoute from "./PrivateRoute";
 
 import { Context } from "./store/appContext";
+import { DashProveedor } from "./views/dashProveedor";
 
 //create your first component
 export class Layout extends React.Component {
@@ -58,6 +59,11 @@ export class Layout extends React.Component {
 										<PrivateRoute path="/reclamos" component={DashReclamo} access={store.access} />
 										<PrivateRoute path="/formdoc" component={FormDoc} access={store.access} />
 										<PrivateRoute path="/update" component={FormDocUpdate} access={store.access} />
+										<PrivateRoute
+											path="/proveedores"
+											component={DashProveedor}
+											access={store.access}
+										/>
 										<Route render={() => <h1>Not found!</h1>} />
 									</Switch>
 								</Fragment>
