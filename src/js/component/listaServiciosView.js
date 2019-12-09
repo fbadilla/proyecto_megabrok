@@ -37,16 +37,6 @@ export class ListaServiciosView extends Component {
 											<i className="ti-image" />
 										</button>
 									</td>
-									<td>
-										<button
-											type="button"
-											className="btn btn-primary2"
-											data-toggle="modal"
-											data-target="#modaldeleteservicio"
-											onClick={() => actions.handleDelete(servicio.id)}>
-											<i className="ti-trash" />
-										</button>
-									</td>
 								</tr>
 							);
 						});
@@ -62,7 +52,6 @@ export class ListaServiciosView extends Component {
 												<th>Monto</th>
 												<th>Pago</th>
 												<th>Archivo</th>
-												<th>Eliminar</th>
 											</tr>
 										</thead>
 										<tbody>{columnas}</tbody>
