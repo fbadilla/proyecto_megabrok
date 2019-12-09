@@ -48,7 +48,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 			aseguradosFiltro: {},
 			proveedores: {},
 			serviceSelected: {},
-			numservice: null
+			numservice: null,
+			proveedor: {
+				nombre_proveedor: "",
+				grupo: "",
+				rut_proveedor: ""
+			}
 		},
 
 		actions: {
@@ -393,6 +398,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 				});
 			},
 
+			handleProveedor: e => {
+				const { name, value } = e.target;
+				const store = getStore();
+				let proveedor = store.proveedor;
+				proveedor[name] = value;
+				setStore({
+					proveedor
+				});
+			},
+
 			//funcion que maneja el Post para crear un nuevo reclamo en api/claim
 			handleGenerate: (e, history) => {
 				e.preventDefault();
@@ -439,6 +454,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				serviceSelected["archivoServicio"] = null;
 				setStore({ serviceSelected, numservice });
 			},
+			handleUpdateProveedor: item => {
+				let store = getStore();
+				let proveedor = Object.assign({}, item);
+				setStore({ proveedor });
+			},
 			handleFiltroReclamo: e => {
 				const { name, value } = e.target;
 				const store = getStore();
@@ -461,6 +481,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 					);
 					let filtro = true;
 					setStore({ filtroReclamo, coleccion, filtro });
+				}
+			},
+			handleFiltroProveedor: e => {
+				const { name, value } = e.target;
+				const store = getStore();
+				let filtroValue = value.toLowerCase();
+				if (filtroValue == "") {
+					let filtro = false;
+					setStore({ filtro });
+				} else {
+					let coleccion = store.proveedores.filter(
+						item =>
+							item.nombre_proveedor.toLowerCase().includes(filtroValue) ||
+							item.grupo.toLowerCase().includes(filtroValue) ||
+							item.rut_proveedor.toLowerCase().includes(filtroValue)
+					);
+					let filtro = true;
+					setStore({ filtroValue, coleccion, filtro });
 				}
 			},
 			vaciarFiltro: () => {
@@ -668,6 +706,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => setStore({ proveedores: data }))
 					.catch(error => setStore({ error }));
 			},
+			getProveedores: () => {
+				const store = getStore();
+				fetch(store.apiUrl + "/api/proveedores/", {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + store.access
+					}
+				})
+					.then(resp => resp.json())
+					.then(data => setStore({ proveedores: data }))
+					.catch(error => setStore({ error }));
+			},
 			handleChangeProveedor: e => {
 				const { name, value } = e.target;
 				const store = getStore();
@@ -757,6 +808,79 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(resp => resp.json())
 					.then(() => {
 						getActions().getFormulario();
+					});
+			},
+			deleteProveedor: () => {
+				const store = getStore();
+				fetch(store.apiUrl + "/api/proveedores/" + store.deleteselect, {
+					method: "DELETE",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + store.access
+					}
+				})
+					.then(resp => resp.json())
+					.then(() => {
+						getActions().getProveedores();
+					});
+			},
+			proveedorVacio: () => {
+				setStore({
+					proveedor: {
+						nombre_proveedor: "",
+						grupo: "",
+						rut_proveedor: ""
+					}
+				});
+			},
+			postAddProveedor: () => {
+				let store = getStore();
+				let data = store.proveedor;
+				fetch(store.apiUrl + "/api/proveedores/", {
+					method: "POST",
+					body: JSON.stringify(data),
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + store.access
+					}
+				})
+					.then(resp => resp)
+					.then(data => {
+						setStore({
+							proveedor: {
+								nombre_proveedor: "",
+								grupo: "",
+								rut_proveedor: ""
+							}
+						});
+					})
+					.then(() => {
+						getActions().getProveedores();
+					});
+			},
+			putProveedor: () => {
+				let store = getStore();
+				let data = store.proveedor;
+				fetch(store.apiUrl + "/api/proveedores/", {
+					method: "PUT",
+					body: JSON.stringify(data),
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + store.access
+					}
+				})
+					.then(resp => resp)
+					.then(data => {
+						setStore({
+							proveedor: {
+								nombre_proveedor: "",
+								grupo: "",
+								rut_proveedor: ""
+							}
+						});
+					})
+					.then(() => {
+						getActions().getProveedores();
 					});
 			},
 			postDocumento: () => {
