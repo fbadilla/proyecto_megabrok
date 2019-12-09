@@ -74,7 +74,6 @@ export default class ModalServicioUpdate extends React.Component {
 													name="archivoServicio"
 													id="docfile"
 													className="form-control"
-													//value={store.serviceSelected.archivoServicio}
 													onChange={e => actions.handleFileChangemod(e)}
 												/>
 											</div>
