@@ -65,55 +65,69 @@ export class MantenedorPersonas extends React.Component {
 							<Fragment>
 								<div className="gtco-section border-bottom">
 									<div className="gtco-container">
-										<div className="row">
-											<div className="col-md-12">
-												<div className="col-md-10 ">
-													<h2>Buscar cliente</h2>
-													<form action="#" onSubmit={e => actions.handleFiltroPersona(e)}>
-														<div className="row form-group">
-															<div className="col-md-5">
-																<div className="feature-left">
-																	<span className="icon">
+										<div className="row justify-content-center">
+											<div className="col-md-10 ">
+												<form action="#" onSubmit={e => actions.handleFiltroPersona(e)}>
+													<div className="row form-group">
+														<div className="col-md-4">
+															<div className="input-group  input-group-lg">
+																<div className="input-group-prepend">
+																	<span
+																		className="input-group-text"
+																		id="basic-addon1">
 																		<i className="ti-search" />
 																	</span>
-																	<div className="feature-copy">
-																		<input
-																			name="busqueda"
-																			id="busqueda"
-																			placeholder="buscar cliente"
-																			type="text"
-																			className="form-control"
-																			onChange={e => actions.handleChange(e)}
-																		/>
-																	</div>
 																</div>
+<<<<<<< HEAD
 															</div>
 															<div className="col-md-5">
+=======
+>>>>>>> 1cf88e19f25f831a0ebe4023ab53fab51912641f
 																<input
-																	type="submit"
-																	value="buscar"
-																	className="btn btn-primary"
+																	name="busqueda"
+																	type="busqueda"
+																	className="form-control"
+																	placeholder="Buscar"
+																	onChange={e => actions.handleChange(e)}
 																/>
 															</div>
 														</div>
-													</form>
-
-													<h3>Resultados </h3>
-													<table className="table">
-														<thead>
-															<tr>
-																<th scope="col">Nombres</th>
-																<th scope="col">Rut</th>
-																<th scope="col">E-mail Primario</th>
-																<th scope="col">Direccion Particular</th>
-																<th scope="col">Telefonos </th>
-																<th scope="col">Oficina </th>
-																<th scope="col">Editar</th>
-																<th scope="col">Eliminar</th>
-															</tr>
-														</thead>
-														<tbody>{foo()}</tbody>
-													</table>
+														<div className="col-md-2">
+															<input
+																type="submit"
+																value="Buscar"
+																className="btn btn-primary"
+															/>
+														</div>
+														<div className="col-md-2 offset-4">
+															<button
+																type="button"
+																className="btn btn-primary"
+																data-toggle="modal"
+																data-target="#ModalAddPersona">
+																<i className="ti-plus" /> AGREGAR
+															</button>
+														</div>
+													</div>
+												</form>
+												<div className="gtco-section ">
+													<div className="table-responsive">
+														<table className="table">
+															<thead>
+																<tr>
+																	<th scope="col">Nombres</th>
+																	<th scope="col">Rut</th>
+																	<th scope="col">E-mail Primario</th>
+																	<th scope="col">Direccion Particular</th>
+																	<th scope="col">Telefonos </th>
+																	<th scope="col">Oficina </th>
+																	<th scope="col">Editar</th>
+																	<th scope="col">Eliminar</th>
+																</tr>
+															</thead>
+															<tbody>{foo()}</tbody>
+														</table>
+													</div>
 												</div>
 											</div>
 										</div>

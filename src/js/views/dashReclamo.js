@@ -30,7 +30,11 @@ export class DashReclamo extends React.Component {
 					return (
 						<Fragment>
 							<div className="gtco-container">
-								<ListaReclamos />
+								<div className="row justify-content-center">
+									<div className="col-md-10 ">
+										<ListaReclamos />
+									</div>
+								</div>
 							</div>
 							<ModalServicioUpdate />
 							<ModalDelete />

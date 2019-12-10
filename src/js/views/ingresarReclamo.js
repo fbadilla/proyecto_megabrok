@@ -48,56 +48,55 @@ export class ingresarReclamo extends React.Component {
 							<Fragment>
 								<div className="gtco-section border-bottom">
 									<div className="gtco-container">
-										<div className="row">
-											<div className="col-md-12">
-												<h2>Buscar cliente</h2>
-												<div className="col-md-10 ">
-													<form
-														action="#"
-														onSubmit={e =>
-															actions.handleSearchPersona(e, this.props.history)
-														}>
-														<div className="row form-group">
-															<div className="col-md-5">
-																<div className="feature-left">
-																	<span className="icon">
+										<div className="row justify-content-center">
+											<div className="col-md-10 ">
+												<form
+													action="#"
+													onSubmit={e => actions.handleSearchPersona(e, this.props.history)}>
+													<div className="row form-group">
+														<div className="col-md-5">
+															<div className="input-group  input-group-lg">
+																<div className="input-group-prepend">
+																	<span
+																		className="input-group-text"
+																		id="basic-addon1">
 																		<i className="ti-search" />
 																	</span>
-																	<div className="feature-copy">
-																		<input
-																			name="busqueda"
-																			id="busqueda"
-																			placeholder="n° poliza, rut, nombre"
-																			type="text"
-																			className="form-control"
-																			onChange={e => actions.handleChange(e)}
-																		/>
-																	</div>
 																</div>
-															</div>
-															<div className="col-md-5">
 																<input
-																	type="submit"
-																	value="buscar"
-																	className="btn btn-primary"
+																	name="busqueda"
+																	type="busqueda"
+																	className="form-control"
+																	placeholder="Buscar"
+																	onChange={e => actions.handleChange(e)}
 																/>
 															</div>
 														</div>
-													</form>
+														<div className="col-md-5">
+															<input
+																type="submit"
+																value="Buscar"
+																className="btn btn-primary"
+															/>
+														</div>
+													</div>
+												</form>
 
-													<h3>Resultados </h3>
-													<table className="table">
-														<thead>
-															<tr>
-																<th scope="col">N° Poliza</th>
-																<th scope="col">Rut</th>
-																<th scope="col">Nombre</th>
-																<th scope="col">Tipo Asegurado</th>
-																<th scope="col">Generar Reclamo</th>
-															</tr>
-														</thead>
-														<tbody>{foo()}</tbody>
-													</table>
+												<div className="gtco-section ">
+													<div className="table-responsive">
+														<table className="table">
+															<thead>
+																<tr>
+																	<th scope="col">N° Poliza</th>
+																	<th scope="col">Rut</th>
+																	<th scope="col">Nombre</th>
+																	<th scope="col">Tipo Asegurado</th>
+																	<th scope="col">Generar Reclamo</th>
+																</tr>
+															</thead>
+															<tbody>{foo()}</tbody>
+														</table>
+													</div>
 												</div>
 											</div>
 										</div>
