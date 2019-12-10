@@ -78,11 +78,8 @@ export class MantenedorPersonas extends React.Component {
 																		<i className="ti-search" />
 																	</span>
 																</div>
-<<<<<<< HEAD
 															</div>
 															<div className="col-md-5">
-=======
->>>>>>> 1cf88e19f25f831a0ebe4023ab53fab51912641f
 																<input
 																	name="busqueda"
 																	type="busqueda"
