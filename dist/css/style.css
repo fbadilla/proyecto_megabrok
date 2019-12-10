@@ -99,11 +99,7 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 
 .gtco-nav {
-<<<<<<< HEAD
-  position: fixed;
-=======
   position: relative;
->>>>>>> 3731f2f57f887fed2b59b213d0e3abdef15602a7
   top: 0;
   left: 0;
   margin: 0;
@@ -111,11 +107,7 @@ h1, h2, h3, h4, h5, h6, figure {
   width: 100%;
   padding: 20px 0;
   z-index: 1001;
-<<<<<<< HEAD
-  background: rgba(0, 0, 0, 0.5);
-=======
   background:rgb(68,96,109);
->>>>>>> 3731f2f57f887fed2b59b213d0e3abdef15602a7
 }
 @media screen and (max-width: 768px) {
   .gtco-nav {
@@ -1935,3 +1927,37 @@ form label {
 
 /*# sourceMappingURL=style.css.map */
 
+input[type="search"]{
+  width: 350px; /*ancho por defecto*/
+  background: #ededed url('http://localhost:8080/images/search-icon.png') no-repeat 9px center; /*icono lupa*/
+  padding: 9px 10px 9px 32px;
+  /*border-radius: 15em;*/
+  -webkit-transition: all .5s; /* transición de .5seg a todos los elementos para chrome*/
+  -moz-transition: all .5s; /* transición de .5seg a todos los elementos para mozilla*/
+  -o-transition: all .5s; /* transición de .5seg a todos los elementos para ophera*/
+  transition: all .5s; /* transición de .5seg a todos los elementos*/
+  outline: none; /* ocultar el fucos automático de los input */
+}
+input[type="search"]:focus{
+  width: 500px; /*tamaño del boton buscar al hacer click*/
+  padding-left: 32px; /*espacio entre el icono lupa y el placeholder*/
+  color: #000;
+  background-color: #FFF;
+}
+input[type="search2"]{
+  width: 100px; /*ancho por defecto*/
+  background: #ededed url('http://localhost:8080/images/search-icon.png') no-repeat 9px center; /*icono lupa*/
+  padding: 9px 10px 9px 32px;
+  border-radius: 10em;
+  -webkit-transition: all .5s; /* transición de .5seg a todos los elementos para chrome*/
+  -moz-transition: all .5s; /* transición de .5seg a todos los elementos para mozilla*/
+  -o-transition: all .5s; /* transición de .5seg a todos los elementos para ophera*/
+  transition: all .5s; /* transición de .5seg a todos los elementos*/
+  outline: none; /* ocultar el fucos automático de los input */
+}
+input[type="search2"]:focus{
+  width: 400px; /*tamaño del boton buscar al hacer click*/
+  padding-left: 32px; /*espacio entre el icono lupa y el placeholder*/
+  color: #000;
+  background-color: #FFF;
+}

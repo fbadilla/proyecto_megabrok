@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			apiUrl: "http://127.0.0.1:8000",
+			apiUrl: "http://127.0.0.1:8006",
 			apiUrl2: "https://apy-cors-fcobad.herokuapp.com/https://mobile.bestdoctorsinsurance.com/spiritapi/api",
 			token: {
 				refresh: "",
@@ -595,7 +595,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				console.log(filtro);
 				let personasFiltro = store.personas.filter(
 					item =>
+						(item.nombre + " " + item.apellido).toLowerCase().includes(filtro) ||
 						item.nombre.toLowerCase().includes(filtro) ||
+						item.apellido.toLowerCase().includes(filtro) ||
 						//item.nombrePila.toLowerCase().includes(filtro) ||
 						item.emailPrimario.toLowerCase().includes(filtro)
 					//item.emailSecundario.toLowerCase().includes(filtro) ||

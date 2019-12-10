@@ -26,7 +26,7 @@ export class DashProveedor extends React.Component {
 					this.actionsContext = actions;
 					return (
 						<Fragment>
-							<div className="gtco-container">
+							<div className="gtco-container ">
 								<div className="col-10 offset-1">
 									<ListaProveedores />
 								</div>

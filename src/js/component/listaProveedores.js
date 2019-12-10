@@ -115,18 +115,20 @@ export class ListaProveedores extends Component {
 										</div>
 									</div>
 									<div className="gtco-section ">
-										<table className="table">
-											<thead>
-												<tr>
-													<th scope="col">Nombre</th>
-													<th scope="col">Grupo</th>
-													<th scope="col">Rut</th>
-													<th scope="col">Editar</th>
-													<th scope="col">Eliminar</th>
-												</tr>
-											</thead>
-											<tbody>{foo()}</tbody>
-										</table>
+										<div className="table-responsive">
+											<table className="table">
+												<thead>
+													<tr>
+														<th scope="col">Nombre</th>
+														<th scope="col">Grupo</th>
+														<th scope="col">Rut</th>
+														<th scope="col">Editar</th>
+														<th scope="col">Eliminar</th>
+													</tr>
+												</thead>
+												<tbody>{foo()}</tbody>
+											</table>
+										</div>
 									</div>
 								</Fragment>
 							);
