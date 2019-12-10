@@ -1,8 +1,6 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
-import Select from "react-select";
 
 export default class ModalPersona extends React.Component {
 	constructor(props) {
@@ -19,7 +17,6 @@ export default class ModalPersona extends React.Component {
 				{({ store, actions }) => {
 					this.storeContext = store;
 					this.actionsContext = actions;
-
 					return (
 						<div
 							className="modal fade"
@@ -36,10 +33,7 @@ export default class ModalPersona extends React.Component {
 										</h5>
 									</div>
 									<div className="modal-body">
-										<form
-											action="#"
-											//onSubmit={e => actions.handleEnvioMod(e, this.props.history)}
-										>
+										<form action="#">
 											<div className="row form-group">
 												<div className="col-md-12">
 													<h4>Datos Personales</h4>
@@ -434,7 +428,6 @@ export default class ModalPersona extends React.Component {
 											</div>
 										</form>
 									</div>
-
 									<div className="modal-footer">
 										<button type="button" className="btn btn-primary" data-dismiss="modal">
 											Cerrar

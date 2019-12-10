@@ -19,8 +19,8 @@ export class ListaPersonas extends Component {
 				<Context.Consumer>
 					{({ store, actions }) => {
 						const foo = () => {
-							if (store.filtro) {
-								return store.coleccion.slice(0).map((item, i) => {
+							if (store.personasFiltro.length > 0) {
+								return store.personasFiltro.map((item, i) => {
 									return (
 										<tr key={i}>
 											<td scope="row">{item.nombre + item.apellido}</td>
@@ -57,70 +57,65 @@ export class ListaPersonas extends Component {
 								return "";
 							}
 						};
-						// -------------------------------------------------------------
-						if (store.personas.length > 0) {
-							return (
-								<Fragment>
-									<div className="gtco-section ">
-										<div className="row">
-											<div className="col-md-10 ">
-												<form action="#" onSubmit={e => actions.handleFiltroPersona(e)}>
-													<div className="row form-group">
-														<div className="col-md-5">
-															<div className="feature-left">
-																<span className="icon">
-																	<i className="ti-search" />
-																</span>
-																<div className="feature-copy">
-																	<input
-																		name="busqueda"
-																		id="busqueda"
-																		placeholder=""
-																		type="text"
-																		className="form-control"
-																		onChange={e => actions.handleChange(e)}
-																	/>
-																</div>
-															</div>
-														</div>
-														<div className="form-group">
-															<div className="col-md-5">
-																<input
-																	type="submit"
-																	value="buscar"
-																	className="btn btn-primary"
-																/>
-															</div>
-														</div>
+						this.storeContext = store;
+						this.actionsContext = actions;
+						return (
+							<Fragment>
+								<div className="gtco-section border-bottom">
+									<form action="#" onSubmit={e => actions.handleFiltroPersona(e)}>
+										<div className="row form-group">
+											<div className="col-md-4">
+												<div className="input-group  input-group-lg">
+													<div className="input-group-prepend">
+														<span className="input-group-text" id="basic-addon1">
+															<i className="ti-search" />
+														</span>
 													</div>
-												</form>
-											</div>
-											<div className="gtco-section ">
-												<div className="col-md-8">
-													<table className="table">
-														<thead>
-															<tr>
-																<th scope="col">Nombres</th>
-																<th scope="col">Rut</th>
-																<th scope="col">E-mail Primario</th>
-																<th scope="col">Direccion Particular</th>
-																<th scope="col">Telefonos </th>
-																<th scope="col">Oficina </th>
-																<th scope="col">Editar</th>
-																<th scope="col">Eliminar</th>
-															</tr>
-														</thead>
-														<tbody>{foo()}</tbody>
-													</table>
+													<input
+														name="busqueda"
+														type="busqueda"
+														className="form-control"
+														placeholder="Buscar"
+														onChange={e => actions.handleChange(e)}
+													/>
 												</div>
 											</div>
+											<div className="col-md-2">
+												<input type="submit" value="Buscar" className="btn btn-primary" />
+											</div>
+											<div className="col-md-2 offset-4">
+												<button
+													type="button"
+													className="btn btn-primary"
+													data-toggle="modal"
+													data-target="#ModalAddPersona">
+													<i className="ti-plus" /> AGREGAR
+												</button>
+											</div>
+										</div>
+									</form>
+									<div className="gtco-section ">
+										<div className="table-responsive">
+											<table className="table">
+												<thead>
+													<tr>
+														<th scope="col">Nombres</th>
+														<th scope="col">Rut</th>
+														<th scope="col">E-mail Primario</th>
+														<th scope="col">Direccion Particular</th>
+														<th scope="col">Telefonos </th>
+														<th scope="col">Oficina </th>
+														<th scope="col">Editar</th>
+														<th scope="col">Eliminar</th>
+													</tr>
+												</thead>
+												<tbody>{foo()}</tbody>
+											</table>
 										</div>
 									</div>
-								</Fragment>
-							);
-						} else {
-							return "";
-						}
+								</div>
+							</Fragment>
+						);
 					}}
 				</Context.Consumer>
 			</Animated>
