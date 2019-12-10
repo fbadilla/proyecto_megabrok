@@ -36,27 +36,13 @@ export class FormDocUpdate extends React.Component {
 
 					return (
 						<Fragment>
-							<Animated
-								animationIn="bounceInDown"
-								animationOut="fadeOut"
-								isVisible={true}
-								data-animate-effect="fadeInLeft">
-								<header
-									id="gtco-header"
-									className="gtco-cover gtco-cover-sm"
-									role="banner"
-									style={{ backgroundImage: "url(images/img_6.jpg)" }}>
-									<div className="overlay" />
-									<div className="gtco-container" />
-								</header>
-							</Animated>
 							<div className="gtco-section border-bottom">
 								<div className="gtco-container">
 									<div className="row">
 										<div className="col-md-12">
 											<div className="col-md-10 ">
 												<h2>Reclamo Nº</h2>
-												<h1>{store.formulario.reclamo_id}</h1>
+												<h1>{store.formulario.id}</h1>
 												<form
 													action="#"
 													onSubmit={e => actions.handleEnvioMod(e, this.props.history)}>
@@ -185,8 +171,7 @@ export class FormDocUpdate extends React.Component {
 																type="button"
 																className="btn btn-primary"
 																data-toggle="modal"
-																data-target="#modalservicio"
-																onClick={() => actions.cleanService()}>
+																data-target="#modalservicio">
 																Agregar Servicio
 															</button>
 														</div>

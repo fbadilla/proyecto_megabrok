@@ -27,20 +27,6 @@ export class FormularioChile extends React.Component {
 					this.actionsContext = actions;
 					return (
 						<Fragment>
-							<Animated
-								animationIn="bounceInLeft"
-								animationOut="fadeOut"
-								isVisible={true}
-								data-animate-effect="fadeInLeft">
-								<header
-									id="gtco-header"
-									className="gtco-cover gtco-cover-sm"
-									role="banner"
-									style={{ backgroundImage: "url(images/img_6.jpg)" }}>
-									<div className="overlay" />
-									<div className="gtco-container" />
-								</header>
-							</Animated>
 							<div className="gtco-section border-bottom">
 								<div className="gtco-container">
 									<div className="row">

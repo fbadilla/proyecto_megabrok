@@ -137,36 +137,46 @@ export class ListaReclamos extends Component {
 								<Fragment>
 									<div className="gtco-section ">
 										<div className="col-md-12">
-											<input
-												name="filtro_reclamo"
-												type="text"
-												className="form-control"
-												placeholder="Filtro"
-												onChange={e => actions.handleFiltroReclamo(e)}
-											/>
+											<div className="input-group  input-group-lg">
+												<div className="input-group-prepend">
+													<span className="input-group-text" id="basic-addon1">
+														<i className="ti-search" />
+													</span>
+												</div>
+
+												<input
+													name="filtro_reclamo"
+													type="text"
+													className="form-control"
+													placeholder="Filtro"
+													onChange={e => actions.handleFiltroReclamo(e)}
+												/>
+											</div>
 										</div>
 									</div>
 									<div className="gtco-section ">
 										<div className="col-md-12">
-											<table className="table">
-												<thead>
-													<tr>
-														<th scope="col">Poliza</th>
-														<th scope="col">Poliza Legacy</th>
-														<th scope="col">Realizado por</th>
-														<th scope="col">Estado</th>
-														<th scope="col">Reclamante</th>
-														<th scope="col">Rut</th>
-														<th scope="col">Detalle</th>
-														<th scope="col">Fecha</th>
-														<th scope="col">Dias</th>
-														<th scope="col">Ver más</th>
-														<th scope="col">Editar</th>
-														<th scope="col">Eliminar</th>
-													</tr>
-												</thead>
-												<tbody>{foo()}</tbody>
-											</table>
+											<div className="table-responsive">
+												<table className="table">
+													<thead>
+														<tr>
+															<th scope="col">Poliza</th>
+															<th scope="col">Poliza Legacy</th>
+															<th scope="col">Realizado por</th>
+															<th scope="col">Estado</th>
+															<th scope="col">Reclamante</th>
+															<th scope="col">Rut</th>
+															<th scope="col">Detalle</th>
+															<th scope="col">Fecha</th>
+															<th scope="col">Dias</th>
+															<th scope="col">Ver más</th>
+															<th scope="col">Editar</th>
+															<th scope="col">Eliminar</th>
+														</tr>
+													</thead>
+													<tbody>{foo()}</tbody>
+												</table>
+											</div>
 										</div>
 									</div>
 								</Fragment>
