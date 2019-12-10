@@ -17,6 +17,7 @@ export class ListaServicios extends Component {
 						const columnas = store.servicios.map((servicio, i) => {
 							return (
 								<tr key={i}>
+									<td>{servicio.proveedor_id__nombre_proveedor}</td>
 									<td>{servicio.detalle}</td>
 									<td>{servicio.documentos.map((doc, i) => doc.numdoc).join(" - ")}</td>
 									<td>
@@ -68,6 +69,7 @@ export class ListaServicios extends Component {
 									<table className="table table-striped table-sm">
 										<thead>
 											<tr>
+												<th>Proveedor</th>
 												<th>Detalle </th>
 												<th>Documentos</th>
 												<th>Monto</th>

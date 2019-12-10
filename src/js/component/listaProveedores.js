@@ -108,7 +108,7 @@ export class ListaProveedores extends Component {
 														className="btn btn-primary"
 														data-toggle="modal"
 														data-target="#ModalAddProveedor">
-														<i className="ti-plus" /> AGREGAR
+														AGREGAR
 													</button>
 												</div>
 											</div>

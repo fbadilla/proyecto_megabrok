@@ -244,7 +244,7 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 
 #gtco-header {
-  background: #1D3557;
+  background:rgb(68,96,109);
 }
 @media screen and (max-width: 768px) {
   #gtco-header.gtco-cover {
@@ -466,7 +466,6 @@ h1, h2, h3, h4, h5, h6, figure {
   top: 0;
   left: 0;
   right: 0;
-  background: rgba(0, 0, 0, 0.5);
 }
 .gtco-cover > .gtco-container {
   position: relative;
@@ -821,7 +820,19 @@ form label {
   margin-bottom: 30px;
   position: relative;
 }
+.feature-left2 {
+  float: left;
+  width: 100%;
+  margin-bottom: 0px;
+  position: relative;
+}
+
 .feature-left .icon {
+  float: left;
+  text-align: center;
+  width: 15%;
+}
+.feature-left2 .icon {
   float: left;
   text-align: center;
   width: 15%;
@@ -846,6 +857,12 @@ form label {
   font-size: 40px;
   color: #457B9D;
 }
+.feature-left2 .icon i {
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 40px;
+  color: #457B9D;
+}
 .feature-left .icon2 i {
   display: table-cell;
   vertical-align: middle;
@@ -856,10 +873,19 @@ form label {
   float: right;
   width: 80%;
 }
+.feature-left2 .feature-copy {
+  float: right;
+  width: 80%;
+}
 .feature-left .feature-copy2 {
   width: 80%;
 }
 .feature-left .feature-copy h3 {
+  font-size: 18px;
+  color: #1a1a1a;
+  margin-bottom: 10px;
+}
+.feature-left2 .feature-copy h3 {
   font-size: 18px;
   color: #1a1a1a;
   margin-bottom: 10px;
