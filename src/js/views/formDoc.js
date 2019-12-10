@@ -1,12 +1,12 @@
 import React, { Fragment } from "react";
 import { Context } from "../store/appContext";
+import { Link } from "react-router-dom";
+import { ListaDocumentos } from "../component/listaDocumentos";
 import PropTypes from "prop-types";
 import { Animated } from "react-animated-css";
 import ModalServicio from "../component/modalServicio";
 import ModalServicioUpdate from "../component/modalServicioUpdate";
 import { ListaServicios } from "../component/listaServicios";
-import ModalDeleteServicio from "../component/modalDeleteServicio";
-import ModalDeleteDocumento from "../component/modalDeleteDocumento";
 
 export class FormDoc extends React.Component {
 	constructor(props) {
@@ -139,8 +139,7 @@ export class FormDoc extends React.Component {
 																type="button"
 																className="btn btn-primary"
 																data-toggle="modal"
-																data-target="#modalservicio"
-																onClick={() => actions.cleanService()}>
+																data-target="#modalservicio">
 																Agregar Servicio
 															</button>
 														</div>
@@ -158,8 +157,6 @@ export class FormDoc extends React.Component {
 							</div>
 							<ModalServicioUpdate />
 							<ModalServicio />
-							<ModalDeleteServicio />
-							<ModalDeleteDocumento />
 						</Fragment>
 					);
 				}}

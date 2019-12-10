@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			apiUrl: "http://best-health.ddns.net:8006",
+			apiUrl: "http://127.0.0.1:8000",
 			apiUrl2: "https://apy-cors-fcobad.herokuapp.com/https://mobile.bestdoctorsinsurance.com/spiritapi/api",
 			token: {
 				refresh: "",
@@ -262,7 +262,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 								formDocumento.append("numdoc", item.numdoc);
 								formDocumento.append("datedoc", item.datedoc);
 								formDocumento.append("montodoc", item.montodoc);
-								console.log(formDocumento);
 								fetch(store.apiUrl + "/api/documentos/", {
 									method: "Post",
 									body: formDocumento,

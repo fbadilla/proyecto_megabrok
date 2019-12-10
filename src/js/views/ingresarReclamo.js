@@ -63,8 +63,8 @@ export class ingresarReclamo extends React.Component {
 								<div className="gtco-container">
 									<div className="row">
 										<div className="col-md-12">
+											<h2>Buscar cliente</h2>
 											<div className="col-md-10 ">
-												<h2>Buscar cliente</h2>
 												<form
 													action="#"
 													onSubmit={e => actions.handleSearchPersona(e, this.props.history)}>
@@ -86,9 +86,7 @@ export class ingresarReclamo extends React.Component {
 																</div>
 															</div>
 														</div>
-													</div>
-													<div className="row">
-														<div className="form-group">
+														<div className="col-md-5">
 															<input
 																type="submit"
 																value="buscar"

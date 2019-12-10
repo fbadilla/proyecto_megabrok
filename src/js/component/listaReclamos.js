@@ -137,13 +137,21 @@ export class ListaReclamos extends Component {
 								<Fragment>
 									<div className="gtco-section ">
 										<div className="col-md-12">
-											<input
-												name="filtro_reclamo"
-												type="text"
-												className="form-control"
-												placeholder="Filtro"
-												onChange={e => actions.handleFiltroReclamo(e)}
-											/>
+											<div className="input-group  input-group-lg">
+												<div className="input-group-prepend">
+													<span className="input-group-text" id="basic-addon1">
+														<i className="ti-search" />
+													</span>
+												</div>
+
+												<input
+													name="filtro_reclamo"
+													type="text"
+													className="form-control"
+													placeholder="Filtro"
+													onChange={e => actions.handleFiltroReclamo(e)}
+												/>
+											</div>
 										</div>
 									</div>
 									<div className="gtco-section ">

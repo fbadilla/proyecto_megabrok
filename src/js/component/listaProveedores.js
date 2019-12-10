@@ -85,16 +85,23 @@ export class ListaProveedores extends Component {
 								<Fragment>
 									<div className="gtco-section ">
 										<div className="row">
-											<div className="col-md-4">
-												<input
-													name="filtroValue"
-													type="text"
-													className="form-control"
-													placeholder="Filtro"
-													onChange={e => actions.handleFiltroProveedor(e)}
-												/>
+											<div className="col-md-6">
+												<div className="input-group  input-group-lg">
+													<div className="input-group-prepend">
+														<span className="input-group-text" id="basic-addon1">
+															<i className="ti-search" />
+														</span>
+													</div>
+													<input
+														name="filtroValue"
+														type="text"
+														className="form-control"
+														placeholder="Buscar"
+														onChange={e => actions.handleFiltroProveedor(e)}
+													/>
+												</div>
 											</div>
-											<div className="col-md-4">
+											<div className="col-md-2 offset-4">
 												<div className="float-right">
 													<button
 														type="button"
@@ -108,20 +115,18 @@ export class ListaProveedores extends Component {
 										</div>
 									</div>
 									<div className="gtco-section ">
-										<div className="col-md-8">
-											<table className="table">
-												<thead>
-													<tr>
-														<th scope="col">Nombre</th>
-														<th scope="col">Grupo</th>
-														<th scope="col">Rut</th>
-														<th scope="col">Editar</th>
-														<th scope="col">Eliminar</th>
-													</tr>
-												</thead>
-												<tbody>{foo()}</tbody>
-											</table>
-										</div>
+										<table className="table">
+											<thead>
+												<tr>
+													<th scope="col">Nombre</th>
+													<th scope="col">Grupo</th>
+													<th scope="col">Rut</th>
+													<th scope="col">Editar</th>
+													<th scope="col">Eliminar</th>
+												</tr>
+											</thead>
+											<tbody>{foo()}</tbody>
+										</table>
 									</div>
 								</Fragment>
 							);
