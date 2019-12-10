@@ -48,11 +48,6 @@ export class Layout extends React.Component {
 											access={store.access}
 										/>
 										<PrivateRoute
-											path="/ingresareclamov2"
-											component={ingresarReclamov2}
-											access={store.access}
-										/>
-										<PrivateRoute
 											path="/formulariochile"
 											component={FormularioChile}
 											access={store.access}
