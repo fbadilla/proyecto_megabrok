@@ -90,11 +90,7 @@ export class MantenedorPersonas extends React.Component {
 																</div>
 															</div>
 														</div>
-<<<<<<< HEAD
 														<div className="col-md-4">
-=======
-														<div className="row">
->>>>>>> 3731f2f57f887fed2b59b213d0e3abdef15602a7
 															<div className="form-group">
 																<input
 																	type="submit"
@@ -102,7 +98,6 @@ export class MantenedorPersonas extends React.Component {
 																	className="btn btn-primary"
 																/>
 															</div>
-<<<<<<< HEAD
 														</div>
 														<div className="col-md-3">
 															<button
@@ -112,8 +107,6 @@ export class MantenedorPersonas extends React.Component {
 																data-target="#ModalAddPersona">
 																<i className="ti-plus" /> AGREGAR
 															</button>
-=======
->>>>>>> 3731f2f57f887fed2b59b213d0e3abdef15602a7
 														</div>
 													</form>
 
