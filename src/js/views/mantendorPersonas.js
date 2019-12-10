@@ -18,91 +18,83 @@ export class MantenedorPersonas extends React.Component {
 	}
 	render() {
 		return (
-			<Context.Consumer>
-				{({ store, actions }) => {
-					const foo = () => {
-						if (store.personasFiltro.length > 0) {
-							return store.personasFiltro.map((item, i) => {
-								return (
-									<tr key={i}>
-										<td scope="row">{item.nombre + item.apellido}</td>
-										<td>{item.rut}</td>
-										<td>{item.emailPrimario}</td>
-										<td>{item.direccionParticular}</td>
-										<td>{item.celular + " / " + item.telefonoCasa}</td>
-										<td>{item.telefonoOficina}</td>
-										<td>
-											<button
-												type="button"
-												className="btn btn-primary2"
-												data-toggle="modal"
-												data-target="#modalProveedorUpdate"
-												onClick={() => actions.handleUpdateProveedor(item)}>
-												<i className="ti-marker-alt" />
-											</button>
-										</td>
-										<td>
-											<button
-												type="button"
-												className="btn btn-primary3"
-												data-toggle="modal"
-												data-target="#ModalDeleteProveedor"
-												//onClick={() => actions.handleDelete(item.id)}
-											>
-												<i className="ti-trash" />
-											</button>
-										</td>
-									</tr>
-								);
-							});
-						} else {
-							return "";
-						}
-					};
-					this.storeContext = store;
-					this.actionsContext = actions;
-					return (
-						<Fragment>
-							<Animated
-								animationIn="bounceInRight"
-								animationOut="fadeOut"
-								isVisible={true}
-								data-animate-effect="fadeInLeft">
-								<header
-									id="gtco-header"
-									className="gtco-cover gtco-cover-sm"
-									role="banner"
-									style={{ backgroundColor: "#457B9D" }}>
-									<div className="overlay" />
-									<div className="gtco-container" />
-								</header>
-							</Animated>
-							<div className="gtco-section border-bottom">
-								<div className="gtco-container">
-									<div className="row">
-										<div className="col-md-12">
-											<div className="col-md-10 ">
-												<h2>Buscar cliente</h2>
-												<form action="#" onSubmit={e => actions.handleFiltroPersona(e)}>
-													<div className="row form-group">
-														<div className="col-md-5">
-															<div className="feature-left">
-																<span className="icon">
-																	<i className="ti-search" />
-																</span>
-																<div className="feature-copy">
-																	<input
-																		name="busqueda"
-																		id="busqueda"
-																		placeholder="buscar cliente"
-																		type="text"
-																		className="form-control"
-																		onChange={e => actions.handleChange(e)}
-																	/>
+			<Animated animationIn="fadeInLeft" animationOut="bounceOutLeft" animationInDuration={500} isVisible={true}>
+				<Context.Consumer>
+					{({ store, actions }) => {
+						const foo = () => {
+							if (store.personasFiltro.length > 0) {
+								return store.personasFiltro.map((item, i) => {
+									return (
+										<tr key={i}>
+											<td scope="row">{item.nombre + item.apellido}</td>
+											<td>{item.rut}</td>
+											<td>{item.emailPrimario}</td>
+											<td>{item.direccionParticular}</td>
+											<td>{item.celular + " / " + item.telefonoCasa}</td>
+											<td>{item.telefonoOficina}</td>
+											<td>
+												<button
+													type="button"
+													className="btn btn-primary2"
+													data-toggle="modal"
+													data-target="#modalProveedorUpdate"
+													onClick={() => actions.handleUpdateProveedor(item)}>
+													<i className="ti-marker-alt" />
+												</button>
+											</td>
+											<td>
+												<button
+													type="button"
+													className="btn btn-primary3"
+													data-toggle="modal"
+													data-target="#ModalDeleteProveedor"
+													//onClick={() => actions.handleDelete(item.id)}
+												>
+													<i className="ti-trash" />
+												</button>
+											</td>
+										</tr>
+									);
+								});
+							} else {
+								return "";
+							}
+						};
+						this.storeContext = store;
+						this.actionsContext = actions;
+						return (
+							<Fragment>
+								<div className="gtco-section border-bottom">
+									<div className="gtco-container">
+										<div className="row">
+											<div className="col-md-12">
+												<div className="col-md-10 ">
+													<h2>Buscar cliente</h2>
+													<form action="#" onSubmit={e => actions.handleFiltroPersona(e)}>
+														<div className="row form-group">
+															<div className="col-md-5">
+																<div className="feature-left">
+																	<span className="icon">
+																		<i className="ti-search" />
+																	</span>
+																	<div className="feature-copy">
+																		<input
+																			name="busqueda"
+																			id="busqueda"
+																			placeholder="buscar cliente"
+																			type="text"
+																			className="form-control"
+																			onChange={e => actions.handleChange(e)}
+																		/>
+																	</div>
 																</div>
 															</div>
 														</div>
+<<<<<<< HEAD
 														<div className="col-md-4">
+=======
+														<div className="row">
+>>>>>>> 3731f2f57f887fed2b59b213d0e3abdef15602a7
 															<div className="form-group">
 																<input
 																	type="submit"
@@ -110,6 +102,7 @@ export class MantenedorPersonas extends React.Component {
 																	className="btn btn-primary"
 																/>
 															</div>
+<<<<<<< HEAD
 														</div>
 														<div className="col-md-3">
 															<button
@@ -119,36 +112,38 @@ export class MantenedorPersonas extends React.Component {
 																data-target="#ModalAddPersona">
 																<i className="ti-plus" /> AGREGAR
 															</button>
+=======
+>>>>>>> 3731f2f57f887fed2b59b213d0e3abdef15602a7
 														</div>
-													</div>
-												</form>
+													</form>
 
-												<h3>Resultados </h3>
-												<table className="table">
-													<thead>
-														<tr>
-															<th scope="col">Nombres</th>
-															<th scope="col">Rut</th>
-															<th scope="col">E-mail Primario</th>
-															<th scope="col">Direccion Particular</th>
-															<th scope="col">Telefonos </th>
-															<th scope="col">Oficina </th>
-															<th scope="col">Editar</th>
-															<th scope="col">Eliminar</th>
-														</tr>
-													</thead>
-													<tbody>{foo()}</tbody>
-												</table>
+													<h3>Resultados </h3>
+													<table className="table">
+														<thead>
+															<tr>
+																<th scope="col">Nombres</th>
+																<th scope="col">Rut</th>
+																<th scope="col">E-mail Primario</th>
+																<th scope="col">Direccion Particular</th>
+																<th scope="col">Telefonos </th>
+																<th scope="col">Oficina </th>
+																<th scope="col">Editar</th>
+																<th scope="col">Eliminar</th>
+															</tr>
+														</thead>
+														<tbody>{foo()}</tbody>
+													</table>
+												</div>
 											</div>
 										</div>
 									</div>
+									<ModalPersona />
 								</div>
-								<ModalPersona />
-							</div>
-						</Fragment>
-					);
-				}}
-			</Context.Consumer>
+							</Fragment>
+						);
+					}}
+				</Context.Consumer>
+			</Animated>
 		);
 	}
 }

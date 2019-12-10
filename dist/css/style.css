@@ -99,7 +99,11 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 
 .gtco-nav {
+<<<<<<< HEAD
   position: fixed;
+=======
+  position: relative;
+>>>>>>> 3731f2f57f887fed2b59b213d0e3abdef15602a7
   top: 0;
   left: 0;
   margin: 0;
@@ -107,7 +111,11 @@ h1, h2, h3, h4, h5, h6, figure {
   width: 100%;
   padding: 20px 0;
   z-index: 1001;
+<<<<<<< HEAD
   background: rgba(0, 0, 0, 0.5);
+=======
+  background:rgb(68,96,109);
+>>>>>>> 3731f2f57f887fed2b59b213d0e3abdef15602a7
 }
 @media screen and (max-width: 768px) {
   .gtco-nav {
@@ -244,7 +252,7 @@ h1, h2, h3, h4, h5, h6, figure {
 }
 
 #gtco-header {
-  background: #35cdfd;
+  background: #1D3557;
 }
 @media screen and (max-width: 768px) {
   #gtco-header.gtco-cover {
@@ -1926,3 +1934,4 @@ form label {
 }
 
 /*# sourceMappingURL=style.css.map */
+

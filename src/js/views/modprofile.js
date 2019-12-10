@@ -21,13 +21,6 @@ export class modificarUsuario extends React.Component {
 					this.actionsContext = actions;
 					return (
 						<Fragment>
-							<header
-								id="gtco-header"
-								className="gtco-cover gtco-cover-sm"
-								role="banner"
-								style={{ backgroundImage: "url(images/img_2.jpg)" }}>
-								<div className="overlay" />
-							</header>
 							<div className="gtco-section border-bottom">
 								<div className="gtco-container">
 									<div className="row">
