@@ -30,19 +30,6 @@ export class Navbar extends React.Component {
 					}
 
 					return (
-<<<<<<< HEAD
-						<nav
-							className="gtco-nav"
-							role="navigation"
-							style={{ backgroundImage: "url(images/img_6.jpg)" }}>
-							<div className="gtco-container">
-								<div className="row">
-									<div className="col-5 col-xs-12">
-										<div id="gtco-logo">
-											<Link to="/">
-												<span>Best Health International</span>
-											</Link>
-=======
 						<Animated
 							animationIn="bounceInRight"
 							animationOut="fadeOut"
@@ -57,7 +44,6 @@ export class Navbar extends React.Component {
 													<span>Best Health International</span>
 												</Link>
 											</div>
->>>>>>> 3731f2f57f887fed2b59b213d0e3abdef15602a7
 										</div>
 										<div className="col-7 text-right menu-1">
 											<ul>
