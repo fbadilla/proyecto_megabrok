@@ -56,7 +56,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			persona: {},
 			personas: [],
-			filtroPersona: {}
+			personasFiltro: {}
 		},
 
 		actions: {
@@ -742,7 +742,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				})
 					.then(resp => resp.json())
-					.then(data => setStore({ personas: data }))
+					.then(data => setStore({ personas: data, personasFiltro: {} }))
 					.catch(error => setStore({ error }));
 			},
 
