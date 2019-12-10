@@ -102,14 +102,23 @@ export class MantenedorPersonas extends React.Component {
 																</div>
 															</div>
 														</div>
-													</div>
-													<div className="row">
-														<div className="form-group">
-															<input
-																type="submit"
-																value="buscar"
+														<div className="col-md-4">
+															<div className="form-group">
+																<input
+																	type="submit"
+																	value="buscar"
+																	className="btn btn-primary"
+																/>
+															</div>
+														</div>
+														<div className="col-md-3">
+															<button
+																type="button"
 																className="btn btn-primary"
-															/>
+																data-toggle="modal"
+																data-target="#ModalAddPersona">
+																<i className="ti-plus" /> AGREGAR
+															</button>
 														</div>
 													</div>
 												</form>

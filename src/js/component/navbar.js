@@ -29,7 +29,10 @@ export class Navbar extends React.Component {
 					}
 
 					return (
-						<nav className="gtco-nav" role="navigation">
+						<nav
+							className="gtco-nav"
+							role="navigation"
+							style={{ backgroundImage: "url(images/img_6.jpg)" }}>
 							<div className="gtco-container">
 								<div className="row">
 									<div className="col-5 col-xs-12">
