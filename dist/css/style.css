@@ -825,6 +825,20 @@ form label {
   text-align: center;
   width: 15%;
 }
+.feature {
+  width: 100%;
+  position: relative;
+}
+.feature .icon {
+  text-align: center;
+  width: 15%;
+}
+.feature .icon i {
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 50px;
+  color: #457B9D;
+}
 .feature-left .icon i {
   display: table-cell;
   vertical-align: middle;
@@ -839,6 +853,9 @@ form label {
 }
 .feature-left .feature-copy {
   float: right;
+  width: 80%;
+}
+.feature-left .feature-copy2 {
   width: 80%;
 }
 .feature-left .feature-copy h3 {
@@ -893,6 +910,12 @@ form label {
   font-size: 20px;
   line-height: 1.5;
   color: gray;
+}
+.col-md-1 {
+  -ms-flex: 0 0 8.333333%;
+  flex: 0 0 8.333333%;
+  max-width: 8.333333%;
+  margin: 20px 0px 0px 0px;
 }
 
 #gtco-products {
