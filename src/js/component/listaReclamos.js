@@ -136,21 +136,26 @@ export class ListaReclamos extends Component {
 							return (
 								<Fragment>
 									<div className="gtco-section ">
-										<div className="col-md-12">
-											<div className="input-group  input-group-lg">
-												<div className="input-group-prepend">
-													<span className="input-group-text" id="basic-addon1">
-														<i className="ti-search" />
-													</span>
-												</div>
+										<div className="row">
+											<div className="col-md-8">
+												<div className="input-group  input-group-lg">
+													<div className="input-group-prepend">
+														<span className="input-group-text" id="basic-addon1">
+															<i className="ti-search" />
+														</span>
+													</div>
 
-												<input
-													name="filtro_reclamo"
-													type="text"
-													className="form-control"
-													placeholder="Filtro"
-													onChange={e => actions.handleFiltroReclamo(e)}
-												/>
+													<input
+														name="filtro_reclamo"
+														type="text"
+														className="form-control"
+														placeholder="Filtro"
+														onChange={e => actions.handleFiltroReclamo(e)}
+													/>
+												</div>
+											</div>
+											<div className="col-md-3 offset-1">
+												<p>EXISTEN {store.formularios.length} RECLAMOS</p>
 											</div>
 										</div>
 									</div>

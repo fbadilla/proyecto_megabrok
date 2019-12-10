@@ -19,13 +19,19 @@ export class Usuarios extends React.Component {
 					this.storeContext = store;
 					this.actionsContext = actions;
 					return (
-						<Fragment>
-							<div className="gtco-section border-bottom">
-								<div className="gtco-container">
-									<div className="row">
-										<div className="col-md-8 text-left gtco-heading">
-											<h2>Mis Datos</h2>
-											<div className="form-group">
+						<Animated
+							animationIn="bounceInLeft"
+							animationOut="fadeOut"
+							isVisible={true}
+							data-animate-effect="fadeInLeft">
+							<Fragment>
+								<div className="gtco-section border-bottom">
+									<div className="gtco-container">
+										<div className="row">
+											<div className="col-md-8">
+												<h2>Mis Datos</h2>
+											</div>
+											<div className="col-md-4">
 												<Link to="/modprofile">
 													<input
 														type="submit"
@@ -35,22 +41,9 @@ export class Usuarios extends React.Component {
 												</Link>
 											</div>
 										</div>
-									</div>
-									<div className="row">
-										<Animated
-											animationIn="bounceInLeft"
-											animationOut="fadeOut"
-											isVisible={true}
-											data-animate-effect="fadeInLeft">
-											<div className="col-md-6">
-												<img
-													src="images/user2.png"
-													className="img-responsive"
-													alt="Free HTML5 Bootstrap Template"
-												/>
-											</div>
+										<div className="row">
 											<div className="col-md-6 mt-sm">
-												<div className="feature-left">
+												<div className="feature-left2">
 													<span className="icon">
 														<i className="ti-user" />
 													</span>
@@ -59,7 +52,7 @@ export class Usuarios extends React.Component {
 														<p>{store.account.name_Account} </p>
 													</div>
 												</div>
-												<div className="feature-left">
+												<div className="feature-left2">
 													<span className="icon">
 														<i className="ti-email" />
 													</span>
@@ -69,7 +62,7 @@ export class Usuarios extends React.Component {
 													</div>
 												</div>
 
-												<div className="feature-left ">
+												<div className="feature-left2 ">
 													<span className="icon">
 														<i className="ti-calendar" />
 													</span>
@@ -79,18 +72,17 @@ export class Usuarios extends React.Component {
 													</div>
 												</div>
 
-												<div className="feature-left">
+												<div className="feature-left2">
 													<span className="icon">
 														<i className="ti-tablet" />
 													</span>
 													<div className="feature-copy">
 														<h3>Telefono</h3>
-														+569
 														<p>{store.account.phone}</p>
 													</div>
 												</div>
 
-												<div className="feature-left">
+												<div className="feature-left2">
 													<span className="icon">
 														<i className="ti-bolt" />
 													</span>
@@ -100,11 +92,11 @@ export class Usuarios extends React.Component {
 													</div>
 												</div>
 											</div>
-										</Animated>
+										</div>
 									</div>
 								</div>
-							</div>
-						</Fragment>
+							</Fragment>
+						</Animated>
 					);
 				}}
 			</Context.Consumer>

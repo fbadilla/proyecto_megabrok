@@ -16,11 +16,7 @@ export class Home extends React.Component {
 					return (
 						<Fragment>
 							<Animated animationIn="bounceInLeft" animationOut="fadeOut" isVisible={true}>
-								<header
-									id="gtco-header"
-									className="gtco-cover"
-									role="banner"
-									style={{ backgroundImage: "url(images/img_6.jpg)" }}>
+								<header id="gtco-header" className="gtco-cover" role="banner">
 									<div className="overlay" />
 									<div className="gtco-container">
 										<div className="row">

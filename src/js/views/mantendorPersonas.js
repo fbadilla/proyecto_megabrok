@@ -1,7 +1,6 @@
 import React, { Fragment } from "react";
 import { Context } from "../store/appContext";
 import { Animated } from "react-animated-css";
-import { ListaPersonas } from "../component/listaPersonas";
 import ModalPersona from "../component/modalPersona";
 import PropTypes from "prop-types";
 
@@ -89,9 +88,7 @@ export class MantenedorPersonas extends React.Component {
 																	</div>
 																</div>
 															</div>
-														</div>
-														<div className="row">
-															<div className="form-group">
+															<div className="col-md-5">
 																<input
 																	type="submit"
 																	value="buscar"
