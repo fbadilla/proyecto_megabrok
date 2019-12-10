@@ -20,31 +20,6 @@ export class Usuarios extends React.Component {
 					this.actionsContext = actions;
 					return (
 						<Fragment>
-							<Animated
-								animationIn="bounceInLeft"
-								animationOut="fadeOut"
-								isVisible={true}
-								data-animate-effect="fadeInLeft">
-								<header
-									id="gtco-header"
-									className="gtco-cover gtco-cover-sm"
-									role="banner"
-									style={{ backgroundImage: "url(images/img_6.jpg)" }}>
-									<div className="overlay" />
-									<div className="gtco-container">
-										<div className="row">
-											<div className="col-md-12 col-md-offset-0 text-left">
-												<div className="row row-mt-15em">
-													<div className="col-md-7 mt-text">
-														<span className="intro-text-small">Bienvenido</span>
-														<h1>{store.account.name_Account}</h1>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</header>
-							</Animated>
 							<div className="gtco-section border-bottom">
 								<div className="gtco-container">
 									<div className="row">
