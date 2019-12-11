@@ -3,7 +3,6 @@ import { Context } from "../store/appContext";
 import { Animated } from "react-animated-css";
 import ModalPersona from "../component/modalPersona";
 import PropTypes from "prop-types";
-import ModalProveedor from "../component/modalProveedor";
 import { ListaPersonas } from "../component/listaProveedores";
 
 export class MantenedorPersonas extends React.Component {
@@ -34,8 +33,6 @@ export class MantenedorPersonas extends React.Component {
 									</div>
 								</div>
 								<ModalPersona />
-
-								<ModalProveedor />
 							</Fragment>
 						);
 					}}
