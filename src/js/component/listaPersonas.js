@@ -12,7 +12,7 @@ export class ListaPersonas extends Component {
 		this.actionsContext = null;
 		this.props.history;
 	}
-	
+
 	render() {
 		return (
 			<Animated animationIn="fadeInLeft" animationOut="bounceOutLeft" animationInDuration={500} isVisible={true}>

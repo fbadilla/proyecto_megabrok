@@ -1,9 +1,8 @@
 import React, { Fragment } from "react";
 import { Context } from "../store/appContext";
-import { Animated } from "react-animated-css";
 import ModalPersona from "../component/modalPersona";
 import PropTypes from "prop-types";
-import { ListaPersonas } from "../component/listaProveedores";
+import { ListaPersonas } from "../component/listaPersonas";
 
 export class MantenedorPersonas extends React.Component {
 	constructor(props) {
@@ -18,26 +17,24 @@ export class MantenedorPersonas extends React.Component {
 	}
 	render() {
 		return (
-			<Animated animationIn="fadeInLeft" animationOut="bounceOutLeft" animationInDuration={500} isVisible={true}>
-				<Context.Consumer>
-					{({ store, actions }) => {
-						this.storeContext = store;
-						this.actionsContext = actions;
-						return (
-							<Fragment>
-								<div className="gtco-container">
-									<div className="row justify-content-center">
-										<div className="col-md-10 ">
-											<ListaPersonas />
-										</div>
+			<Context.Consumer>
+				{({ store, actions }) => {
+					this.storeContext = store;
+					this.actionsContext = actions;
+					return (
+						<Fragment>
+							<div className="gtco-container">
+								<div className="row justify-content-center">
+									<div className="col-md-10 ">
+										<ListaPersonas />
 									</div>
 								</div>
-								<ModalPersona />
-							</Fragment>
-						);
-					}}
-				</Context.Consumer>
-			</Animated>
+							</div>
+							<ModalPersona />
+						</Fragment>
+					);
+				}}
+			</Context.Consumer>
 		);
 	}
 }
