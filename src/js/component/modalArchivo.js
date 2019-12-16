@@ -40,7 +40,7 @@ export default class ModalArchivo extends React.Component {
 											name="archivoServicio"
 											id="docfile"
 											className="form-control"
-											onChange={e => actions.handleFileChange(e)}
+											onChange={e => actions.handleFileChangemod(e)}
 										/>
 									</div>
 
@@ -52,7 +52,7 @@ export default class ModalArchivo extends React.Component {
 											type="button"
 											className="btn btn-primary"
 											onClick={() => {
-												actions.deleteReclamo();
+												actions.handlePutServicioArchivo();
 											}}
 											data-dismiss="modal">
 											Cargar Archivo

@@ -14,11 +14,9 @@ export class ListaServicios extends Component {
 			<Context.Consumer>
 				{({ store, actions }) => {
 					if (store.servicios.length > 0) {
-						const columnas = store.servicios.map((servicio, i) => {
+						const columnas = store.servicios.map((servicio, key) => {
 							return (
-								<div
-									className="row justify-content-center"
-									key={servicio.proveedor_id__nombre_proveedor}>
+								<div className="row justify-content-center" key={key.proveedor_id}>
 									<div className="container">
 										<div className="row">
 											<div className="col-md-12">
@@ -35,7 +33,6 @@ export class ListaServicios extends Component {
 													<th>Documentos</th>
 													<th>Monto</th>
 													<th>Pago</th>
-													<th>Eliminar</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -51,16 +48,6 @@ export class ListaServicios extends Component {
 															.reduce((a, b) => parseInt(a) + parseInt(b), 0)}
 													</td>
 													<td>{servicio.pago}</td>
-													<td>
-														<button
-															type="button"
-															className="btn btn-primary2"
-															data-toggle="modal"
-															data-target="#modaldeleteservicio"
-															onClick={() => actions.handleDelete(servicio.id)}>
-															<i className="ti-trash" />
-														</button>
-													</td>
 												</tr>
 											</tbody>
 										</table>
@@ -114,8 +101,8 @@ export class ListaServicios extends Component {
 						return (
 							<Fragment>
 								{columnas}
-								<div className="row">
-									<div className="col-md-3">
+								<div className="row justify-content-end">
+									<div className="col-md-4 ">
 										<div className="feature-left">
 											<button
 												type="button"

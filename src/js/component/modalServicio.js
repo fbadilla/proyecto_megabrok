@@ -56,18 +56,6 @@ export default class ModalServicio extends React.Component {
 												<label htmlFor="inputNombre">Ingreso servicio </label>
 											</h5>
 										</div>
-
-										<div className="col-md-5">
-											<div className="feature-right">
-												<input
-													type="file"
-													name="archivoServicio"
-													id="docfile"
-													className="form-control"
-													onChange={e => actions.handleFileChange(e)}
-												/>
-											</div>
-										</div>
 									</div>
 									<div className="modal-body">
 										<form action="#">

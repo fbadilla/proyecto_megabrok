@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			apiUrl: "http://best-health.ddns.net:8001",
+			apiUrl: "http://0.0.0.0:8006",
 			apiUrl2: "https://apy-cors-fcobad.herokuapp.com/https://mobile.bestdoctorsinsurance.com/spiritapi/api",
 			token: {
 				refresh: "",
@@ -56,7 +56,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			persona: {},
 			personas: [],
-			personasFiltro: {}
+			personasFiltro: {},
+			servicios2: []
 		},
 
 		actions: {
@@ -123,7 +124,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					servicio
 				});
 			},
-			handleServicioSelect: value => {
+			handleselect: value => {
 				const store = getStore();
 				let servicio = store.servicio;
 				servicio["proveedor_id"] = value.value;
@@ -346,6 +347,54 @@ const getState = ({ getStore, getActions, setStore }) => {
 							documentos: []
 						})
 					)
+
+					.then(() => getActions().getServicios())
+
+					.catch(error => {
+						setStore({ error });
+						alert("No se pudo modificar el servicio, revise los campos");
+					});
+			},
+			handlePutServicioArchivo: () => {
+				const store = getStore();
+				let formServicio = new FormData();
+				formServicio.append("proveedor_id", store.serviceSelected.proveedor_id);
+				formServicio.append("detalle", store.serviceSelected.detalle);
+				formServicio.append("pago", store.serviceSelected.pago);
+				formServicio.append("reclamo_id", store.formulario.reclamo_id);
+				if (store.serviceSelected.archivoServicio != null)
+					formServicio.append(
+						"archivoServicio",
+						store.serviceSelected.archivoServicio,
+						store.serviceSelected.archivoServicio.name
+					);
+				fetch(store.apiUrl + "/api/servicios/" + store.serviceSelected.id, {
+					method: "Put",
+					body: formServicio,
+					mimeType: "multipart/form-data",
+					headers: {
+						Authorization: "Bearer " + store.access
+					}
+				})
+					.then(resp => resp.json())
+					.then(() => {
+						setStore({
+							documento: {
+								tipodoc: "Boleta",
+								numdoc: "",
+								montodoc: "",
+								datedoc: new Date().toISOString().slice(0, 10)
+							},
+							servicio: {
+								pago: "COB",
+								detalle: "",
+								archivoServicio: null,
+								proveedor_id: 1
+							},
+							documentos: []
+						});
+						alert("El archivo se cargo con exito");
+					})
 
 					.then(() => getActions().getServicios())
 
@@ -727,13 +776,65 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				})
 					.then(resp => resp.json())
-					.then(servicios =>
+					.then(data =>
 						setStore({
-							servicios
+							servicios: data
 						})
 					)
 					.catch(error => setStore({ error }));
 			},
+			servicesmaps: () => {
+				const store = getStore();
+				setStore({
+					servicios2: {
+						proveedor_id: servicios.proveedor_id,
+						nombre_proveedor: servicios.proveedor_id__nombre_proveedor,
+						documentos: {
+							id: servicios.documentos.id,
+							numdoc: servicios.documentos.numdoc
+						},
+						servicios: {
+							id: servicios.id,
+							detalle: servicios.detalle,
+							pago: servicios.pago,
+							archivoServicio: servicios.archivoServicio
+						}
+					}
+				});
+			},
+
+			getServicios2: () => {
+				const store = getStore();
+
+				fetch(store.apiUrl + "/api/serviciosDocumentos/" + store.formulario.reclamo_id, {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + store.access
+					}
+				})
+					.then(resp => resp.json())
+					.then(servicios =>
+						setStore({
+							servicios: {
+								proveedor_id: servicios.proveedor_id,
+								nombre_proveedor: servicios.proveedor_id__nombre_proveedor,
+								documentos: {
+									id: servicios.documentos.id,
+									numdoc: servicios.documentos.numdoc
+								},
+								servicios: {
+									id: servicios.id,
+									detalle: servicios.detalle,
+									pago: servicios.pago,
+									archivoServicio: servicios.archivoServicio
+								}
+							}
+						})
+					)
+					.catch(error => setStore({ error }));
+			},
+
 			getPersonas: () => {
 				const store = getStore();
 				fetch(store.apiUrl + "/api/personas/", {
