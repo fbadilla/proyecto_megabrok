@@ -1367,6 +1367,13 @@ form label {
   padding: 3px 10px;
   font-size: 25px;
 }
+.btn-primary5 {
+  margin-right: 0px;
+  background: #457B9D;
+  color: #fff;
+  border: 2px solid #457B9D !important;
+  padding: 3px 13px;
+}
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
   background: #1D3557 !important;
@@ -1946,7 +1953,11 @@ form label {
     font-size: 26px;
   }
 }
-
+.table2 {
+  width: 100%;
+  margin-bottom: 5rem;
+  color: #212529;
+}
 .modal-open {
   overflow: auto;
 }
