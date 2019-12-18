@@ -26,6 +26,7 @@ export default class ModalServicioUpdate extends React.Component {
 								.slice(0)
 								.reverse()
 								.map((item, i) => {
+									console.log("aqui estoy2", store.servicios[store.numservice].documentos);
 									return (
 										<tr key={i}>
 											<td scope="row">{item.tipodoc}</td>

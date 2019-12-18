@@ -586,7 +586,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				let serviceSelected = servicio;
 				let numservice = i;
-				serviceSelected["archivoServicio"] = null;
 				setStore({ serviceSelected, numservice });
 			},
 			handleUpdateProveedor: item => {
