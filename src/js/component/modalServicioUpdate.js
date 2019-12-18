@@ -21,12 +21,11 @@ export default class ModalServicioUpdate extends React.Component {
 					this.storeContext = store;
 					this.actionsContext = actions;
 					const foo = () => {
-						if (store.numservice != null) {
-							return store.servicios[store.numservice].documentos
+						if (store.numservice != null || store.numservice == "") {
+							return store.documentoid
 								.slice(0)
 								.reverse()
 								.map((item, i) => {
-									console.log("aqui estoy2", store.servicios[store.numservice].documentos);
 									return (
 										<tr key={i}>
 											<td scope="row">{item.tipodoc}</td>
@@ -206,7 +205,7 @@ export default class ModalServicioUpdate extends React.Component {
 															type="button"
 															className="btn btn-primary"
 															value="Aceptar"
-															onClick={e => actions.postDocumento(e)}
+															onClick={e => actions.postDocumento()}
 														/>
 													</div>
 												</div>

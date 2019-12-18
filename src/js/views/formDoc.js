@@ -125,7 +125,8 @@ export class FormDoc extends React.Component {
 																type="button"
 																className="btn btn-primary"
 																data-toggle="modal"
-																data-target="#modalservicio">
+																data-target="#modalservicio"
+																onClick={e => actions.cleanService()}>
 																Agregar Servicio
 															</button>
 														</div>

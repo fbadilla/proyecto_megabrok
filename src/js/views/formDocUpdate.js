@@ -153,7 +153,8 @@ export class FormDocUpdate extends React.Component {
 															type="button"
 															className="btn btn-primary"
 															data-toggle="modal"
-															data-target="#modalservicio">
+															data-target="#modalservicio"
+															onClick={e => actions.cleanService()}>
 															<i className="ti-plus" /> Agregar Servicio
 														</button>
 													</div>

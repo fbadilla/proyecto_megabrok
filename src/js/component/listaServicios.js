@@ -21,11 +21,7 @@ export class ListaServicios extends Component {
 							}, {})
 						).sort((a, b) => a[0] < b[0]);
 
-						console.log("esta esta", columnas);
 						columnas = columnas.map((servicio, i) => {
-							console.log("aqui estoy", servicio);
-							<h3>Servicios:</h3>;
-
 							return (
 								<div className="row" key={i}>
 									<div className="col-md-4">
@@ -37,7 +33,13 @@ export class ListaServicios extends Component {
 											className="btn btn-primary2"
 											data-toggle="modal"
 											data-target="#modalArchivo"
-											onClick={() => actions.handleSelectedServicio(servicio[1][0], i)}>
+											onClick={() =>
+												actions.handleSelectedServicio(
+													servicio[1][0].id,
+													i,
+													servicio[1][0].proveedor_id
+												)
+											}>
 											<i className="ti-plus" />
 											Subir archivo
 										</button>
@@ -64,11 +66,12 @@ export class ListaServicios extends Component {
 													<th>Monto</th>
 													<th>Pago</th>
 													<th>Editar</th>
+													<th>Eliminar</th>
 												</tr>
 											</thead>
 											<tbody>
 												{servicio[1].map(row => {
-													const { detalle, documentos, pago, id } = row;
+													const { detalle, documentos, pago, id, proveedor_id } = row;
 													return (
 														<tr key={i}>
 															<td>{detalle}</td>
@@ -87,8 +90,23 @@ export class ListaServicios extends Component {
 																	className="btn btn-primary2"
 																	data-toggle="modal"
 																	data-target="#modalservicioupdate"
-																	onClick={() => actions.handleSelectedServicio(id)}>
+																	onClick={() =>
+																		actions.handleSelectedServicio(
+																			{ id },
+																			{ detalle, pago, proveedor_id }
+																		)
+																	}>
 																	<i className="ti-pencil" />
+																</button>
+															</td>
+															<td>
+																<button
+																	type="button"
+																	className="btn btn-primary2"
+																	data-toggle="modal"
+																	data-target="#modaldeleteservicio"
+																	onClick={() => actions.handleDelete({ id })}>
+																	<i className="ti-trash" />
 																</button>
 															</td>
 														</tr>
