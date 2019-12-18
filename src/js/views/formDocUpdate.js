@@ -1,15 +1,15 @@
 import React, { Fragment } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
-import ModalServicioUpdate from "../component/modalServicioUpdate";
 import { ListaDocumentos } from "../component/listaDocumentos";
 import PropTypes from "prop-types";
 import { Animated } from "react-animated-css";
-import ModalServicio from "../component/modalServicio";
 import { ListaServicios } from "../component/listaServicios";
 import ModalDeleteServicio from "../component/modalDeleteServicio";
 import ModalDeleteDocumento from "../component/modalDeleteDocumento";
 import ModalArchivo from "../component/modalArchivo";
+import ModalServicio from "../component/modalServicio";
+import ModalServicioUpdate from "../component/modalServicioUpdate";
 
 export class FormDocUpdate extends React.Component {
 	constructor(props) {

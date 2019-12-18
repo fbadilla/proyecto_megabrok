@@ -38,7 +38,6 @@ export class ListaReclamos extends Component {
 														" " +
 														item.asociacion_id__id_persona__apellido}
 												</td>
-												<td>{item.asociacion_id__id_persona__rut}</td>
 												<td>{item.detalle_diagnostico}</td>
 												<td>{item.date}</td>
 												<td>{actions.restafecha(item.date)}</td>
@@ -93,7 +92,6 @@ export class ListaReclamos extends Component {
 														" " +
 														item.asociacion_id__id_persona__apellido}
 												</td>
-												<td>{item.asociacion_id__id_persona__rut}</td>
 												<td>{item.detalle_diagnostico}</td>
 												<td>{item.date}</td>
 												<td>{actions.restafecha(item.date)}</td>
@@ -170,7 +168,6 @@ export class ListaReclamos extends Component {
 															<th scope="col">Realizado por</th>
 															<th scope="col">Estado</th>
 															<th scope="col">Reclamante</th>
-															<th scope="col">Rut</th>
 															<th scope="col">Detalle</th>
 															<th scope="col">Fecha</th>
 															<th scope="col">Dias</th>
