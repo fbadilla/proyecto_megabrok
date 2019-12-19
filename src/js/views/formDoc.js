@@ -4,9 +4,12 @@ import { Link } from "react-router-dom";
 import { ListaDocumentos } from "../component/listaDocumentos";
 import PropTypes from "prop-types";
 import { Animated } from "react-animated-css";
+import { ListaServicios } from "../component/listaServicios";
+import ModalDeleteServicio from "../component/modalDeleteServicio";
+import ModalDeleteDocumento from "../component/modalDeleteDocumento";
+import ModalArchivo from "../component/modalArchivo";
 import ModalServicio from "../component/modalServicio";
 import ModalServicioUpdate from "../component/modalServicioUpdate";
-import { ListaServicios } from "../component/listaServicios";
 
 export class FormDoc extends React.Component {
 	constructor(props) {
@@ -125,7 +128,8 @@ export class FormDoc extends React.Component {
 																type="button"
 																className="btn btn-primary"
 																data-toggle="modal"
-																data-target="#modalservicio">
+																data-target="#modalservicio"
+																onClick={e => actions.cleanService()}>
 																Agregar Servicio
 															</button>
 														</div>
@@ -143,6 +147,9 @@ export class FormDoc extends React.Component {
 							</div>
 							<ModalServicioUpdate />
 							<ModalServicio />
+							<ModalArchivo />
+							<ModalDeleteServicio />
+							<ModalDeleteDocumento />
 						</Fragment>
 					);
 				}}

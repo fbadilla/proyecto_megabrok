@@ -21,8 +21,8 @@ export default class ModalServicioUpdate extends React.Component {
 					this.storeContext = store;
 					this.actionsContext = actions;
 					const foo = () => {
-						if (store.numservice != null) {
-							return store.servicios[store.numservice].documentos
+						if (store.numservice != null || store.numservice == "") {
+							return store.documentoid
 								.slice(0)
 								.reverse()
 								.map((item, i) => {
@@ -65,18 +65,6 @@ export default class ModalServicioUpdate extends React.Component {
 											<h5 className="modal-title" id="exampleModalLabel">
 												<label htmlFor="inputNombre">Modificar Servicio </label>
 											</h5>
-										</div>
-
-										<div className="col-md-5">
-											<div className="feature-right">
-												<input
-													type="file"
-													name="archivoServicio"
-													id="docfile"
-													className="form-control"
-													onChange={e => actions.handleFileChangemod(e)}
-												/>
-											</div>
 										</div>
 									</div>
 									<div className="modal-body">
@@ -217,7 +205,7 @@ export default class ModalServicioUpdate extends React.Component {
 															type="button"
 															className="btn btn-primary"
 															value="Aceptar"
-															onClick={e => actions.postDocumento(e)}
+															onClick={e => actions.postDocumento()}
 														/>
 													</div>
 												</div>

@@ -938,12 +938,7 @@ form label {
   line-height: 1.5;
   color: gray;
 }
-.col-md-1 {
-  -ms-flex: 0 0 8.333333%;
-  flex: 0 0 8.333333%;
-  max-width: 8.333333%;
-  margin: 20px 0px 0px 0px;
-}
+
 
 #gtco-products {
   background: #008ee0;
@@ -1366,6 +1361,13 @@ form label {
   border: 2px solid #33b5e5 !important;
   padding: 3px 10px;
   font-size: 25px;
+}
+.btn-primary5 {
+  margin-right: 0px;
+  background: #457B9D;
+  color: #fff;
+  border: 2px solid #457B9D !important;
+  padding: 3px 13px;
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
@@ -1946,7 +1948,11 @@ form label {
     font-size: 26px;
   }
 }
-
+.table2 {
+  width: 100%;
+  margin-bottom: 5rem;
+  color: #212529;
+}
 .modal-open {
   overflow: auto;
 }
