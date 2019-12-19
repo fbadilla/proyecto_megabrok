@@ -48,7 +48,7 @@ export class ListaReclamos extends Component {
 														className="btn btn-primary2"
 														data-toggle="modal"
 														data-target="#modalviewdocumento"
-														onClick={() => actions.getDocumentoId2(item.id)}>
+														onClick={() => actions.handleModReclamo(item)}>
 														<i className="ti-eye" />
 													</button>
 												</td>

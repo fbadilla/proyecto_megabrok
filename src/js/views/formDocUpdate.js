@@ -10,6 +10,7 @@ import ModalDeleteDocumento from "../component/modalDeleteDocumento";
 import ModalArchivo from "../component/modalArchivo";
 import ModalServicio from "../component/modalServicio";
 import ModalServicioUpdate from "../component/modalServicioUpdate";
+import { ListaServiciosDetalle } from "../component/listaServiciosDetalles";
 
 export class FormDocUpdate extends React.Component {
 	constructor(props) {
@@ -25,7 +26,7 @@ export class FormDocUpdate extends React.Component {
 		this.props.history;
 	}
 	componentDidMount() {
-		// this.actionsContext.getServicios();
+		this.actionsContext.getServicios();
 		this.actionsContext.getaccount();
 	}
 	render() {
@@ -159,7 +160,7 @@ export class FormDocUpdate extends React.Component {
 														</button>
 													</div>
 												</div>
-												<ListaServicios />
+												<ListaServiciosDetalle />
 											</form>
 										</div>
 									</div>

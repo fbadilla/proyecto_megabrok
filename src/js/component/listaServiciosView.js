@@ -17,10 +17,10 @@ export class ListaServiciosView extends Component {
 						const columnas = store.servicios.map((servicio, i) => {
 							return (
 								<tr key={i}>
-									<td>{servicio.detalle}</td>
+									<td>{servicio.DetalleServicio.detalle}</td>
 									<td>{servicio.documentos.map((doc, i) => doc.numdoc).join(" - ")}</td>
 									<td>
-										{servicio.documentos
+										{servicio.DetalleServicio.documentos
 											.map((doc, i) => doc.montodoc)
 											.reduce((a, b) => parseInt(a) + parseInt(b), 0)}
 									</td>
