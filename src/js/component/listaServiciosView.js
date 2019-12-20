@@ -13,7 +13,7 @@ export class ListaServiciosView extends Component {
 			<Context.Consumer>
 				{({ store }) => {
 					if (store.servicios.length > 0) {
-						let columnas = store.servicios.DetalleServicio.map(row => {
+						let columnas = store.servicios.DetalleServicio.map((row, i) => {
 							const { detalle, documentos, pago, id, proveedor_id } = row;
 							return (
 								<tr key={i}>
@@ -31,9 +31,10 @@ export class ListaServiciosView extends Component {
 											className="btn btn-primary2"
 											data-toggle="modal"
 											data-target="#modalservicioupdate"
-											onClick={() =>
-												actions.handleSelectedServicio({ id }, { detalle, pago, proveedor_id })
-											}>
+											//onClick={() =>
+											//	actions.handleSelectedServicio({ id }, { detalle, pago, proveedor_id })
+											//}
+										>
 											<i className="ti-pencil" />
 										</button>
 									</td>
