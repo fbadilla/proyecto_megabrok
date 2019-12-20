@@ -91,10 +91,7 @@ export class ListaServicios extends Component {
 																	data-toggle="modal"
 																	data-target="#modalservicioupdate"
 																	onClick={() =>
-																		actions.handleSelectedServicio(
-																			{ id },
-																			{ detalle, pago, proveedor_id }
-																		)
+																		actions.handleSelectedServicio(servicio)
 																	}>
 																	<i className="ti-pencil" />
 																</button>

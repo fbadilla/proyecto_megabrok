@@ -368,21 +368,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			handlePutServicio: () => {
 				const store = getStore();
-				let formServicio = new FormData();
-				formServicio.append("proveedor_id", store.serviceSelected.proveedor_id);
-				formServicio.append("detalle", store.serviceSelected.detalle);
-				formServicio.append("pago", store.serviceSelected.pago);
-				formServicio.append("reclamo_id", store.formulario.reclamo_id);
-				if (store.serviceSelected.archivoServicio != null)
-					formServicio.append(
-						"archivoServicio",
-						store.serviceSelected.archivoServicio,
-						store.serviceSelected.archivoServicio.name
-					);
-				fetch(store.apiUrl + "/api/servicios/" + store.numservice.id, {
+				let formDetalleServicio = new FormData();
+				formDetalleServicio.append("proveedor_id", store.serviceSelected.proveedor_id);
+				formDetalleServicio.append("detalle", store.serviceSelected.detalle);
+				formDetalleServicio.append("pago", store.serviceSelected.pago);
+				formDetalleServicio.append("servicio_id", store.serviceSelected.servicio_id);
+				fetch(store.apiUrl + "/api/detalleServicio/" + store.numservice.id, {
 					method: "Put",
-					body: formServicio,
-					mimeType: "multipart/form-data",
+					body: formDetalleServicio,
 					headers: {
 						Authorization: "Bearer " + store.access
 					}
@@ -398,9 +391,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							},
 							servicio: {
 								pago: "COB",
-								detalle: "",
-								archivoServicio: null,
-								proveedor_id: 1
+								detalle: ""
 							},
 							documentos: []
 						})
@@ -639,12 +630,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 				deleteselect = id;
 				setStore({ deleteselect });
 			},
-			handleSelectedServicio: (id, servicio, proveedor_id) => {
+			handleSelectedServicio: (id, servicio) => {
 				const store = getStore();
 				let serviceSelected = servicio;
 				let numservice = id;
-				let proveedorselected = proveedor_id;
-				setStore({ serviceSelected, numservice, proveedorselected });
+				setStore({ serviceSelected, numservice });
 				getActions().getDocumentoId();
 			},
 			handleUpdateProveedor: item => {

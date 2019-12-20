@@ -80,7 +80,7 @@ export class ListaServiciosDetalle extends Component {
 																	onClick={() =>
 																		actions.handleSelectedServicio(
 																			{ id },
-																			{ detalle, pago, proveedor_id }
+																			{ servicio }
 																		)
 																	}>
 																	<i className="ti-pencil" />
