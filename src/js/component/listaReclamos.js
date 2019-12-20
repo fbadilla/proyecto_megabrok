@@ -66,7 +66,7 @@ export class ListaReclamos extends Component {
 														className="btn btn-primary3"
 														data-toggle="modal"
 														data-target="#modaldelete"
-														onClick={() => actions.handleDelete(reclamo_id)}>
+														onClick={() => actions.handleDelete(item.reclamo_id)}>
 														<i className="ti-trash" />
 													</button>
 												</td>

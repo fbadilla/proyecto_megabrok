@@ -265,7 +265,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 											formDocumento.append("datedoc", documento.datedoc);
 											formDocumento.append("montodoc", documento.montodoc);
 											formDocumento.append("numdoc", documento.numdoc);
-											formDocumento.append("boleta", documento.boleta);
+											formDocumento.append("tipodoc", documento.tipodoc);
 
 											// Se realiza POST por cada boleta
 											fetch(store.apiUrl + "/api/documentos/", {
@@ -617,16 +617,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					servicio
 				});
 			},
-			handleForm: e => {
-				const { name, value } = e.target;
-				const store = getStore();
-				let formulario = store.formulario;
-				formulario[name] = value;
-
-				setStore({
-					formulario
-				});
-			},
 			handleFileChangemod: e => {
 				const store = getStore();
 				const archivoServicio = e.target.files[0];
@@ -709,7 +699,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				const store = getStore();
 				const filtro = store.busqueda;
-				console.log(filtro);
 				let personasFiltro = store.personas.filter(
 					item =>
 						(item.nombre + " " + item.apellido).toLowerCase().includes(filtro) ||
@@ -850,26 +839,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						})
 					)
 					.catch(error => setStore({ error }));
-			},
-
-			servicesmaps: () => {
-				const store = getStore();
-				setStore({
-					servicios2: {
-						proveedor_id: servicios.proveedor_id,
-						nombre_proveedor: servicios.proveedor_id__nombre_proveedor,
-						documentos: {
-							id: servicios.documentos.id,
-							numdoc: servicios.documentos.numdoc
-						},
-						servicios: {
-							id: servicios.id,
-							detalle: servicios.detalle,
-							pago: servicios.pago,
-							archivoServicio: servicios.archivoServicio
-						}
-					}
-				});
 			},
 
 			getServicios2: () => {
@@ -1335,7 +1304,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 								pago: "COB",
 								tipodoc: "Boleta",
 								nombre_proveedor: "",
-								tipodoc: "",
 								numdoc: "",
 								montodoc: 0,
 								detalle_tratamiento: "",
@@ -1391,19 +1359,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({ formulario: data });
 						alert("se modificaron los datos del reclamo");
 					});
-			},
-			getPersonas: () => {
-				const store = getStore();
-				fetch(store.apiUrl + "/api/personas/", {
-					method: "GET",
-					headers: {
-						"Content-Type": "application/json",
-						Authorization: "Bearer " + store.access
-					}
-				})
-					.then(resp => resp.json())
-					.then(data => setStore({ personas: data }))
-					.catch(error => setStore({ error }));
 			},
 			restafecha: item => {
 				let fecha1 = new Date(item);
