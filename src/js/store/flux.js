@@ -161,7 +161,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				let serviceSelected = store.serviceSelected;
 				serviceSelected[name] = value;
-
 				setStore({
 					serviceSelected
 				});
@@ -915,9 +914,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			//funcion GET para obtener los documentos por reclamo  - GET api propia
-			getDocumentoId2: id => {
+			getServicioId2: item => {
 				const store = getStore();
-				fetch(store.apiUrl + "/api/documentos/" + id, {
+				fetch(store.apiUrl + "/api/serviciosDocumentos/" + item.reclamo_id, {
 					method: "GET",
 					headers: {
 						"Content-Type": "application/json",
@@ -925,7 +924,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				})
 					.then(resp => resp.json())
-					.then(data => setStore({ documentoid: data }))
+					.then(data => setStore({ servicios: data }))
 					.catch(error => setStore({ error }));
 			},
 
