@@ -261,6 +261,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 									.then(infoDetalle => {
 										detalle.documentos.slice(0).map((documento, i) => {
 											let formDocumento = new FormData();
+											formDocumento.append("detalle_servicio_id", infoDetalle.id);
 											formDocumento.append("datedoc", documento.datedoc);
 											formDocumento.append("montodoc", documento.montodoc);
 											formDocumento.append("numdoc", documento.numdoc);
