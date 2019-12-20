@@ -85,6 +85,11 @@ export class ListaProveedores extends Component {
 								<Fragment>
 									<div className="gtco-section ">
 										<div className="row">
+											<div className="col-md-8">
+												<p>Aca puedes ver y editar todos los proveedores</p>
+											</div>
+										</div>
+										<div className="row">
 											<div className="col-md-6">
 												<div className="input-group  input-group-lg">
 													<div className="input-group-prepend">
@@ -96,19 +101,19 @@ export class ListaProveedores extends Component {
 														name="filtroValue"
 														type="text"
 														className="form-control"
-														placeholder="Buscar"
+														placeholder="Buscar proveedor"
 														onChange={e => actions.handleFiltroProveedor(e)}
 													/>
 												</div>
 											</div>
-											<div className="col-md-2 offset-4">
+											<div className="col-md-3 offset-3">
 												<div className="float-right">
 													<button
 														type="button"
 														className="btn btn-primary"
 														data-toggle="modal"
 														data-target="#ModalAddProveedor">
-														AGREGAR
+														Agregar proveedor
 													</button>
 												</div>
 											</div>
