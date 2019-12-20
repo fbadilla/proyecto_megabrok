@@ -1,8 +1,8 @@
 import React, { Fragment } from "react";
-import { Context } from "../store/appContext";
-import ModalPersona from "../component/modalPersona";
+import { Context } from "../../store/appContext";
+import ModalPersona from "./modalPersona";
 import PropTypes from "prop-types";
-import { ListaPersonas } from "../component/listaPersonas";
+import { ListaPersonas } from "./listaPersonas";
 
 export class MantenedorPersonas extends React.Component {
 	constructor(props) {

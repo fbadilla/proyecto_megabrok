@@ -1,8 +1,7 @@
 import React, { Component, Fragment } from "react";
-import { Context } from "../store/appContext";
+import { Context } from "../../store/appContext";
 import PropTypes from "prop-types";
 import { Animated } from "react-animated-css";
-import { Link } from "react-router-dom";
 
 export class ListaPersonas extends Component {
 	constructor(props) {

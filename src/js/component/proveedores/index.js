@@ -1,10 +1,9 @@
 import React, { Fragment } from "react";
-import { Context } from "../store/appContext";
-import { Animated } from "react-animated-css";
-import { ListaProveedores } from "../component/listaProveedores";
-import ModalProveedor from "../component/modalProveedor";
-import ModalDeleteProveedor from "../component/modalDeleteProveedor";
-import ModalProveedorUpdate from "../component/modalProveedorUpdate";
+import { Context } from "../../store/appContext";
+import { ListaProveedores } from "./listaProveedores";
+import ModalProveedor from "./modalProveedor";
+import ModalDeleteProveedor from "./modalDeleteProveedor";
+import ModalProveedorUpdate from "./modalProveedorUpdate";
 
 export class DashProveedor extends React.Component {
 	constructor(props) {

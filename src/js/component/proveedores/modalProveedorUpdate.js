@@ -1,10 +1,8 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import { Context } from "../store/appContext";
+import React from "react";
 import PropTypes from "prop-types";
-import Select from "react-select";
+import { Context } from "../../store/appContext";
 
-export default class ModalProveedor extends React.Component {
+export default class ModalProveedorUpdate extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = { value: "" };
@@ -23,7 +21,7 @@ export default class ModalProveedor extends React.Component {
 					return (
 						<div
 							className="modal fade"
-							id="ModalAddProveedor"
+							id="modalProveedorUpdate"
 							tabIndex="-1"
 							role="dialog"
 							aria-labelledby="exampleModalLabel"
@@ -32,7 +30,7 @@ export default class ModalProveedor extends React.Component {
 								<div className="modal-content">
 									<div className="modal-header">
 										<h5 className="modal-title" id="exampleModalLabel">
-											<label htmlFor="inputNombre">Ingresar nuevo proveedor </label>
+											<label htmlFor="inputNombre">Modificar proveedor </label>
 										</h5>
 									</div>
 									<div className="modal-body">
@@ -112,10 +110,10 @@ export default class ModalProveedor extends React.Component {
 											type="button"
 											className="btn btn-primary"
 											onClick={() => {
-												actions.postAddProveedor();
+												actions.putProveedor();
 											}}
 											data-dismiss="modal">
-											Ingresar
+											Modificar
 										</button>
 									</div>
 								</div>
@@ -127,6 +125,6 @@ export default class ModalProveedor extends React.Component {
 		);
 	}
 }
-ModalProveedor.propTypes = {
+ModalProveedorUpdate.propTypes = {
 	history: PropTypes.array
 };
