@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Context } from "../store/appContext";
+import React from "react";
+import { Context } from "../../store/appContext";
 import PropTypes from "prop-types";
 
 export default class ModalPersona extends React.Component {

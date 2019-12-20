@@ -12,10 +12,10 @@ import { FormularioChile } from "./views/formularioChile";
 import { FormDoc } from "./views/formDoc";
 import { FormDocUpdate } from "./views/formDocUpdate";
 import PrivateRoute from "./PrivateRoute";
-import { MantenedorPersonas } from "./views/mantendorPersonas";
+import { MantenedorPersonas } from "./component/personas";
 
 import { Context } from "./store/appContext";
-import { DashProveedor } from "./views/dashProveedor";
+import { DashProveedor } from "./component/proveedores";
 
 //create your first component
 export class Layout extends React.Component {
