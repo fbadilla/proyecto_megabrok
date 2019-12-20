@@ -219,10 +219,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			handleEnvioServicio: history => {
 				const store = getStore();
+				// Servicio necesita reclamo_id, archivoServicio, proveedor_id
 				let formServicio = new FormData();
 				formServicio.append("proveedor_id", store.servicio.proveedor_id);
-				formServicio.append("detalle", store.servicio.detalle);
-				formServicio.append("pago", store.servicio.pago);
 				formServicio.append("reclamo_id", store.formulario.reclamo_id);
 				if (store.servicio.archivoServicio != null)
 					formServicio.append(
@@ -230,6 +229,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						store.servicio.archivoServicio,
 						store.servicio.archivoServicio.name
 					);
+				// Se realiza POST al servicio
 				fetch(store.apiUrl + "/api/servicios/", {
 					method: "Post",
 					body: formServicio,
@@ -239,24 +239,43 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				})
 					.then(resp => resp.json())
-					.then(data => {
-						store.documentos
+					.then(infoServicio => {
+						store.servicio.detalleServicio
 							.slice(0)
 							.reverse()
-							.map((documento, i) => {
-								let formDocumento = new FormData();
-								formDocumento.append("servicio_id", data.id);
-								formDocumento.append("tipodoc", documento.tipodoc);
-								formDocumento.append("numdoc", documento.numdoc);
-								formDocumento.append("datedoc", documento.datedoc);
-								formDocumento.append("montodoc", documento.montodoc);
-								fetch(store.apiUrl + "/api/documentos/", {
+							.map((detalle, i) => {
+								let formDetalle = new FormData();
+
+								formDetalle.append("detalle", detalle.detalle);
+								formDetalle.append("pago", detalle.pago);
+								formDetalle.append("servicio_id", infoServicio.id);
+								// se realiza POST por cada detalle
+								fetch(store.apiUrl + "/api/detalleServicio/", {
 									method: "Post",
-									body: formDocumento,
+									body: formDetalle,
 									headers: {
 										Authorization: "Bearer " + store.access
 									}
-								});
+								})
+									.then(resp => resp.json())
+									.then(infoDetalle => {
+										detalle.documentos.slice(0).map((documento, i) => {
+											let formDocumento = new FormData();
+											formDocumento.append("datedoc", documento.datedoc);
+											formDocumento.append("montodoc", documento.montodoc);
+											formDocumento.append("numdoc", documento.numdoc);
+											formDocumento.append("boleta", documento.boleta);
+
+											// Se realiza POST por cada boleta
+											fetch(store.apiUrl + "/api/documentos/", {
+												method: "Post",
+												body: formDocumento,
+												headers: {
+													Authorization: "Bearer " + store.access
+												}
+											});
+										});
+									});
 							});
 						getActions().getServicios();
 					})
