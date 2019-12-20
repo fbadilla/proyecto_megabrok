@@ -30,7 +30,8 @@ export default class ModalViewServicio extends React.Component {
 							</h5>
 						</div>
 						<div className="modal-body">
-							<ListaServiciosView />
+							{/* lista no funciona, verificar porque y como mostraremos los datos <ListaServiciosView /> */}
+							
 						</div>
 
 						<div className="modal-footer">

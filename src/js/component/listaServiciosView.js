@@ -6,35 +6,35 @@ export class ListaServiciosView extends Component {
 	constructor(props) {
 		super(props);
 		this.storeContext = null;
-		this.actionsContext = null;
 		this.props.history;
 	}
 	render() {
 		return (
 			<Context.Consumer>
-				{({ store, actions }) => {
+				{({ store }) => {
 					if (store.servicios.length > 0) {
-						const columnas = store.servicios.map((servicio, i) => {
+						let columnas = store.servicios.DetalleServicio.map(row => {
+							const { detalle, documentos, pago, id, proveedor_id } = row;
 							return (
-								<tr key={i}>
-									<td>{servicio.detalle}</td>
-									<td>{servicio.documentos.map((doc, i) => doc.numdoc).join(" - ")}</td>
+								<tr key={}>
+									<td>{detalle}</td>
+									<td>{documentos.map((doc, i) => doc.numdoc).join(" - ")}</td>
 									<td>
-										{servicio.documentos
+										{documentos
 											.map((doc, i) => doc.montodoc)
 											.reduce((a, b) => parseInt(a) + parseInt(b), 0)}
 									</td>
-									<td>{servicio.pago}</td>
+									<td>{pago}</td>
 									<td>
 										<button
 											type="button"
 											className="btn btn-primary2"
+											data-toggle="modal"
+											data-target="#modalservicioupdate"
 											onClick={() =>
-												servicio.archivoServicio.length < 1
-													? alert("no existe el documento")
-													: window.open(store.apiUrl + "/media/" + servicio.archivoServicio)
+												actions.handleSelectedServicio({ id }, { detalle, pago, proveedor_id })
 											}>
-											<i className="ti-image" />
+											<i className="ti-pencil" />
 										</button>
 									</td>
 								</tr>
