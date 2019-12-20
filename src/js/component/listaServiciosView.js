@@ -16,7 +16,7 @@ export class ListaServiciosView extends Component {
 						let columnas = store.servicios.DetalleServicio.map(row => {
 							const { detalle, documentos, pago, id, proveedor_id } = row;
 							return (
-								<tr key={}>
+								<tr key={i}>
 									<td>{detalle}</td>
 									<td>{documentos.map((doc, i) => doc.numdoc).join(" - ")}</td>
 									<td>

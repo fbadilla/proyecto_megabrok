@@ -63,7 +63,7 @@ export default class ModalServicioUpdate extends React.Component {
 									<div className="modal-header">
 										<div className="col-md-7">
 											<h5 className="modal-title" id="exampleModalLabel">
-												<label htmlFor="inputNombre">Modificar Servicio </label>
+												<label htmlFor="inputNombre">Modificar Detalle del Servicio </label>
 											</h5>
 										</div>
 									</div>
@@ -72,23 +72,7 @@ export default class ModalServicioUpdate extends React.Component {
 											<div className="form-row">
 												<div className="col-md-5">
 													<div className="feature-left">
-														<label>Proveedor</label>
-														<Select
-															className="basic-single"
-															classNamePrefix="select"
-															onChange={value => actions.handleServicioSelectMod(value)}
-															options={store.proveedores}
-															value={
-																store.proveedores[
-																	store.serviceSelected.proveedor_id - 1
-																]
-															}
-														/>
-													</div>
-												</div>
-												<div className="col-md-5">
-													<div className="feature-left">
-														<label>Detalle</label>
+														<label>Detalle Servicio</label>
 														<input
 															name="detalle"
 															className="form-control"
