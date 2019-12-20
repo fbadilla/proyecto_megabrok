@@ -32,10 +32,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 				datedoc: new Date().toISOString().slice(0, 10)
 			},
 			servicio: {
-				pago: "COB",
-				detalle: "",
 				archivoServicio: null,
-				proveedor_id: 1
+				proveedor_id: 1,
+				detalleServicio: []
+			},
+			detalleServicio: {
+				detalle: "",
+				pago: "COB",
+				documentos: []
 			},
 			servicios: [],
 			documentoid: [],
@@ -116,6 +120,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 					documento
 				});
 			},
+			handleDetalle: e => {
+				const { name, value } = e.target;
+				const store = getStore();
+				let detalleServicio = store.detalleServicio;
+				detalleServicio[name] = value;
+				setStore({
+					detalleServicio
+				});
+			},
+
 			handleServicio: e => {
 				const { name, value } = e.target;
 				const store = getStore();
@@ -169,20 +183,37 @@ const getState = ({ getStore, getActions, setStore }) => {
 			//funcion que maneja el Post de un nuevo formulario, ademas realiza un GET de documentos por ID, antes y despues del POST
 			handleAceptarDocumento: history => {
 				const store = getStore();
-				let documentos = store.documentos;
+				let documentos = store.detalleServicio.documentos;
+				let detalleServicio = store.detalleServicio;
+
 				let doc = store.documento;
 				if (doc.montodoc != "" && doc.numdoc != "") {
 					documentos.push(store.documento);
 				} else {
 					alert("ingresa todos los campos del documento");
 				}
+				detalleServicio["documentos"] = documentos;
 				setStore({
-					documentos,
+					detalleServicio,
 					documento: {
 						tipodoc: "Boleta",
 						numdoc: "",
 						montodoc: "",
 						datedoc: new Date().toISOString().slice(0, 10)
+					}
+				});
+			},
+			handleAddDetalle: e => {
+				const store = getStore();
+				let detalleServicio = store.detalleServicio;
+				let servicio = store.servicio;
+				servicio["detalleServicio"].push(detalleServicio);
+				setStore({
+					servicio,
+					detalleServicio: {
+						detalle: "",
+						pago: "COB",
+						documentos: []
 					}
 				});
 			},
@@ -243,10 +274,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 						datedoc: new Date().toISOString().slice(0, 10)
 					},
 					servicio: {
-						pago: "COB",
-						detalle: "",
 						archivoServicio: null,
-						proveedor_id: 1
+						proveedor_id: 1,
+						detalleServicio: []
 					},
 					documentos: []
 				});
