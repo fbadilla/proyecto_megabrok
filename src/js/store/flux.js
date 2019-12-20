@@ -265,7 +265,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 											formDocumento.append("datedoc", documento.datedoc);
 											formDocumento.append("montodoc", documento.montodoc);
 											formDocumento.append("numdoc", documento.numdoc);
-											formDocumento.append("boleta", documento.boleta);
+											formDocumento.append("tipodoc", documento.tipodoc);
 
 											// Se realiza POST por cada boleta
 											fetch(store.apiUrl + "/api/documentos/", {
