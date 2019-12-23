@@ -26,19 +26,11 @@ export class ListaReclamos extends Component {
 									.reverse()
 									.map((item, i) => {
 										return (
-											<tr
-												key={i}
-												className={item.name_estado == "Pendiente" ? "danger" : "primary"}>
-												<td scope="row">{item.asociacion_id__id_poliza__nun_poliza}</td>
-												<td>{item.asociacion_id__id_poliza__numPolizaLegacy}</td>
-												<td>{item.account_id__name_Account}</td>
-												<th>{item.name_estado}</th>
-												<td>
-													{" "}
-													{item.asociacion_id__id_persona__nombre +
-														" " +
-														item.asociacion_id__id_persona__apellido}
-												</td>
+											<tr key={i} className={item.estado == "Pendiente" ? "danger" : "primary"}>
+												<td scope="row">{item.numPoliza}</td>
+												<td>{item.username}</td>
+												<th>{item.estado}</th>
+												<td>{item.nombreReclamante + " " + item.apellidoReclamante}</td>
 												<td>{item.detalle_diagnostico}</td>
 												<td>{item.date}</td>
 												<td>{actions.restafecha(item.date)}</td>
@@ -80,19 +72,11 @@ export class ListaReclamos extends Component {
 									.reverse()
 									.map((item, i) => {
 										return (
-											<tr
-												key={i}
-												className={item.name_estado == "Pendiente" ? "danger" : "primary"}>
-												<td scope="row">{item.asociacion_id__id_poliza__nun_poliza}</td>
-												<td>{item.asociacion_id__id_poliza__numPolizaLegacy}</td>
-												<td>{item.account_id__name_Account}</td>
-												<th>{item.name_estado}</th>
-												<td>
-													{" "}
-													{item.asociacion_id__id_persona__nombre +
-														" " +
-														item.asociacion_id__id_persona__apellido}
-												</td>
+											<tr key={i} className={item.estado == "Pendiente" ? "danger" : "primary"}>
+												<td scope="row">{item.numPoliza}</td>
+												<td>{item.username}</td>
+												<th>{item.estado}</th>
+												<td> {item.nombreReclamante + " " + item.apellidoReclamante}</td>
 												<td>{item.detalle_diagnostico}</td>
 												<td>{item.date}</td>
 												<td>{actions.restafecha(item.date)}</td>
@@ -137,7 +121,6 @@ export class ListaReclamos extends Component {
 												<thead>
 													<tr>
 														<th scope="col">Poliza</th>
-														<th scope="col">Poliza Legacy</th>
 														<th scope="col">Realizado por</th>
 														<th scope="col">Estado</th>
 														<th scope="col">Reclamante</th>
