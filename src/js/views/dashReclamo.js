@@ -70,7 +70,6 @@ export class DashReclamo extends React.Component {
 									</div>
 								</div>
 							</div>
-							<ModalServicioUpdate />
 							<ModalDelete />
 							<ModalDeleteDocumento />
 							<ModalViewServicio />

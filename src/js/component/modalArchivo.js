@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
+import Select from "react-select";
 
 export default class ModalArchivo extends React.Component {
 	constructor(props) {
@@ -35,13 +36,32 @@ export default class ModalArchivo extends React.Component {
 										</h5>
 									</div>
 									<div className="modal-body">
-										<input
-											type="file"
-											name="archivoServicio"
-											id="docfile"
-											className="form-control"
-											onChange={e => actions.handleFileChangemod(e)}
-										/>
+										<div className="form-row">
+											<div className="col-md-5">
+												<div className="feature-left">
+													<label>Proveedor</label>
+													<Select
+														value={store.proveedores[store.servicio.proveedor_id - 1]}
+														className="basic-single"
+														classNamePrefix="select"
+														onChange={value => actions.handleServicioSelect(value)}
+														options={store.proveedores}
+													/>
+												</div>
+											</div>
+											<div className="col-md-5">
+												<div className="feature-right">
+													<label> Archivo</label>
+													<input
+														type="file"
+														name="archivoServicio"
+														id="docfile"
+														className="form-control"
+														onChange={e => actions.handleFileChange(e)}
+													/>
+												</div>
+											</div>
+										</div>
 									</div>
 
 									<div className="modal-footer">

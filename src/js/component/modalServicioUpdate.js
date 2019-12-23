@@ -55,7 +55,7 @@ export default class ModalServicioUpdate extends React.Component {
 							className="modal fade"
 							id="modalservicioupdate"
 							tabIndex="-1"
-							role="dialog"
+							role="document"
 							aria-labelledby="myLargeModalLabel"
 							aria-hidden="true">
 							<div className="modal-dialog modal-xl" role="document">
