@@ -1,10 +1,6 @@
 import React, { Fragment } from "react";
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
-import { ListaDocumentos } from "../component/listaDocumentos";
 import PropTypes from "prop-types";
-import { Animated } from "react-animated-css";
-import { ListaServicios } from "../component/listaServicios";
 import ModalDeleteServicio from "../component/modalDeleteServicio";
 import ModalDeleteDocumento from "../component/modalDeleteDocumento";
 import ModalArchivo from "../component/modalArchivo";
@@ -45,7 +41,21 @@ export class FormDocUpdate extends React.Component {
 								<div className="gtco-container">
 									<div className="row justify-content-center">
 										<div className="col-md-10 ">
-											<h2>Reclamo Nº {store.formulario.reclamo_id}</h2>
+											<div className="row">
+												<div className="col-md-4">
+													<h2>Reclamo Nº {store.formulario.reclamo_id}</h2>
+												</div>
+												<div className="col-md-4">
+													<button
+														type="button"
+														className="btn btn-primary"
+														//data-toggle="modal"
+														//data-target="#modalservicio"
+														onClick={e => actions.enviarReclamo(store.formulario)}>
+														Enviar reclamo
+													</button>
+												</div>
+											</div>
 											<form
 												action="#"
 												onSubmit={e => actions.handleEnvioMod(e, this.props.history)}>
@@ -64,12 +74,9 @@ export class FormDocUpdate extends React.Component {
 																	name="nameReclamo"
 																	className="form-control"
 																	id="nameReclamo"
-																	onChange={e => actions.handleForm(e)}
 																	value={
-																		store.formulario
-																			.asociacion_id__id_persona__nombre +
-																		store.formulario
-																			.asociacion_id__id_persona__apellido
+																		store.formulario.nombreReclamante +
+																		store.formulario.apellidoReclamante
 																	}
 																	type="text"
 																	readOnly
@@ -82,13 +89,10 @@ export class FormDocUpdate extends React.Component {
 															<div className="feature-copy">
 																<label>Numero Poliza</label>
 																<input
-																	name="numpoliza"
+																	name="numPoliza"
 																	id="disabledTextInput"
 																	onChange={e => actions.handleForm(e)}
-																	value={
-																		store.formulario
-																			.asociacion_id__id_poliza__nun_poliza
-																	}
+																	value={store.formulario.numPoliza}
 																	type="text"
 																	className="form-control"
 																	readOnly
@@ -127,8 +131,8 @@ export class FormDocUpdate extends React.Component {
 																<select
 																	className="form-control"
 																	id="name_estado"
-																	name="name_estado"
-																	value={store.formulario.name_estado}
+																	name="estado"
+																	value={store.formulario.estado}
 																	onChange={e => actions.handleForm(e)}>
 																	<option>Pendiente</option>
 																	<option>Aprobada</option>
