@@ -1,9 +1,17 @@
 import React, { Fragment } from "react";
-import { Context } from "../store/appContext";
+import { Context } from "../../../store/appContext";
+import { Link } from "react-router-dom";
+import { ListaDocumentos } from "../../documentos/listaDocumentos";
 import PropTypes from "prop-types";
 import { Animated } from "react-animated-css";
+import { ListaServicios } from "../../servicios/listaServicios";
+import ModalDeleteServicio from "../../servicios/eliminar/modalDeleteServicio";
+import ModalDeleteDocumento from "../../documentos/eliminar/modalDeleteDocumento";
+import ModalArchivo from "../../servicios/modificar/modalArchivo";
+import ModalServicio from "../../servicios/crear/modalServicio";
+import ModalServicioUpdate from "../../servicios/modificar/modalServicioUpdate";
 
-export class FormularioChile extends React.Component {
+export class FormDoc extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -18,6 +26,7 @@ export class FormularioChile extends React.Component {
 	}
 	componentDidMount() {
 		this.actionsContext.getaccount();
+		this.actionsContext.getServicios();
 	}
 	render() {
 		return (
@@ -32,14 +41,13 @@ export class FormularioChile extends React.Component {
 									<div className="row">
 										<div className="col-md-12">
 											<div className="col-md-10 ">
-												<h2>Ingresar Formulario</h2>
+												<h2>
+													Reclamo Nº <h1>{store.formulario.reclamo_id}</h1>
+												</h2>
 												<form
 													action="#"
 													onSubmit={e => actions.handleFormulario(e, this.props.history)}>
 													<div className="row form-group">
-														<div className="col-md-8">
-															<h4>Datos Personales del Paciente</h4>
-														</div>
 														<div className="col-md-6">
 															<div className="feature-left">
 																<span className="icon">
@@ -49,12 +57,11 @@ export class FormularioChile extends React.Component {
 																	<label>Nombre Completo Paciente</label>
 																	<input
 																		name="nameReclamo"
-																		id="nameReclamo"
-																		value={store.formulario.nameReclamo}
-																		onChange={e => actions.handleForm(e)}
-																		type="text"
-																		className="form-control"
 																		readOnly
+																		className="form-control"
+																		id="static"
+																		placeholder={store.formulario.nameReclamo}
+																		type="text"
 																	/>
 																</div>
 															</div>
@@ -65,9 +72,8 @@ export class FormularioChile extends React.Component {
 																	<label> Rut</label>
 																	<input
 																		name="rut"
-																		id="rut"
-																		value={store.formulario.rut}
-																		onChange={e => actions.handleForm(e)}
+																		id="disabledTextInput"
+																		placeholder={store.formulario.rut}
 																		type="text"
 																		className="form-control"
 																		readOnly
@@ -81,21 +87,18 @@ export class FormularioChile extends React.Component {
 																	<label>Numero Poliza</label>
 																	<input
 																		name="numpoliza"
-																		id="numpoliza"
-																		readOnly
-																		value={store.formulario.numpoliza}
-																		onChange={e => actions.handleForm(e)}
+																		id="disabledTextInput"
+																		placeholder={store.formulario.numpoliza}
 																		type="text"
 																		className="form-control"
+																		readOnly
 																	/>
 																</div>
 															</div>
 														</div>
 													</div>
-
 													<div className="row form-group">
 														<div className="col-md-6">
-															<h4>Detalles del Diagnostico / Accidente</h4>
 															<div className="feature-left">
 																<span className="icon">
 																	<i className="ti-clipboard" />
@@ -105,27 +108,35 @@ export class FormularioChile extends React.Component {
 																		name="detalle_diagnostico"
 																		id="mail"
 																		rows="5"
-																		placeholder="Diagnóstico o Tipo de Accidente"
-																		onChange={e => actions.handleForm(e)}
+																		placeholder={
+																			store.formulario.detalle_diagnostico
+																		}
 																		type="text"
+																		readOnly
 																		className="form-control"
 																	/>
-																	<label>
-																		<i className="ti-link" />
-																		En caso de accidente, incluir el Reporte
-																		Policial
-																	</label>
 																</div>
 															</div>
 														</div>
 													</div>
-													<div className="row">
-														<div className="form-group">
-															<input
-																type="submit"
-																value="aceptar"
+													<div className="row form-group">
+														<div className="col-md-8">
+															<h4>Datos sobre los Servicios Prestados</h4>
+														</div>
+														<div className="col-md-6">
+															<button
+																type="button"
 																className="btn btn-primary"
-															/>
+																data-toggle="modal"
+																data-target="#modalservicio"
+																onClick={e => actions.cleanService()}>
+																Agregar Servicio
+															</button>
+														</div>
+													</div>
+													<div className="row">
+														<div className="col-md-12">
+															<ListaServicios />
 														</div>
 													</div>
 												</form>
@@ -134,6 +145,11 @@ export class FormularioChile extends React.Component {
 									</div>
 								</div>
 							</div>
+							<ModalServicioUpdate />
+							<ModalServicio />
+							<ModalArchivo />
+							<ModalDeleteServicio />
+							<ModalDeleteDocumento />
 						</Fragment>
 					);
 				}}
@@ -141,6 +157,6 @@ export class FormularioChile extends React.Component {
 		);
 	}
 }
-FormularioChile.propTypes = {
+FormDoc.propTypes = {
 	history: PropTypes.object
 };

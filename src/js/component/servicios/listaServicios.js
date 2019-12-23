@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import { Context } from "../store/appContext";
+import { Context } from "../../store/appContext";
 import PropTypes from "prop-types";
 
 export class ListaServicios extends Component {

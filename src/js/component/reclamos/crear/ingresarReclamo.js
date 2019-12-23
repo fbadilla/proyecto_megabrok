@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Context } from "../store/appContext";
+import { Context } from "../../../store/appContext";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Animated } from "react-animated-css";

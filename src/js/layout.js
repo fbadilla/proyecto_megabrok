@@ -5,12 +5,12 @@ import { Home } from "./views/home";
 import injectContext from "./store/appContext";
 import { Usuarios } from "./views/user";
 import { modificarUsuario } from "./views/modprofile";
-import { ingresarReclamo } from "./views/ingresarReclamo";
-import { DashReclamo } from "./views/dashReclamo";
+import { ingresarReclamo } from "./component/reclamos/crear/ingresarReclamo";
+import { DashReclamo } from "./component/reclamos";
 import { Navbar } from "./component/navbar";
-import { FormularioChile } from "./views/formularioChile";
-import { FormDoc } from "./views/formDoc";
-import { FormDocUpdate } from "./views/formDocUpdate";
+import { FormularioChile } from "./component/reclamos/crear/formularioChile";
+import { FormDoc } from "./component/reclamos/crear/formDoc";
+import { FormDocUpdate } from "./component/reclamos/modificar/formDocUpdate";
 import PrivateRoute from "./PrivateRoute";
 import { MantenedorPersonas } from "./component/personas";
 
