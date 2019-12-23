@@ -4,12 +4,13 @@ import { Link } from "react-router-dom";
 import { ListaDocumentos } from "../../documentos/listaDocumentos";
 import PropTypes from "prop-types";
 import { Animated } from "react-animated-css";
-import { ListaServicios } from "../../servicios/listaServicios";
+import { ListaServiciosDetalle } from "../../servicios/listaServiciosDetalles";
 import ModalDeleteServicio from "../../servicios/eliminar/modalDeleteServicio";
 import ModalDeleteDocumento from "../../documentos/eliminar/modalDeleteDocumento";
 import ModalArchivo from "../../servicios/modificar/modalArchivo";
 import ModalServicio from "../../servicios/crear/modalServicio";
 import ModalServicioUpdate from "../../servicios/modificar/modalServicioUpdate";
+
 
 export class FormDoc extends React.Component {
 	constructor(props) {
@@ -136,7 +137,7 @@ export class FormDoc extends React.Component {
 													</div>
 													<div className="row">
 														<div className="col-md-12">
-															<ListaServicios />
+															<ListaServiciosDetalle />
 														</div>
 													</div>
 												</form>
