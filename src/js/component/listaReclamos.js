@@ -18,9 +18,10 @@ export class ListaReclamos extends Component {
 			<Animated animationIn="fadeInLeft" animationOut="bounceOutLeft" animationInDuration={500} isVisible={true}>
 				<Context.Consumer>
 					{({ store, actions }) => {
-						const foo = () => {
+						let reclamos = {};
+						if (store.formularios.length > 0) {
 							if (store.filtro) {
-								return store.coleccion
+								reclamos = store.coleccion
 									.slice(0)
 									.reverse()
 									.map((item, i) => {
@@ -74,7 +75,7 @@ export class ListaReclamos extends Component {
 										);
 									});
 							} else {
-								return store.formularios
+								reclamos = store.formularios
 									.slice(0)
 									.reverse()
 									.map((item, i) => {
@@ -128,60 +129,31 @@ export class ListaReclamos extends Component {
 										);
 									});
 							}
-						};
-						// -------------------------------------------------------------
-						if (store.formularios.length > 0) {
 							return (
-								<Fragment>
-									<div className="gtco-section ">
-										<div className="row">
-											<div className="col-md-8">
-												<div className="input-group  input-group-lg">
-													<div className="input-group-prepend">
-														<span className="input-group-text" id="basic-addon1">
-															<i className="ti-search" />
-														</span>
-													</div>
-
-													<input
-														name="filtro_reclamo"
-														type="text"
-														className="form-control"
-														placeholder="Filtro"
-														onChange={e => actions.handleFiltroReclamo(e)}
-													/>
-												</div>
-											</div>
-											<div className="col-md-3 offset-1">
-												<p>EXISTEN {store.formularios.length} RECLAMOS</p>
-											</div>
+								<div className="gtco-section ">
+									<div className="col-md-12">
+										<div className="table-responsive">
+											<table className="table">
+												<thead>
+													<tr>
+														<th scope="col">Poliza</th>
+														<th scope="col">Poliza Legacy</th>
+														<th scope="col">Realizado por</th>
+														<th scope="col">Estado</th>
+														<th scope="col">Reclamante</th>
+														<th scope="col">Detalle</th>
+														<th scope="col">Fecha</th>
+														<th scope="col">Dias</th>
+														<th scope="col">Ver más</th>
+														<th scope="col">Editar</th>
+														<th scope="col">Eliminar</th>
+													</tr>
+												</thead>
+												<tbody>{reclamos}</tbody>
+											</table>
 										</div>
 									</div>
-									<div className="gtco-section ">
-										<div className="col-md-12">
-											<div className="table-responsive">
-												<table className="table">
-													<thead>
-														<tr>
-															<th scope="col">Poliza</th>
-															<th scope="col">Poliza Legacy</th>
-															<th scope="col">Realizado por</th>
-															<th scope="col">Estado</th>
-															<th scope="col">Reclamante</th>
-															<th scope="col">Detalle</th>
-															<th scope="col">Fecha</th>
-															<th scope="col">Dias</th>
-															<th scope="col">Ver más</th>
-															<th scope="col">Editar</th>
-															<th scope="col">Eliminar</th>
-														</tr>
-													</thead>
-													<tbody>{foo()}</tbody>
-												</table>
-											</div>
-										</div>
-									</div>
-								</Fragment>
+								</div>
 							);
 						} else {
 							return "";

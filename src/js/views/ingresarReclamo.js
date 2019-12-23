@@ -20,7 +20,7 @@ export class ingresarReclamo extends React.Component {
 					{({ store, actions }) => {
 						const foo = () => {
 							if (store.aseguradosFiltro.length > 0) {
-								return store.aseguradosFiltro.map((item, i) => {
+								const personas = store.aseguradosFiltro.map((item, i) => {
 									return (
 										<tr key={i}>
 											<td>{item.id_poliza__nun_poliza}</td>
@@ -38,6 +38,24 @@ export class ingresarReclamo extends React.Component {
 										</tr>
 									);
 								});
+								return (
+									<div className="gtco-section ">
+										<div className="table-responsive">
+											<table className="table">
+												<thead>
+													<tr>
+														<th scope="col">N° Poliza</th>
+														<th scope="col">Rut</th>
+														<th scope="col">Nombre</th>
+														<th scope="col">Tipo Asegurado</th>
+														<th scope="col">Generar Reclamo</th>
+													</tr>
+												</thead>
+												<tbody>{personas}</tbody>
+											</table>
+										</div>
+									</div>
+								);
 							} else {
 								return "";
 							}
@@ -46,59 +64,45 @@ export class ingresarReclamo extends React.Component {
 						this.actionsContext = actions;
 						return (
 							<Fragment>
-								<div className="gtco-section border-bottom">
-									<div className="gtco-container">
-										<div className="row justify-content-center">
-											<div className="col-md-10 ">
-												<form
-													action="#"
-													onSubmit={e => actions.handleSearchPersona(e, this.props.history)}>
-													<div className="row form-group">
-														<div className="col-md-5">
-															<div className="input-group  input-group-lg">
-																<div className="input-group-prepend">
-																	<span
-																		className="input-group-text"
-																		id="basic-addon1">
-																		<i className="ti-search" />
-																	</span>
-																</div>
-																<input
-																	name="busqueda"
-																	type="busqueda"
-																	className="form-control"
-																	placeholder="Buscar"
-																	onChange={e => actions.handleChange(e)}
-																/>
-															</div>
+								<div className="gtco-container">
+									<div className="row justify-content-center">
+										<div className="col-md-10 ">
+											<p>
+												{" "}
+												Para generar un reclamo, busca un asegurado. Puede ser por n° poliza,
+												nombre y rut
+											</p>
+										</div>
+										<div className="col-md-10 ">
+											<div className="row form-group">
+												<div className="col-md-5">
+													<div className="input-group  input-group-lg">
+														<div className="input-group-prepend">
+															<span className="input-group-text" id="basic-addon1">
+																<i className="ti-search" />
+															</span>
 														</div>
-														<div className="col-md-5">
-															<input
-																type="submit"
-																value="Buscar"
-																className="btn btn-primary"
-															/>
-														</div>
-													</div>
-												</form>
-
-												<div className="gtco-section ">
-													<div className="table-responsive">
-														<table className="table">
-															<thead>
-																<tr>
-																	<th scope="col">N° Poliza</th>
-																	<th scope="col">Rut</th>
-																	<th scope="col">Nombre</th>
-																	<th scope="col">Tipo Asegurado</th>
-																	<th scope="col">Generar Reclamo</th>
-																</tr>
-															</thead>
-															<tbody>{foo()}</tbody>
-														</table>
+														<input
+															name="busqueda"
+															type="busqueda"
+															className="form-control"
+															placeholder="Buscar asegurado"
+															onChange={e => actions.handleChange(e)}
+														/>
 													</div>
 												</div>
+												<div className="col-md-5">
+													<input
+														type="submit"
+														value="Buscar"
+														className="btn btn-primary"
+														onClick={e =>
+															actions.handleSearchPersona(e, this.props.history)
+														}
+													/>
+												</div>
 											</div>
+											{foo()}
 										</div>
 									</div>
 								</div>
