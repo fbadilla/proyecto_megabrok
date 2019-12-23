@@ -661,15 +661,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} else {
 					let coleccion = store.formularios.filter(
 						item =>
-							(item.asociacion_id__id_persona__nombre + " " + item.asociacion_id__id_persona__apellido)
+							(item.nombreReclamante + " " + item.apellidoReclamante)
 								.toLowerCase()
 								.includes(filtroReclamo) ||
-							item.asociacion_id__id_persona__rut.toLowerCase().includes(filtroReclamo) ||
 							item.detalle_diagnostico.toLowerCase().includes(filtroReclamo) ||
-							item.account_id__name_Account.toLowerCase().includes(filtroReclamo) ||
-							item.name_estado.toLowerCase().includes(filtroReclamo) ||
-							item.asociacion_id__id_poliza__nun_poliza.toLowerCase().includes(filtroReclamo) ||
-							item.asociacion_id__id_poliza__numPolizaLegacy.toLowerCase().includes(filtroReclamo)
+							item.username.toLowerCase().includes(filtroReclamo) ||
+							item.estado.toLowerCase().includes(filtroReclamo) ||
+							item.numPoliza.toLowerCase().includes(filtroReclamo)
 					);
 					let filtro = true;
 					setStore({ filtroReclamo, coleccion, filtro });
@@ -1341,8 +1339,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const data = {
 					id: store.formulario.reclamo_id,
 					detalle_diagnostico: store.formulario.detalle_diagnostico,
-					name_estado: store.formulario.name_estado,
-
+					name_estado: store.formulario.estado,
 					asociacion_id: store.formulario.asociacion_id
 				};
 
@@ -1356,7 +1353,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 					.then(resp => resp.json())
 					.then(data => {
-						setStore({ formulario: data });
 						alert("se modificaron los datos del reclamo");
 					});
 			},
@@ -1366,6 +1362,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 				var dif = fecha2.getTime() - fecha1.getTime();
 				var dias = Math.floor(dif / (1000 * 60 * 60 * 24));
 				return dias;
+			},
+			enviarReclamo: reclamo => {
+				const store = getStore();
+				let data = reclamo;
+				fetch(store.apiUrl + "/api/generarclaim/", {
+					method: "Post",
+					body: JSON.stringify(data),
+					headers: {
+						Authorization: "Bearer " + store.access,
+						"Content-Type": "application/json"
+					}
+				})
+					.then(resp => resp.json())
+					.then(data => {
+						setStore({ formulario: data });
+						alert("se modificaron los datos del reclamo");
+					});
 			}
 		}
 	};
