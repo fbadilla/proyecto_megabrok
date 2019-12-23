@@ -11,7 +11,9 @@ import ModalArchivo from "../component/modalArchivo";
 import ModalServicio from "../component/modalServicio";
 import ModalServicioUpdate from "../component/modalServicioUpdate";
 import ModalDetalleServicio from "../component/modalDetalleServicio";
+ModalDetalleServicioUpdate;
 import { ListaServiciosDetalle } from "../component/listaServiciosDetalles";
+import ModalDetalleServicioUpdate from "../component/modalDetalleServicioUpdate";
 
 export class FormDocUpdate extends React.Component {
 	constructor(props) {
@@ -173,6 +175,7 @@ export class FormDocUpdate extends React.Component {
 							<ModalArchivo />
 							<ModalDeleteServicio />
 							<ModalDeleteDocumento />
+							<ModalDetalleServicioUpdate />
 						</Fragment>
 					);
 				}}

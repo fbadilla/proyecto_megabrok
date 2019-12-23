@@ -66,7 +66,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			personasFiltro: {},
 			servicios2: [],
 			servicioid: {},
-			archivo: {}
+			archivo: {},
+			serviceSelectedUpdate: {}
 		},
 
 		actions: {
@@ -288,6 +289,48 @@ const getState = ({ getStore, getActions, setStore }) => {
 						alert("No se pudo ingresar el documento, revise los campos");
 					});
 			},
+			handleEnvioDetalle: history => {
+				const store = getStore();
+				// Servicio necesita reclamo_id, archivoServicio, proveedor_id
+				let formDetalle = new FormData();
+
+				formDetalle.append("detalle", store.detalleServicio.detalle);
+				formDetalle.append("pago", store.detalleServicio.pago);
+				formDetalle.append("servicio_id", store.serviceSelectedUpdate.id);
+				// se realiza POST por cada detalle
+				fetch(store.apiUrl + "/api/detalleServicio/", {
+					method: "Post",
+					body: formDetalle,
+					headers: {
+						Authorization: "Bearer " + store.access
+					}
+				})
+					.then(resp => resp.json())
+					.then(infoDetalle => {
+						store.detalleServicio.documentos.slice(0).map((documento, i) => {
+							let formDocumento = new FormData();
+							formDocumento.append("detalle_servicio_id", infoDetalle.id);
+							formDocumento.append("datedoc", documento.datedoc);
+							formDocumento.append("montodoc", documento.montodoc);
+							formDocumento.append("numdoc", documento.numdoc);
+							formDocumento.append("tipodoc", documento.tipodoc);
+
+							// Se realiza POST por cada boleta
+							fetch(store.apiUrl + "/api/documentos/", {
+								method: "Post",
+								body: formDocumento,
+								headers: {
+									Authorization: "Bearer " + store.access
+								}
+							});
+						});
+						getActions().getServicios();
+					})
+					.catch(error => {
+						setStore({ error });
+						alert("No se pudo ingresar el documento, revise los campos");
+					});
+			},
 			cleanService: () => {
 				setStore({
 					documento: {
@@ -301,7 +344,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 						proveedor_id: 1,
 						detalleServicio: []
 					},
-					documentos: []
+					documentos: [],
+					detalleServicio: {
+						detalle: "",
+						documentos: [],
+						pago: "COB"
+					}
 				});
 			},
 			handleEnvioServicio2: history => {
@@ -645,6 +693,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let numservice = id;
 				setStore({ serviceSelected, numservice });
 				getActions().getDocumentoId();
+			},
+			handleSelectedServicioUpdate: servicio => {
+				const store = getStore();
+				let serviceSelectedUpdate = servicio;
+				setStore({ serviceSelectedUpdate });
+				getActions().cleanService();
 			},
 			handleUpdateProveedor: item => {
 				let store = getStore();
