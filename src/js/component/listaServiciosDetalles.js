@@ -21,7 +21,7 @@ export class ListaServiciosDetalle extends Component {
 										<div className="col-md-5 mt-4">
 											<h6>{servicio.proveedor_id__nombre_proveedor}:</h6>
 										</div>
-										<div className="col-md-auto mt-5 offset-md-3 ">
+										<div className="col-md-auto mt-5 offset-md-2 ">
 											<button
 												type="button"
 												className="btn btn-primary2"
@@ -29,7 +29,7 @@ export class ListaServiciosDetalle extends Component {
 												data-target="#modalArchivo"
 												onClick={() => actions.handleSelectedArchivo(servicio)}>
 												<i className="ti-pencil" />
-												Modificar Servicio
+												Modificar
 											</button>
 											<button
 												type="button"
@@ -43,6 +43,15 @@ export class ListaServiciosDetalle extends Component {
 														  )
 												}>
 												<i className="ti-image" />
+											</button>
+											<button
+												type="button"
+												className="btn btn-primary2"
+												data-dismiss="modal"
+												data-toggle="modal"
+												data-target="#modalDetalleServicioUpdate"
+												onClick={() => actions.handleSelectedServicioUpdate(servicio)}>
+												<i className="ti-plus" /> Nuevo Detalle
 											</button>
 										</div>
 										<div className="col-md-12">
