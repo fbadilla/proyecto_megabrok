@@ -1,15 +1,15 @@
 import React, { Fragment } from "react";
-import { Context } from "../store/appContext";
+import { Context } from "../../../store/appContext";
 import PropTypes from "prop-types";
-import ModalDeleteServicio from "../component/modalDeleteServicio";
-import ModalDeleteDocumento from "../component/modalDeleteDocumento";
-import ModalArchivo from "../component/modalArchivo";
-import ModalServicio from "../component/modalServicio";
-import ModalServicioUpdate from "../component/modalServicioUpdate";
-import ModalDetalleServicio from "../component/modalDetalleServicio";
+import ModalDeleteServicio from "../../servicios/eliminar/modalDeleteServicio";
+import ModalDeleteDocumento from "../../documentos/eliminar/modalDeleteDocumento";
+import ModalArchivo from "../../servicios/modificar/modalArchivo";
+import ModalServicio from "../../servicios/crear/modalServicio";
+import ModalServicioUpdate from "../../servicios/modificar/modalServicioUpdate";
+import ModalDetalleServicio from "../../servicios/crear/modalDetalleServicio";
 ModalDetalleServicioUpdate;
-import { ListaServiciosDetalle } from "../component/listaServiciosDetalles";
-import ModalDetalleServicioUpdate from "../component/modalDetalleServicioUpdate";
+import { ListaServiciosDetalle } from "../../servicios/listaServiciosDetalles";
+import ModalDetalleServicioUpdate from "../../modalDetalleServicioUpdate";
 
 export class FormDocUpdate extends React.Component {
 	constructor(props) {

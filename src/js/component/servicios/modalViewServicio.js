@@ -1,7 +1,7 @@
 import React from "react";
-import { Context } from "../store/appContext";
+import { Context } from "../../store/appContext";
 import PropTypes from "prop-types";
-import ModalDocumento from "./modalServicio";
+import ModalDocumento from "./crear/modalServicio";
 import { ListaServiciosView } from "./listaServiciosView";
 
 export default class ModalViewServicio extends React.Component {

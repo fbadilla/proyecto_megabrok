@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Context } from "../store/appContext";
+import { Context } from "../../store/appContext";
 import PropTypes from "prop-types";
 import ModalDocumento from "./modalServicio";
 import { ListaDocumentos } from "./listaDocumentos";

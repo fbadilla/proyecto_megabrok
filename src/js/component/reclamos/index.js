@@ -1,12 +1,11 @@
 import React, { Fragment } from "react";
-import { Context } from "../store/appContext";
-import { Animated } from "react-animated-css";
+import { Context } from "../../store/appContext";
 import { Link } from "react-router-dom";
-import { ListaReclamos } from "../component/listaReclamos";
-import ModalDelete from "../component/modalDelete";
-import ModalDeleteDocumento from "../component/modalDeleteDocumento";
-import ModalServicioUpdate from "../component/modalServicioUpdate";
-import ModalViewServicio from "../component/modalViewServicio";
+import { ListaReclamos } from "./listaReclamos";
+import ModalDelete from "./eliminar/modalDelete";
+import ModalDeleteDocumento from "../documentos/eliminar/modalDeleteDocumento";
+import ModalServicioUpdate from "../servicios/modificar/modalServicioUpdate";
+import ModalViewServicio from "../servicios/modalViewServicio";
 
 export class DashReclamo extends React.Component {
 	constructor(props) {

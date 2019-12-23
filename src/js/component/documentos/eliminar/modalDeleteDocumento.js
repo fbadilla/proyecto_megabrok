@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Context } from "../store/appContext";
+import { Context } from "../../../store/appContext";
 import PropTypes from "prop-types";
 
 export default class ModalDeleteDocumento extends React.Component {

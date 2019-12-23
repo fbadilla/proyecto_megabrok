@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Context } from "../store/appContext";
+import { Context } from "../../store/appContext";
 import PropTypes from "prop-types";
 
 export class ListaDocumentos extends Component {
