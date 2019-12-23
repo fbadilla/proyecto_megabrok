@@ -1,5 +1,5 @@
 import React from "react";
-import { Context } from "../store/appContext";
+import { Context } from "../../store/appContext";
 import PropTypes from "prop-types";
 import Select from "react-select";
 

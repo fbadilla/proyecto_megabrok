@@ -11,7 +11,6 @@ import ModalArchivo from "../../servicios/modificar/modalArchivo";
 import ModalServicio from "../../servicios/crear/modalServicio";
 import ModalServicioUpdate from "../../servicios/modificar/modalServicioUpdate";
 
-
 export class FormDoc extends React.Component {
 	constructor(props) {
 		super(props);
