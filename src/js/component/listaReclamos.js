@@ -30,7 +30,6 @@ export class ListaReclamos extends Component {
 												key={i}
 												className={item.name_estado == "Pendiente" ? "danger" : "primary"}>
 												<td scope="row">{item.asociacion_id__id_poliza__nun_poliza}</td>
-												<td>{item.asociacion_id__id_poliza__numPolizaLegacy}</td>
 												<td>{item.account_id__name_Account}</td>
 												<th>{item.name_estado}</th>
 												<td>
@@ -84,7 +83,6 @@ export class ListaReclamos extends Component {
 												key={i}
 												className={item.name_estado == "Pendiente" ? "danger" : "primary"}>
 												<td scope="row">{item.asociacion_id__id_poliza__nun_poliza}</td>
-												<td>{item.asociacion_id__id_poliza__numPolizaLegacy}</td>
 												<td>{item.account_id__name_Account}</td>
 												<th>{item.name_estado}</th>
 												<td>
@@ -137,7 +135,6 @@ export class ListaReclamos extends Component {
 												<thead>
 													<tr>
 														<th scope="col">Poliza</th>
-														<th scope="col">Poliza Legacy</th>
 														<th scope="col">Realizado por</th>
 														<th scope="col">Estado</th>
 														<th scope="col">Reclamante</th>

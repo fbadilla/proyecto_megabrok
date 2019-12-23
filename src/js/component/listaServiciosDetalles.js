@@ -34,19 +34,6 @@ export class ListaServiciosDetalle extends Component {
 											<button
 												type="button"
 												className="btn btn-primary2"
-												onClick={() =>
-													servicio.archivoServicio.length < 1 ||
-													servicio.archivoServicio.length == null
-														? alert("no existe el documento")
-														: window.open(
-																store.apiUrl + "/media/" + servicio.archivoServicio
-														  )
-												}>
-												<i className="ti-image" />
-											</button>
-											<button
-												type="button"
-												className="btn btn-primary2"
 												data-dismiss="modal"
 												data-toggle="modal"
 												data-target="#modalDetalleServicioUpdate"
@@ -112,6 +99,35 @@ export class ListaServiciosDetalle extends Component {
 													})}
 												</tbody>
 											</table>
+										</div>
+									</div>
+									<div className="row justify-content-end">
+										<div className="col-1">
+											<img
+												src="images/PDF.png"
+												className="rounded-sm w-100 "
+												onClick={() =>
+													servicio.archivoServicio.length < 1 ||
+													servicio.archivoServicio.length == null
+														? alert("no existe el documento")
+														: window.open(
+																store.apiUrl + "/media/" + servicio.archivoServicio
+														  )
+												}
+											/>
+										</div>
+										<div className="col-3">
+											<span
+												onClick={() =>
+													servicio.archivoServicio.length < 1 ||
+													servicio.archivoServicio.length == null
+														? alert("no existe el documento")
+														: window.open(
+																store.apiUrl + "/media/" + servicio.archivoServicio
+														  )
+												}>
+												{servicio.archivoServicio.slice(11)}
+											</span>
 										</div>
 									</div>
 								</div>

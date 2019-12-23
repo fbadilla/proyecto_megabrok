@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { ListaDocumentos } from "../component/listaDocumentos";
 import PropTypes from "prop-types";
 import { Animated } from "react-animated-css";
-import { ListaServicios } from "../component/listaServicios";
+import { ListaServiciosDetalle } from "../component/listaServiciosDetalles";
 import ModalDeleteServicio from "../component/modalDeleteServicio";
 import ModalDeleteDocumento from "../component/modalDeleteDocumento";
 import ModalArchivo from "../component/modalArchivo";
@@ -136,7 +136,7 @@ export class FormDoc extends React.Component {
 													</div>
 													<div className="row">
 														<div className="col-md-12">
-															<ListaServicios />
+															<ListaServiciosDetalle />
 														</div>
 													</div>
 												</form>
