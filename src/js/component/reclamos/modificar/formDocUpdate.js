@@ -4,12 +4,12 @@ import PropTypes from "prop-types";
 import ModalDeleteServicio from "../../servicios/eliminar/modalDeleteServicio";
 import ModalDeleteDocumento from "../../documentos/eliminar/modalDeleteDocumento";
 import ModalArchivo from "../../servicios/modificar/modalArchivo";
+import ModalProveedorUpdate from "../../servicios/modificar/modalProvedoorUpdate";
 import ModalServicio from "../../servicios/crear/modalServicio";
 import ModalServicioUpdate from "../../servicios/modificar/modalServicioUpdate";
 import ModalDetalleServicio from "../../servicios/crear/modalDetalleServicio";
-ModalDetalleServicioUpdate;
 import { ListaServiciosDetalle } from "../../servicios/listaServiciosDetalles";
-import ModalDetalleServicioUpdate from "../../modalDetalleServicioUpdate";
+import ModalDetalleServicioUpdate from "../../servicios/modalDetalleServicioUpdate";
 
 export class FormDocUpdate extends React.Component {
 	constructor(props) {
@@ -180,6 +180,7 @@ export class FormDocUpdate extends React.Component {
 							<ModalDeleteServicio />
 							<ModalDeleteDocumento />
 							<ModalDetalleServicioUpdate />
+							<ModalProveedorUpdate />
 						</Fragment>
 					);
 				}}

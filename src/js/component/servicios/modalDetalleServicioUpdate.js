@@ -51,11 +51,12 @@ export default class ModalDetalleServicioUpdate extends React.Component {
 							<div className="modal-dialog modal-xl" role="document">
 								<div className="modal-content">
 									<div className="modal-header">
-										<div className="col-md-7">
-											<h5 className="modal-title" id="exampleModalLabel">
-												<label htmlFor="inputNombre">Ingreso servicio </label>
-											</h5>
-										</div>
+										<h5 className="modal-title" id="exampleModalLabel">
+											<label htmlFor="inputNombre">Agregar Nuevo Detalle</label>
+										</h5>
+										<button type="button" className="close" data-dismiss="modal" aria-label="Close">
+											<i className="ti-close" />
+										</button>
 									</div>
 									<div className="modal-body">
 										<form action="#">
@@ -200,9 +201,6 @@ export default class ModalDetalleServicioUpdate extends React.Component {
 												</div>
 											</div>
 											<div className="modal-footer">
-												<button type="button" className="btn btn-primary" data-dismiss="modal">
-													Cerrar
-												</button>
 												<button
 													type="submit"
 													className="btn btn-primary"
