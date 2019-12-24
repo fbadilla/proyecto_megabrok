@@ -1417,9 +1417,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				var dias = Math.floor(dif / (1000 * 60 * 60 * 24));
 				return dias;
 			},
-			enviarReclamo: reclamo => {
+			enviarReclamo: (reclamo, servicios) => {
 				const store = getStore();
-				let data = reclamo;
+				let data = { reclamo, servicios };
 				fetch(store.apiUrl + "/api/generarclaim/", {
 					method: "Post",
 					body: JSON.stringify(data),
@@ -1428,10 +1428,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 						"Content-Type": "application/json"
 					}
 				})
-					.then(resp => resp.json())
-					.then(data => {
-						setStore({ formulario: data });
-						alert("se modificaron los datos del reclamo");
+					.then(resp => {
+						if (resp.status === 200) {
+							return resp.json().then(data => {
+								setStore({ formulario: data });
+								alert("Se ha enviado el reclamo exitosamente");
+							});
+						} else if (resp.status === 400) {
+							return resp.json().then(data => alert("No se ha enviado el reclamo: " + data.reason));
+						}
+					})
+					.catch(error => {
+						setStore({ error });
+						alert("No se puede enviar el reclamo: ");
 					});
 			}
 		}
