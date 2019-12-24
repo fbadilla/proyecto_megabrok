@@ -1965,7 +1965,50 @@ form label {
 .modal-open {
   overflow: auto;
 }
-
+.icono {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  opacity: .5;
+  border: 0;
+  padding: 2;
+  background-color: transparent;
+}
+.icono2 {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  opacity: .5;
+  border: 0;
+  padding: 2;
+  background-color: transparent;
+}
+.cursor-pointer{
+  cursor: pointer;
+}
+.w-3 {
+  width: 3% ;
+}
+.stretched-link2::after {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  pointer-events: auto;
+  content: "";
+  background-color: rgba(0, 0, 0, 0);
+}
+.col-12file{
+  -ms-flex: 0 0 100%;
+  flex: 0 0 100%;
+  max-width: 100%;
+  background: aliceblue;
+}
 /*# sourceMappingURL=style.css.map */
 
 input[type="search"]{
