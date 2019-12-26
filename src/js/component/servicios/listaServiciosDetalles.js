@@ -47,7 +47,7 @@ export class ListaServiciosDetalle extends Component {
 												<thead>
 													<tr>
 														<th>
-															Detalle{" "}
+															Detalle
 															<button
 																type="button"
 																className="icono2"
@@ -77,7 +77,7 @@ export class ListaServiciosDetalle extends Component {
 																			.map((doc, i) => doc.numdoc)
 																			.join(" - ")}
 																	</td>
-																	<td className="moneda">
+																	<td>
 																		{documentos
 																			.map((doc, i) => doc.montodoc)
 																			.reduce(

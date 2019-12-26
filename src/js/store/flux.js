@@ -288,7 +288,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(error => {
 						setStore({ error });
 						alert("No se pudo ingresar el documento, revise los campos");
-					});
+					})
+					.then(() => getActions().getServicios());
 			},
 			handleEnvioDetalle: history => {
 				const store = getStore();
@@ -413,6 +414,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							documentos: []
 						})
 					)
+
 					.catch(error => {
 						setStore({ error });
 						alert("No se pudo ingresar el documento, revise los campos");
@@ -552,7 +554,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			handleDeleteServicio: () => {
 				const store = getStore();
-				fetch(store.apiUrl + "/api/servicios/" + store.deleteselect.id, {
+				fetch(store.apiUrl + "/api/servicios/" + store.deleteselect, {
 					method: "DELETE",
 					mimeType: "multipart/form-data",
 					headers: {
@@ -566,6 +568,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							deleteselect: ""
 						})
 					)
+
 					.catch(error => {
 						setStore({ error });
 						alert("No se pudo eliminar el servicio");
