@@ -60,7 +60,7 @@ export default class ModalProveedorUpdate extends React.Component {
 											type="button"
 											className="btn btn-primary"
 											onClick={() => {
-												actions.handlePutServicioArchivo();
+												actions.handlePutProveedorServicio();
 											}}
 											data-dismiss="modal">
 											Modificar

@@ -17,7 +17,7 @@ export class ListaServiciosDetalle extends Component {
 						let columnas = store.servicios.map((servicio, i) => {
 							return (
 								<div className="col-md-9" key={i}>
-									<div className="row row2 border rounded">
+									<div className="row row2 border rounded ">
 										<div className="col-md-5 mt-4">
 											<h6>
 												<button
@@ -25,13 +25,7 @@ export class ListaServiciosDetalle extends Component {
 													className="icono"
 													data-toggle="modal"
 													data-target="#modalProveedorUpdate"
-													//onClick={() =>
-													//	actions.handleSelectedServicio(
-													//		{ id },
-													//		row,
-													//		servicio.id
-													//	)}
-												>
+													onClick={() => actions.handleSelectedServicioUpdate(servicio)}>
 													<i className="ti-settings" />
 												</button>
 												{servicio.proveedor_id__nombre_proveedor}:
@@ -43,8 +37,8 @@ export class ListaServiciosDetalle extends Component {
 												className="close"
 												data-dismiss="modal"
 												data-toggle="modal"
-												data-target="#modalDetalleServicioUpdate"
-												onClick={() => actions.handleSelectedServicioUpdate(servicio)}>
+												data-target="#modaldeleteservicio"
+												onClick={() => actions.handleDelete(servicio.id)}>
 												<i className="ti-close" />
 											</button>
 										</div>
@@ -53,7 +47,7 @@ export class ListaServiciosDetalle extends Component {
 												<thead>
 													<tr>
 														<th>
-															Detalle{" "}
+															Detalle
 															<button
 																type="button"
 																className="icono2"
@@ -111,7 +105,7 @@ export class ListaServiciosDetalle extends Component {
 																			type="button"
 																			className="icono"
 																			data-toggle="modal"
-																			data-target="#modaldeleteservicio"
+																			data-target="#modaldeletedetalleservicio"
 																			onClick={() =>
 																				actions.handleDelete({ id })
 																			}>
@@ -131,12 +125,7 @@ export class ListaServiciosDetalle extends Component {
 												className="rounded-sm w-3 cursor-pointer "
 												data-toggle="modal"
 												data-target="#modalArchivo"
-												//onClick={() =>
-												//	actions.handleSelectedServicio(
-												//		{ id },
-												//		row,
-												//		servicio.id
-												//	)}
+												onClick={() => actions.handleSelectedServicioUpdate(servicio)}
 											/>
 											<a
 												href="#"

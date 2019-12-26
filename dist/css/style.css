@@ -1961,9 +1961,14 @@ form label {
   margin-right: -15px;
   margin-left: -15px;
   margin-top: 15px;
+  
 }
 .modal-open {
   overflow: auto;
+}
+.moneda {
+  padding: 0.3rem;
+  text-align: right;
 }
 .icono {
   font-size: 1.5rem;

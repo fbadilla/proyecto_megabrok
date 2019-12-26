@@ -142,7 +142,7 @@ export default class ModalServicio extends React.Component {
 														<input
 															name="numdoc"
 															id="numdoc"
-															placeholder="666"
+															placeholder="Nº"
 															type="number"
 															className="form-control"
 															value={store.documento.numdoc}
@@ -160,7 +160,7 @@ export default class ModalServicio extends React.Component {
 														<input
 															name="montodoc"
 															id="montodoc"
-															placeholder="100000"
+															placeholder="$"
 															type="number"
 															className="form-control"
 															value={store.documento.montodoc}

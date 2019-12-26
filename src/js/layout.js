@@ -6,16 +6,16 @@ import injectContext from "./store/appContext";
 import { Usuarios } from "./views/user";
 import { modificarUsuario } from "./views/modprofile";
 import { ingresarReclamo } from "./component/reclamos/crear/ingresarReclamo";
-import { DashReclamo } from "./component/reclamos";
+import { DashReclamo } from "./views/dashReclamo";
 import { Navbar } from "./component/navbar";
-import { FormularioChile } from "./component/reclamos/crear/formularioChile";
-import { FormDoc } from "./component/reclamos/crear/formDoc";
-import { FormDocUpdate } from "./component/reclamos/modificar/formDocUpdate";
+import { FormularioChile } from "./views/formularioChile";
+import { FormDoc } from "./views/formDoc";
+import { FormDocUpdate } from "./views/formDocUpdate";
 import PrivateRoute from "./PrivateRoute";
-import { MantenedorPersonas } from "./component/personas";
+import { MantenedorPersonas } from "./views/dashPersonas";
 
 import { Context } from "./store/appContext";
-import { DashProveedor } from "./component/proveedores";
+import { DashProveedor } from "./views/dashProveedor";
 
 //create your first component
 export class Layout extends React.Component {

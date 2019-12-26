@@ -1,17 +1,18 @@
 import React, { Fragment } from "react";
-import { Context } from "../../../store/appContext";
+import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
-import ModalDeleteServicio from "../../servicios/eliminar/modalDeleteServicio";
-import ModalDeleteDocumento from "../../documentos/eliminar/modalDeleteDocumento";
-import ModalArchivo from "../../servicios/modificar/modalArchivo";
-import ModalProveedorUpdate from "../../servicios/modificar/modalProvedoorUpdate";
-import ModalServicio from "../../servicios/crear/modalServicio";
-import ModalServicioUpdate from "../../servicios/modificar/modalServicioUpdate";
-import ModalDetalleServicio from "../../servicios/crear/modalDetalleServicio";
-import { ListaServiciosDetalle } from "../../servicios/listaServiciosDetalles";
-import ModalDetalleServicioUpdate from "../../servicios/modalDetalleServicioUpdate";
+import ModalDeleteServicio from "../component/servicios/eliminar/modalDeleteServicio";
+import ModalDeleteDetalleServicio from "../component/servicios/eliminar/modalDeleteDetalleServicio";
+import ModalDeleteDocumento from "../component/documentos/eliminar/modalDeleteDocumento";
+import ModalArchivo from "../component/servicios/modificar/modalArchivo";
+import ModalProveedorUpdate from "../component/servicios/modificar/modalProvedoorUpdate";
+import ModalServicio from "../component/servicios/crear/modalServicio";
+import ModalServicioUpdate from "../component/servicios/modificar/modalServicioUpdate";
+import ModalDetalleServicio from "../component/servicios/crear/modalDetalleServicio";
+import { ListaServiciosDetalle } from "../component/servicios/listaServiciosDetalles";
+import ModalDetalleServicioUpdate from "../component/servicios/modalDetalleServicioUpdate";
 
-export class FormDocUpdate extends React.Component {
+export class FormDoc extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -25,8 +26,8 @@ export class FormDocUpdate extends React.Component {
 		this.props.history;
 	}
 	componentDidMount() {
-		this.actionsContext.getServicios();
 		this.actionsContext.getaccount();
+		this.actionsContext.getServicios();
 	}
 	render() {
 		return (
@@ -34,7 +35,6 @@ export class FormDocUpdate extends React.Component {
 				{({ store, actions }) => {
 					this.storeContext = store;
 					this.actionsContext = actions;
-
 					return (
 						<Fragment>
 							<div className="gtco-section border-bottom">
@@ -58,11 +58,8 @@ export class FormDocUpdate extends React.Component {
 											</div>
 											<form
 												action="#"
-												onSubmit={e => actions.handleEnvioMod(e, this.props.history)}>
+												onSubmit={e => actions.handleFormulario(e, this.props.history)}>
 												<div className="row form-group">
-													<div className="col-md-8">
-														<h4>Datos Personales del Paciente</h4>
-													</div>
 													<div className="col-md-6">
 														<div className="feature-left">
 															<span className="icon">
@@ -72,14 +69,11 @@ export class FormDocUpdate extends React.Component {
 																<label>Nombre Completo Paciente</label>
 																<input
 																	name="nameReclamo"
-																	className="form-control"
-																	id="nameReclamo"
-																	value={
-																		store.formulario.nombreReclamante +
-																		store.formulario.apellidoReclamante
-																	}
-																	type="text"
 																	readOnly
+																	className="form-control"
+																	id="static"
+																	placeholder={store.formulario.nameReclamo}
+																	type="text"
 																/>
 															</div>
 														</div>
@@ -89,10 +83,9 @@ export class FormDocUpdate extends React.Component {
 															<div className="feature-copy">
 																<label>Numero Poliza</label>
 																<input
-																	name="numPoliza"
+																	name="numpoliza"
 																	id="disabledTextInput"
-																	onChange={e => actions.handleForm(e)}
-																	value={store.formulario.numPoliza}
+																	placeholder={store.formulario.numpoliza}
 																	type="text"
 																	className="form-control"
 																	readOnly
@@ -101,7 +94,6 @@ export class FormDocUpdate extends React.Component {
 														</div>
 													</div>
 												</div>
-
 												<div className="row form-group">
 													<div className="col-md-8">
 														<h4>Detalles del Diagnostico / Accidente</h4>
@@ -121,24 +113,6 @@ export class FormDocUpdate extends React.Component {
 																	type="text"
 																	className="form-control"
 																/>
-															</div>
-														</div>
-													</div>
-													<div className="col-md-3">
-														<div className="feature-left">
-															<div className="feature-copy">
-																<label>Estado Reclamo </label>
-																<select
-																	className="form-control"
-																	id="name_estado"
-																	name="estado"
-																	value={store.formulario.estado}
-																	onChange={e => actions.handleForm(e)}>
-																	<option>Pendiente</option>
-																	<option>Aprobada</option>
-																	<option>Rechazada</option>
-																	<option>Anulada</option>
-																</select>
 															</div>
 														</div>
 													</div>
@@ -167,7 +141,11 @@ export class FormDocUpdate extends React.Component {
 														</button>
 													</div>
 												</div>
-												<ListaServiciosDetalle />
+												<div className="row">
+													<div className="col-md-12">
+														<ListaServiciosDetalle />
+													</div>
+												</div>
 											</form>
 										</div>
 									</div>
@@ -178,6 +156,7 @@ export class FormDocUpdate extends React.Component {
 							<ModalDetalleServicio />
 							<ModalArchivo />
 							<ModalDeleteServicio />
+							<ModalDeleteDetalleServicio />
 							<ModalDeleteDocumento />
 							<ModalDetalleServicioUpdate />
 							<ModalProveedorUpdate />
@@ -188,6 +167,6 @@ export class FormDocUpdate extends React.Component {
 		);
 	}
 }
-FormDocUpdate.propTypes = {
+FormDoc.propTypes = {
 	history: PropTypes.object
 };

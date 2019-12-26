@@ -35,7 +35,7 @@ export default class ModalServicioUpdate extends React.Component {
 											<th>
 												<button
 													type="button"
-													className="btn btn-primary2"
+													className="icono"
 													data-toggle="modal"
 													data-target="#modaldeletedocumento"
 													onClick={() => actions.handleDelete(item.id)}>
@@ -61,17 +61,17 @@ export default class ModalServicioUpdate extends React.Component {
 							<div className="modal-dialog modal-xl" role="document">
 								<div className="modal-content">
 									<div className="modal-header">
-										<div className="col-md-7">
+										<div className="col">
 											<h5 className="modal-title" id="exampleModalLabel">
 												<label htmlFor="inputNombre">Modificar Detalle del Servicio </label>
+												<button
+													type="button"
+													className="close"
+													data-dismiss="modal"
+													aria-label="Close">
+													<i className="ti-close" />
+												</button>
 											</h5>
-											<button
-												type="button"
-												className="close"
-												data-dismiss="modal"
-												aria-label="Close">
-												<i className="ti-close" />
-											</button>
 										</div>
 									</div>
 									<div className="modal-body">
@@ -159,7 +159,7 @@ export default class ModalServicioUpdate extends React.Component {
 														<input
 															name="numdoc"
 															id="numdoc"
-															placeholder="666"
+															placeholder="Nº"
 															type="number"
 															className="form-control"
 															value={store.documento.numdoc}
@@ -177,7 +177,7 @@ export default class ModalServicioUpdate extends React.Component {
 														<input
 															name="montodoc"
 															id="montodoc"
-															placeholder="$100.000.-"
+															placeholder="$..."
 															type="number"
 															className="form-control"
 															value={store.documento.montodoc}
