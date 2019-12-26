@@ -283,7 +283,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 										});
 									});
 							});
-						getActions().getServicios();
 					})
 					.catch(error => {
 						setStore({ error });
@@ -331,7 +330,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(error => {
 						setStore({ error });
 						alert("No se pudo ingresar el documento, revise los campos");
-					});
+					})
+					.then(() => getActions().getServicios());
 			},
 			cleanService: () => {
 				setStore({

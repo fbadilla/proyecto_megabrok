@@ -138,9 +138,9 @@ export class FormDocUpdate extends React.Component {
 																	value={store.formulario.estado}
 																	onChange={e => actions.handleForm(e)}>
 																	<option>Pendiente</option>
+																	<option>Enviado</option>
 																	<option>Aprobada</option>
 																	<option>Rechazada</option>
-																	<option>Anulada</option>
 																</select>
 															</div>
 														</div>
