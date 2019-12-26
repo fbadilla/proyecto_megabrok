@@ -49,8 +49,6 @@ export class FormDocUpdate extends React.Component {
 													<button
 														type="button"
 														className="btn btn-primary"
-														//data-toggle="modal"
-														//data-target="#modalservicio"
 														onClick={() =>
 															actions.enviarReclamo(store.formulario, store.servicios)
 														}>
