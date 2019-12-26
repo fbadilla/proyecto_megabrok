@@ -157,7 +157,7 @@ export class FormDocUpdate extends React.Component {
 												</div>
 												<div className="row form-group">
 													<div className="col-md-8">
-														<h4>Datos sobre los Servicios Prestados</h4>
+														<h4>Servicios Prestados</h4>
 													</div>
 													<div className="col-md-6">
 														<button
