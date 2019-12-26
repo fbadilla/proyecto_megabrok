@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import { Context } from "../../../store/appContext";
 import PropTypes from "prop-types";
 import ModalDeleteServicio from "../../servicios/eliminar/modalDeleteServicio";
+import ModalDeleteDetalleServicio from "../../servicios/eliminar/modalDeleteDetalleServicio";
 import ModalDeleteDocumento from "../../documentos/eliminar/modalDeleteDocumento";
 import ModalArchivo from "../../servicios/modificar/modalArchivo";
 import ModalProveedorUpdate from "../../servicios/modificar/modalProvedoorUpdate";
@@ -180,6 +181,7 @@ export class FormDocUpdate extends React.Component {
 							<ModalDetalleServicio />
 							<ModalArchivo />
 							<ModalDeleteServicio />
+							<ModalDeleteDetalleServicio />
 							<ModalDeleteDocumento />
 							<ModalDetalleServicioUpdate />
 							<ModalProveedorUpdate />

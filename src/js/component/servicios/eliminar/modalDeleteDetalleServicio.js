@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Context } from "../../../store/appContext";
 import PropTypes from "prop-types";
 
-export default class ModalDeleteServicio extends React.Component {
+export default class ModalDeleteDetalleServicio extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = { value: "" };
@@ -22,7 +22,7 @@ export default class ModalDeleteServicio extends React.Component {
 					return (
 						<div
 							className="modal fade"
-							id="modaldeleteservicio"
+							id="modaldeletedetalleservicio"
 							tabIndex="-1"
 							role="dialog"
 							aria-labelledby="exampleModalLabel"
@@ -44,7 +44,7 @@ export default class ModalDeleteServicio extends React.Component {
 											type="button"
 											className="btn btn-primary"
 											onClick={() => {
-												actions.handleDeleteServicio();
+												actions.handleDeleteDetalleServicio();
 											}}
 											data-dismiss="modal">
 											Eliminar Servicio
@@ -59,6 +59,6 @@ export default class ModalDeleteServicio extends React.Component {
 		);
 	}
 }
-ModalDeleteServicio.propTypes = {
+ModalDeleteDetalleServicio.propTypes = {
 	history: PropTypes.array
 };

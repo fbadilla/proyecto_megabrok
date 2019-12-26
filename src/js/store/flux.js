@@ -515,7 +515,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			handleDeleteServicio: () => {
 				const store = getStore();
-				fetch(store.apiUrl + "/api/servicios/" + store.deleteselect.id, {
+				fetch(store.apiUrl + "/api/servicios/" + store.deleteselect, {
+					method: "DELETE",
+					mimeType: "multipart/form-data",
+					headers: {
+						Authorization: "Bearer " + store.access
+					}
+				})
+					.then(resp => resp.json())
+					.then(() => getActions().getServicios())
+					.then(
+						setStore({
+							deleteselect: ""
+						})
+					)
+					.catch(error => {
+						setStore({ error });
+						alert("No se pudo eliminar el servicio");
+					});
+			},
+			handleDeleteDetalleServicio: () => {
+				const store = getStore();
+				fetch(store.apiUrl + "/api/detalleServicio/" + store.deleteselect.id, {
 					method: "DELETE",
 					mimeType: "multipart/form-data",
 					headers: {
@@ -531,7 +552,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					)
 					.catch(error => {
 						setStore({ error });
-						alert("No se pudo ingresar el documento, revise los campos");
+						alert("No se Eliminar el detalle de servicio");
 					});
 			},
 

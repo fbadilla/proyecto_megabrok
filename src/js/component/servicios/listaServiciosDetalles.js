@@ -17,7 +17,7 @@ export class ListaServiciosDetalle extends Component {
 						let columnas = store.servicios.map((servicio, i) => {
 							return (
 								<div className="col-md-9" key={i}>
-									<div className="row row2 border rounded">
+									<div className="row row2 border rounded ">
 										<div className="col-md-5 mt-4">
 											<h6>
 												<button
@@ -43,8 +43,8 @@ export class ListaServiciosDetalle extends Component {
 												className="close"
 												data-dismiss="modal"
 												data-toggle="modal"
-												data-target="#modalDetalleServicioUpdate"
-												onClick={() => actions.handleSelectedServicioUpdate(servicio)}>
+												data-target="#modaldeleteservicio"
+												onClick={() => actions.handleDelete(servicio.id)}>
 												<i className="ti-close" />
 											</button>
 										</div>
@@ -83,7 +83,7 @@ export class ListaServiciosDetalle extends Component {
 																			.map((doc, i) => doc.numdoc)
 																			.join(" - ")}
 																	</td>
-																	<td>
+																	<td className="moneda">
 																		{documentos
 																			.map((doc, i) => doc.montodoc)
 																			.reduce(
