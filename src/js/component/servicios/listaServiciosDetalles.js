@@ -25,13 +25,7 @@ export class ListaServiciosDetalle extends Component {
 													className="icono"
 													data-toggle="modal"
 													data-target="#modalProveedorUpdate"
-													//onClick={() =>
-													//	actions.handleSelectedServicio(
-													//		{ id },
-													//		row,
-													//		servicio.id
-													//	)}
-												>
+													onClick={() => actions.handleSelectedServicioUpdate(servicio)}>
 													<i className="ti-settings" />
 												</button>
 												{servicio.proveedor_id__nombre_proveedor}:
@@ -111,7 +105,7 @@ export class ListaServiciosDetalle extends Component {
 																			type="button"
 																			className="icono"
 																			data-toggle="modal"
-																			data-target="#modaldeleteservicio"
+																			data-target="#modaldeletedetalleservicio"
 																			onClick={() =>
 																				actions.handleDelete({ id })
 																			}>
@@ -131,12 +125,7 @@ export class ListaServiciosDetalle extends Component {
 												className="rounded-sm w-3 cursor-pointer "
 												data-toggle="modal"
 												data-target="#modalArchivo"
-												//onClick={() =>
-												//	actions.handleSelectedServicio(
-												//		{ id },
-												//		row,
-												//		servicio.id
-												//	)}
+												onClick={() => actions.handleSelectedServicioUpdate(servicio)}
 											/>
 											<a
 												href="#"

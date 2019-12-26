@@ -1,14 +1,15 @@
 import React, { Fragment } from "react";
 import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
-import ModalDeleteServicio from "../component/modalDeleteServicio";
-import ModalDeleteDocumento from "../component/modalDeleteDocumento";
-import ModalArchivo from "../component/modalArchivo";
-import ModalServicio from "../component/modalServicio";
-import ModalServicioUpdate from "../component/modalServicioUpdate";
-import ModalDetalleServicio from "../component/modalDetalleServicio";
-ModalDetalleServicioUpdate;
-import { ListaServiciosDetalle } from "../component/listaServiciosDetalles";
+import ModalDeleteServicio from "../component/servicios/eliminar/modalDeleteServicio";
+import ModalDeleteDetalleServicio from "../component/servicios/eliminar/modalDeleteDetalleServicio";
+import ModalDeleteDocumento from "../component/documentos/eliminar/modalDeleteDocumento";
+import ModalArchivo from "../component/servicios/modificar/modalArchivo";
+import ModalProveedorUpdate from "../component/servicios/modificar/modalProvedoorUpdate";
+import ModalServicio from "../component/servicios/crear/modalServicio";
+import ModalServicioUpdate from "../component/servicios/modificar/modalServicioUpdate";
+import ModalDetalleServicio from "../component/servicios/crear/modalDetalleServicio";
+import { ListaServiciosDetalle } from "../component/servicios/listaServiciosDetalles";
 import ModalDetalleServicioUpdate from "../component/servicios/modalDetalleServicioUpdate";
 
 export class FormDocUpdate extends React.Component {
@@ -51,7 +52,9 @@ export class FormDocUpdate extends React.Component {
 														className="btn btn-primary"
 														//data-toggle="modal"
 														//data-target="#modalservicio"
-														onClick={e => actions.enviarReclamo(store.formulario)}>
+														onClick={() =>
+															actions.enviarReclamo(store.formulario, store.servicios)
+														}>
 														Enviar reclamo
 													</button>
 												</div>
@@ -154,7 +157,7 @@ export class FormDocUpdate extends React.Component {
 												</div>
 												<div className="row form-group">
 													<div className="col-md-8">
-														<h4>Datos sobre los Servicios Prestados</h4>
+														<h4>Servicios Prestados</h4>
 													</div>
 													<div className="col-md-6">
 														<button
@@ -178,8 +181,10 @@ export class FormDocUpdate extends React.Component {
 							<ModalDetalleServicio />
 							<ModalArchivo />
 							<ModalDeleteServicio />
+							<ModalDeleteDetalleServicio />
 							<ModalDeleteDocumento />
 							<ModalDetalleServicioUpdate />
+							<ModalProveedorUpdate />
 						</Fragment>
 					);
 				}}

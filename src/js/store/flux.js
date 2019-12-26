@@ -155,9 +155,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 			handleServicioSelect: value => {
 				const store = getStore();
 				let servicio = store.servicio;
+				let serviceSelectedUpdate = store.serviceSelectedUpdate;
 				servicio["proveedor_id"] = value.value;
+				serviceSelectedUpdate["proveedor_id"] = value.value;
 				setStore({
-					servicio
+					servicio,
+					serviceSelectedUpdate
 				});
 			},
 			handleServicioMod: e => {
@@ -177,13 +180,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 					serviceSelected
 				});
 			},
-
 			//funcion que maneja el Post de un nuevo formulario
 			handleFormulario: (e, history) => {
 				e.preventDefault();
 				getActions().SaveFormulario(history);
 			},
-
 			//funcion que maneja el Post de un nuevo formulario, ademas realiza un GET de documentos por ID, antes y despues del POST
 			handleAceptarDocumento: history => {
 				const store = getStore();
@@ -458,15 +459,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 			handlePutServicioArchivo: () => {
 				const store = getStore();
 				let formServicio = new FormData();
-				formServicio.append("proveedor_id", store.numservice.proveedor_id);
+				formServicio.append("proveedor_id", store.serviceSelectedUpdate.proveedor_id);
 				formServicio.append("reclamo_id", store.formulario.reclamo_id);
-				if (store.archivo.archivoServicio != null)
+				if (store.serviceSelectedUpdate.archivoServicio != null)
 					formServicio.append(
 						"archivoServicio",
-						store.archivo.archivoServicio,
-						store.archivo.archivoServicio.name
+						store.serviceSelectedUpdate.archivoServicio,
+						store.serviceSelectedUpdate.archivoServicio.name
 					);
-				fetch(store.apiUrl + "/api/servicios/" + store.numservice.id, {
+				fetch(store.apiUrl + "/api/servicios/" + store.serviceSelectedUpdate.id, {
 					method: "Put",
 					body: formServicio,
 					mimeType: "multipart/form-data",
@@ -499,6 +500,42 @@ const getState = ({ getStore, getActions, setStore }) => {
 						alert("No se pudo modificar el servicio, revise los campos");
 					});
 			},
+			handlePutProveedorServicio: () => {
+				const store = getStore();
+				let formProveedorServicio = new FormData();
+				formProveedorServicio.append("proveedor_id", store.serviceSelectedUpdate.proveedor_id);
+				formProveedorServicio.append("reclamo_id", store.formulario.reclamo_id);
+				fetch(store.apiUrl + "/api/servicios/" + store.serviceSelectedUpdate.id, {
+					method: "Put",
+					body: formProveedorServicio,
+					headers: {
+						Authorization: "Bearer " + store.access
+					}
+				})
+					.then(resp => resp.json())
+					.then(
+						setStore({
+							documento: {
+								tipodoc: "Boleta",
+								numdoc: "",
+								montodoc: "",
+								datedoc: new Date().toISOString().slice(0, 10)
+							},
+							servicio: {
+								pago: "COB",
+								detalle: ""
+							},
+							documentos: []
+						})
+					)
+
+					.then(() => getActions().getServicios())
+
+					.catch(error => {
+						setStore({ error });
+						alert("No se pudo modificar el proveedor");
+					});
+			},
 
 			handleDeleteDocumento: () => {
 				const store = getStore();
@@ -515,7 +552,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			handleDeleteServicio: () => {
 				const store = getStore();
-				fetch(store.apiUrl + "/api/servicios/" + store.deleteselect, {
+				fetch(store.apiUrl + "/api/servicios/" + store.deleteselect.id, {
 					method: "DELETE",
 					mimeType: "multipart/form-data",
 					headers: {
@@ -673,9 +710,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				const archivoServicio = e.target.files[0];
 				let servicio = store.servicio;
+				let serviceSelectedUpdate = store.serviceSelectedUpdate;
 				servicio["archivoServicio"] = archivoServicio;
+				serviceSelectedUpdate["archivoServicio"] = archivoServicio;
 				setStore({
-					servicio
+					servicio,
+					serviceSelectedUpdate
 				});
 			},
 			handleFileChangemod: e => {

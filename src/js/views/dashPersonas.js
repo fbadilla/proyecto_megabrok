@@ -1,24 +1,19 @@
 import React, { Fragment } from "react";
-import { Context } from "../../store/appContext";
-import { Link } from "react-router-dom";
-import { ListaReclamos } from "./listaReclamos";
-import ModalDelete from "./eliminar/modalDelete";
-import ModalDeleteDocumento from "../documentos/eliminar/modalDeleteDocumento";
-import ModalServicioUpdate from "../servicios/modificar/modalServicioUpdate";
-import ModalViewServicio from "../servicios/modalViewServicio";
+import { Context } from "../store/appContext";
+import ModalPersona from "../component/personas/modalPersona";
+import PropTypes from "prop-types";
+import { ListaPersonas } from "../component/personas/listaPersonas";
 
-export class DashReclamo extends React.Component {
+export class MantenedorPersonas extends React.Component {
 	constructor(props) {
 		super(props);
 		this.storeContext = null;
 		this.actionsContext = null;
 	}
 	componentDidMount() {
-		this.actionsContext.getProveedoresAutocompletar();
-		this.actionsContext.getaccount();
-		this.actionsContext.getFormulario();
-		this.actionsContext.vaciarFiltro();
 		this.actionsContext.getPersonas();
+		this.actionsContext.getaccount();
+		this.actionsContext.vaciarFiltro();
 	}
 	render() {
 		return (
@@ -34,44 +29,51 @@ export class DashReclamo extends React.Component {
 										<div className="gtco-section ">
 											<div className="row">
 												<div className="col-md-8">
-													<p>
-														Aca se mostraran todos los reclamos, si deseas crear uno nuevo
-														presiona el boton Crear reclamo
-													</p>
+													<p>Aca se mostraran todas las personas</p>
 												</div>
 											</div>
 											<div className="row">
-												<div className="col-md-8">
+												<div className="col-md-4">
 													<div className="input-group  input-group-lg">
 														<div className="input-group-prepend">
 															<span className="input-group-text" id="basic-addon1">
 																<i className="ti-search" />
 															</span>
 														</div>
-
 														<input
-															name="filtro_reclamo"
-															type="text"
+															name="busqueda"
+															type="busqueda"
 															className="form-control"
-															placeholder="Filtro"
-															onChange={e => actions.handleFiltroReclamo(e)}
+															placeholder="Buscar"
+															onChange={e => actions.handleChange(e)}
 														/>
 													</div>
 												</div>
-												<div className="col-md-3 offset-1">
-													<Link to="/ingresareclamo" className="btn btn-primary">
-														Crear Reclamo
-													</Link>
+												<div className="col-md-2">
+													<input
+														type="submit"
+														value="Buscar persona"
+														className="btn btn-primary"
+														onClick={e => actions.handleFiltroPersona(e)}
+													/>
+												</div>
+												<div className="col-md-3 offset-3">
+													<button
+														type="button"
+														className="btn btn-primary"
+														data-toggle="modal"
+														data-target="#ModalAddPersona">
+														Agregar Persona
+													</button>
 												</div>
 											</div>
 										</div>
-										<ListaReclamos />
+
+										<ListaPersonas />
 									</div>
 								</div>
 							</div>
-							<ModalDelete />
-							<ModalDeleteDocumento />
-							<ModalViewServicio />
+							<ModalPersona />
 						</Fragment>
 					);
 				}}
@@ -79,3 +81,6 @@ export class DashReclamo extends React.Component {
 		);
 	}
 }
+MantenedorPersonas.propTypes = {
+	history: PropTypes.object
+};
