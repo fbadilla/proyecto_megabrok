@@ -47,11 +47,7 @@ export class FormDocUpdate extends React.Component {
 										<div className="col-md-10 ">
 											<div className="row">
 												<div className="col-md-4">
-<<<<<<< HEAD
 													<h2>Reclamo {store.formulario.num_claim}</h2>
-=======
-													<h2>Reclamo Nº {store.formulario.num_claim}</h2>
->>>>>>> d019cef7bfaf948873a52a9fcceaa6e6367b7322
 												</div>
 												<div className={visible}>
 													<div className="col-md-4">
