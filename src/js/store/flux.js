@@ -427,7 +427,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			handlePutServicio: () => {
 				const store = getStore();
 				let formDetalleServicio = new FormData();
-				formDetalleServicio.append("proveedor_id", store.serviceSelected.proveedor_id);
 				formDetalleServicio.append("detalle", store.serviceSelected.detalle);
 				formDetalleServicio.append("pago", store.serviceSelected.pago);
 				formDetalleServicio.append("servicio_id", store.serviceSelected.servicio_id);

@@ -30,21 +30,11 @@ export class ListaReclamos extends Component {
 												<td scope="row">{item.numPoliza}</td>
 												<td>{item.username}</td>
 												<th>{item.estado}</th>
+												<th>{item.num_claim}</th>
 												<td>{item.nombreReclamante + " " + item.apellidoReclamante}</td>
 												<td>{item.detalle_diagnostico}</td>
 												<td>{item.date}</td>
 												<td>{actions.restafecha(item.date)}</td>
-
-												<td>
-													<button
-														type="button"
-														className="btn btn-primary2"
-														data-toggle="modal"
-														data-target="#modalviewdocumento"
-														onClick={() => actions.getServicioId2(item.reclamo_id)}>
-														<i className="ti-eye" />
-													</button>
-												</td>
 												<td>
 													<Link
 														to="/update"
@@ -76,21 +66,11 @@ export class ListaReclamos extends Component {
 												<td scope="row">{item.numPoliza}</td>
 												<td>{item.username}</td>
 												<th>{item.estado}</th>
+												<th>{item.num_claim}</th>
 												<td> {item.nombreReclamante + " " + item.apellidoReclamante}</td>
 												<td>{item.detalle_diagnostico}</td>
 												<td>{item.date}</td>
 												<td>{actions.restafecha(item.date)}</td>
-
-												<td>
-													<button
-														type="button"
-														className="btn btn-primary2"
-														data-toggle="modal"
-														data-target="#modalviewservicio"
-														onClick={() => actions.handleModReclamo(item)}>
-														<i className="ti-eye" />
-													</button>
-												</td>
 												<td>
 													<Link
 														to="/update"
@@ -117,17 +97,17 @@ export class ListaReclamos extends Component {
 								<div className="gtco-section ">
 									<div className="col-md-12">
 										<div className="table-responsive">
-											<table className="table">
+											<table className="table table-hover">
 												<thead>
 													<tr>
 														<th scope="col">Poliza</th>
 														<th scope="col">Realizado por</th>
 														<th scope="col">Estado</th>
+														<th scope="col">Nº Claim</th>
 														<th scope="col">Reclamante</th>
 														<th scope="col">Detalle</th>
 														<th scope="col">Fecha</th>
 														<th scope="col">Dias</th>
-														<th scope="col">Ver más</th>
 														<th scope="col">Editar</th>
 														<th scope="col">Eliminar</th>
 													</tr>
