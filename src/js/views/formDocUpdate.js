@@ -44,7 +44,7 @@ export class FormDocUpdate extends React.Component {
 										<div className="col-md-10 ">
 											<div className="row">
 												<div className="col-md-4">
-													<h2>Reclamo Nº {store.formulario.reclamo_id}</h2>
+													<h2>Reclamo Nº {store.formulario.num_claim}</h2>
 												</div>
 												<div className="col-md-4">
 													<button
