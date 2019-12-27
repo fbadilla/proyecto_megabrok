@@ -22,7 +22,6 @@ export class ListaPersonas extends Component {
 								return (
 									<tr key={i}>
 										<td scope="row">{item.nombre + " " + item.apellido}</td>
-										<td>{item.rut}</td>
 										<td>{item.emailPrimario}</td>
 										<td>{item.direccionParticular}</td>
 										<td>{item.celular + " / " + item.telefonoCasa}</td>
@@ -32,8 +31,8 @@ export class ListaPersonas extends Component {
 												type="button"
 												className="btn btn-primary2"
 												data-toggle="modal"
-												data-target="#modalProveedorUpdate"
-												onClick={() => actions.handleUpdateProveedor(item)}>
+												data-target="#modalPersonaUpdate"
+												onClick={() => actions.handleUpdatePersona(item)}>
 												<i className="ti-marker-alt" />
 											</button>
 										</td>
@@ -56,7 +55,6 @@ export class ListaPersonas extends Component {
 											<thead>
 												<tr>
 													<th scope="col">Nombres</th>
-													<th scope="col">Rut</th>
 													<th scope="col">E-mail Primario</th>
 													<th scope="col">Direccion Particular</th>
 													<th scope="col">Telefonos </th>

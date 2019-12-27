@@ -27,6 +27,42 @@ export class DashProveedor extends React.Component {
 						<Fragment>
 							<div className="gtco-container ">
 								<div className="col-10 offset-1">
+									<div className="gtco-section ">
+										<div className="row">
+											<div className="col-md-8">
+												<p>Aca puedes ver y editar todos los proveedores</p>
+											</div>
+										</div>
+										<div className="row">
+											<div className="col-md-6">
+												<div className="input-group  input-group-lg">
+													<div className="input-group-prepend">
+														<span className="input-group-text" id="basic-addon1">
+															<i className="ti-search" />
+														</span>
+													</div>
+													<input
+														name="filtroValue"
+														type="text"
+														className="form-control"
+														placeholder="Buscar proveedor"
+														onChange={e => actions.handleFiltroProveedor(e)}
+													/>
+												</div>
+											</div>
+											<div className="col-md-3 offset-3">
+												<div className="float-right">
+													<button
+														type="button"
+														className="btn btn-primary"
+														data-toggle="modal"
+														data-target="#ModalAddProveedor">
+														Agregar proveedor
+													</button>
+												</div>
+											</div>
+										</div>
+									</div>
 									<ListaProveedores />
 								</div>
 							</div>

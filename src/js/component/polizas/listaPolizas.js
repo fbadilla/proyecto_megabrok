@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { Animated } from "react-animated-css";
 import { Link } from "react-router-dom";
 
-export class ListaProveedores extends Component {
+export class ListaPolizas extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {};
@@ -18,10 +18,9 @@ export class ListaProveedores extends Component {
 			<Animated animationIn="fadeInLeft" animationOut="bounceOutLeft" animationInDuration={500} isVisible={true}>
 				<Context.Consumer>
 					{({ store, actions }) => {
-						let proveedores = {};
-						if (store.proveedores.length > 0) {
+						const foo = () => {
 							if (store.filtro) {
-								proveedores = store.coleccion.slice(0).map((item, i) => {
+								return store.coleccion.slice(0).map((item, i) => {
 									return (
 										<tr key={i}>
 											<td scope="row">{item.nombre_proveedor}</td>
@@ -49,7 +48,7 @@ export class ListaProveedores extends Component {
 									);
 								});
 							} else {
-								proveedores = store.proveedores.slice(0).map((item, i) => {
+								return store.polizas.slice(0).map((item, i) => {
 									return (
 										<tr key={i}>
 											<td scope="row">{item.nombre_proveedor}</td>
@@ -79,24 +78,64 @@ export class ListaProveedores extends Component {
 									);
 								});
 							}
-
+						};
+						// -------------------------------------------------------------
+						if (store.polizas.length > 0) {
 							return (
-								<div className="gtco-section ">
-									<div className="table-responsive">
-										<table className="table">
-											<thead>
-												<tr>
-													<th scope="col">Nombre</th>
-													<th scope="col">Grupo</th>
-													<th scope="col">Rut</th>
-													<th scope="col">Editar</th>
-													<th scope="col">Eliminar</th>
-												</tr>
-											</thead>
-											<tbody>{proveedores}</tbody>
-										</table>
+								<Fragment>
+									<div className="gtco-section ">
+										<div className="row">
+											<div className="col-md-8">
+												<p>Aca puedes ver y editar todos los proveedores</p>
+											</div>
+										</div>
+										<div className="row">
+											<div className="col-md-6">
+												<div className="input-group  input-group-lg">
+													<div className="input-group-prepend">
+														<span className="input-group-text" id="basic-addon1">
+															<i className="ti-search" />
+														</span>
+													</div>
+													<input
+														name="filtroValue"
+														type="text"
+														className="form-control"
+														placeholder="Buscar proveedor"
+														onChange={e => actions.handleFiltroProveedor(e)}
+													/>
+												</div>
+											</div>
+											<div className="col-md-3 offset-3">
+												<div className="float-right">
+													<button
+														type="button"
+														className="btn btn-primary"
+														data-toggle="modal"
+														data-target="#ModalAddProveedor">
+														Agregar proveedor
+													</button>
+												</div>
+											</div>
+										</div>
 									</div>
-								</div>
+									<div className="gtco-section ">
+										<div className="table-responsive">
+											<table className="table">
+												<thead>
+													<tr>
+														<th scope="col">Nombre</th>
+														<th scope="col">Grupo</th>
+														<th scope="col">Rut</th>
+														<th scope="col">Editar</th>
+														<th scope="col">Eliminar</th>
+													</tr>
+												</thead>
+												<tbody>{foo()}</tbody>
+											</table>
+										</div>
+									</div>
+								</Fragment>
 							);
 						} else {
 							return "";
@@ -107,6 +146,6 @@ export class ListaProveedores extends Component {
 		);
 	}
 }
-ListaProveedores.propTypes = {
+ListaPolizas.propTypes = {
 	history: PropTypes.object
 };

@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 import ModalPersona from "../component/personas/modalPersona";
 import PropTypes from "prop-types";
 import { ListaPersonas } from "../component/personas/listaPersonas";
+import ModalUpdatePersona from "../component/personas/modalUpdatePersona";
 
 export class MantenedorPersonas extends React.Component {
 	constructor(props) {
@@ -74,6 +75,7 @@ export class MantenedorPersonas extends React.Component {
 								</div>
 							</div>
 							<ModalPersona />
+							<ModalUpdatePersona />
 						</Fragment>
 					);
 				}}

@@ -67,7 +67,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			servicios2: [],
 			servicioid: {},
 			archivo: {},
-			serviceSelectedUpdate: {}
+			serviceSelectedUpdate: {},
+			update: {}
 		},
 
 		actions: {
@@ -95,10 +96,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const { name, value } = e.target;
 				const store = getStore();
 				let persona = store.persona;
+				let update = store.update;
 				persona[name] = value;
+				update[name] = value;
 
 				setStore({
-					persona
+					persona,
+					update
 				});
 			},
 
@@ -1505,6 +1509,47 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.catch(error => {
 						setStore({ error });
 						alert("No se puede enviar el reclamo: ");
+					});
+			},
+			getPolizas: () => {
+				const store = getStore();
+				fetch(store.apiUrl + "/api/polizas", {
+					method: "get",
+					headers: {
+						Authorization: "Bearer " + store.access,
+						"Content-Type": "application/json"
+					}
+				})
+					.then(resp => {
+						if (resp.status === 200) {
+							return resp.json().then(data => {
+								setStore({ polizas: data });
+							});
+						}
+					})
+					.catch(error => {
+						setStore({ error });
+						alert("Ocurrio un error, intentelo nuevamente");
+					});
+			},
+			handleUpdatePersona: persona => {
+				setStore({ persona });
+			},
+			putPersona: () => {
+				const store = getStore();
+				let data = store.update;
+				fetch(store.apiUrl + "/api/personas/" + store.persona.id, {
+					method: "PUT",
+					body: JSON.stringify(data),
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + store.access
+					}
+				})
+					.then(resp => resp.json())
+					.then(data => {
+						setStore({ update: {} });
+						alert("Se modificaron los datos del cliente");
 					});
 			}
 		}

@@ -13,6 +13,9 @@ export class ListaServiciosDetalle extends Component {
 		return (
 			<Context.Consumer>
 				{({ store, actions }) => {
+					let visible = "visible";
+					if (store.formulario.estado == "Enviado") visible = "invisible";
+
 					if (store.servicios.length > 0) {
 						let columnas = store.servicios.map((servicio, i) => {
 							return (

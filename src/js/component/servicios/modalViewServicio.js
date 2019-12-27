@@ -28,16 +28,15 @@ export default class ModalViewServicio extends React.Component {
 							<h5 className="modal-title" id="exampleModalLabel">
 								<label htmlFor="inputNombre">Servicios </label>
 							</h5>
+							<button type="button" className="close" data-dismiss="modal" aria-label="Close">
+								<i className="ti-close" />
+							</button>
 						</div>
 						<div className="modal-body">
 							{/* lista no funciona, verificar porque y como mostraremos los datos <ListaServiciosView /> */}
 						</div>
 
-						<div className="modal-footer">
-							<button type="button" className="btn btn-primary" data-dismiss="modal">
-								Cerrar
-							</button>
-						</div>
+						<div className="modal-footer"></div>
 					</div>
 				</div>
 			</div>

@@ -16,6 +16,7 @@ import { MantenedorPersonas } from "./views/dashPersonas";
 
 import { Context } from "./store/appContext";
 import { DashProveedor } from "./views/dashProveedor";
+import { DashPolizas } from "./views/dashPolizas";
 
 //create your first component
 export class Layout extends React.Component {
@@ -64,6 +65,7 @@ export class Layout extends React.Component {
 											component={MantenedorPersonas}
 											access={store.access}
 										/>
+										<PrivateRoute path="/polizas" component={DashPolizas} access={store.access} />
 										<Route render={() => <h1>Not found!</h1>} />
 									</Switch>
 								</Fragment>

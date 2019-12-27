@@ -11,6 +11,7 @@ import ModalServicioUpdate from "../component/servicios/modificar/modalServicioU
 import ModalDetalleServicio from "../component/servicios/crear/modalDetalleServicio";
 import { ListaServiciosDetalle } from "../component/servicios/listaServiciosDetalles";
 import ModalDetalleServicioUpdate from "../component/servicios/modalDetalleServicioUpdate";
+import ModalEnvioReclamo from "../component/reclamos/modalEnvioReclamo";
 
 export class FormDocUpdate extends React.Component {
 	constructor(props) {
@@ -35,6 +36,8 @@ export class FormDocUpdate extends React.Component {
 				{({ store, actions }) => {
 					this.storeContext = store;
 					this.actionsContext = actions;
+					let visible = "visible";
+					if (store.formulario.estad == "Enviado") visible = "invisible";
 
 					return (
 						<Fragment>
@@ -44,19 +47,18 @@ export class FormDocUpdate extends React.Component {
 										<div className="col-md-10 ">
 											<div className="row">
 												<div className="col-md-4">
-													<h2>Reclamo Nº {store.formulario.reclamo_id}</h2>
+													<h2>Reclamo {store.formulario.num_claim}</h2>
 												</div>
-												<div className="col-md-4">
-													<button
-														type="button"
-														className="btn btn-primary"
-														//data-toggle="modal"
-														//data-target="#modalservicio"
-														onClick={() =>
-															actions.enviarReclamo(store.formulario, store.servicios)
-														}>
-														Enviar reclamo
-													</button>
+												<div className={visible}>
+													<div className="col-md-4">
+														<button
+															type="button"
+															className="btn btn-primary"
+															data-toggle="modal"
+															data-target="#ModalEnvioReclamo">
+															Enviar reclamo
+														</button>
+													</div>
 												</div>
 											</div>
 											<form
@@ -185,6 +187,7 @@ export class FormDocUpdate extends React.Component {
 							<ModalDeleteDocumento />
 							<ModalDetalleServicioUpdate />
 							<ModalProveedorUpdate />
+							<ModalEnvioReclamo />
 						</Fragment>
 					);
 				}}

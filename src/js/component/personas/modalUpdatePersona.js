@@ -2,11 +2,10 @@ import React from "react";
 import { Context } from "../../store/appContext";
 import PropTypes from "prop-types";
 
-export default class ModalPersona extends React.Component {
+export default class ModalUpdatePersona extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = { value: "" };
-
 		this.storeContext = null;
 		this.actionsContext = null;
 		this.props.history;
@@ -20,7 +19,7 @@ export default class ModalPersona extends React.Component {
 					return (
 						<div
 							className="modal fade"
-							id="ModalAddPersona"
+							id="modalPersonaUpdate"
 							tabIndex="-1"
 							role="dialog"
 							aria-labelledby="exampleModalLabel"
@@ -29,9 +28,8 @@ export default class ModalPersona extends React.Component {
 								<div className="modal-content">
 									<div className="modal-header">
 										<h5 className="modal-title" id="exampleModalLabel">
-											<label htmlFor="inputNombre">Ingresar nuevo cliente </label>
+											<label htmlFor="inputNombre">Modificar persona </label>
 										</h5>
-
 										<button type="button" className="close" data-dismiss="modal" aria-label="Close">
 											<i className="ti-close" />
 										</button>
@@ -57,8 +55,9 @@ export default class ModalPersona extends React.Component {
 																name="nombre"
 																className="form-control"
 																id="nombre"
-																onChange={e => actions.handleFormPersona(e)}
+																value={store.persona.nombre}
 																type="text"
+																readOnly
 															/>
 														</div>
 													</div>
@@ -68,11 +67,12 @@ export default class ModalPersona extends React.Component {
 														<div className="feature-copy2">
 															<label>Apellidos</label>
 															<input
+																className="form-control"
+																type="text"
 																name="apellido"
 																id="apellido"
-																onChange={e => actions.handleFormPersona(e)}
-																type="text"
-																className="form-control"
+																value={store.persona.apellido}
+																readOnly
 															/>
 														</div>
 													</div>
@@ -91,11 +91,12 @@ export default class ModalPersona extends React.Component {
 														<div className="feature-copy2">
 															<label>Nombre de Pila</label>
 															<input
+																type="text"
 																name="nombrePila"
 																className="form-control"
 																id="nombrePila"
+																value={store.persona.nombrePila}
 																onChange={e => actions.handleFormPersona(e)}
-																type="text"
 															/>
 														</div>
 													</div>
@@ -106,11 +107,13 @@ export default class ModalPersona extends React.Component {
 														<div className="feature-copy2">
 															<label>Fecha Nacimiento</label>
 															<input
-																name="fecha_nacimiento_persona"
-																id="fecha_nacimiento_persona"
-																onChange={e => actions.handleFormPersona(e)}
 																type="date"
 																className="form-control"
+																name="fechaNacimiento"
+																id="fechaNacimiento"
+																value={store.persona.fechaNacimiento}
+																onChange={e => actions.handleFormPersona(e)}
+																readOnly
 															/>
 														</div>
 													</div>
@@ -120,11 +123,12 @@ export default class ModalPersona extends React.Component {
 														<div className="feature-copy2">
 															<label> Isapre</label>
 															<input
-																name="isapre"
-																id="isapre"
-																onChange={e => actions.handleFormPersona(e)}
 																type="text"
 																className="form-control"
+																name="isapre"
+																id="isapre"
+																value={store.persona.isapre}
+																onChange={e => actions.handleFormPersona(e)}
 															/>
 														</div>
 													</div>
@@ -146,11 +150,12 @@ export default class ModalPersona extends React.Component {
 														<div className="feature-copy2">
 															<label>E-mail Primario</label>
 															<input
+																type="text"
 																name="emailPrimario"
 																className="form-control"
 																id="emailPrimario"
+																value={store.persona.emailPrimario}
 																onChange={e => actions.handleFormPersona(e)}
-																type="text"
 															/>
 														</div>
 													</div>
@@ -160,11 +165,12 @@ export default class ModalPersona extends React.Component {
 														<div className="feature-copy2">
 															<label>E-mail Secundario</label>
 															<input
+																type="text"
 																name="emailSecundario"
 																className="form-control"
 																id="emailSecundario"
+																value={store.persona.emailSecundario}
 																onChange={e => actions.handleFormPersona(e)}
-																type="text"
 															/>
 														</div>
 													</div>
@@ -186,11 +192,12 @@ export default class ModalPersona extends React.Component {
 														<div className="feature-copy2">
 															<label>Direccion particular</label>
 															<input
+																type="text"
 																name="direccionParticular"
 																className="form-control"
 																id="direccionParticular"
+																value={store.persona.direccionParticular}
 																onChange={e => actions.handleFormPersona(e)}
-																type="text"
 															/>
 														</div>
 													</div>
@@ -200,11 +207,12 @@ export default class ModalPersona extends React.Component {
 														<div className="feature-copy2">
 															<label>Direccion Comercial</label>
 															<input
-																name="direccionComercial"
-																id="direccionComercial"
-																onChange={e => actions.handleFormPersona(e)}
 																type="text"
 																className="form-control"
+																name="direccionComercial"
+																id="direccionComercial"
+																value={store.persona.direccionComercial}
+																onChange={e => actions.handleFormPersona(e)}
 															/>
 														</div>
 													</div>
@@ -227,11 +235,12 @@ export default class ModalPersona extends React.Component {
 														<div className="feature-copy2">
 															<label>Telefono Celular</label>
 															<input
+																type="text"
 																name="celular"
 																className="form-control"
 																id="celular"
+																value={store.persona.celular}
 																onChange={e => actions.handleFormPersona(e)}
-																type="text"
 															/>
 														</div>
 													</div>
@@ -241,11 +250,12 @@ export default class ModalPersona extends React.Component {
 														<div className="feature-copy2">
 															<label>Telefono Casa</label>
 															<input
-																name="telefonoCasa"
-																id="telefonoCasa"
-																onChange={e => actions.handleFormPersona(e)}
 																type="text"
 																className="form-control"
+																name="telefonoCasa"
+																id="telefonoCasa"
+																value={store.persona.telefonoCasa}
+																onChange={e => actions.handleFormPersona(e)}
 															/>
 														</div>
 													</div>
@@ -255,11 +265,12 @@ export default class ModalPersona extends React.Component {
 														<div className="feature-copy2">
 															<label> Telefono Oficina</label>
 															<input
-																name="telefonoOficina"
-																id="telefonoOficina"
-																onChange={e => actions.handleFormPersona(e)}
 																type="text"
 																className="form-control"
+																name="telefonoOficina"
+																id="telefonoOficina"
+																value={store.persona.telefonoOficina}
+																onChange={e => actions.handleFormPersona(e)}
 															/>
 														</div>
 													</div>
@@ -281,11 +292,12 @@ export default class ModalPersona extends React.Component {
 														<div className="feature-copy2">
 															<label>Nombre Conyuge</label>
 															<input
+																type="text"
 																name="nombreConyuge"
 																className="form-control"
 																id="nombreConyuge"
+																value={store.persona.nombreConyuge}
 																onChange={e => actions.handleFormPersona(e)}
-																type="text"
 															/>
 														</div>
 													</div>
@@ -296,11 +308,12 @@ export default class ModalPersona extends React.Component {
 														<div className="feature-copy2">
 															<label>Telefono Conyuge</label>
 															<input
-																name="telefonoConyuge"
-																id="telefonoConyuge"
-																onChange={e => actions.handleFormPersona(e)}
 																type="text"
 																className="form-control"
+																name="telefonoConyuge"
+																id="telefonoConyuge"
+																value={store.persona.telefonoConyuge}
+																onChange={e => actions.handleFormPersona(e)}
 															/>
 														</div>
 													</div>
@@ -310,11 +323,12 @@ export default class ModalPersona extends React.Component {
 														<div className="feature-copy2">
 															<label>E-mail Conyuge</label>
 															<input
-																name="emailConyuge"
-																id="emailConyuge"
-																onChange={e => actions.handleFormPersona(e)}
 																type="text"
 																className="form-control"
+																name="emailConyuge"
+																id="emailConyuge"
+																value={store.persona.emailConyuge}
+																onChange={e => actions.handleFormPersona(e)}
 															/>
 														</div>
 													</div>
@@ -333,11 +347,12 @@ export default class ModalPersona extends React.Component {
 														<div className="feature-copy2">
 															<label>Nombre Secretaria</label>
 															<input
+																type="text"
 																name="nombreSecretaria"
 																className="form-control"
 																id="nombreSecretaria"
+																value={store.persona.nombreSecretaria}
 																onChange={e => actions.handleFormPersona(e)}
-																type="text"
 															/>
 														</div>
 													</div>
@@ -352,6 +367,7 @@ export default class ModalPersona extends React.Component {
 																className="form-control"
 																name="emailSecretaria"
 																id="emailSecretaria"
+																value={store.persona.emailSecretaria}
 																onChange={e => actions.handleFormPersona(e)}
 															/>
 														</div>
@@ -365,10 +381,10 @@ export default class ModalPersona extends React.Component {
 											type="button"
 											className="btn btn-primary"
 											onClick={() => {
-												actions.postAddPersona();
+												actions.putPersona();
 											}}
 											data-dismiss="modal">
-											Ingresar
+											Modificar
 										</button>
 									</div>
 								</div>
@@ -380,6 +396,6 @@ export default class ModalPersona extends React.Component {
 		);
 	}
 }
-ModalPersona.propTypes = {
+ModalUpdatePersona.propTypes = {
 	history: PropTypes.array
 };
