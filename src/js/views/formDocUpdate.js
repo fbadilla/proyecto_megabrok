@@ -12,6 +12,7 @@ import ModalDetalleServicio from "../component/servicios/crear/modalDetalleServi
 import { ListaServiciosDetalle } from "../component/servicios/listaServiciosDetalles";
 import ModalDetalleServicioUpdate from "../component/servicios/modalDetalleServicioUpdate";
 import ModalEnvioReclamo from "../component/reclamos/modalEnvioReclamo";
+import { toast } from "react-toastify";
 
 export class FormDocUpdate extends React.Component {
 	constructor(props) {
@@ -26,6 +27,43 @@ export class FormDocUpdate extends React.Component {
 		this.actionsContext = null;
 		this.props.history;
 	}
+	notify = () =>
+		toast.info("Se han Realizado las modificaciones", {
+			position: "bottom-right",
+			autoClose: 4000,
+			hideProgressBar: true,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true
+		});
+	notify2 = () =>
+		toast.info("⚠️ Este reclamo ya a sido enviado, solo puedes modificar su estado", {
+			position: "bottom-right",
+			autoClose: 4000,
+			hideProgressBar: true,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true
+		});
+	notifySend = () =>
+		toast.success("✅ Recuerda llenar todos los campos antes de enviar el formulario", {
+			position: "bottom-right",
+			autoClose: 5000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true
+		});
+	notifySend2 = () =>
+		toast.error("❌ este reclamo ya se envio bajo el Nº" + this.storeContext.formulario.num_claim, {
+			position: "bottom-right",
+			autoClose: 5000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true
+		});
+
 	componentDidMount() {
 		this.actionsContext.getServicios();
 		this.actionsContext.getaccount();
@@ -36,8 +74,10 @@ export class FormDocUpdate extends React.Component {
 				{({ store, actions }) => {
 					this.storeContext = store;
 					this.actionsContext = actions;
+					let activo = store.formulario.estado == "Enviado";
 					let visible = "visible";
-					if (store.formulario.estad == "Enviado") visible = "invisible";
+					if (store.formulario.estado == "Enviado") visible = "invisible";
+					let target = store.formulario.estado !== "Enviado" ? "#ModalEnvioReclamo" : "#";
 
 					return (
 						<Fragment>
@@ -49,16 +89,19 @@ export class FormDocUpdate extends React.Component {
 												<div className="col-md-4">
 													<h2>Reclamo {store.formulario.num_claim}</h2>
 												</div>
-												<div className={visible}>
-													<div className="col-md-4">
-														<button
-															type="button"
-															className="btn btn-primary"
-															data-toggle="modal"
-															data-target="#ModalEnvioReclamo">
-															Enviar reclamo
-														</button>
-													</div>
+												<div className="col-md-4">
+													<button
+														type="button"
+														className="btn btn-primary"
+														data-toggle="modal"
+														data-target={target}
+														onClick={e => {
+															store.formulario.estado == "Enviado"
+																? this.notifySend2()
+																: this.notifySend();
+														}}>
+														Enviar reclamo
+													</button>
 												</div>
 											</div>
 											<form
@@ -125,6 +168,7 @@ export class FormDocUpdate extends React.Component {
 																	value={store.formulario.detalle_diagnostico}
 																	type="text"
 																	className="form-control"
+																	readOnly={activo}
 																/>
 															</div>
 														</div>
@@ -154,6 +198,11 @@ export class FormDocUpdate extends React.Component {
 															type="submit"
 															value="Modificar"
 															className="btn btn-primary"
+															onClick={e => {
+																store.formulario.estado == "Enviado"
+																	? this.notify2()
+																	: this.notify();
+															}}
 														/>
 													</div>
 												</div>
@@ -167,7 +216,8 @@ export class FormDocUpdate extends React.Component {
 															className="btn btn-primary"
 															data-toggle="modal"
 															data-target="#modalservicio"
-															onClick={e => actions.cleanService()}>
+															onClick={e => actions.cleanService()}
+															disabled={activo}>
 															<i className="ti-plus" /> Agregar Servicio
 														</button>
 													</div>

@@ -15,6 +15,7 @@ export class ListaServiciosDetalle extends Component {
 				{({ store, actions }) => {
 					let visible = "visible";
 					if (store.formulario.estado == "Enviado") visible = "invisible";
+					let activo = store.formulario.estado == "Enviado";
 
 					if (store.servicios.length > 0) {
 						let columnas = store.servicios.map((servicio, i) => {
@@ -28,7 +29,8 @@ export class ListaServiciosDetalle extends Component {
 													className="icono"
 													data-toggle="modal"
 													data-target="#modalProveedorUpdate"
-													onClick={() => actions.handleSelectedServicioUpdate(servicio)}>
+													onClick={() => actions.handleSelectedServicioUpdate(servicio)}
+													disabled={activo}>
 													<i className="ti-settings" />
 												</button>
 												{servicio.proveedor_id__nombre_proveedor}:
@@ -41,7 +43,8 @@ export class ListaServiciosDetalle extends Component {
 												data-dismiss="modal"
 												data-toggle="modal"
 												data-target="#modaldeleteservicio"
-												onClick={() => actions.handleDelete(servicio.id)}>
+												onClick={() => actions.handleDelete(servicio.id)}
+												disabled={activo}>
 												<i className="ti-close" />
 											</button>
 										</div>
@@ -59,7 +62,8 @@ export class ListaServiciosDetalle extends Component {
 																data-target="#modalDetalleServicioUpdate"
 																onClick={() =>
 																	actions.handleSelectedServicioUpdate(servicio)
-																}>
+																}
+																disabled={activo}>
 																<i className="ti-plus" />
 															</button>
 														</th>
@@ -101,7 +105,8 @@ export class ListaServiciosDetalle extends Component {
 																					row,
 																					servicio.id
 																				)
-																			}>
+																			}
+																			disabled={activo}>
 																			<i className="ti-settings" />
 																		</button>
 																		<button
@@ -109,9 +114,8 @@ export class ListaServiciosDetalle extends Component {
 																			className="icono"
 																			data-toggle="modal"
 																			data-target="#modaldeletedetalleservicio"
-																			onClick={() =>
-																				actions.handleDelete({ id })
-																			}>
+																			onClick={() => actions.handleDelete({ id })}
+																			disabled={activo}>
 																			<i className="ti-trash" />
 																		</button>
 																	</td>
@@ -159,7 +163,8 @@ export class ListaServiciosDetalle extends Component {
 										<button
 											type="button"
 											className="btn btn-primary "
-											onClick={e => actions.handlePDFFormulario(e, store.formulario.reclamo_id)}>
+											onClick={e => actions.handlePDFFormulario(e, store.formulario.reclamo_id)}
+											disabled={activo}>
 											CREAR FORMULARIO
 										</button>
 									</div>

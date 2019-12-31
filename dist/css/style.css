@@ -2008,6 +2008,11 @@ form label {
   content: "";
   background-color: rgba(0, 0, 0, 0);
 }
+.btn-primary:disabled {
+  color: #fff;
+  background-color: #457B9D;
+  border-color: #007bff;
+}
 .col-12file{
   -ms-flex: 0 0 100%;
   flex: 0 0 100%;

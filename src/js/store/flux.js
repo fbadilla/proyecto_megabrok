@@ -226,9 +226,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				});
 			},
-			handleEnvioServicio: history => {
+			handleEnvioRefresh: () => {
+				getActions().handleEnvioServicio();
+				getActions().getServicios();
+			},
+			handleEnvioServicio: () => {
 				const store = getStore();
 				// Servicio necesita reclamo_id, archivoServicio, proveedor_id
+				getActions().handleAddDetalle();
+				getActions().getServicios();
 				let formServicio = new FormData();
 				formServicio.append("proveedor_id", store.servicio.proveedor_id);
 				formServicio.append("reclamo_id", store.formulario.reclamo_id);
@@ -285,7 +291,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 												}
 											});
 										});
-									});
+									})
+									.then(() => getActions().getServicios());
 							});
 					})
 					.catch(error => {
@@ -1471,11 +1478,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						"Content-Type": "application/json",
 						Authorization: "Bearer " + store.access
 					}
-				})
-					.then(resp => resp.json())
-					.then(data => {
-						alert("se modificaron los datos del reclamo");
-					});
+				}).then(resp => resp.json());
 			},
 			restafecha: item => {
 				let fecha1 = new Date(item);

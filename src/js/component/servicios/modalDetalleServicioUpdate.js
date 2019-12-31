@@ -170,15 +170,10 @@ export default class ModalDetalleServicioUpdate extends React.Component {
 													</div>
 												</div>
 												<div className="col-md-2">
-													<div className="feature-copy">
-														<label>
-															<span>
-																<i className="ti-money" /> Guardar
-															</span>
-														</label>
+													<div className="feature-copy mt-3">
 														<input
 															type="button"
-															className="btn btn-primary"
+															className="btn btn-primary mt-3"
 															value="Aceptar"
 															onClick={e => actions.handleAceptarDocumento(e)}
 														/>

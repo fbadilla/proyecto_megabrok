@@ -83,7 +83,7 @@ export class ListaProveedores extends Component {
 							return (
 								<div className="gtco-section ">
 									<div className="table-responsive">
-										<table className="table">
+										<table className="table table-hover">
 											<thead>
 												<tr>
 													<th scope="col">Nombre</th>

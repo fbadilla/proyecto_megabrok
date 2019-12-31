@@ -17,6 +17,8 @@ import { MantenedorPersonas } from "./views/dashPersonas";
 import { Context } from "./store/appContext";
 import { DashProveedor } from "./views/dashProveedor";
 import { DashPolizas } from "./views/dashPolizas";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 //create your first component
 export class Layout extends React.Component {
@@ -34,6 +36,7 @@ export class Layout extends React.Component {
 							<BrowserRouter basename={basename}>
 								<Fragment>
 									<Navbar />
+									<ToastContainer />
 									<Switch>
 										<Route exact path="/" component={Home} />
 										<PrivateRoute path="/usuarios" component={Usuarios} access={store.access} />

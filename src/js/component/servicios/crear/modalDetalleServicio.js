@@ -51,18 +51,12 @@ export default class ModalServicio extends React.Component {
 							<div className="modal-dialog modal-xl" role="document">
 								<div className="modal-content">
 									<div className="modal-header">
-										<div className="col-md-7">
-											<h5 className="modal-title" id="exampleModalLabel">
-												<label htmlFor="inputNombre">Ingreso servicio </label>
-											</h5>
-											<button
-												type="button"
-												className="close"
-												data-dismiss="modal"
-												aria-label="Close">
-												<i className="ti-close" />
-											</button>
-										</div>
+										<h5 className="modal-title" id="exampleModalLabel">
+											<label htmlFor="inputNombre">Ingreso servicio </label>
+										</h5>
+										<button type="button" className="close" data-dismiss="modal" aria-label="Close">
+											<i className="ti-close" />
+										</button>
 									</div>
 									<div className="modal-body">
 										<form action="#">
@@ -176,15 +170,10 @@ export default class ModalServicio extends React.Component {
 													</div>
 												</div>
 												<div className="col-md-2">
-													<div className="feature-copy">
-														<label>
-															<span>
-																<i className="ti-money" /> Guardar
-															</span>
-														</label>
+													<div className="feature-copy mt-3">
 														<input
 															type="button"
-															className="btn btn-primary"
+															className="btn btn-primary mt-3"
 															value="Aceptar"
 															onClick={e => actions.handleAceptarDocumento(e)}
 														/>
@@ -213,16 +202,16 @@ export default class ModalServicio extends React.Component {
 													onClick={() => {
 														actions.handleAddDetalle();
 													}}>
-													Añadir detalle
+													<i className="ti-plus" /> Nuevo Detalle
 												</button>
 												<button
 													type="submit"
 													className="btn btn-primary"
 													onClick={() => {
-														actions.handleEnvioServicio({});
+														actions.handleEnvioRefresh({});
 													}}
 													data-dismiss="modal">
-													Finalizar
+													Aceptar
 												</button>
 											</div>
 										</form>

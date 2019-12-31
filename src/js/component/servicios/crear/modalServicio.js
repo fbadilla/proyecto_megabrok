@@ -32,10 +32,8 @@ export default class ModalServicio extends React.Component {
 							<div className="modal-dialog modal-xl" role="document">
 								<div className="modal-content">
 									<div className="modal-header">
-										<div className="col-md-7">
-											<h5 className="modal-title" id="exampleModalLabel">
-												<label htmlFor="inputNombre">Ingreso servicio </label>
-											</h5>
+										<h5 className="modal-title" id="exampleModalLabel">
+											<label htmlFor="inputNombre">Ingreso servicio </label>
 											<button
 												type="button"
 												className="close"
@@ -43,7 +41,7 @@ export default class ModalServicio extends React.Component {
 												aria-label="Close">
 												<i className="ti-close" />
 											</button>
-										</div>
+										</h5>
 									</div>
 									<div className="modal-body">
 										<form action="#">
