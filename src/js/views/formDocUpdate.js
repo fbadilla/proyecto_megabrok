@@ -37,7 +37,7 @@ export class FormDocUpdate extends React.Component {
 			draggable: true
 		});
 	notify2 = () =>
-		toast.info("⚠️ Este reclamo ya a sido enviado, solo puedes modificar su estado", {
+		toast.info("⚠️ Este reclamo ya se envió, solo puedes modificar su estado", {
 			position: "bottom-right",
 			autoClose: 4000,
 			hideProgressBar: true,

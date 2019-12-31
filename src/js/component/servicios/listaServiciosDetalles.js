@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Context } from "../../store/appContext";
 import PropTypes from "prop-types";
+import { toast } from "react-toastify";
 
 export class ListaServiciosDetalle extends Component {
 	constructor(props) {
@@ -9,6 +10,15 @@ export class ListaServiciosDetalle extends Component {
 		this.actionsContext = null;
 		this.props.history;
 	}
+	notifyNotFile = () =>
+		toast.error("⚠️ Este servicio no posee Archivo Adjunto, carge un archivo haciendo click en la imagen del PDF", {
+			position: "bottom-right",
+			autoClose: 5000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true
+		});
 	render() {
 		return (
 			<Context.Consumer>
@@ -135,12 +145,11 @@ export class ListaServiciosDetalle extends Component {
 												onClick={() => actions.handleSelectedServicioUpdate(servicio)}
 											/>
 											<a
-												href="#"
-												className="stretched-link2"
+												className="stretched-link2 cursor-pointer linkAzul"
 												onClick={() =>
 													servicio.archivoServicio.length < 1 ||
 													servicio.archivoServicio.length == null
-														? alert("no existe el documento")
+														? this.notifyNotFile()
 														: window.open(
 																store.apiUrl + "/media/" + servicio.archivoServicio
 														  )

@@ -2007,6 +2007,13 @@ form label {
   pointer-events: auto;
   content: "";
   background-color: rgba(0, 0, 0, 0);
+
+}
+.linkAzul{
+  color: #457B9D !important;
+  -webkit-transition: 0.5s;
+  -o-transition: 0.5s;
+  transition: 0.5s;
 }
 .btn-primary:disabled {
   color: #fff;
