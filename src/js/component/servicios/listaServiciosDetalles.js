@@ -24,9 +24,9 @@ export class ListaServiciosDetalle extends Component {
 			<Context.Consumer>
 				{({ store, actions }) => {
 					let visible = "visible";
-					if (store.formulario.estado == "Enviado") visible = "invisible";
+					// if (store.servicios.archivoServicio.length < 1) visible = "invisible";
 					let activo = store.formulario.estado == "Enviado";
-
+					let icono = <i className="ti-download icono3 linkAzul" />;
 					if (store.servicios.length > 0) {
 						let columnas = store.servicios.map((servicio, i) => {
 							return (
@@ -46,37 +46,25 @@ export class ListaServiciosDetalle extends Component {
 												{servicio.proveedor_id__nombre_proveedor}:
 											</h6>
 										</div>
-										<div className="col-md-2 mt-4 offset-md-5 ">
+										<div className="col-md-3 mt-4 offset-md-4 ">
 											<button
 												type="button"
-												className="close"
+												className="icono2"
 												data-dismiss="modal"
 												data-toggle="modal"
-												data-target="#modaldeleteservicio"
-												onClick={() => actions.handleDelete(servicio.id)}
+												data-target="#modalDetalleServicioUpdate"
+												onClick={() => actions.handleSelectedServicioUpdate(servicio)}
 												disabled={activo}>
-												<i className="ti-close" />
+												<u>
+													Agregar Tipo de Servicio <i className="ti-plus" />
+												</u>
 											</button>
 										</div>
 										<div className="col-md-12">
 											<table className="table2 table-striped table-sm">
 												<thead>
 													<tr>
-														<th>
-															Detalle
-															<button
-																type="button"
-																className="icono2"
-																data-dismiss="modal"
-																data-toggle="modal"
-																data-target="#modalDetalleServicioUpdate"
-																onClick={() =>
-																	actions.handleSelectedServicioUpdate(servicio)
-																}
-																disabled={activo}>
-																<i className="ti-plus" />
-															</button>
-														</th>
+														<th>Detalle</th>
 														<th>Documentos</th>
 														<th>Monto</th>
 														<th>Pago</th>
@@ -95,12 +83,14 @@ export class ListaServiciosDetalle extends Component {
 																			.join(" - ")}
 																	</td>
 																	<td>
+																		$
 																		{documentos
 																			.map((doc, i) => doc.montodoc)
 																			.reduce(
 																				(a, b) => parseInt(a) + parseInt(b),
 																				0
 																			)}
+																		.-
 																	</td>
 																	<td>{pago}</td>
 																	<td>
@@ -136,28 +126,146 @@ export class ListaServiciosDetalle extends Component {
 												</tbody>
 											</table>
 										</div>
-										<div className="col-12file">
-											<img
-												src="images/PDF.png"
-												className="rounded-sm w-3 cursor-pointer "
+										<div className="col-12">
+											<button
+												type="button"
+												className="icono2"
 												data-toggle="modal"
 												data-target="#modalArchivo"
 												onClick={() => actions.handleSelectedServicioUpdate(servicio)}
-											/>
-											<a
-												className="stretched-link2 cursor-pointer linkAzul"
-												onClick={() =>
+												disabled={activo}>
+												<i className="ti-upload icono3" />
+												{servicio.archivoServicio.length >= 2 ||
+												servicio.file_infomedica.length >= 2 ||
+												servicio.file_docgeneral.length >= 2
+													? " Modificar Archivos"
+													: " Subir Archivos "}
+											</button>
+										</div>
+										<div
+											className={
+												servicio.archivoServicio.length < 1 ||
+												servicio.archivoServicio.length == null
+													? "col-12file d-none"
+													: "col-12file"
+											}>
+											<div
+												className={
 													servicio.archivoServicio.length < 1 ||
 													servicio.archivoServicio.length == null
-														? this.notifyNotFile()
-														: window.open(
-																store.apiUrl + "/media/" + servicio.archivoServicio
-														  )
+														? "col-12 d-none"
+														: "col-12"
 												}>
-												{servicio.archivoServicio.length >= 2
-													? servicio.archivoServicio.slice(11)
-													: "Servicio sin PDF Adjunto"}
-											</a>
+												<span>
+													{servicio.archivoServicio.length < 1 ||
+													servicio.archivoServicio.length == null
+														? ""
+														: "Facturas:"}
+												</span>
+												<button
+													type="button"
+													className="icono2 linkAzul"
+													onClick={() =>
+														servicio.archivoServicio.length < 1 ||
+														servicio.archivoServicio.length == null
+															? this.notifyNotFile()
+															: window.open(
+																	store.apiUrl + "/media/" + servicio.archivoServicio
+															  )
+													}>
+													<span
+														className={
+															servicio.archivoServicio.length < 1 ||
+															servicio.archivoServicio.length == null
+																? "invisible"
+																: ""
+														}>
+														{icono}
+													</span>
+													{servicio.archivoServicio.length < 1 ||
+													servicio.archivoServicio.length == null
+														? ""
+														: servicio.archivoServicio.slice(28)}
+												</button>
+											</div>
+											<div
+												className={
+													servicio.file_infomedica.length < 1 ||
+													servicio.file_infomedica.length == null
+														? "col-12 d-none"
+														: "col-12"
+												}>
+												<span>
+													{servicio.file_infomedica.length < 1 ||
+													servicio.file_infomedica.length == null
+														? ""
+														: "Informacion Medica:"}
+												</span>
+												<button
+													type="button"
+													className="icono2 linkAzul"
+													onClick={() =>
+														servicio.file_infomedica.length < 1 ||
+														servicio.file_infomedica.length == null
+															? this.notifyNotFile()
+															: window.open(
+																	store.apiUrl + "/media/" + servicio.file_infomedica
+															  )
+													}>
+													<span
+														className={
+															servicio.file_infomedica.length < 1 ||
+															servicio.file_infomedica.length == null
+																? "invisible"
+																: ""
+														}>
+														{icono}
+													</span>
+													{servicio.file_infomedica.length < 1 ||
+													servicio.file_infomedica.length == null
+														? ""
+														: servicio.file_infomedica.slice(28)}
+												</button>
+											</div>
+											<div
+												className={
+													servicio.file_docgeneral.length < 1 ||
+													servicio.file_docgeneral.length == null
+														? "col-12 d-none"
+														: "col-12"
+												}>
+												<span>
+													{servicio.file_docgeneral.length < 1 ||
+													servicio.file_docgeneral.length == null
+														? ""
+														: "Documentos Generales:"}
+												</span>
+												<button
+													type="button"
+													className="icono2 linkAzul"
+													onClick={() =>
+														servicio.file_docgeneral.length < 1 ||
+														servicio.file_docgeneral.length == null
+															? this.notifyNotFile()
+															: window.open(
+																	store.apiUrl + "/media/" + servicio.file_docgeneral
+															  )
+													}>
+													<span
+														className={
+															servicio.archivoServicio.length < 1 ||
+															servicio.archivoServicio.length == null
+																? "invisible"
+																: ""
+														}>
+														{icono}
+													</span>
+													{servicio.file_docgeneral.length < 1 ||
+													servicio.file_docgeneral.length == null
+														? ""
+														: servicio.file_docgeneral.slice(28)}
+												</button>
+											</div>
 										</div>
 									</div>
 								</div>

@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			apiUrl: "http://best-health.ddns.net:8001",
+			apiUrl: "http://0.0.0.0:8006",
 			apiUrl2: "https://apy-cors-fcobad.herokuapp.com/https://mobile.bestdoctorsinsurance.com/spiritapi/api",
 			token: {
 				refresh: "",
@@ -39,6 +39,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			detalleServicio: {
 				detalle: "",
 				pago: "COB",
+				moneda: "CLP",
+				archivoServicio: null,
 				documentos: []
 			},
 			servicios: [],
@@ -67,8 +69,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 			servicios2: [],
 			servicioid: {},
 			archivo: {},
-			serviceSelectedUpdate: {},
-			update: {}
+			serviceSelectedUpdate: {
+				archivoServicio: null,
+				file_infomedica: null,
+				file_docgeneral: null
+			},
+			update: {},
+			doc_archivoServicio: null,
+			doc_file_infomedica: null,
+			doc_file_docgeneral: null
 		},
 
 		actions: {
@@ -222,6 +231,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					detalleServicio: {
 						detalle: "",
 						pago: "COB",
+						moneda: "CLP",
 						documentos: []
 					}
 				});
@@ -242,7 +252,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					formServicio.append(
 						"archivoServicio",
 						store.servicio.archivoServicio,
-						store.servicio.archivoServicio.name
+						store.formulario.ClaimantId +
+							"/" +
+							new Date().toISOString().slice(0, 10) +
+							store.serviceSelectedUpdate.archivoServicio.name
 					);
 				// Se realiza POST al servicio
 				fetch(store.apiUrl + "/api/servicios/", {
@@ -263,7 +276,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 								formDetalle.append("detalle", detalle.detalle);
 								formDetalle.append("pago", detalle.pago);
+								formDetalle.append("moneda", detalle.moneda);
 								formDetalle.append("servicio_id", infoServicio.id);
+								formDetalle.append("InsideUSA", detalle.InsideUSA);
 								// se realiza POST por cada detalle
 								fetch(store.apiUrl + "/api/detalleServicio/", {
 									method: "Post",
@@ -308,6 +323,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				formDetalle.append("detalle", store.detalleServicio.detalle);
 				formDetalle.append("pago", store.detalleServicio.pago);
+				formDetalle.append("moneda", store.detalleServicio.moneda);
+				formDetalle.append("InsideUSA", store.detalleServicio.InsideUSA);
 				formDetalle.append("servicio_id", store.serviceSelectedUpdate.id);
 				// se realiza POST por cada detalle
 				fetch(store.apiUrl + "/api/detalleServicio/", {
@@ -361,7 +378,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					detalleServicio: {
 						detalle: "",
 						documentos: [],
-						pago: "COB"
+						pago: "COB",
+						InsideUSA: "False",
+						moneda: "CLP"
 					}
 				});
 			},
@@ -420,6 +439,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 								pago: "COB",
 								detalle: "",
 								archivoServicio: null,
+
 								proveedor_id: 1
 							},
 							documentos: []
@@ -436,6 +456,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let formDetalleServicio = new FormData();
 				formDetalleServicio.append("detalle", store.serviceSelected.detalle);
 				formDetalleServicio.append("pago", store.serviceSelected.pago);
+				formDetalleServicio.append("moneda", store.serviceSelected.moneda);
+				formDetalleServicio.append("InsideUSA", store.serviceSelected.InsideUSA);
 				formDetalleServicio.append("servicio_id", store.serviceSelected.servicio_id);
 				fetch(store.apiUrl + "/api/detalleServicio/" + store.serviceSelected.id, {
 					method: "Put",
@@ -473,11 +495,35 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let formServicio = new FormData();
 				formServicio.append("proveedor_id", store.serviceSelectedUpdate.proveedor_id);
 				formServicio.append("reclamo_id", store.formulario.reclamo_id);
-				if (store.serviceSelectedUpdate.archivoServicio != null)
+				if (store.doc_archivoServicio != null)
 					formServicio.append(
 						"archivoServicio",
-						store.serviceSelectedUpdate.archivoServicio,
-						store.serviceSelectedUpdate.archivoServicio.name
+						store.doc_archivoServicio,
+						store.formulario.ClaimantId +
+							"_" +
+							new Date().toISOString().slice(0, 10) +
+							"Factura_" +
+							store.serviceSelectedUpdate.archivoServicio.name
+					);
+				if (store.doc_file_docgeneral != null)
+					formServicio.append(
+						"file_docgeneral",
+						store.doc_file_docgeneral,
+						store.formulario.ClaimantId +
+							"_" +
+							new Date().toISOString().slice(0, 10) +
+							"docgen_" +
+							store.doc_file_docgeneral.name
+					);
+				if (store.doc_file_infomedica != null)
+					formServicio.append(
+						"file_infomedica",
+						store.doc_file_infomedica,
+						store.formulario.ClaimantId +
+							"_" +
+							new Date().toISOString().slice(0, 10) +
+							"infomed_" +
+							store.doc_file_infomedica.name
 					);
 				fetch(store.apiUrl + "/api/servicios/" + store.serviceSelectedUpdate.id, {
 					method: "Put",
@@ -723,12 +769,45 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				const archivoServicio = e.target.files[0];
 				let servicio = store.servicio;
-				let serviceSelectedUpdate = store.serviceSelectedUpdate;
 				servicio["archivoServicio"] = archivoServicio;
+				let doc_archivoServicio = store.doc_archivoServicio;
+				doc_archivoServicio = archivoServicio;
+				let serviceSelectedUpdate = store.serviceSelectedUpdate;
 				serviceSelectedUpdate["archivoServicio"] = archivoServicio;
 				setStore({
 					servicio,
-					serviceSelectedUpdate
+					serviceSelectedUpdate,
+					doc_archivoServicio
+				});
+			},
+			handleFileChange2: e => {
+				const store = getStore();
+				const file_docgeneral = e.target.files[0];
+				let servicio = store.servicio;
+				let serviceSelectedUpdate = store.serviceSelectedUpdate;
+				servicio["file_docgeneral"] = file_docgeneral;
+				let doc_file_docgeneral = store.doc_file_docgeneral;
+				doc_file_docgeneral = file_docgeneral;
+				serviceSelectedUpdate["file_docgeneral"] = file_docgeneral;
+				setStore({
+					servicio,
+					serviceSelectedUpdate,
+					doc_file_docgeneral
+				});
+			},
+			handleFileChange3: e => {
+				const store = getStore();
+				const file_infomedica = e.target.files[0];
+				let servicio = store.servicio;
+				let serviceSelectedUpdate = store.serviceSelectedUpdate;
+				servicio["file_infomedica"] = file_infomedica;
+				let doc_file_infomedica = store.doc_file_infomedica;
+				doc_file_infomedica = file_infomedica;
+				serviceSelectedUpdate["file_infomedica"] = file_infomedica;
+				setStore({
+					servicio,
+					serviceSelectedUpdate,
+					doc_file_infomedica
 				});
 			},
 			handleFileChangemod: e => {
@@ -896,6 +975,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					servicio: {
 						pago: "COB",
 						detalle: "",
+						InsideUSA: "False",
+						moneda: "CLP",
 						archivoServicio: null,
 						proveedor_id: 1
 					}

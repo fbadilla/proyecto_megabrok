@@ -29,24 +29,20 @@ export default class ModalServicio extends React.Component {
 							role="dialog"
 							aria-labelledby="myLargeModalLabel"
 							aria-hidden="true">
-							<div className="modal-dialog modal-xl" role="document">
+							<div className="modal-dialog" role="document">
 								<div className="modal-content">
 									<div className="modal-header">
 										<h5 className="modal-title" id="exampleModalLabel">
-											<label htmlFor="inputNombre">Ingreso servicio </label>
-											<button
-												type="button"
-												className="close"
-												data-dismiss="modal"
-												aria-label="Close">
-												<i className="ti-close" />
-											</button>
+											<label htmlFor="inputNombre">Ingresar servicio </label>
 										</h5>
+										<button type="button" className="close" data-dismiss="modal" aria-label="Close">
+											<i className="ti-close" />
+										</button>
 									</div>
 									<div className="modal-body">
 										<form action="#">
 											<div className="form-row">
-												<div className="col-md-5">
+												<div className="col-md-12">
 													<div className="feature-left">
 														<label>Proveedor</label>
 														<Select
@@ -55,18 +51,6 @@ export default class ModalServicio extends React.Component {
 															classNamePrefix="select"
 															onChange={value => actions.handleServicioSelect(value)}
 															options={store.proveedores}
-														/>
-													</div>
-												</div>
-												<div className="col-md-5">
-													<div className="feature-right">
-														<label> Archivo</label>
-														<input
-															type="file"
-															name="archivoServicio"
-															id="docfile"
-															className="form-control"
-															onChange={e => actions.handleFileChange(e)}
 														/>
 													</div>
 												</div>

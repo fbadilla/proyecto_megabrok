@@ -32,7 +32,7 @@ export default class ModalArchivo extends React.Component {
 								<div className="modal-content">
 									<div className="modal-header">
 										<h5 className="modal-title" id="exampleModalLabel">
-											<label htmlFor="inputNombre">Subir Archivo </label>
+											<label htmlFor="inputNombre">Subir Archivos al Servicio </label>
 										</h5>
 										<button type="button" className="close" data-dismiss="modal" aria-label="Close">
 											<i className="ti-close" />
@@ -42,13 +42,42 @@ export default class ModalArchivo extends React.Component {
 										<div className="form-row">
 											<div className="col">
 												<div className="feature-right">
-													<label> Archivo</label>
+													<label> Boletas o Facturas</label>
 													<input
 														type="file"
 														name="archivoServicio"
-														id="docfile"
+														id="archivoServicio"
 														className="form-control"
 														onChange={e => actions.handleFileChange(e)}
+													/>
+												</div>
+											</div>
+										</div>
+
+										<div className="form-row">
+											<div className="col">
+												<div className="feature-right">
+													<label> Informacion Medica</label>
+													<input
+														type="file"
+														name="file_infomedica"
+														id="file_infomedica"
+														className="form-control"
+														onChange={e => actions.handleFileChange3(e)}
+													/>
+												</div>
+											</div>
+										</div>
+										<div className="form-row">
+											<div className="col">
+												<div className="feature-right">
+													<label> Documentos Generales</label>
+													<input
+														type="file"
+														name="file_docgeneral"
+														id="file_docgeneral"
+														className="form-control"
+														onChange={e => actions.handleFileChange2(e)}
 													/>
 												</div>
 											</div>

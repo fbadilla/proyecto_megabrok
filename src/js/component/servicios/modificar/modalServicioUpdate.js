@@ -80,15 +80,18 @@ export default class ModalServicioUpdate extends React.Component {
 												<div className="col-md-5">
 													<div className="feature-left">
 														<label>Detalle Servicio</label>
-														<input
+														<select
 															name="detalle"
 															className="form-control"
-															rows="5"
 															id="detalle"
 															value={store.serviceSelected.detalle}
 															placeholder="Detalles Del Tratamiento"
-															onChange={e => actions.handleServicioMod(e)}
-														/>
+															onChange={e => actions.handleServicioMod(e)}>
+															<option>Consulta</option>
+															<option>Examen</option>
+															<option>Insumos Medicos</option>
+															<option>Otro</option>
+														</select>
 													</div>
 												</div>
 												<div className="col-md-2">
@@ -103,6 +106,38 @@ export default class ModalServicioUpdate extends React.Component {
 																onChange={e => actions.handleServicioMod(e)}>
 																<option>COB</option>
 																<option>REM</option>
+															</select>
+														</div>
+													</div>
+												</div>
+												<div className="col-md-1">
+													<div className="feature-left">
+														<div className="feature-copy">
+															<label>Moneda </label>
+															<select
+																className="form-control"
+																name="moneda"
+																id="moneda"
+																value={store.serviceSelected.moneda}
+																onChange={e => actions.handleServicioMod(e)}>
+																<option>CLP</option>
+																<option>USD</option>
+															</select>
+														</div>
+													</div>
+												</div>
+												<div className="col-md-2">
+													<div className="feature-left">
+														<div className="feature-copy">
+															<label>Pais</label>
+															<select
+																className="form-control"
+																name="InsideUSA"
+																id="InsideUSA"
+																value={store.serviceSelected.InsideUSA}
+																onChange={e => actions.handleServicioMod(e)}>
+																<option value="False">Chile</option>
+																<option value="True">USA</option>
 															</select>
 														</div>
 													</div>
@@ -223,7 +258,7 @@ export default class ModalServicioUpdate extends React.Component {
 												actions.handlePutServicio({});
 											}}
 											data-dismiss="modal">
-											modificar
+											Modificar
 										</button>
 									</div>
 								</div>

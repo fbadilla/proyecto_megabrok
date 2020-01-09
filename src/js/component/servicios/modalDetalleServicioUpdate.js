@@ -64,15 +64,17 @@ export default class ModalDetalleServicioUpdate extends React.Component {
 												<div className="col-md-5">
 													<div className="feature-left">
 														<label>Detalle</label>
-														<input
+														<select
 															name="detalle"
 															className="form-control"
-															rows="5"
 															id="detalle"
-															value={store.detalleServicio.detalle}
-															placeholder="Detalles Del Tratamiento"
-															onChange={e => actions.handleDetalle(e)}
-														/>
+															value={store.serviceSelected.detalle}
+															onChange={e => actions.handleDetalle(e)}>
+															<option>Consulta</option>
+															<option>Examen</option>
+															<option>Insumos Medicos</option>
+															<option>Otro</option>
+														</select>
 													</div>
 												</div>
 												<div className="col-md-2">
@@ -83,10 +85,48 @@ export default class ModalDetalleServicioUpdate extends React.Component {
 																className="form-control"
 																name="pago"
 																id="pago"
-																value={store.detalleServicio.pago}
+																value={store.serviceSelected.pago}
 																onChange={e => actions.handleDetalle(e)}>
 																<option>COB</option>
 																<option>REM</option>
+															</select>
+														</div>
+													</div>
+												</div>
+												<div className="col-md-1">
+													<div className="feature-left">
+														<div className="feature-copy">
+															<label>Moneda </label>
+															<select
+																className="form-control"
+																name="moneda"
+																id="moneda"
+																value={store.serviceSelected.moneda}
+																onChange={e => actions.handleDetalle(e)}>
+																<option>CLP</option>
+																<option>USD</option>
+															</select>
+														</div>
+													</div>
+												</div>
+												<div className="col-md-2">
+													<div className="feature-left">
+														<div className="feature-copy">
+															<label>Pais</label>
+															<select
+																className="form-control"
+																name="InsideUSA"
+																id="InsideUSA"
+																value={
+																	store.serviceSelected.InsideUSA != "True"
+																		? "Otro"
+																		: "USA"
+																}
+																onChange={e => actions.handleDetalle(e)}>
+																<option selected value="False">
+																	Otro
+																</option>
+																<option value="True">USA</option>
 															</select>
 														</div>
 													</div>
