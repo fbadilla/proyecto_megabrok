@@ -2,6 +2,7 @@ import React from "react";
 import { Context } from "../../../store/appContext";
 import PropTypes from "prop-types";
 import Select from "react-select";
+import { toast } from "react-toastify";
 
 export default class ModalServicioUpdate extends React.Component {
 	constructor(props) {
@@ -11,6 +12,15 @@ export default class ModalServicioUpdate extends React.Component {
 		this.actionsContext = null;
 		this.props.history;
 	}
+	notify3 = () =>
+		toast.error("⚠️ Debes agregar el numero y monto del documento", {
+			position: "top-center",
+			autoClose: 4000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true
+		});
 	componentDidMount() {
 		this.actionsContext.getProveedoresAutocompletar();
 	}
@@ -37,6 +47,7 @@ export default class ModalServicioUpdate extends React.Component {
 													type="button"
 													className="icono"
 													data-toggle="modal"
+													data-dismiss="modal"
 													data-target="#modaldeletedocumento"
 													onClick={() => actions.handleDelete(item.id)}>
 													<i className="ti-trash" />
@@ -63,7 +74,7 @@ export default class ModalServicioUpdate extends React.Component {
 									<div className="modal-header">
 										<div className="col">
 											<h5 className="modal-title" id="exampleModalLabel">
-												<label htmlFor="inputNombre">Modificar Detalle del Servicio </label>
+												<label htmlFor="inputNombre">Modificar Detalle del Servicio. </label>
 												<button
 													type="button"
 													className="close"
@@ -84,9 +95,8 @@ export default class ModalServicioUpdate extends React.Component {
 															name="detalle"
 															className="form-control"
 															id="detalle"
-															value={store.serviceSelected.detalle}
-															placeholder="Detalles Del Tratamiento"
-															onChange={e => actions.handleServicioMod(e)}>
+															value={store.detalle}
+															onChange={e => actions.handleChange(e)}>
 															<option>Consulta</option>
 															<option>Examen</option>
 															<option>Insumos Medicos</option>
@@ -102,15 +112,15 @@ export default class ModalServicioUpdate extends React.Component {
 																className="form-control"
 																name="pago"
 																id="pago"
-																value={store.serviceSelected.pago}
-																onChange={e => actions.handleServicioMod(e)}>
+																value={store.pago}
+																onChange={e => actions.handleChange(e)}>
 																<option>COB</option>
 																<option>REM</option>
 															</select>
 														</div>
 													</div>
 												</div>
-												<div className="col-md-1">
+												<div className="col-md-2">
 													<div className="feature-left">
 														<div className="feature-copy">
 															<label>Moneda </label>
@@ -134,7 +144,11 @@ export default class ModalServicioUpdate extends React.Component {
 																className="form-control"
 																name="InsideUSA"
 																id="InsideUSA"
-																value={store.serviceSelected.InsideUSA}
+																value={
+																	store.serviceSelected.InsideUSA != "True"
+																		? "Otro"
+																		: "USA"
+																}
 																onChange={e => actions.handleServicioMod(e)}>
 																<option value="False">Chile</option>
 																<option value="True">USA</option>
@@ -226,7 +240,12 @@ export default class ModalServicioUpdate extends React.Component {
 															type="button"
 															className="btn btn-primary mt-3"
 															value="Aceptar"
-															onClick={e => actions.postDocumento()}
+															onClick={e => {
+																store.documento.montodoc != "" &&
+																store.documento.numdoc != ""
+																	? actions.postDocumento()
+																	: this.notify3();
+															}}
 														/>
 													</div>
 												</div>

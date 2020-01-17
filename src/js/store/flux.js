@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			apiUrl: "http://0.0.0.0:8006",
+			apiUrl: "http://best-health.ddns.net:8001",
 			apiUrl2: "https://apy-cors-fcobad.herokuapp.com/https://mobile.bestdoctorsinsurance.com/spiritapi/api",
 			token: {
 				refresh: "",
@@ -18,7 +18,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			aseguradoselected: {},
 			numpoliza: "",
 			error: {},
-			idReclamo: "",
 			formulario: {
 				name_estado: "Pendiente"
 			},
@@ -37,7 +36,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				detalleServicio: []
 			},
 			detalleServicio: {
-				detalle: "",
+				detalle: "Consulta",
 				pago: "COB",
 				moneda: "CLP",
 				archivoServicio: null,
@@ -77,7 +76,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 			update: {},
 			doc_archivoServicio: null,
 			doc_file_infomedica: null,
-			doc_file_docgeneral: null
+			doc_file_docgeneral: null,
+			idReclamo: [],
+			Estadoreclamo: [],
+			pago: "COB",
+			detalle: "Consulta",
+			serviciosAll: []
 		},
 
 		actions: {
@@ -98,7 +102,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				formulario[name] = value;
 
 				setStore({
-					formulario
+					formulario,
+					[name]: value
 				});
 			},
 			handleFormPersona: e => {
@@ -185,6 +190,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 					serviceSelected
 				});
 			},
+			handleServicioDetalle: e => {
+				const { name, value } = e.target;
+				setStore({
+					name: value
+				});
+			},
+
 			handleServicioSelectMod: value => {
 				const store = getStore();
 				let serviceSelected = store.serviceSelected;
@@ -207,8 +219,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				let doc = store.documento;
 				if (doc.montodoc != "" && doc.numdoc != "") {
 					documentos.push(store.documento);
-				} else {
-					alert("ingresa todos los campos del documento");
 				}
 				detalleServicio["documentos"] = documentos;
 				setStore({
@@ -229,7 +239,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({
 					servicio,
 					detalleServicio: {
-						detalle: "",
+						detalle: "Consulta",
 						pago: "COB",
 						moneda: "CLP",
 						documentos: []
@@ -304,17 +314,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 												headers: {
 													Authorization: "Bearer " + store.access
 												}
-											});
+											}).then(() => getActions().getServicios());
 										});
-									})
-									.then(() => getActions().getServicios());
+									});
 							});
 					})
 					.catch(error => {
 						setStore({ error });
 						alert("No se pudo ingresar el documento, revise los campos");
-					})
-					.then(() => getActions().getServicios());
+					});
 			},
 			handleEnvioDetalle: history => {
 				const store = getStore();
@@ -351,15 +359,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 								headers: {
 									Authorization: "Bearer " + store.access
 								}
-							});
+							}).then(() => getActions().getServicios());
 						});
-						getActions().getServicios();
 					})
 					.catch(error => {
 						setStore({ error });
 						alert("No se pudo ingresar el documento, revise los campos");
-					})
-					.then(() => getActions().getServicios());
+					});
 			},
 			cleanService: () => {
 				setStore({
@@ -376,7 +382,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					},
 					documentos: [],
 					detalleServicio: {
-						detalle: "",
+						detalle: "Consulta",
 						documentos: [],
 						pago: "COB",
 						InsideUSA: "False",
@@ -454,8 +460,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			handlePutServicio: () => {
 				const store = getStore();
 				let formDetalleServicio = new FormData();
-				formDetalleServicio.append("detalle", store.serviceSelected.detalle);
-				formDetalleServicio.append("pago", store.serviceSelected.pago);
+				formDetalleServicio.append("detalle", store.detalle);
+				formDetalleServicio.append("pago", store.pago);
 				formDetalleServicio.append("moneda", store.serviceSelected.moneda);
 				formDetalleServicio.append("InsideUSA", store.serviceSelected.InsideUSA);
 				formDetalleServicio.append("servicio_id", store.serviceSelected.servicio_id);
@@ -604,6 +610,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						Authorization: "Bearer " + store.access
 					}
 				})
+					.then(() => getActions().getDocumentoId())
 					.then(resp => resp.json())
 					.then(() => getActions().getServicios())
 					.catch(error => setStore({ error }));
@@ -822,8 +829,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 			handleModReclamo: (item, history) => {
 				const store = getStore();
 				let formulario = store.formulario;
+				let idReclamo = store.idReclamo;
+				let Estadoreclamo = store.Estadoreclamo;
 				formulario = item;
-				setStore({ formulario });
+				idReclamo = item.reclamo_id;
+				Estadoreclamo = item.estado;
+				setStore({ formulario, idReclamo, Estadoreclamo });
 				getActions().getServicios();
 			},
 			handleDelete: id => {
@@ -974,7 +985,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					},
 					servicio: {
 						pago: "COB",
-						detalle: "",
+						detalle: "Consulta",
 						InsideUSA: "False",
 						moneda: "CLP",
 						archivoServicio: null,
@@ -1046,11 +1057,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 					)
 					.catch(error => setStore({ error }));
 			},
-
-			getServicios2: () => {
+			getServiciosAll: () => {
 				const store = getStore();
 
-				fetch(store.apiUrl + "/api/serviciosDocumentos/" + store.formulario.reclamo_id, {
+				fetch(store.apiUrl + "/api/serviciosDocumentos/", {
 					method: "GET",
 					headers: {
 						"Content-Type": "application/json",
@@ -1058,22 +1068,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}
 				})
 					.then(resp => resp.json())
-					.then(servicios =>
+					.then(data =>
 						setStore({
-							servicios: {
-								proveedor_id: servicios.proveedor_id,
-								nombre_proveedor: servicios.proveedor_id__nombre_proveedor,
-								documentos: {
-									id: servicios.documentos.id,
-									numdoc: servicios.documentos.numdoc
-								},
-								servicios: {
-									id: servicios.id,
-									detalle: servicios.detalle,
-									pago: servicios.pago,
-									archivoServicio: servicios.archivoServicio
-								}
-							}
+							serviciosAll: data
+						})
+					)
+					.catch(error => setStore({ error }));
+			},
+
+			getServicios2: () => {
+				const store = getStore();
+
+				fetch(store.apiUrl + "/api/serviciosDocumentos/" + store.idReclamo, {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + store.access
+					}
+				})
+					.then(resp => resp.json())
+					.then(data =>
+						setStore({
+							servicios: data
 						})
 					)
 					.catch(error => setStore({ error }));
@@ -1541,6 +1557,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => setStore({ formularios: data }))
 					.catch(error => setStore({ error }));
 			},
+			getFormularioId: () => {
+				const store = getStore();
+				fetch(store.apiUrl + "/api/reclamos/" + store.idReclamo, {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + store.access
+					}
+				})
+					.then(resp => resp.json())
+					.then(data => setStore({ formulario: data }))
+					.catch(error => setStore({ error }));
+			},
 
 			//funcion PUT para modificar los datos del usuario - PUT api propia
 			putFormulario: () => {
@@ -1568,7 +1597,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 				var dias = Math.floor(dif / (1000 * 60 * 60 * 24));
 				return dias;
 			},
-			enviarReclamo: (reclamo, servicios) => {
+			handleEnvioReclamo: (reclamo, servicios, history) => {
+				const store = getStore();
+				getActions().enviarReclamo(reclamo, servicios, history);
+				setStore({
+					formulario: {
+						estado: "Enviado",
+						nombreReclamante: store.formulario.nombreReclamante,
+						apellidoReclamante: store.formulario.apellidoReclamante
+					}
+				});
+			},
+			enviarReclamo: (reclamo, servicios, history) => {
 				const store = getStore();
 				let data = { reclamo, servicios };
 				fetch(store.apiUrl + "/api/generarclaim/", {
@@ -1578,21 +1618,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 						Authorization: "Bearer " + store.access,
 						"Content-Type": "application/json"
 					}
-				})
-					.then(resp => {
-						if (resp.status === 200) {
-							return resp.json().then(data => {
-								setStore({ formulario: data });
-								alert("Se ha enviado el reclamo exitosamente");
+				}).then(resp => {
+					if (resp.status === 200) {
+						return resp.json().then(() => {
+							alert("Se ha enviado el reclamo exitosamente");
+							setStore({
+								formulario: {
+									estado: "Enviado",
+									nombreReclamante: store.formulario.nombreReclamante,
+									apellidoReclamante: store.formulario.apellidoReclamante
+								}
 							});
-						} else if (resp.status === 400) {
-							return resp.json().then(data => alert("No se ha enviado el reclamo: " + data.reason));
-						}
-					})
-					.catch(error => {
-						setStore({ error });
-						alert("No se puede enviar el reclamo: ");
-					});
+							getActions().getServicios2();
+						});
+					}
+				});
 			},
 			getPolizas: () => {
 				const store = getStore();

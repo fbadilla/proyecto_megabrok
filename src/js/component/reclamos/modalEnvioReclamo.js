@@ -1,6 +1,7 @@
 import React from "react";
 import { Context } from "../../store/appContext";
 import PropTypes from "prop-types";
+import { toast } from "react-toastify";
 
 export default class ModalEnvioReclamo extends React.Component {
 	constructor(props) {
@@ -11,6 +12,15 @@ export default class ModalEnvioReclamo extends React.Component {
 		this.actionsContext = null;
 		this.props.history;
 	}
+	notify3 = () =>
+		toast.error("⚠️ Debes adjuntar el archivo con los documentos escaneado del servicio", {
+			position: "top-center",
+			autoClose: 5000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true
+		});
 
 	render() {
 		return (
@@ -45,7 +55,11 @@ export default class ModalEnvioReclamo extends React.Component {
 										<button
 											type="button"
 											className="btn btn-primary"
-											onClick={() => actions.enviarReclamo(store.formulario, store.servicios)}
+											onClick={e => {
+												store.servicios[0].archivoServicio != ""
+													? actions.handleEnvioReclamo(store.formulario, store.servicios)
+													: this.notify3();
+											}}
 											data-dismiss="modal">
 											Enviar Reclamo
 										</button>

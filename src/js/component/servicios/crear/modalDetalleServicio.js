@@ -2,6 +2,7 @@ import React from "react";
 import { Context } from "../../../store/appContext";
 import PropTypes from "prop-types";
 import Select from "react-select";
+import { toast } from "react-toastify";
 
 export default class ModalServicio extends React.Component {
 	constructor(props) {
@@ -11,6 +12,15 @@ export default class ModalServicio extends React.Component {
 		this.actionsContext = null;
 		this.props.history;
 	}
+	notify3 = () =>
+		toast.error("⚠️ Debes agregar el numero y monto del documento", {
+			position: "top-center",
+			autoClose: 4000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true
+		});
 	componentDidMount() {
 		this.actionsContext.getProveedoresAutocompletar();
 	}
@@ -94,7 +104,7 @@ export default class ModalServicio extends React.Component {
 														</div>
 													</div>
 												</div>
-												<div className="col-md-1">
+												<div className="col-md-2">
 													<div className="feature-left">
 														<div className="feature-copy">
 															<label>Moneda </label>
@@ -118,13 +128,16 @@ export default class ModalServicio extends React.Component {
 																className="form-control"
 																name="InsideUSA"
 																id="InsideUSA"
-																value={store.detalleServicio.InsideUSA}
+																value={
+																	store.serviceSelected.InsideUSA != "True"
+																		? "Otro"
+																		: "USA"
+																}
 																onChange={e => actions.handleDetalle(e)}>
 																<option selected value="False">
-																	Chile
+																	Otro
 																</option>
 																<option value="True">USA</option>
-																<option value="False">Otro</option>
 															</select>
 														</div>
 													</div>
@@ -213,7 +226,12 @@ export default class ModalServicio extends React.Component {
 															type="button"
 															className="btn btn-primary mt-3"
 															value="Aceptar"
-															onClick={e => actions.handleAceptarDocumento(e)}
+															onClick={e => {
+																store.documento.montodoc != "" &&
+																store.documento.numdoc != ""
+																	? actions.handleAceptarDocumento()
+																	: this.notify3();
+															}}
 														/>
 													</div>
 												</div>

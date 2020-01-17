@@ -32,7 +32,13 @@ export class ListaServiciosDetalle extends Component {
 							return (
 								<div className="col-md-9" key={i}>
 									<div className="row row2 border rounded ">
-										<div className="col-md-5 mt-4">
+										<div
+											className={
+												servicio.num_claim == null ? "col-md-12 mt-4 d-none" : "col-md-12 mt-4 "
+											}>
+											<h5>Nº Reclamo : {servicio.num_claim}</h5>
+										</div>
+										<div className="col-md-5 mt-2">
 											<h6>
 												<button
 													type="button"
@@ -58,6 +64,16 @@ export class ListaServiciosDetalle extends Component {
 												<u>
 													Agregar Tipo de Servicio <i className="ti-plus" />
 												</u>
+											</button>
+											<button
+												type="button"
+												className="close"
+												data-dismiss="modal"
+												data-toggle="modal"
+												data-target="#modaldeleteservicio"
+												onClick={() => actions.handleDelete(servicio.id)}
+												disabled={activo}>
+												<i className="ti-close" />
 											</button>
 										</div>
 										<div className="col-md-12">
@@ -144,10 +160,7 @@ export class ListaServiciosDetalle extends Component {
 										</div>
 										<div
 											className={
-												servicio.archivoServicio.length < 1 ||
-												servicio.archivoServicio.length == null
-													? "col-12file d-none"
-													: "col-12file"
+												servicio.archivoServicio.length < 1 ? "col-12file d-none" : "col-12file"
 											}>
 											<div
 												className={
@@ -185,7 +198,7 @@ export class ListaServiciosDetalle extends Component {
 													{servicio.archivoServicio.length < 1 ||
 													servicio.archivoServicio.length == null
 														? ""
-														: servicio.archivoServicio.slice(28)}
+														: servicio.archivoServicio.slice(27)}
 												</button>
 											</div>
 											<div
@@ -224,7 +237,7 @@ export class ListaServiciosDetalle extends Component {
 													{servicio.file_infomedica.length < 1 ||
 													servicio.file_infomedica.length == null
 														? ""
-														: servicio.file_infomedica.slice(28)}
+														: servicio.file_infomedica.slice(27)}
 												</button>
 											</div>
 											<div
@@ -263,7 +276,7 @@ export class ListaServiciosDetalle extends Component {
 													{servicio.file_docgeneral.length < 1 ||
 													servicio.file_docgeneral.length == null
 														? ""
-														: servicio.file_docgeneral.slice(28)}
+														: servicio.file_docgeneral.slice(27)}
 												</button>
 											</div>
 										</div>

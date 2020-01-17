@@ -43,10 +43,12 @@ export default class ModalDeleteDocumento extends React.Component {
 										<button
 											type="button"
 											className="btn btn-primary"
+											data-toggle="modal"
+											data-target="#modalservicioupdate"
+											data-dismiss="modal"
 											onClick={() => {
 												actions.handleDeleteDocumento();
-											}}
-											data-dismiss="modal">
+											}}>
 											Eliminar Documento
 										</button>
 									</div>

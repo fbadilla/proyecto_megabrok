@@ -66,7 +66,7 @@ export class ListaReclamos extends Component {
 												<td scope="row">{item.numPoliza}</td>
 												<td>{item.username}</td>
 												<th>{item.estado}</th>
-												<th>{item.num_claim}</th>
+												<th>{item.claims.map((claim, i) => claim.num_claim).join(" - ")}</th>
 												<td> {item.nombreReclamante + " " + item.apellidoReclamante}</td>
 												<td>{item.detalle_diagnostico}</td>
 												<td>{item.date}</td>

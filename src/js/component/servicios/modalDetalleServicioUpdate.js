@@ -2,6 +2,7 @@ import React from "react";
 import { Context } from "../../store/appContext";
 import PropTypes from "prop-types";
 import Select from "react-select";
+import { toast } from "react-toastify";
 
 export default class ModalDetalleServicioUpdate extends React.Component {
 	constructor(props) {
@@ -11,6 +12,15 @@ export default class ModalDetalleServicioUpdate extends React.Component {
 		this.actionsContext = null;
 		this.props.history;
 	}
+	notify3 = () =>
+		toast.error("⚠️ Debes agregar el numero y monto del documento", {
+			position: "top-center",
+			autoClose: 4000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true
+		});
 	componentDidMount() {
 		this.actionsContext.getProveedoresAutocompletar();
 	}
@@ -68,9 +78,8 @@ export default class ModalDetalleServicioUpdate extends React.Component {
 															name="detalle"
 															className="form-control"
 															id="detalle"
-															value={store.serviceSelected.detalle}
 															onChange={e => actions.handleDetalle(e)}>
-															<option>Consulta</option>
+															<option selected>Consulta</option>
 															<option>Examen</option>
 															<option>Insumos Medicos</option>
 															<option>Otro</option>
@@ -93,7 +102,7 @@ export default class ModalDetalleServicioUpdate extends React.Component {
 														</div>
 													</div>
 												</div>
-												<div className="col-md-1">
+												<div className="col-md-2">
 													<div className="feature-left">
 														<div className="feature-copy">
 															<label>Moneda </label>
@@ -215,7 +224,12 @@ export default class ModalDetalleServicioUpdate extends React.Component {
 															type="button"
 															className="btn btn-primary mt-3"
 															value="Aceptar"
-															onClick={e => actions.handleAceptarDocumento(e)}
+															onClick={e => {
+																store.documento.montodoc != "" &&
+																store.documento.numdoc != ""
+																	? actions.handleAceptarDocumento()
+																	: this.notify3();
+															}}
 														/>
 													</div>
 												</div>

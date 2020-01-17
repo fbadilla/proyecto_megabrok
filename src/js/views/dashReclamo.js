@@ -17,6 +17,7 @@ export class DashReclamo extends React.Component {
 		this.actionsContext.getProveedoresAutocompletar();
 		this.actionsContext.getaccount();
 		this.actionsContext.getFormulario();
+		this.actionsContext.getServiciosAll();
 		this.actionsContext.vaciarFiltro();
 		this.actionsContext.getPersonas();
 	}

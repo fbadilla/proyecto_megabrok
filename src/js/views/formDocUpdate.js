@@ -10,6 +10,7 @@ import ModalServicio from "../component/servicios/crear/modalServicio";
 import ModalServicioUpdate from "../component/servicios/modificar/modalServicioUpdate";
 import ModalDetalleServicio from "../component/servicios/crear/modalDetalleServicio";
 import { ListaServiciosDetalle } from "../component/servicios/listaServiciosDetalles";
+import { ReclamoView } from "../component/servicios/Reclamoview";
 import ModalDetalleServicioUpdate from "../component/servicios/modalDetalleServicioUpdate";
 import ModalEnvioReclamo from "../component/reclamos/modalEnvioReclamo";
 import { toast } from "react-toastify";
@@ -74,10 +75,6 @@ export class FormDocUpdate extends React.Component {
 				{({ store, actions }) => {
 					this.storeContext = store;
 					this.actionsContext = actions;
-					let activo = store.formulario.estado == "Enviado";
-					let visible = "visible";
-					if (store.formulario.estado == "Enviado") visible = "invisible";
-					let target = store.formulario.estado !== "Enviado" ? "#ModalEnvioReclamo" : "#";
 
 					return (
 						<Fragment>
@@ -86,15 +83,12 @@ export class FormDocUpdate extends React.Component {
 									<div className="row justify-content-center">
 										<div className="col-md-10 ">
 											<div className="row">
-												<div className="col-md-4">
-													<h2>Reclamo {store.formulario.num_claim}</h2>
-												</div>
-												<div className="col-md-4">
+												<div className="col-md-4 offset-md-4 ">
 													<button
 														type="button"
 														className="btn btn-primary"
 														data-toggle="modal"
-														data-target={target}
+														data-target="#ModalEnvioReclamo"
 														onClick={e => {
 															store.formulario.estado == "Enviado"
 																? this.notifySend2()
@@ -104,126 +98,9 @@ export class FormDocUpdate extends React.Component {
 													</button>
 												</div>
 											</div>
-											<form
-												action="#"
-												onSubmit={e => actions.handleEnvioMod(e, this.props.history)}>
-												<div className="row form-group">
-													<div className="col-md-8">
-														<h4>Datos Personales del Paciente</h4>
-													</div>
-													<div className="col-md-6">
-														<div className="feature-left">
-															<span className="icon">
-																<i className="ti-user" />
-															</span>
-															<div className="feature-copy">
-																<label>Nombre Completo Paciente</label>
-																<input
-																	name="nameReclamo"
-																	className="form-control"
-																	id="nameReclamo"
-																	value={
-																		store.formulario.nombreReclamante +
-																		store.formulario.apellidoReclamante
-																	}
-																	type="text"
-																	readOnly
-																/>
-															</div>
-														</div>
-													</div>
-													<div className="col-md-3">
-														<div className="feature-left">
-															<div className="feature-copy">
-																<label>Numero Poliza</label>
-																<input
-																	name="numPoliza"
-																	id="disabledTextInput"
-																	onChange={e => actions.handleForm(e)}
-																	value={store.formulario.numPoliza}
-																	type="text"
-																	className="form-control"
-																	readOnly
-																/>
-															</div>
-														</div>
-													</div>
-												</div>
+											<ReclamoView />
 
-												<div className="row form-group">
-													<div className="col-md-8">
-														<h4>Detalles del Diagnostico / Accidente</h4>
-													</div>
-													<div className="col-md-6">
-														<div className="feature-left">
-															<span className="icon">
-																<i className="ti-clipboard" />
-															</span>
-															<div className="feature-copy">
-																<label>Diagnostico o tipo de Accidente</label>
-																<input
-																	name="detalle_diagnostico"
-																	id="detalle_diagnostico"
-																	onChange={e => actions.handleForm(e)}
-																	value={store.formulario.detalle_diagnostico}
-																	type="text"
-																	className="form-control"
-																	readOnly={activo}
-																/>
-															</div>
-														</div>
-													</div>
-													<div className="col-md-3">
-														<div className="feature-left">
-															<div className="feature-copy">
-																<label>Estado Reclamo </label>
-																<select
-																	className="form-control"
-																	id="name_estado"
-																	name="estado"
-																	value={store.formulario.estado}
-																	onChange={e => actions.handleForm(e)}>
-																	<option>Pendiente</option>
-																	<option>Enviado</option>
-																	<option>Aprobada</option>
-																	<option>Rechazada</option>
-																</select>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div className="row  form-group">
-													<div className="col-md-3 offset-md-7">
-														<input
-															type="submit"
-															value="Modificar"
-															className="btn btn-primary"
-															onClick={e => {
-																store.formulario.estado == "Enviado"
-																	? this.notify2()
-																	: this.notify();
-															}}
-														/>
-													</div>
-												</div>
-												<div className="row form-group">
-													<div className="col-md-8">
-														<h4>Servicios Prestados</h4>
-													</div>
-													<div className="col-md-6">
-														<button
-															type="button"
-															className="btn btn-primary"
-															data-toggle="modal"
-															data-target="#modalservicio"
-															onClick={e => actions.cleanService()}
-															disabled={activo}>
-															<i className="ti-plus" /> Agregar Servicio
-														</button>
-													</div>
-												</div>
-												<ListaServiciosDetalle />
-											</form>
+											<ListaServiciosDetalle />
 										</div>
 									</div>
 								</div>
