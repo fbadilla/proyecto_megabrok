@@ -34,7 +34,8 @@ export class ListaReclamos extends Component {
 												<td>{item.nombreReclamante + " " + item.apellidoReclamante}</td>
 												<td>{item.detalle_diagnostico}</td>
 												<td>{item.date}</td>
-												<td>{actions.restafecha(item.date)}</td>
+												<td>{item.Fecha_recepcion}</td>
+												<td>{actions.restafecha(item.date, item.Fecha_recepcion)}</td>
 												<td>
 													<Link
 														to="/update"
@@ -70,7 +71,8 @@ export class ListaReclamos extends Component {
 												<td> {item.nombreReclamante + " " + item.apellidoReclamante}</td>
 												<td>{item.detalle_diagnostico}</td>
 												<td>{item.date}</td>
-												<td>{actions.restafecha(item.date)}</td>
+												<td>{item.Fecha_recepcion}</td>
+												<td>{actions.restafecha(item)}</td>
 												<td>
 													<Link
 														to="/update"
@@ -100,14 +102,15 @@ export class ListaReclamos extends Component {
 											<table className="table table-hover">
 												<thead>
 													<tr>
-														<th scope="col">Poliza</th>
+														<th scope="col">Póliza</th>
 														<th scope="col">Realizado por</th>
 														<th scope="col">Estado</th>
 														<th scope="col">Nº Claim</th>
 														<th scope="col">Reclamante</th>
-														<th scope="col">Detalle</th>
-														<th scope="col">Fecha</th>
-														<th scope="col">Dias</th>
+														<th scope="col">Diagnóstico</th>
+														<th scope="col">Fecha Envío</th>
+														<th scope="col">Fecha Recepción</th>
+														<th scope="col">Días</th>
 														<th scope="col">Editar</th>
 														<th scope="col">Eliminar</th>
 													</tr>

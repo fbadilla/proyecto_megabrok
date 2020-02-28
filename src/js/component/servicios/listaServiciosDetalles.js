@@ -49,7 +49,7 @@ export class ListaServiciosDetalle extends Component {
 													disabled={activo}>
 													<i className="ti-settings" />
 												</button>
-												{servicio.proveedor_id__nombre_proveedor}:
+												{servicio.grupo_id__nombre_grupo}:
 											</h6>
 										</div>
 										<div className="col-md-3 mt-4 offset-md-4 ">
@@ -160,7 +160,11 @@ export class ListaServiciosDetalle extends Component {
 										</div>
 										<div
 											className={
-												servicio.archivoServicio.length < 1 ? "col-12file d-none" : "col-12file"
+												servicio.archivoServicio.length >= 2 ||
+												servicio.file_infomedica.length >= 2 ||
+												servicio.file_docgeneral.length >= 2
+													? "col-12file "
+													: "col-12file d-none"
 											}>
 											<div
 												className={
@@ -198,7 +202,7 @@ export class ListaServiciosDetalle extends Component {
 													{servicio.archivoServicio.length < 1 ||
 													servicio.archivoServicio.length == null
 														? ""
-														: servicio.archivoServicio.slice(27)}
+														: servicio.archivoServicio.slice(36)}
 												</button>
 											</div>
 											<div
@@ -237,7 +241,7 @@ export class ListaServiciosDetalle extends Component {
 													{servicio.file_infomedica.length < 1 ||
 													servicio.file_infomedica.length == null
 														? ""
-														: servicio.file_infomedica.slice(27)}
+														: servicio.file_infomedica.slice(36)}
 												</button>
 											</div>
 											<div
@@ -276,7 +280,7 @@ export class ListaServiciosDetalle extends Component {
 													{servicio.file_docgeneral.length < 1 ||
 													servicio.file_docgeneral.length == null
 														? ""
-														: servicio.file_docgeneral.slice(27)}
+														: servicio.file_docgeneral.slice(36)}
 												</button>
 											</div>
 										</div>

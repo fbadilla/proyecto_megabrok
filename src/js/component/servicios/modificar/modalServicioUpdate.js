@@ -72,18 +72,12 @@ export default class ModalServicioUpdate extends React.Component {
 							<div className="modal-dialog modal-xl" role="document">
 								<div className="modal-content">
 									<div className="modal-header">
-										<div className="col">
-											<h5 className="modal-title" id="exampleModalLabel">
-												<label htmlFor="inputNombre">Modificar Detalle del Servicio. </label>
-												<button
-													type="button"
-													className="close"
-													data-dismiss="modal"
-													aria-label="Close">
-													<i className="ti-close" />
-												</button>
-											</h5>
-										</div>
+										<h5 className="modal-title" id="exampleModalLabel">
+											<label htmlFor="inputNombre">Modificar Detalle del Servicio. </label>
+										</h5>
+										<button type="button" className="close" data-dismiss="modal" aria-label="Close">
+											<i className="ti-close" />
+										</button>
 									</div>
 									<div className="modal-body">
 										<form action="#">
@@ -95,7 +89,7 @@ export default class ModalServicioUpdate extends React.Component {
 															name="detalle"
 															className="form-control"
 															id="detalle"
-															value={store.detalle}
+															value={store.serviceSelected.detalle}
 															onChange={e => actions.handleChange(e)}>
 															<option>Consulta</option>
 															<option>Examen</option>
@@ -112,7 +106,7 @@ export default class ModalServicioUpdate extends React.Component {
 																className="form-control"
 																name="pago"
 																id="pago"
-																value={store.pago}
+																value={store.serviceSelected.pago}
 																onChange={e => actions.handleChange(e)}>
 																<option>COB</option>
 																<option>REM</option>

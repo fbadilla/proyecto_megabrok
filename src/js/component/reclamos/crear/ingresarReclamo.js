@@ -18,6 +18,72 @@ export class ingresarReclamo extends React.Component {
 			<Animated animationIn="fadeInLeft" animationOut="bounceOutLeft" animationInDuration={500} isVisible={true}>
 				<Context.Consumer>
 					{({ store, actions }) => {
+						let statuspoliza = item => {
+							if (item.id_poliza__estado_poliza == 96005) {
+								return "Activa";
+							} else if (
+								item.id_poliza__estado_poliza == 96002 ||
+								item.id_poliza__estado_poliza == 97008 ||
+								item.id_poliza__estado_poliza == 97022 ||
+								item.id_poliza__estado_poliza == 97024
+							) {
+								return "Rechazada ";
+							} else if (
+								item.id_poliza__estado_poliza == 96003 ||
+								item.id_poliza__estado_poliza == 97009 ||
+								item.id_poliza__estado_poliza == 97010 ||
+								item.id_poliza__estado_poliza == 97011 ||
+								item.id_poliza__estado_poliza == 97012 ||
+								item.id_poliza__estado_poliza == 97027 ||
+								item.id_poliza__estado_poliza == 97025
+							) {
+								return "Pendiente";
+							} else if (item.id_poliza__estado_poliza == 96006) {
+								return "Cancelada";
+							} else if (
+								item.id_poliza__estado_poliza == 96007 ||
+								item.id_poliza__estado_poliza == 96010
+							) {
+								return "Pausa";
+							} else if (item.id_poliza__estado_poliza == 97015) {
+								return "En Proceso";
+							} else if (item.id_poliza__estado_poliza == 97020) {
+								return "No Renovada";
+							} else if (
+								item.id_poliza__estado_poliza == 96001 ||
+								item.id_poliza__estado_poliza == 97026 ||
+								item.id_poliza__estado_poliza == 96004
+							) {
+								return "Aprobada";
+							} else {
+								item.id_poliza__estado_poliza == 96008;
+								return "Gracia";
+							}
+						};
+						let StatusCliente = item => {
+							if (item.estado_asegurado == 1) {
+								return "Activa";
+							} else if (item.estado_asegurado == 2) {
+								return "Pendiente ";
+							} else {
+								item.estado_asegurado == 3;
+								return "Inactivo";
+							}
+						};
+						let TipoAsegurado = item => {
+							if (item.tipo_asegurado == 1) {
+								return "Titular";
+							} else if (item.tipo_asegurado == 2) {
+								return "Conyugue";
+							} else if (item.tipo_asegurado == 3) {
+								return "Dependiente";
+							} else if (item.tipo_asegurado == 4) {
+								return "Tutos ";
+							} else {
+								item.estado_asegurado == 5;
+								return "Padres";
+							}
+						};
 						const foo = () => {
 							if (store.aseguradosFiltro.length > 0) {
 								const personas = store.aseguradosFiltro.map((item, i) => {
@@ -26,7 +92,11 @@ export class ingresarReclamo extends React.Component {
 											<td>{item.id_poliza__nun_poliza}</td>
 											<td>{item.id_persona__rut}</td>
 											<td>{item.id_persona__nombre + " " + item.id_persona__apellido}</td>
-											<td> {item.tipo_asegurado}</td>
+											<td> {item.id_persona__emailPrimario}</td>
+											<td> {item.id_poliza__id_Plan__nombre_plan}</td>
+											<td> {statuspoliza(item)}</td>
+											<td> {StatusCliente(item)}</td>
+											<td> {TipoAsegurado(item)}</td>
 											<td>
 												<Link
 													to="/formulariochile"
@@ -47,6 +117,10 @@ export class ingresarReclamo extends React.Component {
 														<th scope="col">N° Poliza</th>
 														<th scope="col">Rut</th>
 														<th scope="col">Nombre</th>
+														<th scope="col">Email</th>
+														<th scope="col">Plan</th>
+														<th scope="col">Status Poliza</th>
+														<th scope="col">Status Cliente</th>
 														<th scope="col">Tipo Asegurado</th>
 														<th scope="col">Generar Reclamo</th>
 													</tr>

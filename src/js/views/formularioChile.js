@@ -18,6 +18,7 @@ export class FormularioChile extends React.Component {
 	}
 	componentDidMount() {
 		this.actionsContext.getaccount();
+		this.actionsContext.getServicios();
 	}
 	render() {
 		return (
@@ -40,10 +41,10 @@ export class FormularioChile extends React.Component {
 												action="#"
 												onSubmit={e => actions.handleFormulario(e, this.props.history)}>
 												<div className="row form-group">
-													<div className="col-md-8">
+													<div className="col-md-12">
 														<h4>Datos Personales del Paciente</h4>
 													</div>
-													<div className="col-md-6">
+													<div className="col-md-4">
 														<div className="feature-left">
 															<span className="icon">
 																<i className="ti-user" />
@@ -53,7 +54,11 @@ export class FormularioChile extends React.Component {
 																<input
 																	name="nameReclamo"
 																	id="nameReclamo"
-																	value={store.formulario.nameReclamo}
+																	value={
+																		store.formulario.nombreReclamante +
+																		" " +
+																		store.formulario.apellidoReclamante
+																	}
 																	onChange={e => actions.handleForm(e)}
 																	type="text"
 																	className="form-control"
@@ -62,15 +67,15 @@ export class FormularioChile extends React.Component {
 															</div>
 														</div>
 													</div>
-													<div className="col-md-3">
+													<div className="col-md-2">
 														<div className="feature-left">
 															<div className="feature-copy">
 																<label>Numero Poliza</label>
 																<input
-																	name="numpoliza"
-																	id="numpoliza"
+																	name="numPoliza"
+																	id="numPoliza"
 																	readOnly
-																	value={store.formulario.numpoliza}
+																	value={store.formulario.numPoliza}
 																	onChange={e => actions.handleForm(e)}
 																	type="text"
 																	className="form-control"
@@ -81,10 +86,10 @@ export class FormularioChile extends React.Component {
 												</div>
 
 												<div className="row form-group">
-													<div className="col-md-8">
+													<div className="col-md-12">
 														<h4>Detalles del Diagnostico / Accidente</h4>
 													</div>
-													<div className="col-md-6">
+													<div className="col-md-4">
 														<div className="feature-left">
 															<span className="icon">
 																<i className="ti-clipboard" />
@@ -97,6 +102,21 @@ export class FormularioChile extends React.Component {
 																	onChange={e => actions.handleForm(e)}
 																	value={store.formulario.detalle_diagnostico}
 																	type="text"
+																	className="form-control"
+																/>
+															</div>
+														</div>
+													</div>
+													<div className="col-md-2">
+														<div className="feature-left">
+															<div className="feature-copy">
+																<label>Fecha de Recepción</label>
+																<input
+																	name="Fecha_recepcion"
+																	id="Fecha_recepcion"
+																	value={store.formulario.Fecha_recepcion}
+																	onChange={e => actions.handleForm(e)}
+																	type="date"
 																	className="form-control"
 																/>
 															</div>

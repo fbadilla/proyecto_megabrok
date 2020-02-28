@@ -4,6 +4,7 @@ import { ListaProveedores } from "../component/proveedores/listaProveedores";
 import ModalProveedor from "../component/proveedores/modalProveedor";
 import ModalDeleteProveedor from "../component/proveedores/modalDeleteProveedor";
 import ModalProveedorUpdate from "../component/proveedores/modalProveedorUpdate";
+import ModalGrupo from "../component/proveedores/modalgrupo";
 
 export class DashProveedor extends React.Component {
 	constructor(props) {
@@ -13,7 +14,9 @@ export class DashProveedor extends React.Component {
 	}
 	componentDidMount() {
 		this.actionsContext.getProveedores();
+		this.actionsContext.getGruposAutocompletar();
 		this.actionsContext.proveedorVacio();
+		this.actionsContext.grupoVacio();
 		this.actionsContext.getaccount();
 		this.actionsContext.vaciarFiltro();
 	}
@@ -67,6 +70,7 @@ export class DashProveedor extends React.Component {
 								</div>
 							</div>
 							<ModalProveedor />
+							<ModalGrupo />
 							<ModalProveedorUpdate />
 							<ModalDeleteProveedor />
 						</Fragment>

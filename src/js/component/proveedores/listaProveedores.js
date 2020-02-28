@@ -53,7 +53,7 @@ export class ListaProveedores extends Component {
 									return (
 										<tr key={i}>
 											<td scope="row">{item.nombre_proveedor}</td>
-											<td>{item.grupo}</td>
+											<td>{item.nombre_grupo}</td>
 											<td>{item.rut_proveedor}</td>
 											<td>
 												<button

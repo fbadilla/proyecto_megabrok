@@ -67,10 +67,10 @@ export class ReclamoView extends Component {
 						<Fragment>
 							<form action="#" onSubmit={e => actions.handleEnvioMod(e, this.props.history)}>
 								<div className="row form-group">
-									<div className="col-md-8">
+									<div className="col-md-12">
 										<h4>Datos Personales del Paciente</h4>
 									</div>
-									<div className="col-md-6">
+									<div className="col-md-4">
 										<div className="feature-left">
 											<span className="icon">
 												<i className="ti-user" />
@@ -92,13 +92,13 @@ export class ReclamoView extends Component {
 											</div>
 										</div>
 									</div>
-									<div className="col-md-3">
+									<div className="col-md-2">
 										<div className="feature-left">
 											<div className="feature-copy">
 												<label>Numero Poliza</label>
 												<input
 													name="numPoliza"
-													id="disabledTextInput"
+													id="numPoliza"
 													onChange={e => actions.handleForm(e)}
 													value={store.formulario.numPoliza}
 													type="text"
@@ -111,10 +111,10 @@ export class ReclamoView extends Component {
 								</div>
 
 								<div className="row form-group">
-									<div className="col-md-8">
+									<div className="col-md-12">
 										<h4>Detalles del Diagnostico / Accidente</h4>
 									</div>
-									<div className="col-md-6">
+									<div className="col-md-4">
 										<div className="feature-left">
 											<span className="icon">
 												<i className="ti-clipboard" />
@@ -133,7 +133,7 @@ export class ReclamoView extends Component {
 											</div>
 										</div>
 									</div>
-									<div className="col-md-3">
+									<div className="col-md-2">
 										<div className="feature-left">
 											<div className="feature-copy">
 												<label>Estado Reclamo </label>
@@ -152,6 +152,22 @@ export class ReclamoView extends Component {
 													<option>Aprobada</option>
 													<option>Rechazada</option>
 												</select>
+											</div>
+										</div>
+									</div>
+									<div className="col-md-2">
+										<div className="feature-left">
+											<div className="feature-copy">
+												<label>Fecha de Recepción</label>
+												<input
+													name="Fecha_recepcion"
+													id="Fecha_recepcion"
+													value={store.formulario.Fecha_recepcion}
+													onChange={e => actions.handleForm(e)}
+													type="date"
+													className="form-control"
+													readOnly={store.formulario.estado == "Enviado" ? "activo" : ""}
+												/>
 											</div>
 										</div>
 									</div>

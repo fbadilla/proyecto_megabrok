@@ -71,7 +71,7 @@ export default class ModalServicio extends React.Component {
 									<div className="modal-body">
 										<form action="#">
 											<div className="form-row">
-												<div className="col-md-5">
+												<div className="col-md-4">
 													<div className="feature-left">
 														<label>Detalle</label>
 														<select
@@ -120,7 +120,7 @@ export default class ModalServicio extends React.Component {
 														</div>
 													</div>
 												</div>
-												<div className="col-md-2">
+												<div className="col-md-2 ">
 													<div className="feature-left">
 														<div className="feature-copy">
 															<label>Pais</label>
@@ -252,14 +252,6 @@ export default class ModalServicio extends React.Component {
 												</div>
 											</div>
 											<div className="modal-footer">
-												<button
-													type="button"
-													className="btn btn-primary"
-													onClick={() => {
-														actions.handleAddDetalle();
-													}}>
-													<i className="ti-plus" /> Nuevo Detalle
-												</button>
 												<button
 													type="submit"
 													className="btn btn-primary"

@@ -90,7 +90,7 @@ export class FormDocUpdate extends React.Component {
 														data-toggle="modal"
 														data-target="#ModalEnvioReclamo"
 														onClick={e => {
-															store.formulario.estado == "Enviado"
+															store.formulario.name_estado == "Enviado"
 																? this.notifySend2()
 																: this.notifySend();
 														}}>

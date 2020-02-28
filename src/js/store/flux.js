@@ -19,7 +19,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			numpoliza: "",
 			error: {},
 			formulario: {
-				name_estado: "Pendiente"
+				name_estado: "Pendiente",
+				Fecha_recepcion: new Date().toISOString().slice(0, 10)
 			},
 			formularios: [],
 			formulariosId: [],
@@ -31,8 +32,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				datedoc: new Date().toISOString().slice(0, 10)
 			},
 			servicio: {
-				archivoServicio: null,
-				proveedor_id: 1,
+				archivoServicio: "",
+				file_docgeneral: "",
+				file_infomedica: "",
 				detalleServicio: []
 			},
 			detalleServicio: {
@@ -59,7 +61,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			numservice: null,
 			proveedor: {
 				nombre_proveedor: "",
-				grupo: "",
+				grupo_id: "",
 				rut_proveedor: ""
 			},
 			persona: {},
@@ -81,7 +83,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 			Estadoreclamo: [],
 			pago: "COB",
 			detalle: "Consulta",
-			serviciosAll: []
+			serviciosAll: [],
+			proveedoresID: "",
+			grupos: [],
+			gruposID: [],
+			provegruposid: [],
+			provdata: [],
+			nogrupo: false,
+			nogruposelect: { label: "", value: 1 },
+			archivoServicio: null,
+			select: { label: "CLINICA TABANCURA SERVICIOS MEDICOS TABANCURA SPA", value: "1" }
 		},
 
 		actions: {
@@ -151,6 +162,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 					detalleServicio
 				});
 			},
+			handleDetalleProveedor: value => {
+				const store = getStore();
+				let detalleServicio = store.detalleServicio;
+				detalleServicio["proveedor_id"] = value.value;
+				setStore({
+					detalleServicio
+				});
+			},
+			handleServicioSelectupdateMod: value => {
+				const store = getStore();
+				let serviceSelectedUpdate = store.serviceSelectedUpdate;
+				serviceSelectedUpdate["proveedor_id"] = value.value;
+				setStore({
+					serviceSelectedUpdate
+				});
+			},
 
 			handleServicio: e => {
 				const { name, value } = e.target;
@@ -174,13 +201,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				let servicio = store.servicio;
 				let serviceSelectedUpdate = store.serviceSelectedUpdate;
-				servicio["proveedor_id"] = value.value;
-				serviceSelectedUpdate["proveedor_id"] = value.value;
+				servicio["grupo_id"] = value;
+				serviceSelectedUpdate["grupo_id"] = value;
 				setStore({
 					servicio,
 					serviceSelectedUpdate
 				});
+				getActions().getProveedoresAutocompletarId();
 			},
+
 			handleServicioMod: e => {
 				const { name, value } = e.target;
 				const store = getStore();
@@ -190,11 +219,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 					serviceSelected
 				});
 			},
+
 			handleServicioDetalle: e => {
 				const { name, value } = e.target;
 				setStore({
 					name: value
 				});
+			},
+			handleproveedor: () => {
+				const store = getStore();
+				let provdata = store.servicios.filter(data => data.grupo_id === store.servicio.grupo_id);
+				let serviceSelectedUpdate = store.serviceSelectedUpdate;
+				serviceSelectedUpdate["id"] =
+					store.servicios.filter(data => data.grupo_id === store.servicio.grupo_id).length > 0
+						? provdata[0].id
+						: 0;
+				setStore({
+					provdata,
+					serviceSelectedUpdate
+				});
+				getActions().getProveedoresAutocompletarId();
 			},
 
 			handleServicioSelectMod: value => {
@@ -256,7 +300,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getActions().handleAddDetalle();
 				getActions().getServicios();
 				let formServicio = new FormData();
-				formServicio.append("proveedor_id", store.servicio.proveedor_id);
+				formServicio.append("grupo_id", store.servicio.grupo_id);
 				formServicio.append("reclamo_id", store.formulario.reclamo_id);
 				if (store.servicio.archivoServicio != null)
 					formServicio.append(
@@ -285,6 +329,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 								let formDetalle = new FormData();
 
 								formDetalle.append("detalle", detalle.detalle);
+								formDetalle.append("proveedor_id", detalle.proveedor_id);
 								formDetalle.append("pago", detalle.pago);
 								formDetalle.append("moneda", detalle.moneda);
 								formDetalle.append("servicio_id", infoServicio.id);
@@ -334,6 +379,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				formDetalle.append("moneda", store.detalleServicio.moneda);
 				formDetalle.append("InsideUSA", store.detalleServicio.InsideUSA);
 				formDetalle.append("servicio_id", store.serviceSelectedUpdate.id);
+				formDetalle.append("proveedor_id", store.detalleServicio.proveedor_id);
 				// se realiza POST por cada detalle
 				fetch(store.apiUrl + "/api/detalleServicio/", {
 					method: "Post",
@@ -377,7 +423,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					},
 					servicio: {
 						archivoServicio: null,
-						proveedor_id: 1,
+						file_docgeneral: "",
+						file_infomedica: "	",
 						detalleServicio: []
 					},
 					documentos: [],
@@ -387,8 +434,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 						pago: "COB",
 						InsideUSA: "False",
 						moneda: "CLP"
-					}
+					},
+					select: null
 				});
+				getActions().getProvGrupoAutocompletar();
 			},
 			handleEnvioServicio2: history => {
 				const store = getStore();
@@ -499,7 +548,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			handlePutServicioArchivo: () => {
 				const store = getStore();
 				let formServicio = new FormData();
-				formServicio.append("proveedor_id", store.serviceSelectedUpdate.proveedor_id);
+				formServicio.append("grupo_id", store.serviceSelectedUpdate.grupo_id);
 				formServicio.append("reclamo_id", store.formulario.reclamo_id);
 				if (store.doc_archivoServicio != null)
 					formServicio.append(
@@ -567,7 +616,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			handlePutProveedorServicio: () => {
 				const store = getStore();
 				let formProveedorServicio = new FormData();
-				formProveedorServicio.append("proveedor_id", store.serviceSelectedUpdate.proveedor_id);
+				formProveedorServicio.append("grupo_id", store.serviceSelectedUpdate.grupo_id);
 				formProveedorServicio.append("reclamo_id", store.formulario.reclamo_id);
 				fetch(store.apiUrl + "/api/servicios/" + store.serviceSelectedUpdate.id, {
 					method: "Put",
@@ -735,12 +784,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 				setStore({
 					formulario: {
-						nameReclamo: item.id_persona__nombre.trim() + " " + item.id_persona__apellido.trim(),
-						numpoliza: item.id_poliza__nun_poliza,
+						nombreReclamante: item.id_persona__nombre.trim(),
+						apellidoReclamante: item.id_persona__apellido.trim(),
+						numPoliza: item.id_poliza__nun_poliza,
 						rut: item.id_persona__rut,
 						name_estado: "Pendiente",
-						asociacion_id: item.id
-					}
+						asociacion_id: item.id,
+						Fecha_recepcion: new Date().toISOString().slice(0, 10)
+					},
+					servicios: []
 				});
 			},
 
@@ -754,7 +806,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 					reclamo
 				});
 			},
+			handleInputChange(e) {
+				const store = getStore();
+				const target = e.target;
+				const value = target.type === "checkbox" ? target.checked : target.value;
+				const name = target.name;
 
+				setStore({
+					[name]: value
+				});
+			},
 			handleProveedor: e => {
 				const { name, value } = e.target;
 				const store = getStore();
@@ -763,6 +824,55 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({
 					proveedor
 				});
+			},
+			handleGrupoProv: value => {
+				const store = getStore();
+				let grupo = store.grupo;
+				grupo["nombre_grupo"] = value.label;
+				let proveedor = store.proveedor;
+				proveedor["grupo_id"] = value.value;
+
+				setStore({
+					grupo,
+					proveedor
+				});
+			},
+			handlegrupo: e => {
+				const { name, value } = e.target;
+				const store = getStore();
+				let grupo = store.grupo;
+				grupo[name] = value;
+				setStore({
+					grupo
+				});
+			},
+			handleinputGrupo: e => {
+				let store = getStore();
+				if (store.proveedor.grupo != "undefined") getActions().postAddgrupo();
+			},
+			postAddgrupo: () => {
+				let store = getStore();
+				let data = store.grupo;
+				fetch(store.apiUrl + "/api/grupos/", {
+					method: "POST",
+					body: JSON.stringify(data),
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + store.access
+					}
+				})
+					.then(resp => resp.json())
+					.then(data =>
+						setStore({
+							proveedor: {
+								grupo_id: data.id,
+								nombre_proveedor: store.proveedor.nombre_proveedor,
+								rut_proveedor: store.proveedor.rut_proveedor
+							}
+						})
+					)
+					.then(() => getActions().getGruposAutocompletar())
+					.then(() => getActions().getGruposAutocompletarID());
 			},
 
 			//funcion que maneja el Post para crear un nuevo reclamo en api/claim
@@ -850,18 +960,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ numservice });
 				getActions().getDocumentoId();
 			},
-			handleSelectedServicio: (id, servicio, servicio_id) => {
+			handleSelectedServicio: (id, servicio, servicio_id, i) => {
 				const store = getStore();
 				let serviceSelected = servicio;
 				serviceSelected["servicio_id"] = servicio_id;
 				let numservice = id;
 				setStore({ serviceSelected, numservice });
 				getActions().getDocumentoId();
+				getActions().getServicio();
 			},
 			handleSelectedServicioUpdate: servicio => {
 				const store = getStore();
 				let serviceSelectedUpdate = servicio;
 				setStore({ serviceSelectedUpdate });
+				getActions().getProveedoresAutocompletarId2();
 				getActions().cleanService();
 			},
 			handleUpdateProveedor: item => {
@@ -1057,6 +1169,41 @@ const getState = ({ getStore, getActions, setStore }) => {
 					)
 					.catch(error => setStore({ error }));
 			},
+			getServicio: () => {
+				const store = getStore();
+				// Servicio necesita reclamo_id, archivoServicio, proveedor_id
+
+				fetch(store.apiUrl + "/api/servicio/" + store.serviceSelected.servicio_id, {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + store.access
+					}
+				})
+					.then(resp => resp.json())
+					.then(infoServicio => {
+						let grupo_id = infoServicio[0].grupo_id;
+						setStore({
+							servicio: infoServicio
+						});
+						fetch(store.apiUrl + "/api/proveedoresAutocompletar/" + grupo_id, {
+							method: "GET",
+							headers: {
+								Authorization: "Bearer " + store.access
+							}
+						})
+							.then(resp => resp.json())
+							.then(infoDetalle =>
+								setStore({
+									proveedoresID: infoDetalle
+								})
+							);
+					})
+					.catch(error => {
+						setStore({ error });
+						alert("No se pudo ingresar el documento, revise los campos");
+					});
+			},
 			getServiciosAll: () => {
 				const store = getStore();
 
@@ -1195,6 +1342,95 @@ const getState = ({ getStore, getActions, setStore }) => {
 					.then(data => setStore({ proveedores: data }))
 					.catch(error => setStore({ error }));
 			},
+			getProveedoresAutocompletarId: () => {
+				const store = getStore();
+				fetch(store.apiUrl + "/api/proveedoresAutocompletar/" + store.servicio.grupo_id, {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + store.access
+					}
+				})
+					.then(resp => resp.json())
+					.then(data =>
+						setStore({
+							proveedoresID: data,
+							detalleServicio: {
+								detalle: "Consulta",
+								pago: "COB",
+								moneda: "CLP",
+								InsideUSA: "False",
+								proveedor_id: data[0].value,
+								documentos: []
+							}
+						})
+					)
+					.catch(error => setStore({ error }));
+			},
+			getProveedoresAutocompletarId2: () => {
+				const store = getStore();
+				fetch(store.apiUrl + "/api/proveedoresAutocompletar/" + store.serviceSelectedUpdate.grupo_id, {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + store.access
+					}
+				})
+					.then(resp => resp.json())
+					.then(data =>
+						setStore({
+							proveedoresID: data,
+							detalleServicio: {
+								detalle: "Consulta",
+								pago: "COB",
+								moneda: "CLP",
+								InsideUSA: "False",
+								proveedor_id: data[0].value,
+								documentos: []
+							}
+						})
+					)
+					.catch(error => setStore({ error }));
+			},
+			getGruposAutocompletar: () => {
+				const store = getStore();
+				fetch(store.apiUrl + "/api/gruposAutocompletar/", {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + store.access
+					}
+				})
+					.then(resp => resp.json())
+					.then(data => setStore({ grupos: data }))
+					.catch(error => setStore({ error }));
+			},
+			getGruposAutocompletarID: () => {
+				const store = getStore();
+				fetch(store.apiUrl + "/api/gruposAutocompletar/" + store.proveedor.grupo_id, {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + store.access
+					}
+				})
+					.then(resp => resp.json())
+					.then(data => setStore({ gruposID: data }))
+					.catch(error => setStore({ error }));
+			},
+			getProvGrupoAutocompletar: () => {
+				const store = getStore();
+				fetch(store.apiUrl + "/api/ProveedoresAutocompletarIdgrup/", {
+					method: "GET",
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + store.access
+					}
+				})
+					.then(resp => resp.json())
+					.then(data => setStore({ provegruposid: data }))
+					.catch(error => setStore({ error }));
+			},
 			getProveedores: () => {
 				const store = getStore();
 				fetch(store.apiUrl + "/api/proveedores/", {
@@ -1318,8 +1554,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({
 					proveedor: {
 						nombre_proveedor: "",
-						grupo: "",
+						grupo_id: "",
 						rut_proveedor: ""
+					}
+				});
+			},
+			grupoVacio: () => {
+				setStore({
+					grupo: {
+						nombre_grupo: "",
+						Abreviacion: ""
 					}
 				});
 			},
@@ -1339,7 +1583,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({
 							proveedor: {
 								nombre_proveedor: "",
-								grupo: "",
+								grupo_id: "",
 								rut_proveedor: ""
 							}
 						});
@@ -1348,6 +1592,63 @@ const getState = ({ getStore, getActions, setStore }) => {
 						getActions().getProveedores();
 					});
 			},
+			// handleAddProveedorSinGrupo: () => {
+			// 	let store = getStore();
+			// 	let data = new FormData();
+			// 	data.append("nombre_grupo", nombre_proveedor);
+			// 	data.append("Abreviacion", "");
+			// 	fetch(store.apiUrl + "/api/grupos/", {
+			// 		method: "POST",
+			// 		body: JSON.stringify(data),
+			// 		headers: {
+			// 			"Content-Type": "application/json",
+			// 			Authorization: "Bearer " + store.access
+			// 		}
+			// 	})
+			// 		.then(resp => resp.json())
+			// 		.then(infoServicio => {
+			// 			let grupo_id = infoServicio[0].grupo_id;
+			// 			console.log(infoServicio[0]);
+			// 			setStore({
+			// 				servicio: infoServicio
+			// 			});
+			// 			fetch(store.apiUrl + "/api/proveedoresAutocompletar/" + grupo_id, {
+			// 				method: "GET",
+			// 				headers: {
+			// 					Authorization: "Bearer " + store.access
+			// 				}
+			// 			})
+			// 				.then(resp => resp.json())
+			// 				.then(infoDetalle =>
+			// 					setStore({
+			// 						proveedoresID: infoDetalle
+			// 					})
+			// 				);
+			// 		})
+			// 		.then(infoDetalle => {
+			// 			store.detalleServicio.documentos.slice(0).map((documento, i) => {
+			// 				let formDocumento = new FormData();
+			// 				formDocumento.append("detalle_servicio_id", infoDetalle.id);
+			// 				formDocumento.append("datedoc", documento.datedoc);
+			// 				formDocumento.append("montodoc", documento.montodoc);
+			// 				formDocumento.append("numdoc", documento.numdoc);
+			// 				formDocumento.append("tipodoc", documento.tipodoc);
+
+			// 				// Se realiza POST por cada boleta
+			// 				fetch(store.apiUrl + "/api/documentos/", {
+			// 					method: "Post",
+			// 					body: formDocumento,
+			// 					headers: {
+			// 						Authorization: "Bearer " + store.access
+			// 					}
+			// 				}).then(() => getActions().getServicios());
+			// 			});
+			// 		})
+			// 		.catch(error => {
+			// 			setStore({ error });
+			// 			alert("No se pudo ingresar el documento, revise los campos");
+			// 		});
+			// },
 			putProveedor: () => {
 				let store = getStore();
 				let data = store.proveedor;
@@ -1364,7 +1665,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({
 							proveedor: {
 								nombre_proveedor: "",
-								grupo: "",
+								grupo_id: "",
 								rut_proveedor: ""
 							}
 						});
@@ -1440,15 +1741,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 						setStore({
 							formulario: {
 								nameReclamo: store.formulario.nameReclamo,
+								nombreReclamante: store.formulario.nombreReclamante,
+								apellidoReclamante: store.formulario.apellidoReclamante,
 								rut: store.formulario.rut,
 								name_estado: store.formulario.name_estado,
-								numpoliza: store.formulario.numpoliza,
+								numPoliza: store.formulario.numPoliza,
+								Fecha_recepcion: store.formulario.Fecha_recepcion,
 								reclamo_id: data.id,
 								detalle_diagnostico: data.detalle_diagnostico
 							}
 						});
-						history.push("/formdoc");
-					});
+					})
+					.then(history.push("/formdoc"));
 			},
 
 			//funcion POST para agregar documentos a un reclamo se envia con Formdata, ya que se adjunta File del documento - POST api propia
@@ -1578,7 +1882,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					id: store.formulario.reclamo_id,
 					detalle_diagnostico: store.formulario.detalle_diagnostico,
 					name_estado: store.formulario.estado,
-					asociacion_id: store.formulario.asociacion_id
+					asociacion_id: store.formulario.asociacion_id,
+					Fecha_recepcion: store.formulario.Fecha_recepcion
 				};
 
 				fetch(store.apiUrl + "/api/reclamos/" + store.formulario.reclamo_id, {
@@ -1591,10 +1896,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}).then(resp => resp.json());
 			},
 			restafecha: item => {
-				let fecha1 = new Date(item);
-				let fecha2 = new Date();
-				var dif = fecha2.getTime() - fecha1.getTime();
-				var dias = Math.floor(dif / (1000 * 60 * 60 * 24));
+				let fecha1 = new Date(item.date);
+				let fecha2 = new Date(item.Fecha_recepcion);
+				var dif = fecha1.getTime() - fecha2.getTime();
+				var dias = fecha1 > 0 ? Math.floor(dif / (1000 * 60 * 60 * 24)) : "";
 				return dias;
 			},
 			handleEnvioReclamo: (reclamo, servicios, history) => {
@@ -1624,7 +1929,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 							alert("Se ha enviado el reclamo exitosamente");
 							setStore({
 								formulario: {
-									estado: "Enviado",
+									name_estado: "Enviado",
 									nombreReclamante: store.formulario.nombreReclamante,
 									apellidoReclamante: store.formulario.apellidoReclamante
 								}

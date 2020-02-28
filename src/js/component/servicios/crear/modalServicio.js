@@ -44,13 +44,17 @@ export default class ModalServicio extends React.Component {
 											<div className="form-row">
 												<div className="col-md-12">
 													<div className="feature-left">
-														<label>Proveedor</label>
+														<label>Grupo del proveedor</label>
 														<Select
-															value={store.proveedores[store.servicio.proveedor_id - 1]}
+															Value={store.select}
+															placeholder="Seleccione un proveedor"
 															className="basic-single"
 															classNamePrefix="select"
-															onChange={value => actions.handleServicioSelect(value)}
-															options={store.proveedores}
+															cacheOptions={false}
+															onChange={value =>
+																actions.handleServicioSelect(value.value)
+															}
+															options={store.provegruposid}
 														/>
 													</div>
 												</div>
@@ -62,7 +66,19 @@ export default class ModalServicio extends React.Component {
 													className="btn btn-primary"
 													data-dismiss="modal"
 													data-toggle="modal"
-													data-target="#modalDetalleServicio">
+													data-target={
+														store.servicios.filter(
+															data => data.grupo_id === store.servicio.grupo_id
+														).length > 0
+															? "#modalDetalleServicioUpdate"
+															: "#modalDetalleServicio"
+													}
+													onClick={() => actions.handleproveedor()}>
+													{console.log(
+														store.servicios.filter(
+															data => data.grupo_id === store.servicio.grupo_id
+														).length > 0
+													)}
 													Siguiente
 												</button>
 											</div>
