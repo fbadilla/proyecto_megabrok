@@ -50,7 +50,7 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
         favicon: 'bestdoctor.ico',
-        template: 'template.html'
+        template: 'index.html'
     })
   ]
 };
